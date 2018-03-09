@@ -1,2 +1,4 @@
 # snake and flappy bird
-cocosCreater
+cocosCreater 
+可生成微信小游戏
+
