@@ -25,20 +25,22 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        var scenes = cc.game._sceneInfos;
-        var scenesList = [{
-            title: 'snake',
+        let scenesList = [{
+            title: ' snake',
             name: 'snake'
         }, {
-            title: 'flappy bird',
+            title: ' flappy bird',
             name: 'flappy_bird'
+        }, {
+            title: ' firework',
+            name: ''
         }];
         let y = -30;
         for (let i = 0; i < scenesList.length; i++) {
             let btn = cc.instantiate(this.gameBtnPfb); // 创建节点
             let item = btn.getComponent('game_start_btn');
             this.content.addChild(btn);
-            if (i > 0) y -= 50;
+            if (i > 0) y -= 65;
             item.updateItem(i, y, scenesList[i].title, scenesList[i].name);
         }
     },

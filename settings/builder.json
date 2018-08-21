@@ -3,12 +3,13 @@
   "appSecret": "",
   "encryptJs": true,
   "excludeScenes": [],
+  "fb-instant-games": {},
   "includeAnySDK": false,
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
   "jailbreakPlatform": false,
-  "md5Cache": false,
+  "md5Cache": true,
   "mergeStartScene": false,
   "oauthLoginServer": "",
   "optimizeHotUpdate": false,
@@ -20,13 +21,20 @@
   },
   "packageName": "org.cocos2d.helloworld",
   "privateKey": "",
-  "renderMode": "0",
-  "startScene": "f7e086a6-2b59-4ec6-86cb-2e752d60e9f2",
-  "title": "snake",
-  "webOrientation": "portrait",
-  "wechatgame": {
-    "appid": "",
+  "qqplay": {
+    "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "xxteaKey": "a017c6bb-f42b-43"
+  "renderMode": "0",
+  "startScene": "f7e086a6-2b59-4ec6-86cb-2e752d60e9f2",
+  "title": "wx_mini_game",
+  "webOrientation": "portrait",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "http://192.168.1.3:8080",
+    "appid": "wxe55f7152ed1b6e63",
+    "isSubdomain": false,
+    "orientation": "portrait"
+  },
+  "xxteaKey": "a017c6bb-f42b-43",
+  "zipCompressJs": true
 }

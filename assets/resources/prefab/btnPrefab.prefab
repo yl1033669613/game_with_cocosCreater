@@ -35,7 +35,7 @@
       "__id__": 9
     },
     "_id": "",
-    "_opacity": 255,
+    "_opacity": 250,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -52,7 +52,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 350,
-      "height": 40
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -93,7 +93,7 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 211,
-      "g": 150,
+      "g": 211,
       "b": 41,
       "a": 255
     },
@@ -106,7 +106,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 350,
-      "height": 40
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -133,16 +133,16 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 28,
-    "_fontSize": 28,
-    "_lineHeight": 40,
+    "_actualFontSize": 26,
+    "_fontSize": 26,
+    "_lineHeight": 50,
     "_enableWrapText": false,
     "_N$file": {
       "__uuid__": "977cfe9b-21c7-498e-b060-541800511a8b"
     },
     "_isSystemFontUsed": false,
-    "_spacingX": 0,
-    "_N$string": "snake",
+    "_spacingX": 2,
+    "_N$string": " snake",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
