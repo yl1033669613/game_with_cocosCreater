@@ -3,7 +3,7 @@
     "__type__": "cc.SceneAsset",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "scene": {
       "__id__": 1
     }
@@ -51,7 +51,7 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0,
-    "autoReleaseAssets": {}
+    "autoReleaseAssets": true
   },
   {
     "__type__": "cc.Node",
@@ -503,7 +503,7 @@
       "__id__": 11
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 45,
     "_left": 0,
@@ -529,7 +529,7 @@
       "__id__": 10
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 40,
     "_left": 0,
@@ -555,7 +555,7 @@
       "__id__": 5
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 37,
     "_left": 350.07654921020657,
@@ -608,7 +608,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "4ca9c3de-fef8-4733-a29d-e4158b8a9767"
+      "__uuid__": "b2440100-0e9f-4348-95ea-d8f64067dc44"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -633,7 +633,7 @@
       "__id__": 4
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 45,
     "_left": -2.2737367544323206e-13,

@@ -1,3 +1,5 @@
+const KEY_BEST_SCORE = "bestScore";
+
 var PipeManager = require('pipe_manager');
 var Bird = require('bird');
 var Scroller = require('scroller');
@@ -147,9 +149,8 @@ cc.Class({
         let medalNode = resultBoardNode.getChildByName("medal");
 
         // 保存最高分到本地
-        const KEY_BEST_SCORE = "bestScore";
         let bestScore = cc.sys.localStorage.getItem(KEY_BEST_SCORE);
-        if (bestScore === "null" || this.score > bestScore) {
+        if (bestScore === "null" || bestScore === "undefined" || this.score > bestScore) {
             bestScore = this.score;
         }
         cc.sys.localStorage.setItem(KEY_BEST_SCORE, bestScore);

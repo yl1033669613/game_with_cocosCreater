@@ -30,7 +30,7 @@
   "title": "wx_mini_game",
   "webOrientation": "portrait",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "http://192.168.1.3:8080",
+    "REMOTE_SERVER_ROOT": "",
     "appid": "wxe55f7152ed1b6e63",
     "isSubdomain": false,
     "orientation": "portrait"

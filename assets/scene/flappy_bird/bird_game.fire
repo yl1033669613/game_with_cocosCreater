@@ -3,7 +3,7 @@
     "__type__": "cc.SceneAsset",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "scene": {
       "__id__": 1
     }
@@ -45,7 +45,7 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0,
-    "autoReleaseAssets": {}
+    "autoReleaseAssets": true
   },
   {
     "__type__": "cc.Node",
@@ -215,7 +215,7 @@
       "__id__": 3
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 13,
     "_left": 0,
@@ -616,7 +616,7 @@
       "__id__": 12
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 12,
     "_left": 0,
@@ -761,7 +761,7 @@
       "__id__": 20
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 17,
     "_left": 0,
@@ -980,7 +980,7 @@
       "__id__": 25
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 16,
     "_left": 0,
@@ -1034,7 +1034,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 156,
+      "width": 157,
       "height": 142
     },
     "_rotationX": 0,
@@ -1089,7 +1089,7 @@
       "__id__": 28
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 16,
     "_left": 0,
@@ -1259,7 +1259,7 @@
       "__id__": 32
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 16,
     "_left": 0,
@@ -1610,7 +1610,7 @@
       "__id__": 35
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 0,
     "_left": 0,
@@ -1736,8 +1736,6 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "pressedSprite": null,
-    "hoverSprite": null,
     "clickEvents": [
       {
         "__id__": 47
@@ -1760,6 +1758,10 @@
       "a": 255
     },
     "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
     "_N$disabledSprite": null,
     "_N$target": {
       "__id__": 44
@@ -1814,7 +1816,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 200,
       "height": 40
     },
     "_rotationX": 0,
@@ -1824,7 +1826,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 2,
-      "y": -7
+      "y": -10
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1898,10 +1900,12 @@
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "977cfe9b-21c7-498e-b060-541800511a8b"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "返回开始页面",
+    "_N$string": "back start page",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -1956,12 +1960,6 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "pressedSprite": {
-      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
-    },
-    "hoverSprite": {
-      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
-    },
     "clickEvents": [
       {
         "__id__": 53
@@ -1984,6 +1982,18 @@
       "a": 255
     },
     "_N$normalSprite": null,
+    "_N$pressedSprite": {
+      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
+    },
+    "pressedSprite": {
+      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
+    },
+    "_N$hoverSprite": {
+      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
+    },
+    "hoverSprite": {
+      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
+    },
     "_N$disabledSprite": {
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
@@ -2061,7 +2071,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "4ca9c3de-fef8-4733-a29d-e4158b8a9767"
+      "__uuid__": "b2440100-0e9f-4348-95ea-d8f64067dc44"
     },
     "_type": 0,
     "_sizeMode": 0,
