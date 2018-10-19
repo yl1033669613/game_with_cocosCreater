@@ -53,7 +53,7 @@ cc.Class({
 
         this.isGameOver = false;
 
-        this.globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('gameUserJs');
+        this.globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
         this.bestScore = this.globalNode.userGameInfo.tzfeBestScore || 0;
         this.WinTimes = this.globalNode.userGameInfo.tzfeWinNum || 0;
         this.db = wx.cloud.database();

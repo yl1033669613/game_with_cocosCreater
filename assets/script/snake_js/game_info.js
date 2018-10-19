@@ -26,7 +26,7 @@ cc.Class({
         let theScore = this.canvas.getComponent("snake_game").score;
         this.scoreLabel.string = "Score:" + theScore.toString();
 
-        let globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('gameUserJs');
+        let globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
         let bestScore = globalNode.userGameInfo.snakeBestScore || 0;
         let db = wx.cloud.database();
 

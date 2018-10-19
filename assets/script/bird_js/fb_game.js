@@ -148,7 +148,7 @@ cc.Class({
 
         // 保存最高分到服务
 
-        let globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('gameUserJs');
+        let globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
         let bestScore = globalNode.userGameInfo.fbBestScore || 0;
         let db = wx.cloud.database();
 
