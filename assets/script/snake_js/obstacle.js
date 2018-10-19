@@ -11,9 +11,9 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
+    onLoad() {
         this.obstacleInstance = [];
-        // 判断是否在蛇身上flag
+        // 判断是否在蛇身上
         this.isOnSnake = true;
 
         // snake
@@ -35,19 +35,20 @@ cc.Class({
         return Math.round(r * range + min);
     },
 
-    createObstacle (){
+    createObstacle() {
         this.isOnSnake = true;
         let indexX, indexY, pointArr = [];
-        let obLength = Math.floor(Math.random()*2);
+        let obLength = Math.floor(Math.random() * 2);
 
         while (this.isOnSnake) {
             //执行后先将判定条件设置为false，如果判定不重合，则不会再执行下列语句
             this.isOnSnake = false;
             indexX = this.getNumberInRange(0, this.node.width / 30 - 1) * 15;
             indexY = this.getNumberInRange(0, this.node.height / 30 - 1) * 15;
-            let aX = indexX,aY = indexY;
+            let aX = indexX,
+                aY = indexY;
             for (let i = 0; i < obLength + 1; i++) {
-                if (i%2 === 0) {
+                if (i % 2 === 0) {
                     aX = indexX;
                     aY = aY - 15;
                 };
@@ -59,10 +60,14 @@ cc.Class({
                         break;
                     }
                 };
+                if (aX < -(this.node.width / 2 - 30) || aX > ((this.node.width / 2) - 30) || aY < -(this.node.height / 2 - 30) || aY > ((this.node.height / 2) - 30)) {
+                    this.isOnSnake = true;
+                };
                 if (this.isOnSnake) break;
+
                 let p = {
-                    x:aX,
-                    y:aY
+                    x: aX,
+                    y: aY
                 };
                 pointArr.push(p);
             };
@@ -76,13 +81,5 @@ cc.Class({
             b.setPosition(cc.p(pointArr[i].x, pointArr[i].y));
             this.obstacleInstance.push(b);
         }
-    },
-
-    start () {
-
-    },
-
-    update (dt) {
-
-    },
+    }
 });

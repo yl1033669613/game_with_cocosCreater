@@ -3,10 +3,12 @@
     "__type__": "cc.Prefab",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "data": {
       "__id__": 1
-    }
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -86,18 +88,18 @@
     "_lineWidth": 1,
     "_strokeColor": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 109,
+      "g": 120,
+      "b": 139,
       "a": 255
     },
     "_lineJoin": 2,
     "_lineCap": 0,
     "_fillColor": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 158,
-      "b": 158,
+      "r": 55,
+      "g": 72,
+      "b": 103,
       "a": 255
     },
     "_miterLimit": 10

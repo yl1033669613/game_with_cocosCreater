@@ -1,5 +1,3 @@
-const KEY_2048_BEST_SCORE = "2048BestScore";
-
 cc.Class({
     extends: cc.Component,
 
@@ -23,6 +21,10 @@ cc.Class({
         infoBestScore: {
             default: null,
             type: cc.Node
+        },
+        gameWinMask: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -40,9 +42,9 @@ cc.Class({
             [0, 0, 0, 0],
             [0, 0, 0, 0]
         ];
-        this.box_width = this.node.width * 0.86 * 0.25;
-        this.margin_width = this.node.width * 0.14 * 0.2;
-        //不同数字的颜色信息
+        this.box_width = this.node.width * 0.86 * 0.25; //单个方块宽度
+        this.margin_width = this.node.width * 0.14 * 0.2; //方块之间的间隔
+        //不同数字的背景颜色信息
         this.num_color = { '0': "#ccc0b3", '2': "#eee4da", '4': "#ede0c8", '8': "#f2b179", '16': "#f59563", '32': "#f67c5f", '64': "#ec6544", '128': "#e44d29", '256': "#edcf72", '512': "#c8a145", '1024': "#a8832b", '2048': "#86aa9c" };
 
         //space表示当前剩余的空格块数，score表示当前的分数
@@ -50,9 +52,14 @@ cc.Class({
         this.score = 0;
 
         this.isGameOver = false;
+
+        this.globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('gameUserJs');
+        this.bestScore = this.globalNode.userGameInfo.tzfeBestScore || 0;
+        this.WinTimes = this.globalNode.userGameInfo.tzfeWinNum || 0;
+        this.db = wx.cloud.database();
     },
 
-    //draw ract
+    //循环
     loop(func) {
         for (let i = 0; i < 4; i++)
             for (let j = 0; j < 4; j++) {
@@ -60,6 +67,7 @@ cc.Class({
             }
     },
 
+    //绘制方块背景
     drawBgShadowRect() {
         let self = this;
         let color = new cc.Color(255, 255, 255, 100);
@@ -91,7 +99,7 @@ cc.Class({
         self.space -= 1;
     },
 
-    clearNumRects() {
+    clearNumRects() { //销毁方块
         for (let i = 0; i < this.node.children.length; i++) {
             if (this.node.children[i]._name == '2048RectPfb') {
                 this.node.children[i].destroy();
@@ -99,7 +107,7 @@ cc.Class({
         };
     },
 
-    // 绘制地图
+    // 根据map 数组渲染方块
     block() {
         let self = this;
         self.clearNumRects();
@@ -112,7 +120,7 @@ cc.Class({
         });
     },
 
-    // 绘制矩形
+    // 绘制单个矩形
     drawRects(x, y, w, c, n) {
         let rect = cc.instantiate(this.rectPfb);
         rect.width = rect.height = w;
@@ -120,12 +128,12 @@ cc.Class({
         let label = rect.getChildByName('2048Number'),
             bg = rect.getChildByName('2048RectBg');
         bg.color = cc.hexToColor(String(c));
-        label.color = (n <= 4) ? cc.hexToColor("#d1b191") : cc.Color.WHITE;
+        label.color = (n <= 4) ? cc.hexToColor("#FF8556") : cc.Color.WHITE;
         label.getComponent(cc.Label).string = n;
         this.node.addChild(rect);
     },
 
-    // game start
+    // game start 默认生成两个方块
     init() {
         for (let i = 0; i < 2; i++) {
             this.produce();
@@ -133,12 +141,11 @@ cc.Class({
     },
 
     move(dir) {
-        //用来调整不同方向的遍历方式
-        let isValid = false;
+        let isValid = false; //判断是否是有效移动
 
         if (this.isGameOver) return;
 
-        function modify(x, y) {
+        function modify(x, y) { //根据不同方向调整遍历方式
             let tx = x,
                 ty = y,
                 tmpTx = tx;
@@ -153,16 +160,21 @@ cc.Class({
         //根据移动的方向，将地图中对应行/列中的数字一个个压入栈中，如果第一次遇到栈顶数字和待入栈数字相等，则栈顶数字乘2，最后用栈中数字更新地图中的对应行/列
         for (let i = 0; i < 4; i++) {
             let tmp = [];
-            let isadd = false;
+            let isadd = false; //每一行或者每一列只能有一次数字合并
             for (let j = 0; j < 4; j++) {
                 let ti = modify(i, j)[0],
                     tj = modify(i, j)[1];
                 if (this.map[ti][tj] != 0) {
                     if (!isadd && this.map[ti][tj] == tmp[tmp.length - 1]) {
-                        this.score += (tmp[tmp.length - 1] *= 2);
+                        this.score += (tmp[tmp.length - 1] *= 2); //数字合并获得分数加成
+                        if (tmp[tmp.length - 1] == 2048) { //如果获得2048则游戏结束
+                            this.isGameOver = true;
+                            this.showTheGamePanel(true, this.gameWinMask);
+                            this.setWinTimes(true);
+                        };
                         isadd = true;
                         this.space += 1;
-                        if (!isValid) {
+                        if (!isValid) { //发生数字合并认定这次移动为有效移动
                             isValid = true;
                         };
                         this.currentScore.getComponent(cc.Label).string = 'score:' + this.score;
@@ -175,33 +187,29 @@ cc.Class({
                 let ti = modify(i, j)[0],
                     tj = modify(i, j)[1];
                 if (this.map[ti][tj] == 0 && tmp[j] > 0) {
-                    if (!isValid) {
+                    if (!isValid) { //数字发生移动，（原来为0的数字变为大于0被认为是有效移动）
                         isValid = true;
                     };
                 };
                 this.map[ti][tj] = isNaN(tmp[j]) ? 0 : tmp[j];
             }
         };
-        if (isValid && this.space > 0) {
+        if (isValid && this.space > 0) { //如果是有效移动则在随机空位新生成一个数字2
             this.produce();
             isValid = false;
         };
-        if (this.space == 0 && this.gameOver()) {
+        if (this.space == 0 && this.gameOver() && !this.isGameOver) { //判断游戏失败 剩余空格为0 并且没有数字可以合并时游戏结束
             this.isGameOver = true;
             this.infoScore.getComponent(cc.Label).string = 'score:' + this.score;
-            // 保存最高分到本地
-            let theBestScore = cc.sys.localStorage.getItem(KEY_2048_BEST_SCORE);
-            if (theBestScore === "null" || theBestScore === "undefined" || this.score > theBestScore) {
-                theBestScore = this.score;
-                cc.sys.localStorage.setItem(KEY_2048_BEST_SCORE, theBestScore);
-            };
-            this.infoBestScore.getComponent(cc.Label).string = 'best:' + theBestScore;
-            this.showTheGameInfoPanel(true);
+
+            this.setDbDataWhenScoreChange(); //保存最高分到服务
+            this.infoBestScore.getComponent(cc.Label).string = 'best:' + this.bestScore;
+            this.showTheGamePanel(true, this.infoPanel);
             return;
         }
     },
 
-    gameOver() {
+    gameOver() { //没有数字可以合并
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
                 let t = ((i == 0) ? null : [i - 1, j]),
@@ -225,26 +233,71 @@ cc.Class({
         return true;
     },
 
-    showTheGameInfoPanel(bool) {
+    setDbDataWhenScoreChange() {
+        let self = this;
+        if (self.score > self.bestScore) {
+            self.bestScore = self.score;
+            self.globalNode.setUserGameInfo('tzfeBestScore', self.bestScore);
+            self.db.collection('userGameInfo').where({
+                _openid: self.globalNode.openid
+            }).get({
+                success: function(res) {
+                    self.db.collection('userGameInfo').doc(res.data[0]._id).update({
+                        data: {
+                            'tzfeBestScore': self.bestScore,
+                            'updateTime': self.db.serverDate()
+                        },
+                        success: function(sc) {
+                            console.log('保存成功')
+                        }
+                    })
+                }
+            })
+        };
+    },
+
+    setWinTimes() {
+        let self = this;
+        self.WinTimes = self.WinTimes + 1;
+        self.globalNode.setUserGameInfo('tzfeWinNum', self.WinTimes);
+        self.db.collection('userGameInfo').where({
+            _openid: globalNode.openid
+        }).get({
+            success: function(res) {
+                self.db.collection('userGameInfo').doc(res.data[0]._id).update({
+                    data: {
+                        'tzfeWinNum': self.WinTimes,
+                        'updateTime': self.db.serverDate()
+                    },
+                    success: function(sc) {
+                        console.log('保存成功')
+                    }
+                })
+            }
+        })
+    },
+
+    showTheGamePanel(bool, cpt) {
         if (bool) {
-            this.infoPanel.active = bool;
-            this.infoPanel.opacity = 0;
-            this.infoPanel.runAction(
+            cpt.active = bool;
+            cpt.opacity = 0;
+            cpt.runAction(
                 cc.fadeIn(0.2)
             )
         } else {
-            this.infoPanel.runAction(
+            cpt.runAction(
                 cc.sequence(
                     cc.fadeOut(0.2),
                     cc.callFunc(() => {
                         // 加载列表
-                        this.infoPanel.active = bool;
+                        cpt.active = bool;
                     }, this)
                 )
             )
         }
     },
 
+    //玩家触摸事件
     eventHandle() {
         let canvasScr = this.node.parent,
             sx, sy, dx, dy, ex, ey;
@@ -287,14 +340,15 @@ cc.Class({
             [0, 0, 0, 0],
             [0, 0, 0, 0]
         ];
-        this.showTheGameInfoPanel(false);
+        this.showTheGamePanel(false, this.infoPanel);
+        this.showTheGamePanel(false, this.gameWinMask);
         this.currentScore.getComponent(cc.Label).string = 'score:' + this.score;
         this.init();
     },
 
-    start() {
+    start() { //初始化
         this.drawBgShadowRect();
         this.eventHandle();
-        this.init(); //初始化
+        this.init();
     }
 });

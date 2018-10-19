@@ -1,5 +1,3 @@
-const KEY_BEST_SCORE = "bestScore";
-
 var PipeManager = require('pipe_manager');
 var Bird = require('bird');
 var Scroller = require('scroller');
@@ -148,12 +146,31 @@ cc.Class({
         let bestScoreNode = resultBoardNode.getChildByName("bestScore");
         let medalNode = resultBoardNode.getChildByName("medal");
 
-        // 保存最高分到本地
-        let bestScore = cc.sys.localStorage.getItem(KEY_BEST_SCORE);
-        if (bestScore === "null" || bestScore === "undefined" || this.score > bestScore) {
+        // 保存最高分到服务
+
+        let globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('gameUserJs');
+        let bestScore = globalNode.userGameInfo.fbBestScore || 0;
+        let db = wx.cloud.database();
+
+        if (this.score > bestScore) {
             bestScore = this.score;
-        }
-        cc.sys.localStorage.setItem(KEY_BEST_SCORE, bestScore);
+            globalNode.setUserGameInfo('fbBestScore', bestScore);
+            db.collection('userGameInfo').where({
+                _openid: globalNode.openid
+            }).get({
+                success: function(res) {
+                    db.collection('userGameInfo').doc(res.data[0]._id).update({
+                        data: {
+                            'fbBestScore': bestScore,
+                            'updateTime': db.serverDate()
+                        },
+                        success: function(sc) {
+                            console.log('保存成功')
+                        }
+                    })
+                }
+            })
+        };
 
         // 显示当前分数、最高分
         currentScoreNode.getComponent(cc.Label).string = this.score;
