@@ -27,6 +27,9 @@ cc.Class({
         }, {
             title: ' 2048',
             name: 'game2048'
+        },{
+            title: ' needles',
+            name: 'game_needles_start'
         }];
         let y = -30;
         for (let i = 0; i < scenesList.length; i++) {
