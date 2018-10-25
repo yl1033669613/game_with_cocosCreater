@@ -154,7 +154,6 @@ cc.Class({
 
         if (this.score > bestScore) {
             bestScore = this.score;
-            globalNode.setUserGameInfo('fbBestScore', bestScore);
             db.collection('userGameInfo').where({
                 _openid: globalNode.openid
             }).get({
@@ -165,6 +164,7 @@ cc.Class({
                             'updateTime': db.serverDate()
                         },
                         success: function(sc) {
+                            globalNode.setUserGameInfo('fbBestScore', bestScore);
                             console.log('保存成功')
                         }
                     })

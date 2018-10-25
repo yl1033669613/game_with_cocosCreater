@@ -1554,8 +1554,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 25,
-    "_fontSize": 25,
+    "_actualFontSize": 24,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": {
@@ -1807,8 +1807,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 25,
-    "_fontSize": 25,
+    "_actualFontSize": 24,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": {

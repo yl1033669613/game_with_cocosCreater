@@ -9,6 +9,10 @@ cc.Class({
         content: {
             default: null,
             type: cc.Node
+        },
+        noticePic: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -27,7 +31,7 @@ cc.Class({
         }, {
             title: ' 2048',
             name: 'game2048'
-        },{
+        }, {
             title: ' needles',
             name: 'game_needles_start'
         }];
@@ -39,5 +43,29 @@ cc.Class({
             if (i > 0) y -= 65;
             item.updateItem(i, y, scenesList[i].title, scenesList[i].name);
         }
+    },
+
+    //加载notice
+    loadNoticePic() {
+        let self = this;
+        let sprite = self.noticePic.getComponent(cc.Sprite);
+        wx.cloud.getTempFileURL({
+            fileList: ['cloud://dev-47dfcd.6465-dev-47dfcd/index_bottom_banner/head_pic.png'],
+            success: res => {
+                // get temp file URL
+                // console.log(res.fileList)
+                cc.loader.load(res.fileList[0].tempFileURL, function(err, texture) {
+                    sprite.spriteFrame = new cc.SpriteFrame(texture);
+                    self.noticePic.parent.height = self.noticePic.height;
+                })
+            },
+            fail: err => {
+                console.log(err)
+            }
+        })
+    },
+
+    start (){
+        this.loadNoticePic();
     }
 });

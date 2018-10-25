@@ -1,3 +1,5 @@
+const gbData = require('./game_global.js');
+
 cc.Class({
     extends: cc.Component,
 
@@ -5,17 +7,24 @@ cc.Class({
         levelModeMask: {
             default: null,
             type: cc.Node
+        },
+        levelBtnLevelTxt: {
+            default: null,
+            type: cc.Label
         }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        let globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
 
-    },
+        gbData.freeBestScore = globalUser.userGameInfo.needleFreeModeScore || 0;
+        gbData.gameLevel = globalUser.userGameInfo.needleLevelModeLevels || 1;
+        gbData.gameLevelData = globalUser.needleLevelData;
 
-    freeMode() {
-        cc.director.loadScene('game_needles');
+        //设置level text
+        this.levelBtnLevelTxt.string = 'level '+ gbData.gameLevel +' play';
     },
 
     levelModeMaskOpen() {
@@ -36,15 +45,17 @@ cc.Class({
         ))
     },
 
+    freeMode() {
+        gbData.mode = 'free';
+        cc.director.loadScene('game_needles');
+    },
+
     levelModePlay() {
+        gbData.mode = 'level';
         cc.director.loadScene('game_needles');
     },
 
     backList() {
         cc.director.loadScene('startscene');
-    },
-
-    start() {
-
     }
 });

@@ -32,7 +32,6 @@ cc.Class({
 
         if (theScore > bestScore) {
             bestScore = theScore;
-            globalNode.setUserGameInfo('snakeBestScore', bestScore);
             db.collection('userGameInfo').where({
                 _openid: globalNode.openid
             }).get({
@@ -43,6 +42,7 @@ cc.Class({
                             'updateTime': db.serverDate()
                         },
                         success: function(sc) {
+                            globalNode.setUserGameInfo('snakeBestScore', bestScore);
                             console.log('保存成功')
                         }
                     })

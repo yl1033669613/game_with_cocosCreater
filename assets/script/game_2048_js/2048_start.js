@@ -237,7 +237,6 @@ cc.Class({
         let self = this;
         if (self.score > self.bestScore) {
             self.bestScore = self.score;
-            self.globalNode.setUserGameInfo('tzfeBestScore', self.bestScore);
             self.db.collection('userGameInfo').where({
                 _openid: self.globalNode.openid
             }).get({
@@ -248,6 +247,7 @@ cc.Class({
                             'updateTime': self.db.serverDate()
                         },
                         success: function(sc) {
+                            self.globalNode.setUserGameInfo('tzfeBestScore', self.bestScore);
                             console.log('保存成功')
                         }
                     })
@@ -259,7 +259,6 @@ cc.Class({
     setWinTimes() {
         let self = this;
         self.WinTimes = self.WinTimes + 1;
-        self.globalNode.setUserGameInfo('tzfeWinNum', self.WinTimes);
         self.db.collection('userGameInfo').where({
             _openid: globalNode.openid
         }).get({
@@ -270,6 +269,7 @@ cc.Class({
                         'updateTime': self.db.serverDate()
                     },
                     success: function(sc) {
+                        self.globalNode.setUserGameInfo('tzfeWinNum', self.WinTimes);
                         console.log('保存成功')
                     }
                 })

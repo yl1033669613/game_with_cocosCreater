@@ -9,7 +9,9 @@ cc.Class({
         numText: {
             default: null,
             type: cc.Node
-        }
+        },
+        isRotate: true,
+        speed: 10
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -30,7 +32,9 @@ cc.Class({
     },
 
     numTextRotate (){
-        let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(8, -360)));
-        this.numText.runAction(rotate);
+        if (this.isRotate) {
+            let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(this.speed, -360)));
+            this.numText.runAction(rotate);
+        }
     }
 });

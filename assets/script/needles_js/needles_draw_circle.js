@@ -12,7 +12,7 @@ cc.Class({
     },
 
     start(){
-        this.ctx.circle(40, 40, this.r);
+        this.ctx.circle(this.r, this.r, this.r);
         this.ctx.fill();
     }
 });

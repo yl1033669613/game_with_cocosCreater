@@ -1314,7 +1314,7 @@
     ],
     "_prefab": null,
     "_id": "73shi7ccZNqKsinBPse/PS",
-    "_opacity": 238,
+    "_opacity": 225,
     "_color": {
       "__type__": "cc.Color",
       "r": 0,
@@ -1954,6 +1954,9 @@
     "_enabled": true,
     "levelModeMask": {
       "__id__": 33
+    },
+    "levelBtnLevelTxt": {
+      "__id__": 39
     }
   }
 ]

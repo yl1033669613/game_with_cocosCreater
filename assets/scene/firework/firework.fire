@@ -407,9 +407,9 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 19,
-    "_fontSize": 19,
-    "_lineHeight": 30,
+    "_actualFontSize": 18,
+    "_fontSize": 18,
+    "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": {
       "__uuid__": "977cfe9b-21c7-498e-b060-541800511a8b"

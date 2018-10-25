@@ -10,33 +10,45 @@ cc.Class({
     onLoad() {
         cc.game.addPersistRootNode(this.node);
 
-        wx.cloud.init({
-            env: 'dev-47dfcd'
-        });
+        wx.cloud.init();
 
         this.db = wx.cloud.database();
 
         this.openid = '';
+
         this.userGameInfo = {
             'snakeBestScore': 0,
             'fbBestScore': 0,
             'tzfeBestScore': 0,
             'tzfeWinNum': 0,
+
+            needleFreeModeScore: 0,
+            needleLevelModeLevels: 1,
             'createTime': this.db.serverDate(),
             'updateTime': this.db.serverDate()
         };
+
+        this.needleLevelData = [{
+            level: 1,
+            speed: 12,
+            generatedNeedlesAngle: [90],
+            needlesNum: 6
+        }];
     },
 
     login() {
         let self = this;
+        wx.showLoading({
+            title: '请稍候...',
+        });
         wx.cloud.callFunction({
             name: 'login',
             success: res => {
-                // console.log('callFunction test result: ', res)
                 self.openid = res.result.openid;
                 self.checkRecordFromDatabase();
             },
             fail: err => {
+                wx.hideLoading();
                 console.log(err)
             }
         });
@@ -49,6 +61,7 @@ cc.Class({
         }).get({
             success: function(res) {
                 // console.log(res)
+                wx.hideLoading();
                 if (res.data.length == 0) {
                     self.db.collection('userGameInfo').add({
                         data: self.userGameInfo,
@@ -62,15 +75,33 @@ cc.Class({
                 } else {
                     self.userGameInfo = res.data[0];
                 }
+            },
+            fail: function(err) {
+                wx.hideLoading();
             }
         });
     },
 
-    setUserGameInfo (key, data){
+    getNeedlesLevelData() {
+        let self = this;
+        wx.cloud.callFunction({
+            name: 'getNeedleLevel',
+            success: res => {
+                // console.log(res)
+                self.needleLevelData = res.result.data;
+            },
+            fail: err => {
+                console.log(err)
+            }
+        });
+    },
+
+    setUserGameInfo(key, data) {
         this.userGameInfo[key] = data
     },
 
     start() {
         this.login();
+        this.getNeedlesLevelData();
     }
 });

@@ -28,10 +28,13 @@
     "_components": [
       {
         "__id__": 10
+      },
+      {
+        "__id__": 11
       }
     ],
     "_prefab": {
-      "__id__": 11
+      "__id__": 12
     },
     "_id": "",
     "_opacity": 255,
@@ -228,7 +231,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 5.5,
+      "width": 0,
       "height": 10
     },
     "_rotationX": 0,
@@ -265,7 +268,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "1",
+    "_N$string": "",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -321,7 +324,25 @@
     },
     "numText": {
       "__id__": 6
-    }
+    },
+    "isRotate": true,
+    "speed": 10
+  },
+  {
+    "__type__": "cc.CircleCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": -111
+    },
+    "_radius": 9
   },
   {
     "__type__": "cc.PrefabInfo",
