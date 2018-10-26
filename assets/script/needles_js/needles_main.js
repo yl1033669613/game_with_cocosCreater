@@ -49,7 +49,15 @@ cc.Class({
         if (!this.globalUser.userGameInfo.needleLevelModeLevels || typeof this.globalUser.userGameInfo.needleFreeModeScore != 'number') {
             this.requestDbNeedleFreeModeScore();
             this.requestDbNeedleLevelModeLevels();
-        }
+        };
+
+        //create obj pool
+        this.needlesPool = new cc.NodePool();
+        let initCount = 40;
+        for (let i = 0; i < initCount; ++i) {
+            let needles = cc.instantiate(this.needlePfb); // 创建节点
+            this.needlesPool.put(needles); // 通过 putInPool 接口放入对象池
+        };
     },
 
     LevelSceneInit() {
@@ -62,7 +70,12 @@ cc.Class({
             if (isL.length > 0) {
                 let gdn = isL[0].generatedNeedlesAngle;
                 for (let i = 0; i < gdn.length; i++) {
-                    let needleBody = cc.instantiate(this.needlePfb);
+                    let needleBody;
+                    if (this.needlesPool.size() > 0) {
+                        needleBody = this.needlesPool.get();
+                    } else {
+                        needleBody = cc.instantiate(this.needlePfb);
+                    };
                     needleBody.rotation = gdn[i];
                     needleBody.getComponent('draw_needles').speed = isL[0].speed;
                     this.bigCircle.addChild(needleBody);
@@ -77,8 +90,13 @@ cc.Class({
         }
     },
 
-    createNeedles() {
-        let needleBody = cc.instantiate(this.needlePfb);
+    createNeedles(cb) {
+        let needleBody;
+        if (this.needlesPool.size() > 0) {
+            needleBody = this.needlesPool.get();
+        } else {
+            needleBody = cc.instantiate(this.needlePfb);
+        };
         let rotation = 360 - (this.bigCircle.rotation % 360);
         needleBody.rotation = rotation;
         let num = 0,
@@ -123,9 +141,6 @@ cc.Class({
             cc.callFunc(() => {
                 this.moveNeedle.active = false;
                 this.createNeedles();
-                if (this.isGameOver) {
-                    this.gameOverShowInfoMask();
-                };
                 if (!this.isGameOver && gbData.mode === 'level' && this.needlesNum == 0) {
                     this.isGameOver = true;
                     this.gameLevelModeThislevelWin()
@@ -164,7 +179,13 @@ cc.Class({
     },
 
     gameOver() {
-        this.isGameOver = true;
+        if (!this.isGameOver) {
+            this.isGameOver = true;
+            this.gameOverShowInfoMask();
+            if (gbData.mode === 'free' && this.freeModeCurrScore === this.freeModeCurrNeedle) {
+                this.freeModeCurrScore--
+            }
+        }
     },
 
     gameOverShowInfoMask() {
@@ -262,7 +283,7 @@ cc.Class({
         ));
     },
 
-    reLoadThisScene (){
+    reLoadThisScene() {
         cc.director.loadScene('game_needles');
     },
 

@@ -40,6 +40,7 @@ cc.Class({
         let self = this;
         wx.showLoading({
             title: '请稍候...',
+            mask: true 
         });
         wx.cloud.callFunction({
             name: 'login',

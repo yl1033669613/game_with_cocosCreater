@@ -2,10 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        canvas: {
-            default: null,
-            type: cc.Node
-        }
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -16,6 +13,7 @@ cc.Class({
     },
 
     onCollisionEnter: function (other) {
-        this.canvas.getComponent('needles_main').gameOver();
+        let canvas = this.node.parent.parent.parent;
+        canvas.getComponent('needles_main').gameOver();
     }
 });
