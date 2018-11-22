@@ -45,7 +45,7 @@ cc.Class({
         this.box_width = this.node.width * 0.86 * 0.25; //单个方块宽度
         this.margin_width = this.node.width * 0.14 * 0.2; //方块之间的间隔
         //不同数字的背景颜色信息
-        this.num_color = { '0': "#ccc0b3", '2': "#eee4da", '4': "#ede0c8", '8': "#f2b179", '16': "#f59563", '32': "#f67c5f", '64': "#ec6544", '128': "#e44d29", '256': "#edcf72", '512': "#c8a145", '1024': "#a8832b", '2048': "#86aa9c" };
+        this.num_color = { '0': "#ccc0b3", '2': "#ffeecd", '4': "#ffcb6a", '8': "#ffa65a", '16': "#ff8545", '32': "#ff643f", '64': "#e4451e", '128': "#bd3b18", '256': "#ece688", '512': "#f8ec24", '1024': "#42f391", '2048': "#00ffae" };
 
         //space表示当前剩余的空格块数，score表示当前的分数
         this.space = 16;
@@ -70,7 +70,7 @@ cc.Class({
     //绘制方块背景
     drawBgShadowRect() {
         let self = this;
-        let color = new cc.Color(255, 255, 255, 100);
+        let color = new cc.Color(255, 255, 255, 30);
         self.loop(function(i, j) {
             let x = j == 0 ? self.margin_width : j * (self.box_width + self.margin_width) + self.margin_width,
                 y = i == 3 ? self.margin_width : (3 - i) * (self.box_width + self.margin_width) + self.margin_width;
@@ -128,7 +128,7 @@ cc.Class({
         let label = rect.getChildByName('2048Number'),
             bg = rect.getChildByName('2048RectBg');
         bg.color = cc.hexToColor(String(c));
-        label.color = (n <= 4) ? cc.hexToColor("#FF8556") : cc.Color.WHITE;
+        label.color = (n <= 4) ? cc.hexToColor("#ffb638") : cc.Color.WHITE;
         label.getComponent(cc.Label).string = n;
         this.node.addChild(rect);
     },

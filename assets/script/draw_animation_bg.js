@@ -2,7 +2,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        circlesNum: 10
+        circlesNum: 10,
+        r: 163,
+        g: 163,
+        b: 163
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -28,7 +31,7 @@ cc.Class({
 
     createCircle(circleObj) {
         this.ctx.arc(circleObj.cx, circleObj.cy, circleObj.r, 0, Math.PI * 2);
-        this.ctx.fillColor = new cc.Color(163, 163, 163, circleObj.alpha);
+        this.ctx.fillColor = new cc.Color(this.r, this.g, this.b, circleObj.alpha);
         this.ctx.fill();
     },
 

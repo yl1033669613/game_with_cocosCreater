@@ -57,12 +57,12 @@ cc.Class({
             moveAction;
         if (!this.noticeOpen) {
             this.noticeOpen = true;
-            dt = 125;
+            dt = 120;
         } else {
             this.noticeOpen = false;
-            dt = -125;
+            dt = -120;
         };
-        moveAction = cc.sequence(cc.moveBy(.2, 0, dt).easing(cc.easeOut(.2)), cc.callFunc(function() {
+        moveAction = cc.sequence(cc.moveBy(.6, 0, dt).easing(cc.easeBounceOut(.6)), cc.callFunc(function() {
             if (this.noticeOpen && this.noticeLoadFirst) {
                 wx.showLoading({ title: '请稍候...' });
                 this.loadNoticePic();

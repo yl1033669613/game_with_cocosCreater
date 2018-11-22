@@ -100,9 +100,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 211,
-      "g": 211,
-      "b": 41,
+      "r": 255,
+      "g": 228,
+      "b": 32,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -141,8 +141,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 26,
-    "_fontSize": 26,
+    "_actualFontSize": 23,
+    "_fontSize": 23,
     "_lineHeight": 50,
     "_enableWrapText": false,
     "_N$file": {
@@ -202,7 +202,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "a9726837-7038-416d-9443-9e0f7a2f69ea"
+      "__uuid__": "b2440100-0e9f-4348-95ea-d8f64067dc44"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -243,7 +243,7 @@
       "a": 255
     },
     "duration": 0.1,
-    "zoomScale": 0.95,
+    "zoomScale": 0.98,
     "clickEvents": [
       {
         "__id__": 8

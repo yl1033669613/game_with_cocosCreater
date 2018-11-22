@@ -85,7 +85,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_lineWidth": 1,
+    "_lineWidth": 0.5,
     "_strokeColor": {
       "__type__": "cc.Color",
       "r": 109,

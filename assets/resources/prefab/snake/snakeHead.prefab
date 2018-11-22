@@ -3,10 +3,12 @@
     "__type__": "cc.Prefab",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "data": {
       "__id__": 1
-    }
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -77,24 +79,24 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_lineWidth": 1,
+    "_lineWidth": 0.5,
     "_strokeColor": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 255,
-      "b": 255,
+      "g": 180,
+      "b": 180,
       "a": 255
     },
     "_lineJoin": 2,
     "_lineCap": 0,
     "_fillColor": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 0,
-      "b": 0,
+      "r": 231,
+      "g": 18,
+      "b": 61,
       "a": 255
     },
-    "_miterLimit": 5
+    "_miterLimit": 4
   },
   {
     "__type__": "c7a33uqHoVKobpqpjjMbZ1/",
