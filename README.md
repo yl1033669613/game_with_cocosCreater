@@ -1,4 +1,4 @@
-# 使用cocosCreator 开发的wx小游戏 有贪吃蛇，flappy bird， 2048, 见缝插针，烟花等
+# 使用cocosCreator 开发的wx小游戏 有贪吃蛇，flappy bird， 2048, 见缝插针，烟花，俄罗斯方块
 
 # 新增
 目前有5款游戏，后续可能会新增更多小游戏
