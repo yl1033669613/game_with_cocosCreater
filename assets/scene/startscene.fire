@@ -1751,11 +1751,11 @@
     ],
     "_prefab": null,
     "_id": "29sEiHOhFEgIPL8s7U4OfA",
-    "_opacity": 247,
+    "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 200,
-      "g": 238,
+      "r": 255,
+      "g": 255,
       "b": 255,
       "a": 255
     },

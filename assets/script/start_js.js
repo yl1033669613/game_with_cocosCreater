@@ -26,20 +26,23 @@ cc.Class({
         this.noticeOpen = false;
         this.noticeLoadFirst = true;
         let scenesList = [{
-            title: ' snake',
+            title: ' Snake',
             name: 'snake'
         }, {
-            title: ' flappy bird',
+            title: ' Flappy bird',
             name: 'flappy_bird'
         }, {
-            title: ' firework',
+            title: ' Firework',
             name: 'firework'
         }, {
             title: ' 2048',
             name: 'game2048'
         }, {
-            title: ' needles',
+            title: ' Needles',
             name: 'game_needles_start'
+        }, {
+            title: ' Tetris',
+            name: 'tetris'
         }];
         let y = -65;
         for (let i = 0; i < scenesList.length; i++) {
@@ -53,26 +56,32 @@ cc.Class({
     },
 
     openNotice() {
-        let dt = 120,
-            moveAction;
-        if (!this.noticeOpen) {
-            this.noticeOpen = true;
+        let self = this;
+        let dt = 120;
+        if (!self.noticeOpen) {
+            self.noticeOpen = true;
             dt = 120;
         } else {
-            this.noticeOpen = false;
+            self.noticeOpen = false;
             dt = -120;
         };
-        moveAction = cc.sequence(cc.moveBy(.6, 0, dt).easing(cc.easeBounceOut(.6)), cc.callFunc(function() {
-            if (this.noticeOpen && this.noticeLoadFirst) {
-                wx.showLoading({ title: '请稍候...' });
-                this.loadNoticePic();
-            }
-        }, this));
+        if (self.noticeOpen && self.noticeLoadFirst) {
+            wx.showLoading({ title: '请稍候...' });
+            self.loadNoticePic(() => {
+                self.noticeMoveAction(dt);
+            });
+        } else {
+            self.noticeMoveAction(dt);
+        }
+    },
+
+    noticeMoveAction(dt) {
+        let moveAction = cc.moveBy(.6, 0, dt).easing(cc.easeBounceOut(.6));
         this.bottBanner.runAction(moveAction);
     },
 
     //加载notice
-    loadNoticePic() {
+    loadNoticePic(cb) {
         let self = this;
         let sprite = self.noticePic.getComponent(cc.Sprite);
         let db = wx.cloud.database();
@@ -85,7 +94,8 @@ cc.Class({
                     success: res => {
                         wx.hideLoading();
                         self.noticeLoadFirst = false;
-                        cc.loader.load(res.fileList[0].tempFileURL, function(err, texture) {
+                        cb && cb();
+                        cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
                             sprite.spriteFrame = new cc.SpriteFrame(texture);
                             self.noticePic.parent.height = self.noticePic.height;
                         })

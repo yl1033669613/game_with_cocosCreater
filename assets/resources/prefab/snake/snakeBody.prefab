@@ -76,18 +76,18 @@
     "_lineWidth": 0.5,
     "_strokeColor": {
       "__type__": "cc.Color",
-      "r": 213,
-      "g": 205,
-      "b": 205,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_lineJoin": 2,
     "_lineCap": 0,
     "_fillColor": {
       "__type__": "cc.Color",
-      "r": 214,
-      "g": 206,
-      "b": 206,
+      "r": 107,
+      "g": 106,
+      "b": 111,
       "a": 253
     },
     "_miterLimit": 5

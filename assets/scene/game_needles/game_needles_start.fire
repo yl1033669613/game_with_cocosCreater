@@ -378,7 +378,10 @@
       "__id__": 7
     },
     "_enabled": true,
-    "circlesNum": 15
+    "circlesNum": 15,
+    "r": 163,
+    "g": 163,
+    "b": 163
   },
   {
     "__type__": "cc.Graphics",
@@ -1013,7 +1016,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 50,
-      "height": 25
+      "height": 40
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1021,8 +1024,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -162.5,
-      "y": -360.5
+      "x": -157.5,
+      "y": -355
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1217,10 +1220,10 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 12,
-    "_left": 0,
+    "_left": 5,
     "_right": 0,
     "_top": 0,
-    "_bottom": 2,
+    "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
