@@ -8,7 +8,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        cc.game.addPersistRootNode(this.node);
+        cc.game.addPersistRootNode(this.node); //设置常驻节点
 
         wx.cloud.init();
 
@@ -18,12 +18,17 @@ cc.Class({
 
         this.userGameInfo = {
             'snakeBestScore': 0,
+
             'fbBestScore': 0,
+
             'tzfeBestScore': 0,
             'tzfeWinNum': 0,
 
             needleFreeModeScore: 0,
             needleLevelModeLevels: 1,
+
+            tetrisBestScore: 0,
+
             'createTime': this.db.serverDate(),
             'updateTime': this.db.serverDate()
         };
@@ -83,6 +88,7 @@ cc.Class({
         });
     },
 
+    //获取needle level 数组
     getNeedlesLevelData() {
         let self = this;
         wx.cloud.callFunction({

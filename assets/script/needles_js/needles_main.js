@@ -43,9 +43,10 @@ cc.Class({
         this.rotateSpeed = 12;
         this.isGameOver = false;
 
+        // wx cloud
         this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
         this.db = wx.cloud.database();
-
+        //判断数据库字段 不存在则先更新字段
         if (!this.globalUser.userGameInfo.needleLevelModeLevels || typeof this.globalUser.userGameInfo.needleFreeModeScore != 'number') {
             this.requestDbNeedleFreeModeScore();
             this.requestDbNeedleLevelModeLevels();
@@ -204,7 +205,7 @@ cc.Class({
             btnRestart.active = true;
             if (this.freeModeCurrScore > gbData.freeBestScore) {
                 gbData.freeBestScore = this.freeModeCurrScore;
-                this.requestDbNeedleFreeModeScore();
+                this.requestDbNeedleFreeModeScore(); //wx db
             };
             freeModeBestScore.getComponent(cc.Label).string = 'best score: ' + gbData.freeBestScore;
         };
@@ -230,11 +231,12 @@ cc.Class({
         } else {
             levelModeTxt.getComponent(cc.Label).string = 'level: ' + gbData.gameLevel;
         };
-        this.requestDbNeedleLevelModeLevels();
+        this.requestDbNeedleLevelModeLevels(); //wx db
         this.gameOverMaskVis();
     },
 
-    requestDbNeedleFreeModeScore() {
+    //保存free mode 分数
+    requestDbNeedleFreeModeScore() { 
         let self = this;
         self.db.collection('userGameInfo').where({
             _openid: self.globalUser.openid
@@ -254,6 +256,7 @@ cc.Class({
         })
     },
 
+    //保存level mode levels
     requestDbNeedleLevelModeLevels() {
         let self = this;
         self.db.collection('userGameInfo').where({

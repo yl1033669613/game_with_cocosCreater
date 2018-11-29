@@ -67,7 +67,7 @@ cc.Class({
         };
         if (self.noticeOpen && self.noticeLoadFirst) {
             wx.showLoading({ title: '请稍候...' });
-            self.loadNoticePic(() => {
+            self.loadNoticePic(() => { //wx cloud
                 self.noticeMoveAction(dt);
             });
         } else {
@@ -80,7 +80,7 @@ cc.Class({
         this.bottBanner.runAction(moveAction);
     },
 
-    //加载notice
+    //加载notice  wx cloud
     loadNoticePic(cb) {
         let self = this;
         let sprite = self.noticePic.getComponent(cc.Sprite);

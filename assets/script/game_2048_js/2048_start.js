@@ -300,18 +300,19 @@ cc.Class({
     //玩家触摸事件
     eventHandle() {
         let canvasScr = this.node.parent,
-            sx, sy, dx, dy, ex, ey;
+            sx, sy, dx, dy;
         canvasScr.on(cc.Node.EventType.TOUCH_START, (e) => {
             let startPoint = e.getLocation();
             sx = startPoint.x;
             sy = startPoint.y;
-
+            dx = 0;
+            dy = 0;
         }, this);
 
         canvasScr.on(cc.Node.EventType.TOUCH_MOVE, (e) => {
             let startPoint = e.getLocation();
-            ex = startPoint.x;
-            ey = startPoint.y;
+            let ex = startPoint.x;
+            let ey = startPoint.y;
             dx = ex - sx;
             dy = ey - sy;
         }, this)
