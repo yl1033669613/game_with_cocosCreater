@@ -1,11 +1,9 @@
-const tets = require('./tetrominoes.js');
+const tets = require('./tetris_type.js');
 const DROPSPEED = 500;
 const ROW = 20;
-const COL = 10,
-    COLUMN = 10;
-const SQ = 18,
-    squareSize = 18;
-const VACANT = "61/60/60/255"; // color of an empty square
+const COL = 10;
+const WIDTH = 18;
+const DFCOLOR = "61/60/60/255"; //默认rect color
 
 cc.Class({
     extends: cc.Component,
@@ -39,7 +37,7 @@ cc.Class({
         this.ctx = this.theBoard.getComponent(cc.Graphics);
         this.board = [];
 
-        this.PIECES = [
+        this.BLOCKS = [
             [tets.Z, "236/38/66/255"],
             [tets.S, "19/171/19/255"],
             [tets.T, "221/219/61/255"],
@@ -57,13 +55,13 @@ cc.Class({
 
         this.gameOver = false;
 
-        //pieces pos
+        //随机块 位置及旋转形状
         this.x = 3;
         this.y = -2;
-        this.tetromino = '';
-        this.color = '';
-        this.tetrominoN = 0; // we start from the first pattern
-        this.activeTetromino = '';
+        this.randomBlock = '';
+        this.color = ''; //当前形状对应颜色
+        this.rotateIdx = 0; //当前形状对应旋转块index
+        this.rotateBlock = ''; //当前形状对应旋转块
 
         // wx cloud
         this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
@@ -75,75 +73,74 @@ cc.Class({
         }
     },
 
+    //随机获取块
+    randomOne() {
+        let r = Math.floor(Math.random() * this.BLOCKS.length)
+
+        this.x = 3;
+        this.y = -2;
+        this.rotateIdx = 0;
+        this.randomBlock = this.BLOCKS[r][0];
+        this.color = this.BLOCKS[r][1];
+        this.rotateBlock = this.randomBlock[this.rotateIdx];
+    },
+
     //draw board
     drawBoard() {
         this.ctx.clear();
         for (let r = 0; r < ROW; r++) {
             for (let c = 0; c < COL; c++) {
-                this.drawSquare(c, r, this.board[r][c]);
+                this.drawRect(c, r, this.board[r][c]);
             }
         }
     },
 
-    drawSquare(x, y, color) {
+    drawRect(x, y, color) {
         let c = color.split('/');
-        let col = new cc.Color({r: parseInt(c[0]), g: parseInt(c[1]), b: parseInt(c[2]), a: parseInt(c[3])});
+        let col = new cc.Color({ r: parseInt(c[0]), g: parseInt(c[1]), b: parseInt(c[2]), a: parseInt(c[3]) });
         this.ctx.fillColor = col;
-        this.ctx.rect((x * SQ) + (2 * x), (SQ * ROW + 22) - ((y * SQ) + (2 * y)), SQ, SQ);
+        this.ctx.rect((x * WIDTH) + (2 * x), (WIDTH * ROW + 22) - ((y * WIDTH) + (2 * y)), WIDTH, WIDTH);
         this.ctx.stroke();
         this.ctx.fill();
     },
 
-    //随机获取块
-    randomPiece() {
-        let r = Math.floor(Math.random() * this.PIECES.length)
-
-        this.x = 3;
-        this.y = -2;
-        this.tetrominoN = 0;
-        this.tetromino = this.PIECES[r][0];
-        this.color = this.PIECES[r][1];
-        this.activeTetromino = this.tetromino[this.tetrominoN];
-    },
-
     // 填充
-    fill(color) {
-        for (let r = 0; r < this.activeTetromino.length; r++) {
-            for (let c = 0; c < this.activeTetromino.length; c++) {
-                // we draw only occupied squares
-                if (this.activeTetromino[r][c]) {
-                    this.drawSquare(this.x + c, this.y + r, color);
+    fills(color) {
+        for (let r = 0; r < this.rotateBlock.length; r++) {
+            for (let c = 0; c < this.rotateBlock.length; c++) {
+                // 只渲染被占用的位置
+                if (this.rotateBlock[r][c]) {
+                    this.drawRect(this.x + c, this.y + r, color);
                 }
             }
         }
     },
 
-    // 绘制
+    // 绘制带颜色的块
     draw() {
-        this.fill(this.color);
+        this.fills(this.color);
     },
 
     // 绘制空格
-    unDraw() {
-        this.fill(VACANT);
+    drawNormal() {
+        this.fills(DFCOLOR);
     },
 
     moveDown() {
-        if (!this.collision(0, 1, this.activeTetromino)) {
-            this.unDraw();
+        if (!this.collisionDetection(0, 1, this.rotateBlock)) {
+            this.drawNormal();
             this.y++;
             this.draw();
         } else {
-            // lock and generate a new one
-            this.lock();
-            this.randomPiece();
+            this.drawOnBoard();
+            this.randomOne();
         }
     },
 
     // move Right
     moveRight() {
-        if (!this.collision(1, 0, this.activeTetromino)) {
-            this.unDraw();
+        if (!this.collisionDetection(1, 0, this.rotateBlock)) {
+            this.drawNormal();
             this.x++;
             this.draw();
         }
@@ -151,44 +148,43 @@ cc.Class({
 
     // move Left 
     moveLeft() {
-        if (!this.collision(-1, 0, this.activeTetromino)) {
-            this.unDraw();
+        if (!this.collisionDetection(-1, 0, this.rotateBlock)) {
+            this.drawNormal();
             this.x--;
             this.draw();
         }
     },
 
-    // rotate the piece
+    // rotate the block
     rotate() {
-        let nextPattern = this.tetromino[(this.tetrominoN + 1) % this.tetromino.length];
-        let kick = 0;
+        let nextBck = this.randomBlock[(this.rotateIdx + 1) % this.randomBlock.length];
+        let drt = 0;
 
-        if (this.collision(0, 0, nextPattern)) {
+        if (this.collisionDetection(0, 0, nextBck)) {
             if (this.x > COL / 2) {
                 // 到达右边界
-                kick = -1; // we need to move the piece to the left
+                drt = -1;
             } else {
                 // 到达右左边界
-                kick = 1; // we need to move the piece to the right
+                drt = 1;
             }
         }
 
-        if (!this.collision(kick, 0, nextPattern)) {
-            this.unDraw();
-            this.x += kick;
-            this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
-            this.activeTetromino = this.tetromino[this.tetrominoN];
+        if (!this.collisionDetection(drt, 0, nextBck)) {
+            this.drawNormal();
+            this.x += drt;
+            this.rotateIdx = (this.rotateIdx + 1) % this.randomBlock.length;
+            this.rotateBlock = this.randomBlock[this.rotateIdx];
             this.draw();
         }
     },
 
-    lock() {
+    drawOnBoard() {
         this.dropSpeed = DROPSPEED;
-
-        for (let r = 0; r < this.activeTetromino.length; r++) {
-            for (let c = 0; c < this.activeTetromino.length; c++) {
+        for (let r = 0; r < this.rotateBlock.length; r++) {
+            for (let c = 0; c < this.rotateBlock.length; c++) {
                 // 跳过空格
-                if (!this.activeTetromino[r][c]) {
+                if (!this.rotateBlock[r][c]) {
                     continue;
                 }
                 // 当形状触碰到board 上边界时游戏结束
@@ -201,7 +197,7 @@ cc.Class({
                     this.showGameOverInfo();
                     break;
                 }
-                // 将方块写入board数组中  表示锁定
+                // 将颜色方块压入board数组中
                 this.board[this.y + r][this.x + c] = this.color;
             }
         }
@@ -209,7 +205,7 @@ cc.Class({
         for (let r = 0; r < ROW; r++) {
             let isRowFull = true;
             for (let c = 0; c < COL; c++) {
-                isRowFull = isRowFull && (this.board[r][c] != VACANT);
+                isRowFull = isRowFull && (this.board[r][c] != DFCOLOR);
             }
             if (isRowFull) {
                 // 当一行被填满时将 上面的方块向下移动
@@ -218,9 +214,9 @@ cc.Class({
                         this.board[y][c] = this.board[y - 1][c];
                     }
                 }
-                // 第一行之上没有更多了
+                // 第一行
                 for (let c = 0; c < COL; c++) {
-                    this.board[0][c] = VACANT;
+                    this.board[0][c] = DFCOLOR;
                 }
                 // 更新分数
                 this.score += 10;
@@ -234,26 +230,24 @@ cc.Class({
     },
 
     //碰撞检测
-    collision(x, y, piece) {
-        for (let r = 0; r < piece.length; r++) {
-            for (let c = 0; c < piece.length; c++) {
+    collisionDetection(x, y, block) {
+        for (let r = 0; r < block.length; r++) {
+            for (let c = 0; c < block.length; c++) {
                 // 空 则跳过
-                if (!piece[r][c]) {
+                if (!block[r][c]) {
                     continue;
                 }
-
-                let newX = this.x + c + x;
-                let newY = this.y + r + y;
-
-                if (newX < 0 || newX >= COL || newY >= ROW) {
+                let nxtX = this.x + c + x,
+                    nxtY = this.y + r + y;
+                if (nxtX < 0 || nxtX >= COL || nxtY >= ROW) {
                     return true;
                 }
-                // skip newY < 0; board[-1] will crush our game
-                if (newY < 0) {
+                // 跳过 nxtY < 0
+                if (nxtY < 0) {
                     continue;
                 }
                 // 判断是是否为非空格
-                if (this.board[newY][newX] != VACANT) {
+                if (this.board[nxtY][nxtX] != DFCOLOR) {
                     return true;
                 }
             }
@@ -279,7 +273,7 @@ cc.Class({
         }, this)
 
         this.node.on(cc.Node.EventType.TOUCH_END, (e) => {
-            //根据横纵坐标位移判断滑动方向 up to rotate piece, left to left, right to right, down to down
+            //根据横纵坐标位移判断滑动方向 up to rotate, left to left, right to right, down to down
             if (this.gameOver) return;
             if (dy > 30 && Math.abs(dy / dx) > 2) this.rotate();
             if (dy < -30 && Math.abs(dy / dx) > 2) {
@@ -289,12 +283,6 @@ cc.Class({
             if (dx < -30 && Math.abs(dx / dy) > 2) this.moveLeft();
             if (dx > 30 && Math.abs(dx / dy) > 2) this.moveRight();
         }, this);
-    },
-
-    drop() {
-        if (!this.gameOver) {
-            this.moveDown();
-        }
     },
 
     //保存最高得分 wx cloud
@@ -342,11 +330,11 @@ cc.Class({
         for (let r = 0; r < ROW; r++) {
             this.board[r] = [];
             for (let c = 0; c < COL; c++) {
-                this.board[r][c] = VACANT;
+                this.board[r][c] = DFCOLOR;
             }
         };
         this.drawBoard();
-        this.randomPiece();
+        this.randomOne();
     },
 
     backList() {
@@ -366,12 +354,12 @@ cc.Class({
         for (let r = 0; r < ROW; r++) {
             this.board[r] = [];
             for (let c = 0; c < COL; c++) {
-                this.board[r][c] = VACANT;
+                this.board[r][c] = DFCOLOR;
             }
         };
         this.scoreLabel.string = 'score:' + this.score;
         this.drawBoard();
-        this.randomPiece();
+        this.randomOne();
         this.initEvent()
     },
 
@@ -379,7 +367,9 @@ cc.Class({
         this.fps += dt * 1000;
         if (this.fps > this.dropSpeed) {
             this.fps = 0;
-            this.drop();
+            if (!this.gameOver) {
+                this.moveDown();
+            }
         }
     },
-});
+})
