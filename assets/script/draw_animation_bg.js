@@ -15,7 +15,7 @@ cc.Class({
         this.circles = [];
         this.speed = 1.5;
         this.tick = 0;
-        for (let i = 0; i < this.circlesNum; i++) {
+        for (let i = 0; i < this.circlesNum; i++) { //生成随机属性的circle 对象
             let obj = {
                 cx: this.random(this.node.width * 0.05, this.node.width * 0.95),
                 cy: this.random(this.node.height * 0.05, this.node.height * 0.95),
@@ -35,7 +35,7 @@ cc.Class({
         this.ctx.fill();
     },
 
-    updateDirection(item) {
+    updateDirection(item) { //更新方向
         item.tick++;
         item.cx += Math.cos(item.angle) * this.speed / 10;
         item.cy += Math.sin(item.angle) * this.speed / 10;
@@ -57,7 +57,7 @@ cc.Class({
         this.createCircle(item);
     },
 
-    random(min, max) {
+    random(min, max) { //获取随机数
         return Math.random() * (max - min) + min;
     },
 

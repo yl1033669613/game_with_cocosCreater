@@ -24,7 +24,6 @@ cc.Class({
             for (var i = 0; i < this.obstacleCount; i++) {
                 this.createObstacle();
             };
-            // console.log(this.obstacleInstance.length)
         };
     },
 

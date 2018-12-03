@@ -37,7 +37,7 @@ cc.Class({
         this.ctx = this.theBoard.getComponent(cc.Graphics);
         this.board = [];
 
-        this.BLOCKS = [
+        this.SHAPES = [
             [tets.Z, "236/38/66/255"],
             [tets.S, "19/171/19/255"],
             [tets.T, "221/219/61/255"],
@@ -58,10 +58,10 @@ cc.Class({
         //随机块 位置及旋转形状
         this.x = 3;
         this.y = -2;
-        this.randomBlock = '';
+        this.randomShape = '';
         this.color = ''; //当前形状对应颜色
-        this.rotateIdx = 0; //当前形状对应旋转块index
-        this.rotateBlock = ''; //当前形状对应旋转块
+        this.rotateIdx = 0; //当前形状对应旋转位置index
+        this.rotateShape = ''; //当前形状对应旋转位置
 
         // wx cloud
         this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
@@ -73,16 +73,15 @@ cc.Class({
         }
     },
 
-    //随机获取块
+    //随机获取一个形状
     randomOne() {
-        let r = Math.floor(Math.random() * this.BLOCKS.length)
-
+        let r = Math.floor(Math.random() * this.SHAPES.length);
         this.x = 3;
         this.y = -2;
         this.rotateIdx = 0;
-        this.randomBlock = this.BLOCKS[r][0];
-        this.color = this.BLOCKS[r][1];
-        this.rotateBlock = this.randomBlock[this.rotateIdx];
+        this.randomShape = this.SHAPES[r][0];
+        this.color = this.SHAPES[r][1];
+        this.rotateShape = this.randomShape[this.rotateIdx];
     },
 
     //draw board
@@ -95,6 +94,7 @@ cc.Class({
         }
     },
 
+    //绘制单个矩形 填充颜色
     drawRect(x, y, color) {
         let c = color.split('/');
         let col = new cc.Color({ r: parseInt(c[0]), g: parseInt(c[1]), b: parseInt(c[2]), a: parseInt(c[3]) });
@@ -104,32 +104,32 @@ cc.Class({
         this.ctx.fill();
     },
 
-    // 填充
+    // 绘制形状
     fills(color) {
-        for (let r = 0; r < this.rotateBlock.length; r++) {
-            for (let c = 0; c < this.rotateBlock.length; c++) {
+        for (let r = 0; r < this.rotateShape.length; r++) {
+            for (let c = 0; c < this.rotateShape.length; c++) {
                 // 只渲染被占用的位置
-                if (this.rotateBlock[r][c]) {
+                if (this.rotateShape[r][c]) {
                     this.drawRect(this.x + c, this.y + r, color);
                 }
             }
         }
     },
 
-    // 绘制带颜色的块
+    // 绘制带颜色的形状
     draw() {
         this.fills(this.color);
     },
 
-    // 绘制空格
-    drawNormal() {
+    // 绘制空 （覆盖之前有颜色的矩形）
+    drawEmpty() {
         this.fills(DFCOLOR);
     },
 
     moveDown() {
-        if (!this.collisionDetection(0, 1, this.rotateBlock)) {
-            this.drawNormal();
-            this.y++;
+        if (!this.collisionDetection(0, 1, this.rotateShape)) {
+            this.drawEmpty();
+            this.y++; //下移一格
             this.draw();
         } else {
             this.drawOnBoard();
@@ -137,29 +137,28 @@ cc.Class({
         }
     },
 
-    // move Right
+    // right
     moveRight() {
-        if (!this.collisionDetection(1, 0, this.rotateBlock)) {
-            this.drawNormal();
-            this.x++;
+        if (!this.collisionDetection(1, 0, this.rotateShape)) {
+            this.drawEmpty();
+            this.x++; //右移一格
             this.draw();
         }
     },
 
-    // move Left 
+    // left 
     moveLeft() {
-        if (!this.collisionDetection(-1, 0, this.rotateBlock)) {
-            this.drawNormal();
-            this.x--;
+        if (!this.collisionDetection(-1, 0, this.rotateShape)) {
+            this.drawEmpty();
+            this.x--; //左移一格
             this.draw();
         }
     },
 
-    // rotate the block
+    // rotate
     rotate() {
-        let nextBck = this.randomBlock[(this.rotateIdx + 1) % this.randomBlock.length];
+        let nextBck = this.randomShape[(this.rotateIdx + 1) % this.randomShape.length];
         let drt = 0;
-
         if (this.collisionDetection(0, 0, nextBck)) {
             if (this.x > COL / 2) {
                 // 到达右边界
@@ -168,23 +167,23 @@ cc.Class({
                 // 到达右左边界
                 drt = 1;
             }
-        }
-
+        };
         if (!this.collisionDetection(drt, 0, nextBck)) {
-            this.drawNormal();
+            this.drawEmpty();
             this.x += drt;
-            this.rotateIdx = (this.rotateIdx + 1) % this.randomBlock.length;
-            this.rotateBlock = this.randomBlock[this.rotateIdx];
+            this.rotateIdx = (this.rotateIdx + 1) % this.randomShape.length;
+            this.rotateShape = this.randomShape[this.rotateIdx];
             this.draw();
         }
     },
 
+    //形状无法向下继续移动时将形状保存到board数组, 并且重新绘制board
     drawOnBoard() {
         this.dropSpeed = DROPSPEED;
-        for (let r = 0; r < this.rotateBlock.length; r++) {
-            for (let c = 0; c < this.rotateBlock.length; c++) {
+        for (let r = 0; r < this.rotateShape.length; r++) {
+            for (let c = 0; c < this.rotateShape.length; c++) {
                 // 跳过空格
-                if (!this.rotateBlock[r][c]) {
+                if (!this.rotateShape[r][c]) {
                     continue;
                 }
                 // 当形状触碰到board 上边界时游戏结束
@@ -206,53 +205,53 @@ cc.Class({
             let isRowFull = true;
             for (let c = 0; c < COL; c++) {
                 isRowFull = isRowFull && (this.board[r][c] != DFCOLOR);
-            }
+            };
             if (isRowFull) {
                 // 当一行被填满时将 上面的方块向下移动
                 for (let y = r; y > 1; y--) {
                     for (let c = 0; c < COL; c++) {
                         this.board[y][c] = this.board[y - 1][c];
                     }
-                }
+                };
                 // 第一行
                 for (let c = 0; c < COL; c++) {
                     this.board[0][c] = DFCOLOR;
-                }
+                };
                 // 更新分数
-                this.score += 10;
+                this.score += 10
             }
-        }
+        };
         // 更新borad
         this.drawBoard();
 
         // 渲染分数
-        this.scoreLabel.string = 'score:' + this.score;
+        this.scoreLabel.string = 'score:' + this.score
     },
 
     //碰撞检测
-    collisionDetection(x, y, block) {
-        for (let r = 0; r < block.length; r++) {
-            for (let c = 0; c < block.length; c++) {
-                // 空 则跳过
-                if (!block[r][c]) {
+    collisionDetection(x, y, shape) {
+        for (let r = 0; r < shape.length; r++) {
+            for (let c = 0; c < shape.length; c++) {
+                // 非形状所在区域 跳过
+                if (!shape[r][c]) {
                     continue;
-                }
+                };
                 let nxtX = this.x + c + x,
                     nxtY = this.y + r + y;
                 if (nxtX < 0 || nxtX >= COL || nxtY >= ROW) {
                     return true;
-                }
-                // 跳过 nxtY < 0
+                };
+                // 跳过 nxtY < 0 初始位置为负数的情况
                 if (nxtY < 0) {
                     continue;
-                }
+                };
                 // 判断是是否为非空格
                 if (this.board[nxtY][nxtX] != DFCOLOR) {
                     return true;
                 }
             }
-        }
-        return false;
+        };
+        return false
     },
 
     //玩家触控
@@ -268,20 +267,26 @@ cc.Class({
             let startPoint = e.getLocation();
             let ex = startPoint.x;
             let ey = startPoint.y;
-            dx = ex - sx;
-            dy = ey - sy;
+            let curx = ex - sx, 
+                cury = ey - sy;
+            if (Math.abs(curx) > 12 || Math.abs(cury / curx) > 2) {
+                dx = curx
+            };
+            if (Math.abs(cury) > 12 || Math.abs(curx / cury) > 2) {
+                dy = cury
+            }
         }, this)
 
         this.node.on(cc.Node.EventType.TOUCH_END, (e) => {
             //根据横纵坐标位移判断滑动方向 up to rotate, left to left, right to right, down to down
             if (this.gameOver) return;
-            if (dy > 30 && Math.abs(dy / dx) > 2) this.rotate();
-            if (dy < -30 && Math.abs(dy / dx) > 2) {
+            if (dy > 25 && Math.abs(dy / dx) > 2) this.rotate();
+            if (dy < -25 && Math.abs(dy / dx) > 2) {
                 this.dropSpeed = 0;
                 this.moveDown();
             };
-            if (dx < -30 && Math.abs(dx / dy) > 2) this.moveLeft();
-            if (dx > 30 && Math.abs(dx / dy) > 2) this.moveRight();
+            if (dx < -25 && Math.abs(dx / dy) > 2) this.moveLeft();
+            if (dx > 25 && Math.abs(dx / dy) > 2) this.moveRight();
         }, this);
     },
 

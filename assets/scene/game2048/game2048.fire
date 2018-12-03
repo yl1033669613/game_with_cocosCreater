@@ -1364,8 +1364,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
-      "height": 30
+      "width": 110,
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1373,8 +1373,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 122.5,
-      "y": -357
+      "x": 132.5,
+      "y": -350
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1416,7 +1416,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
+      "width": 110,
       "height": 30
     },
     "_rotationX": 0,
@@ -1444,8 +1444,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 24,
-    "_fontSize": 24,
+    "_actualFontSize": 20,
+    "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": {
@@ -1562,7 +1562,7 @@
     "_left": 0,
     "_right": 0,
     "_top": 0,
-    "_bottom": 3,
+    "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -1618,7 +1618,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 64,
-      "height": 30
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1627,7 +1627,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -155.5,
-      "y": -358
+      "y": -350
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1697,8 +1697,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 24,
-    "_fontSize": 24,
+    "_actualFontSize": 20,
+    "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": {
@@ -1815,7 +1815,7 @@
     "_left": 0,
     "_right": 0,
     "_top": 0,
-    "_bottom": 2,
+    "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,

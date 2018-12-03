@@ -140,30 +140,30 @@ cc.Class({
         }
     },
 
-    move(dir) {
+    move(direction) {
         let isValid = false; //判断是否是有效移动
 
         if (this.isGameOver) return;
 
-        function modify(x, y) { //根据不同方向调整遍历方式
+        function convert(x, y) { //根据不同方向调整遍历方式
             let tx = x,
                 ty = y,
                 tmpTx = tx;
-            if (dir[0] == 0) {
+            if (direction[0] == 0) {
                 tx = ty;
                 ty = tmpTx;
             };
-            if (dir[1] > 0) tx = 3 - tx;
-            if (dir[0] > 0) ty = 3 - ty;
+            if (direction[1] > 0) tx = 3 - tx;
+            if (direction[0] > 0) ty = 3 - ty;
             return [tx, ty];
         };
-        //根据移动的方向，将地图中对应行/列中的数字一个个压入栈中，如果第一次遇到栈顶数字和待入栈数字相等，则栈顶数字乘2，最后用栈中数字更新地图中的对应行/列
+
         for (let i = 0; i < 4; i++) {
             let tmp = [];
             let isadd = false; //每一行或者每一列只能有一次数字合并
             for (let j = 0; j < 4; j++) {
-                let ti = modify(i, j)[0],
-                    tj = modify(i, j)[1];
+                let ti = convert(i, j)[0],
+                    tj = convert(i, j)[1];
                 if (this.map[ti][tj] != 0) {
                     if (!isadd && this.map[ti][tj] == tmp[tmp.length - 1]) {
                         this.score += (tmp[tmp.length - 1] *= 2); //数字合并获得分数加成
@@ -184,8 +184,8 @@ cc.Class({
                 }
             };
             for (let j = 0; j < 4; j++) {
-                let ti = modify(i, j)[0],
-                    tj = modify(i, j)[1];
+                let ti = convert(i, j)[0],
+                    tj = convert(i, j)[1];
                 if (this.map[ti][tj] == 0 && tmp[j] > 0) {
                     if (!isValid) { //数字发生移动，（原来为0的数字变为大于0被认为是有效移动）
                         isValid = true;
@@ -209,7 +209,7 @@ cc.Class({
         }
     },
 
-    gameOver() { //没有数字可以合并
+    gameOver() { //判断是否还有可能的合并
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
                 let t = ((i == 0) ? null : [i - 1, j]),
@@ -319,10 +319,10 @@ cc.Class({
 
         canvasScr.on(cc.Node.EventType.TOUCH_END, (e) => {
             //根据横纵坐标位移判断滑动方向
-            if (dy < -50 && Math.abs(dy / dx) > 2) this.move([0, 1]);
-            if (dy > 50 && Math.abs(dy / dx) > 2) this.move([0, -1]);
-            if (dx < -50 && Math.abs(dx / dy) > 2) this.move([-1, 0]);
-            if (dx > 50 && Math.abs(dx / dy) > 2) this.move([1, 0]);
+            if (dy < -30 && Math.abs(dy / dx) > 2) this.move([0, 1]);
+            if (dy > 30 && Math.abs(dy / dx) > 2) this.move([0, -1]);
+            if (dx < -30 && Math.abs(dx / dy) > 2) this.move([-1, 0]);
+            if (dx > 30 && Math.abs(dx / dy) > 2) this.move([1, 0]);
         }, this);
     },
 
