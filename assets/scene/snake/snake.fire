@@ -288,13 +288,15 @@
     "_useOriginalSize": false,
     "_actualFontSize": 20,
     "_fontSize": 20,
-    "_lineHeight": 21,
+    "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "977cfe9b-21c7-498e-b060-541800511a8b"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "score:0",
-    "_N$horizontalAlign": 1,
+    "_N$string": "score: 0",
+    "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0
@@ -319,7 +321,7 @@
     ],
     "_prefab": null,
     "_id": "6b/Fq5K5ZEaaN3ZlV5ETRS",
-    "_opacity": 200,
+    "_opacity": 91.8,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -330,13 +332,13 @@
     "_cascadeOpacityEnabled": true,
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
+      "x": 1,
+      "y": 1
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66,
-      "height": 21
+      "width": 73.33,
+      "height": 22.22
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -344,8 +346,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -152.5,
-      "y": 359
+      "x": -110.17,
+      "y": 375
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -364,8 +366,8 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 8,
-    "_left": 2,
+    "_alignFlags": 9,
+    "_left": 4,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
