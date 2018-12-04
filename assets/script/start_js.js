@@ -43,6 +43,9 @@ cc.Class({
         }, {
             title: ' Tetris',
             name: 'tetris'
+        }, {
+            title: ' Aircraft war',
+            name: 'aircraft_war_start'
         }];
         let y = -65;
         for (let i = 0; i < scenesList.length; i++) {
