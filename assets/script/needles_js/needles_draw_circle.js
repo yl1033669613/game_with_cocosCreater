@@ -5,8 +5,6 @@ cc.Class({
         r: 0
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         this.ctx = this.node.getComponent(cc.Graphics);
     },

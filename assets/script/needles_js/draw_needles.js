@@ -14,8 +14,6 @@ cc.Class({
         speed: 10
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         this.ctx = this.needleDrawContent.getComponent(cc.Graphics);
         this.startRotate = 0;
