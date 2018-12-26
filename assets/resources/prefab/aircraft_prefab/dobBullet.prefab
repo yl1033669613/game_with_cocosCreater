@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bullet1",
+    "_name": "dobBullet",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -77,7 +77,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "a39e0e8d-c932-4858-b7cf-c7eb56341d03"
+      "__uuid__": "deace260-f255-436b-9672-d920111e0bed"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -134,9 +134,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "919d52c6-3c37-4223-bcca-c927391af934"
+      "__uuid__": "0812d52d-5002-42cf-8858-c5e373baa826"
     },
-    "fileId": "5bwmEidX9Lj5dJFggJtamG",
+    "fileId": "a09Kdzc2VKUr/ev1nX+vYF",
     "sync": false
   }
 ]

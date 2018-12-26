@@ -11,34 +11,37 @@ cc.Class({
         initHP: 0, //初始生命值
         initSpriteFrame: {
             default: null,
-            type: cc.SpriteFrame,
-            tooltip: '初始化的图像'
+            type: cc.SpriteFrame
+        },
+        nodeCollision: {
+            default: null,
+            type: cc.Node
         },
         score: 0 //死后获得的分数
     },
     onLoad() {
-        cc.director.getCollisionManager().enabled = true;
-
         this.xSpeed = Math.random() * (this.xMaxSpeed - this.xMinSpeed) + this.xMinSpeed;
         this.ySpeed = cc.random0To1() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
-        this.enemyGroup = this.node.parent.getComponent('enemyGroup');
+        this.enemyGroup = this.node.parent.getComponent('enemy_group');
     },
     init() {
         if (this.node.group != 'enemy') {
             this.node.group = 'enemy';
-        }
+        };
         if (this.hP != this.initHP) {
             this.hP = this.initHP;
-        }
+        };
         let nSprite = this.node.getComponent(cc.Sprite);
         if (nSprite.spriteFrame != this.initSpriteFrame) {
             nSprite.spriteFrame = this.initSpriteFrame;
-        }
+        };
+        this.nodeCollision.group = 'enemy'; //恢复碰撞状态
     },
     update(dt) {
         if (this.enemyGroup.eState != D.commonInfo.gameState.start) {
             return;
-        }
+        };
+        if (this.hP == 0) return;
         let scores = this.enemyGroup.getScore();
         if (scores <= 50000) {
             this.node.y += dt * this.ySpeed;
@@ -59,29 +62,17 @@ cc.Class({
             this.enemyGroup.enemyDied(this.node, 0);
         }
     },
-    //碰撞检测
-    onCollisionEnter(other, self) {
-        if (other.node.group != 'bullet') {
-            return;
-        }
-        let bullet = other.node.getComponent('bullet');
-
-        if (this.hP > 0) {
-            this.hP -= bullet.hpDrop;
-        } else {
-            return;
-        }
-        if (this.hP <= 0) {
-            this.node.group = 'default'; //不让动画在执行碰撞
-            //播放动画
-            let anim = this.getComponent(cc.Animation);
-            let animName = self.node.name + 'ani';
-            anim.play(animName);
-            anim.on('finished', this.onFinished, this);
-        }
-    },
     //动画结束后 动画节点回收
-    onFinished(event) {
-        this.enemyGroup.enemyDied(this.node, this.score);
+    enemyOver(isHero) {
+        let score = 0,
+            anim = this.node.getComponent(cc.Animation),
+            animName = this.node.name + 'Ani';
+        if (isHero != 'isHero') {
+            score = this.score
+        };
+        anim.play(animName);
+        anim.on('finished', function(){
+            this.enemyGroup.enemyDied(this.node, score);
+        },this)
     }
 })

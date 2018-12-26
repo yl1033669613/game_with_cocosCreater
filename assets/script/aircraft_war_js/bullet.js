@@ -10,10 +10,11 @@ cc.Class({
     onLoad() {
         let manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        this.bulletGroup = this.node.parent.getComponent('bulletGroup')
+        this.bulletGroup = this.node.parent.getComponent('bullet_group')
     },
     //碰撞检测
     onCollisionEnter(other, self) {
+        if (other.node.name == 'hero') return;
         this.bulletGroup.bulletDied(self.node);
     },
     update(dt) {

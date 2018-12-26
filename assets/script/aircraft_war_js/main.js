@@ -6,8 +6,7 @@ cc.Class({
         pause: cc.Button,
         btnSprite: {
             default: [],
-            type: cc.SpriteFrame,
-            tooltip: '暂停按钮不同状态的图片',
+            type: cc.SpriteFrame
         },
         bomb: {
             default: null,
@@ -19,15 +18,15 @@ cc.Class({
         },
         enemyGroup: {
             default: null,
-            type: require('enemyGroup'),
+            type: require('enemy_group'),
         },
-        ufoGroup: {
+        buffGroup: {
             default: null,
-            type: require('ufoGroup'),
+            type: require('buff_group'),
         },
         bulletGroup: {
             default: null,
-            type: require('bulletGroup'),
+            type: require('bullet_group'),
         },
         scoreDisplay: {
             default: null,
@@ -41,39 +40,41 @@ cc.Class({
     onLoad() {
         this.score = 0;
         this.bombNo = 0;
+        this.isGameOver = false;
         this.scoreDisplay.string = this.score;
         this.bombNoDisplay.string = this.bombNo;
         this.eState = D.commonInfo.gameState.start;
 
         this.bulletGroup.startAction();
         this.enemyGroup.startAction();
-        this.ufoGroup.startAction();
+        this.buffGroup.startAction();
         this.bomb.on(cc.Node.EventType.TOUCH_START, this.bombOnclick, this);
     },
-
     bombOnclick() {
+        if (this.isGameOver) return;
         let bombNoLabel = this.bomb.getChildByName('bombNo').getComponent(cc.Label);
         let bombNo = parseInt(bombNoLabel.string);
         if (bombNo > 0) {
             bombNoLabel.string = bombNo - 1;
-            this.removeEnemy();
+            this.removeAllEnemy();
         }
     },
-    //暂停按钮点击事件  
-    pauseClick() { //暂停 继续
-        if (this.eState == D.commonInfo.gameState.pause) {
-            this.resumeAction();
-            this.eState = D.commonInfo.gameState.start;
-        } else if (this.eState == D.commonInfo.gameState.start) {
-            this.pauseAction();
-            this.eState = D.commonInfo.gameState.pause;
+    pauseClick() {
+        if (!this.isGameOver) {
+            if (this.eState == D.commonInfo.gameState.pause) {
+                this.resumeAction();
+                this.eState = D.commonInfo.gameState.start;
+            } else if (this.eState == D.commonInfo.gameState.start) {
+                this.pauseAction();
+                this.eState = D.commonInfo.gameState.pause;
+            }
         }
     },
     //游戏继续
     resumeAction() {
         this.enemyGroup.resumeAction();
         this.bulletGroup.resumeAction();
-        this.ufoGroup.resumeAction();
+        this.buffGroup.resumeAction();
         this.hero.onDrag();
         this.pause.normalSprite = this.btnSprite[0];
         this.pause.pressedSprite = this.btnSprite[1];
@@ -84,16 +85,14 @@ cc.Class({
         this.enemyGroup.pauseAction();
         this.bulletGroup.pauseAction();
         this.hero.offDrag();
-        this.ufoGroup.pauseAction();
+        this.buffGroup.pauseAction();
         this.pause.normalSprite = this.btnSprite[2];
         this.pause.pressedSprite = this.btnSprite[3];
-        this.pause.hoverSprite = this.btnSprite[3];
-
+        this.pause.hoverSprite = this.btnSprite[3]
     },
     //增加分数
     gainScore(scoreno) {
         this.score += scoreno;
-        //更新 scoreDisplay Label 的文字
         this.scoreDisplay.string = this.score.toString();
     },
     //get分数
@@ -102,42 +101,25 @@ cc.Class({
     },
     updateScore() {
         let currentScore = this.scoreDisplay.string;
-        let scoreData = {
-            'score': currentScore,
-            'time': D.common.timeFmt(new Date(), 'yyyy-MM-dd hh:mm:ss'),
-        };
-        let preData = cc.sys.localStorage.getItem('score');
-        let preTopScore = cc.sys.localStorage.getItem('topScore');
-        if (!preTopScore || parseInt(preTopScore) < parseInt(currentScore)) {
-            cc.sys.localStorage.setItem('topScore', currentScore);
-        }
-        if (!preData) {
-            preData = [];
-            preData.unshift(scoreData);
-        } else {
-            preData = JSON.parse(preData);
-            if (!(preData instanceof Array)) {
-                preData = [];
-            }
-            preData.unshift(scoreData);
-        }
-        cc.sys.localStorage.setItem('currentScore', currentScore);
-        cc.sys.localStorage.setItem('score', JSON.stringify(preData));
     },
     //炸弹清除敌机
-    removeEnemy() {
-        this.enemyGroup.node.removeAllChildren();
+    removeAllEnemy() {
+        let children = this.enemyGroup.node.children;
+        for (let i = 0; i < children.length; i++) {
+            children[i].getComponent('enemy').hP = 0;
+            children[i].getComponent('enemy').enemyOver()
+        }
     },
     //接到炸弹
-    getUfoBomb() {
+    getBuffBomb() {
         if (parseInt(this.bombNoDisplay.string) < 3) { //多于三个炸弹就不累加
             this.bombNoDisplay.string += 1;
         }
     },
     //游戏结束
     gameOver() {
+        this.isGameOver = true;
         this.pauseAction();
-        this.updateScore();
-        cc.director.loadScene('end');
-    },
-});
+        this.updateScore()
+    }
+})
