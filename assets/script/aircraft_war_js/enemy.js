@@ -4,11 +4,13 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        xMinSpeed: 0, //x轴最小速度
-        xMaxSpeed: 0, //x轴最大速度
-        yMinSpeed: 0, //y轴最小速度
-        yMaxSpeed: 0, //y轴最大速度
-        initHP: 0, //初始生命值
+        xMinSpeed: 0,
+        xMaxSpeed: 0,
+        yMinSpeed: 0,
+        yMaxSpeed: 0,
+        initHP: 0,
+        enemyType: 1,
+        enemyBulletFreq: 5,
         initSpriteFrame: {
             default: null,
             type: cc.SpriteFrame
@@ -17,12 +19,18 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        score: 0 //死后获得的分数
+        score: 0
     },
     onLoad() {
         this.xSpeed = Math.random() * (this.xMaxSpeed - this.xMinSpeed) + this.xMinSpeed;
         this.ySpeed = cc.random0To1() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
         this.enemyGroup = this.node.parent.getComponent('enemy_group');
+
+        this.enemyBulletGroup = cc.find('Canvas/background/enemyBulletGroup').getComponent('enemy_bullet_group');
+        if (this.enemyType != 1) {
+            console.log(this.node.uuid)
+            this.cbFnName = this.enemyBulletGroup.startAction(this.node)
+        }
     },
     init() {
         if (this.node.group != 'enemy') {
@@ -60,13 +68,21 @@ cc.Class({
         //出屏幕后 回收节点
         if (this.node.y < -this.node.parent.height / 2 - this.node.height / 2 ) {
             this.enemyGroup.enemyDied(this.node, 0);
+            if (this.cbFnName) {
+                this.cbFnName = '';
+                this.enemyBulletGroup.unscheduleForEnemyBullet(this.cbFnName)
+            }
         }
     },
-    //动画结束后 动画节点回收
+    //节点回收
     enemyOver(isHero) {
         let score = 0,
             anim = this.node.getComponent(cc.Animation),
             animName = this.node.name + 'Ani';
+        if (this.cbFnName) {
+            this.cbFnName = '';
+            this.enemyBulletGroup.unscheduleForEnemyBullet(this.cbFnName)
+        };
         if (isHero != 'isHero') {
             score = this.score
         };

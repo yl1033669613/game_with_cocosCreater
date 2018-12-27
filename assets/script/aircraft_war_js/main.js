@@ -20,6 +20,10 @@ cc.Class({
             default: null,
             type: require('enemy_group'),
         },
+        enemyBulletGroup: {
+            default: null,
+            type: require('enemy_bullet_group'),
+        },
         buffGroup: {
             default: null,
             type: require('buff_group'),
@@ -73,6 +77,7 @@ cc.Class({
     //游戏继续
     resumeAction() {
         this.enemyGroup.resumeAction();
+        this.enemyBulletGroup.resumeAction();
         this.bulletGroup.resumeAction();
         this.buffGroup.resumeAction();
         this.hero.onDrag();
@@ -83,9 +88,10 @@ cc.Class({
     //游戏暂停
     pauseAction() {
         this.enemyGroup.pauseAction();
+        this.enemyBulletGroup.pauseAction();
         this.bulletGroup.pauseAction();
-        this.hero.offDrag();
         this.buffGroup.pauseAction();
+        this.hero.offDrag();
         this.pause.normalSprite = this.btnSprite[2];
         this.pause.pressedSprite = this.btnSprite[3];
         this.pause.hoverSprite = this.btnSprite[3]

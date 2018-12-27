@@ -11,7 +11,8 @@ cc.Class({
         bulletGroup: {
             default: null,
             type: require('bullet_group'),
-        }
+        },
+        moveRatio: 0.8
     }),
 
     onLoad() {
@@ -19,7 +20,10 @@ cc.Class({
         manager.enabled = true;
         this.eState = D.commonInfo.gameState.none;
         this.currX = 0;
-        this.onDrag()
+        this.onDrag();
+        //setting hero pos
+        this.node.x = 0;
+        this.node.y = -(this.node.parent.height / 2) + (this.node.height / 2) + 8;
     },
     onDrag() {
         this.node.parent.on(cc.Node.EventType.TOUCH_START, this.dragStart, this);
@@ -38,7 +42,7 @@ cc.Class({
             location = { x: this.node.x, y: this.node.y },
             minX = -this.node.parent.width / 2 + this.node.width / 2,
             maxX = -minX;
-        location.x += locationv.x - this.currX;
+        location.x += (locationv.x - this.currX) * this.moveRatio;
         this.currX = locationv.x;
         if (location.x < minX) {
             location.x = minX;

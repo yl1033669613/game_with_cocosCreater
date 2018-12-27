@@ -268,6 +268,8 @@
     "yMinSpeed": -50,
     "yMaxSpeed": -50,
     "initHP": 15,
+    "enemyType": 3,
+    "enemyBulletFreq": 1,
     "initSpriteFrame": {
       "__uuid__": "4c993fe7-1278-42a8-985a-7e69688be01c"
     },
