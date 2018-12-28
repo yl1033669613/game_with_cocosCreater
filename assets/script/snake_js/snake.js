@@ -194,9 +194,5 @@ cc.Class({
         } else {
             return false;
         };
-    },
-
-    update (dt){
- 		
     }
 });

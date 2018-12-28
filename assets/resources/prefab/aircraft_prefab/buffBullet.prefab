@@ -106,8 +106,8 @@
     "_enabled": true,
     "xMinSpeed": 0,
     "xMaxSpeed": 0,
-    "yMinSpeed": -50,
-    "yMaxSpeed": -50
+    "yMinSpeed": -30,
+    "yMaxSpeed": -30
   },
   {
     "__type__": "cc.BoxCollider",

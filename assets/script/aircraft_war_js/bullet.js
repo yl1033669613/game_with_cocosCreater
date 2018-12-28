@@ -14,7 +14,6 @@ cc.Class({
     },
     //碰撞检测
     onCollisionEnter(other, self) {
-        if (other.node.name == 'hero') return;
         this.bulletGroup.bulletDied(self.node);
     },
     update(dt) {

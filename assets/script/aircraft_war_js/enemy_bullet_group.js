@@ -36,12 +36,8 @@ cc.Class({
 		//初始enemy bullet
 		D.common.initObjPool(this, this.enemybulletIfe);
 	},
-	startAction(gteBEnemyInfo) {
-		let enemy = gteBEnemyInfo.getComponent('enemy');
-		let cbName = gteBEnemyInfo.uuid + 'Callback';
-		this[cbName] = function() { this.getNewbullet(this.enemybulletIfe, gteBEnemyInfo) }.bind(this);
-		this.schedule(this[cbName], enemy.enemyBulletFreq);
-		return cbName
+	enemyOpenFire(gteBEnemyInfo) {
+		this.getNewbullet(this.enemybulletIfe, gteBEnemyInfo)
 	},
 	pauseAction() {
 		this.enabled = false;
@@ -63,15 +59,11 @@ cc.Class({
 			newNodeComp.ySpeed = gteInfo.getComponent('enemy').ySpeed - 50;
 		}
 	},
-	//获取子弹位置
 	getBulletPostion(posInfo, gteInfo) {
 		let hPos = gteInfo.getPosition();
 		let newV2_x = hPos.x + parseFloat(posInfo.xAxis);
 		let newV2_y = hPos.y + parseFloat(posInfo.yAxis);
 		return cc.p(newV2_x, newV2_y);
-	},
-	unscheduleForEnemyBullet(name) {
-		this.unschedule(this[name]);
 	},
 	//回收节点
 	bulletDied(nodeinfo) {

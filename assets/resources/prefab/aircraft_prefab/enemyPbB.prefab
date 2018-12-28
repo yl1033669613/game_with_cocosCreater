@@ -275,17 +275,19 @@
     "_enabled": true,
     "xMinSpeed": 0,
     "xMaxSpeed": 0,
-    "yMinSpeed": -50,
+    "yMinSpeed": -30,
     "yMaxSpeed": -100,
     "initHP": 5,
     "enemyType": 2,
+    "enemyBulletFreq": 5,
+    "heroDropHp": 10,
     "initSpriteFrame": {
       "__uuid__": "7fb818d3-02f2-4d5f-823c-cef57f25f7fa"
     },
     "nodeCollision": {
       "__id__": 2
     },
-    "score": 2000
+    "score": 2500
   },
   {
     "__type__": "cc.PrefabInfo",

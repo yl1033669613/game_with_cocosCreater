@@ -12,7 +12,12 @@ cc.Class({
             default: null,
             type: require('bullet_group'),
         },
-        moveRatio: 0.8
+        moveRatio: 0.8,
+        heroHp: 10,
+        heroHpLabel: {
+            default: null,
+            type: cc.Label
+        }
     }),
 
     onLoad() {
@@ -24,6 +29,8 @@ cc.Class({
         //setting hero pos
         this.node.x = 0;
         this.node.y = -(this.node.parent.height / 2) + (this.node.height / 2) + 8;
+
+        this.heroHpLabel.string = 'HP ' + this.heroHp
     },
     onDrag() {
         this.node.parent.on(cc.Node.EventType.TOUCH_START, this.dragStart, this);
@@ -61,13 +68,21 @@ cc.Class({
                 this.main.getBuffBomb();
             }
         } else if (other.node.group == 'enemy') {
-            //播放动画
+            let enemy = other.node.parent.getComponent('enemy');
+            this.heroHp -= enemy.heroDropHp;
+        } else if (other.node.group == 'enemyBullet') {
+            let enemyBullet = other.node.getComponent('enemy_bullet');
+            this.heroHp -= enemyBullet.hpDrop
+        } else {
+            return false;
+        };
+        //hp 小于0 gameOver播放动画
+        this.heroHpLabel.string = 'HP ' + (this.heroHp > 0 ? this.heroHp : 0);
+        if (this.heroHp <= 0) {
             let animation = this.node.getComponent(cc.Animation);
             animation.play('hero_bomb_ani');
             animation.on('finished', this.onFinished, this);
-            this.main.gameOver();
-        } else {
-            return false;
+            this.main.gameOver()
         }
     },
     onFinished(event) { //动画结束后

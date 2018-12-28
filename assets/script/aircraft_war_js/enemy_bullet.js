@@ -8,15 +8,16 @@ cc.Class({
         hpDrop: 0 //掉血
     },
     onLoad() {
-        // let manager = cc.director.getCollisionManager();
-        // manager.enabled = true;
+        let manager = cc.director.getCollisionManager();
+        manager.enabled = true;
         this.enemyBulletGroup = this.node.parent.getComponent('enemy_bullet_group')
     },
     //碰撞检测
-    // onCollisionEnter(other, self) {
-    //     if (other.node.name == 'hero') return;
-    //     this.enemyBulletGroup.bulletDied(self.node);
-    // },
+    onCollisionEnter(other, self) {
+        if (other.node.group == 'hero' || other.node.group == 'heroBullet') {
+            this.enemyBulletGroup.bulletDied(this.node)
+        }
+    },
     update(dt) {
         if (this.enemyBulletGroup.eState != D.commonInfo.gameState.start) {
             return

@@ -250,9 +250,12 @@
     "_enabled": true,
     "xMinSpeed": 0,
     "xMaxSpeed": 0,
-    "yMinSpeed": -30,
-    "yMaxSpeed": -200,
+    "yMinSpeed": -50,
+    "yMaxSpeed": -150,
     "initHP": 1,
+    "enemyType": 1,
+    "enemyBulletFreq": 5,
+    "heroDropHp": 5,
     "initSpriteFrame": {
       "__uuid__": "88181abf-694c-4789-aaff-b5b0337f7748"
     },

@@ -3,7 +3,10 @@ const D = require('globals');
 cc.Class({
     extends: cc.Component,
     properties: {
-        pause: cc.Button,
+        pause: {
+            default: null,
+            type: cc.Button
+        },
         btnSprite: {
             default: [],
             type: cc.SpriteFrame
@@ -40,6 +43,18 @@ cc.Class({
             default: null,
             type: cc.Label
         },
+        gameOverMask: {
+            default: null,
+            type: cc.Node
+        },
+        maskBestScore: {
+            default: null,
+            type: cc.Label
+        },
+        maskCurrScore: {
+            default: null,
+            type: cc.Label
+        }
     },
     onLoad() {
         this.score = 0;
@@ -81,9 +96,7 @@ cc.Class({
         this.bulletGroup.resumeAction();
         this.buffGroup.resumeAction();
         this.hero.onDrag();
-        this.pause.normalSprite = this.btnSprite[0];
-        this.pause.pressedSprite = this.btnSprite[1];
-        this.pause.hoverSprite = this.btnSprite[1];
+        this.pause.getComponent(cc.Sprite).spriteFrame = this.btnSprite[0];
     },
     //游戏暂停
     pauseAction() {
@@ -92,9 +105,7 @@ cc.Class({
         this.bulletGroup.pauseAction();
         this.buffGroup.pauseAction();
         this.hero.offDrag();
-        this.pause.normalSprite = this.btnSprite[2];
-        this.pause.pressedSprite = this.btnSprite[3];
-        this.pause.hoverSprite = this.btnSprite[3]
+        this.pause.getComponent(cc.Sprite).spriteFrame = this.btnSprite[1];
     },
     //增加分数
     gainScore(scoreno) {
@@ -114,6 +125,10 @@ cc.Class({
         for (let i = 0; i < children.length; i++) {
             children[i].getComponent('enemy').hP = 0;
             children[i].getComponent('enemy').enemyOver()
+        };
+        let enemyBulletChildren = this.enemyBulletGroup.node.children;
+        for (let i = 0; i < enemyBulletChildren.length; i++) {
+            this.enemyBulletGroup.bulletDied(enemyBulletChildren[i])
         }
     },
     //接到炸弹
@@ -126,6 +141,21 @@ cc.Class({
     gameOver() {
         this.isGameOver = true;
         this.pauseAction();
-        this.updateScore()
+        this.updateScore();
+        this.gameOverMaskVis()
+    },
+    gameOverMaskVis() {
+        this.gameOverMask.active = true;
+        this.gameOverMask.opacity = 0;
+        this.gameOverMask.runAction(
+            cc.fadeIn(0.3)
+        );
+        this.maskCurrScore.string = 'Current Score: ' + this.getScore();
+    },
+    playAgain() {
+        cc.director.loadScene('aircraft_war_game')
+    },
+    backStartScene() {
+        cc.director.loadScene('aircraft_war_start')
     }
 })
