@@ -8,14 +8,15 @@ cc.Class({
         yMinSpeed: 0,
         yMaxSpeed: 0,
         initHP: 0,
+        score: 0,
         enemyType: 1,
         enemyBulletFreq: 5,
         heroDropHp: 5,
+        initSize: 30,
         nodeCollision: {
             default: null,
             type: cc.Node
         },
-        score: 0,
         texturePic: {
             default: null,
             type: cc.Node
@@ -81,7 +82,7 @@ cc.Class({
     enemyOver(isHero) {
         let score = 0,
             anim = this.node.getComponent(cc.Animation),
-            animName = 'plane_blow_up';
+            animName = 'blow_up';
         if (isHero != 'isHero') {
             score = this.score
         };
@@ -91,6 +92,9 @@ cc.Class({
         this.texturePic.active = false;
         anim.play(animName);
         anim.on('finished', function() {
+            this.node.getComponent(cc.Sprite).spriteFrame = null;
+            this.node.width = this.initSize;
+            this.node.height = this.initSize;
             this.enemyGroup.enemyDied(this.node, score);
         }, this)
     }

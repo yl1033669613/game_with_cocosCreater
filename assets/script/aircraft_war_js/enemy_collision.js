@@ -25,7 +25,7 @@ cc.Class({
             };
             if (other.node.group == 'hero') {
                 enemyObj.hP = 0;
-                enemyObj.enemyOver('isHero')
+                enemyObj.enemyOver('isHero');
                 return
             }
         }

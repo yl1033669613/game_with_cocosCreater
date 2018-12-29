@@ -4,6 +4,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: () => ({
+        moveRatio: 0.8,
+        heroHp: 10,
         main: {
             default: null,
             type: require('main'),
@@ -12,11 +14,13 @@ cc.Class({
             default: null,
             type: require('bullet_group'),
         },
-        moveRatio: 0.8,
-        heroHp: 10,
         heroHpLabel: {
             default: null,
             type: cc.Label
+        },
+        heroDropHpBg: {
+            default: null,
+            type: cc.Node
         }
     }),
 
@@ -59,20 +63,34 @@ cc.Class({
         };
         this.node.setPosition(location);
     },
+    heroHitByEnemyShowBlood() {
+        this.heroDropHpBg.active = true;
+        let act = cc.sequence(cc.fadeTo(0, 0), cc.fadeTo(.3, 100), cc.callFunc(() => {
+            this.heroDropHpBg.active = false;
+        }, this));
+        this.heroDropHpBg.runAction(act)
+    },
     //碰撞监测
     onCollisionEnter(other, self) {
         if (other.node.group == 'buff') {
             if (other.node.name == 'buffBullet') {
-                this.bulletGroup.changeBullet(other.node.name);
+                this.bulletGroup.changeBullet(other.node.name)
             } else if (other.node.name == 'buffBomb') {
-                this.main.getBuffBomb();
+                this.main.getBuffBomb()
             }
         } else if (other.node.group == 'enemy') {
             let enemy = other.node.parent.getComponent('enemy');
             this.heroHp -= enemy.heroDropHp;
+            other.node.group = 'default'; //防止敌人死亡之后再次发生碰撞
+            if (this.heroHp > 0) {
+                this.heroHitByEnemyShowBlood()
+            }
         } else if (other.node.group == 'enemyBullet') {
             let enemyBullet = other.node.getComponent('enemy_bullet');
-            this.heroHp -= enemyBullet.hpDrop
+            this.heroHp -= enemyBullet.hpDrop;
+            if (this.heroHp > 0) {
+                this.heroHitByEnemyShowBlood()
+            }
         } else {
             return false;
         };
@@ -80,7 +98,7 @@ cc.Class({
         this.heroHpLabel.string = this.heroHp > 0 ? this.heroHp : 0;
         if (this.heroHp <= 0) {
             let animation = this.node.getComponent(cc.Animation);
-            animation.play('plane_blow_up');
+            animation.play('blow_up');
             animation.on('finished', this.onFinished, this);
             this.main.gameOver()
         }

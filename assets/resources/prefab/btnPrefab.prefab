@@ -188,9 +188,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "0ba4043d-ed50-43d5-9a7d-aeaa6be77da4"
+      "__id__": 0
     },
-    "fileId": "58JHFpD4VMjK1VGAojw9jb",
+    "fileId": "99ElFOUJVJcrhZJ7lvxLyb",
     "sync": false
   },
   {
@@ -268,12 +268,8 @@
     "_N$normalSprite": {
       "__uuid__": "a9726837-7038-416d-9443-9e0f7a2f69ea"
     },
-    "_N$pressedSprite": {
-      "__uuid__": "94e3ed37-ddc6-4916-b82e-30e2639d51a7"
-    },
-    "pressedSprite": {
-      "__uuid__": "94e3ed37-ddc6-4916-b82e-30e2639d51a7"
-    },
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
     "_N$hoverSprite": null,
     "hoverSprite": null,
     "_N$disabledSprite": null,
@@ -334,9 +330,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "0ba4043d-ed50-43d5-9a7d-aeaa6be77da4"
+      "__id__": 0
     },
-    "fileId": "39W37+PQxFYqDquFI09ZIj",
+    "fileId": "33aCdQvutPs6qYXKZyS56R",
     "sync": false
   }
 ]

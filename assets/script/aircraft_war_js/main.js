@@ -71,7 +71,7 @@ cc.Class({
     },
     bombOnclick() {
         if (this.isGameOver) return;
-        let bombNoLabel = this.bomb.getChildByName('bombNo').getComponent(cc.Label);
+        let bombNoLabel = this.bombNoDisplay;
         let bombNo = parseInt(bombNoLabel.string);
         if (bombNo > 0) {
             bombNoLabel.string = bombNo - 1;

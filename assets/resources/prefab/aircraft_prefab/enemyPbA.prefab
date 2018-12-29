@@ -321,13 +321,14 @@
     "yMinSpeed": -50,
     "yMaxSpeed": -150,
     "initHP": 1,
+    "score": 1000,
     "enemyType": 1,
     "enemyBulletFreq": 5,
     "heroDropHp": 5,
+    "initSize": 30,
     "nodeCollision": {
       "__id__": 5
     },
-    "score": 1000,
     "texturePic": {
       "__id__": 2
     }
