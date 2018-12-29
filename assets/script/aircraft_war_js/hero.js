@@ -30,7 +30,7 @@ cc.Class({
         this.node.x = 0;
         this.node.y = -(this.node.parent.height / 2) + (this.node.height / 2) + 8;
 
-        this.heroHpLabel.string = 'HP ' + this.heroHp
+        this.heroHpLabel.string = this.heroHp
     },
     onDrag() {
         this.node.parent.on(cc.Node.EventType.TOUCH_START, this.dragStart, this);
@@ -77,10 +77,10 @@ cc.Class({
             return false;
         };
         //hp 小于0 gameOver播放动画
-        this.heroHpLabel.string = 'HP ' + (this.heroHp > 0 ? this.heroHp : 0);
+        this.heroHpLabel.string = this.heroHp > 0 ? this.heroHp : 0;
         if (this.heroHp <= 0) {
             let animation = this.node.getComponent(cc.Animation);
-            animation.play('hero_bomb_ani');
+            animation.play('plane_blow_up');
             animation.on('finished', this.onFinished, this);
             this.main.gameOver()
         }

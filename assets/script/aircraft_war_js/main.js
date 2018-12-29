@@ -150,7 +150,7 @@ cc.Class({
         this.gameOverMask.runAction(
             cc.fadeIn(0.3)
         );
-        this.maskCurrScore.string = 'Current Score: ' + this.getScore();
+        this.maskCurrScore.string = 'Current Score: ' + this.getScore()
     },
     playAgain() {
         cc.director.loadScene('aircraft_war_game')

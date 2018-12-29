@@ -11,15 +11,15 @@ cc.Class({
         enemyType: 1,
         enemyBulletFreq: 5,
         heroDropHp: 5,
-        initSpriteFrame: {
-            default: null,
-            type: cc.SpriteFrame
-        },
         nodeCollision: {
             default: null,
             type: cc.Node
         },
-        score: 0
+        score: 0,
+        texturePic: {
+            default: null,
+            type: cc.Node
+        }
     },
     onLoad() {
         this.xSpeed = Math.random() * (this.xMaxSpeed - this.xMinSpeed) + this.xMinSpeed;
@@ -42,10 +42,7 @@ cc.Class({
         if (this.hP != this.initHP) {
             this.hP = this.initHP
         };
-        let nSprite = this.node.getComponent(cc.Sprite);
-        if (nSprite.spriteFrame != this.initSpriteFrame) {
-            nSprite.spriteFrame = this.initSpriteFrame;
-        };
+        this.texturePic.active = true;
         this.nodeCollision.group = 'enemy'; //恢复碰撞状态
     },
     update(dt) {
@@ -84,13 +81,14 @@ cc.Class({
     enemyOver(isHero) {
         let score = 0,
             anim = this.node.getComponent(cc.Animation),
-            animName = this.node.name + 'Ani';
+            animName = 'plane_blow_up';
         if (isHero != 'isHero') {
             score = this.score
         };
         if (this.enemyType != 1) {
             this.unschedule(this.startGetEnemyBullet)
         };
+        this.texturePic.active = false;
         anim.play(animName);
         anim.on('finished', function() {
             this.enemyGroup.enemyDied(this.node, score);
