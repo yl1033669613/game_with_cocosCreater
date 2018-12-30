@@ -32,7 +32,7 @@ cc.Class({
         this.onDrag();
         //setting hero pos
         this.node.x = 0;
-        this.node.y = -(this.node.parent.height / 2) + (this.node.height / 2) + 8;
+        this.node.y = -(this.node.parent.height / 2) + (this.node.height / 2) + 12;
 
         this.heroHpLabel.string = this.heroHp
     },
