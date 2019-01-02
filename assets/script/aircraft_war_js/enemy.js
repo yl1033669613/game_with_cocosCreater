@@ -13,6 +13,7 @@ cc.Class({
         enemyBulletFreq: 5,
         heroDropHp: 5,
         initSize: 30,
+        buffType: 'none',
         nodeCollision: {
             default: null,
             type: cc.Node
@@ -26,7 +27,8 @@ cc.Class({
         this.xSpeed = Math.random() * (this.xMaxSpeed - this.xMinSpeed) + this.xMinSpeed;
         this.ySpeed = cc.random0To1() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
         this.enemyGroup = this.node.parent.getComponent('enemy_group');
-        this.enemyBulletGroup = cc.find('Canvas/background/enemyBulletGroup').getComponent('enemy_bullet_group')
+        this.enemyBulletGroup = cc.find('Canvas/background/enemyBulletGroup').getComponent('enemy_bullet_group');
+        this.buffGroup = cc.find('Canvas/background/buffGroup').getComponent('buff_group')
     },
     onEnable() {
         if (this.enemyType != 1) {
@@ -90,12 +92,13 @@ cc.Class({
             this.unschedule(this.startGetEnemyBullet)
         };
         this.texturePic.active = false;
+        this.buffGroup.createHeroBuff(this.node);
         anim.play(animName);
         anim.on('finished', function() {
             this.node.getComponent(cc.Sprite).spriteFrame = null;
             this.node.width = this.initSize;
             this.node.height = this.initSize;
-            this.enemyGroup.enemyDied(this.node, score);
+            this.enemyGroup.enemyDied(this.node, score)
         }, this)
     }
 })

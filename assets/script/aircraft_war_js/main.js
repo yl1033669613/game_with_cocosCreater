@@ -66,7 +66,6 @@ cc.Class({
 
         this.bulletGroup.startAction();
         this.enemyGroup.startAction();
-        this.buffGroup.startAction();
         this.bomb.on(cc.Node.EventType.TOUCH_START, this.bombOnclick, this);
     },
     bombOnclick() {

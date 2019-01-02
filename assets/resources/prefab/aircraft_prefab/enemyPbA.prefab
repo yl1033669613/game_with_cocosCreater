@@ -318,14 +318,15 @@
     "_enabled": true,
     "xMinSpeed": 0,
     "xMaxSpeed": 0,
-    "yMinSpeed": -50,
-    "yMaxSpeed": -150,
+    "yMinSpeed": -30,
+    "yMaxSpeed": -100,
     "initHP": 1,
     "score": 1000,
     "enemyType": 1,
     "enemyBulletFreq": 5,
     "heroDropHp": 5,
     "initSize": 30,
+    "buffType": "none",
     "nodeCollision": {
       "__id__": 5
     },

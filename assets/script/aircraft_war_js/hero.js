@@ -5,6 +5,7 @@ cc.Class({
 
     properties: () => ({
         moveRatio: 0.8,
+        heroInitHp: 10,
         heroHp: 10,
         main: {
             default: null,
@@ -65,7 +66,8 @@ cc.Class({
     },
     heroHitByEnemyShowBlood() {
         this.heroDropHpBg.active = true;
-        let act = cc.sequence(cc.fadeTo(0, 0), cc.fadeTo(.3, 100), cc.callFunc(() => {
+        this.heroDropHpBg.opacity = 0;
+        let act = cc.sequence(cc.fadeTo(.2, 100), cc.fadeTo(.2, 0), cc.callFunc(() => {
             this.heroDropHpBg.active = false;
         }, this));
         this.heroDropHpBg.runAction(act)
@@ -77,6 +79,12 @@ cc.Class({
                 this.bulletGroup.changeBullet(other.node.name)
             } else if (other.node.name == 'buffBomb') {
                 this.main.getBuffBomb()
+            } else if (other.node.name == 'buffHeart') {
+                if (this.heroInitHp - this.heroHp >= 5) {
+                    this.heroHp += 5
+                } else {
+                    this.heroHp = this.heroInitHp
+                }
             }
         } else if (other.node.group == 'enemy') {
             let enemy = other.node.parent.getComponent('enemy');

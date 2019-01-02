@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "enemyPbB",
+    "_name": "enemyPbE",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -56,8 +56,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 45,
-      "height": 45
+      "width": 30,
+      "height": 30
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -110,8 +110,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 45,
-      "height": 36
+      "width": 30,
+      "height": 22
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -138,7 +138,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "c46880fc-af11-4216-8372-79e3060f6338"
+      "__uuid__": "31e4c585-b2d5-442f-85d7-6e8693b37a62"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -163,9 +163,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "06e5b673-cffa-49e1-b71a-faf55628ec39"
+      "__uuid__": "bc71cc92-9ea4-4925-9100-e84bfa54b163"
     },
-    "fileId": "c5epza/gZMtJjLdAe//wRg",
+    "fileId": "80XPVf/2dE24paplUW5OKW",
     "sync": false
   },
   {
@@ -242,58 +242,58 @@
     "points": [
       {
         "__type__": "cc.Vec2",
-        "x": -16.9,
-        "y": -1.6
+        "x": -15.3,
+        "y": 2.7
       },
       {
         "__type__": "cc.Vec2",
-        "x": -8.8,
-        "y": -6.6
+        "x": -15.6,
+        "y": -1
       },
       {
         "__type__": "cc.Vec2",
-        "x": -2.3,
-        "y": -18.3
+        "x": -5.7,
+        "y": -5.7
       },
       {
         "__type__": "cc.Vec2",
-        "x": 1.6,
-        "y": -18.3
+        "x": -2.6,
+        "y": -7.8
       },
       {
         "__type__": "cc.Vec2",
-        "x": 8.9,
-        "y": -7.1
+        "x": -0.5,
+        "y": -11.3
       },
       {
         "__type__": "cc.Vec2",
-        "x": 16.3,
-        "y": -0.9
+        "x": 1.8,
+        "y": -7
       },
       {
         "__type__": "cc.Vec2",
-        "x": 22.1,
-        "y": 8.6
+        "x": 5.1,
+        "y": -5.9
       },
       {
         "__type__": "cc.Vec2",
-        "x": 6.4,
-        "y": 20.9
+        "x": 14.4,
+        "y": -1
       },
       {
         "__type__": "cc.Vec2",
-        "x": 0.6,
-        "y": 16.9
+        "x": 14,
+        "y": 4.5
       },
       {
         "__type__": "cc.Vec2",
-        "x": -6.9,
-        "y": 20.1
+        "x": 1.9,
+        "y": 10.4
       },
       {
         "__type__": "cc.Vec2",
-        "x": -22.3,
-        "y": 8.2
+        "x": -2.9,
+        "y": 10.4
       }
     ]
   },
@@ -312,9 +312,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "06e5b673-cffa-49e1-b71a-faf55628ec39"
+      "__uuid__": "bc71cc92-9ea4-4925-9100-e84bfa54b163"
     },
-    "fileId": "aagRek+bpLVK/DuMBXLG27",
+    "fileId": "5ejRhTkClNFYPIVedj2/Fu",
     "sync": false
   },
   {
@@ -344,14 +344,14 @@
     "xMinSpeed": 0,
     "xMaxSpeed": 0,
     "yMinSpeed": -30,
-    "yMaxSpeed": -80,
-    "initHP": 5,
-    "score": 2500,
-    "enemyType": 2,
-    "enemyBulletFreq": 5,
-    "heroDropHp": 10,
-    "initSize": 45,
-    "buffType": "buffBomb",
+    "yMaxSpeed": -100,
+    "initHP": 1,
+    "score": 1000,
+    "enemyType": 1,
+    "enemyBulletFreq": 0,
+    "heroDropHp": 5,
+    "initSize": 30,
+    "buffType": "none",
     "nodeCollision": {
       "__id__": 5
     },
@@ -389,9 +389,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "06e5b673-cffa-49e1-b71a-faf55628ec39"
+      "__uuid__": "bc71cc92-9ea4-4925-9100-e84bfa54b163"
     },
-    "fileId": "5bCUG1ea5Oj712fmqFKCHT",
+    "fileId": "dasJsOSqZGo7lUTEdfAQIg",
     "sync": false
   }
 ]

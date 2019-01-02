@@ -10,6 +10,9 @@ cc.Class({
     },
     onLoad() {
         this.xSpeed = Math.random() * (this.xMaxSpeed - this.xMinSpeed) + this.xMinSpeed;
+        if (Math.ceil(Math.random()*10) < 5) {
+            this.xSpeed = - this.xSpeed
+        };
         this.ySpeed = cc.random0To1() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
         this.buffGroup = this.node.parent.getComponent('buff_group');
     },
@@ -20,9 +23,21 @@ cc.Class({
         if (this.buffGroup.eState != D.commonInfo.gameState.start) {
             return;
         };
-        this.node.x += dt * this.xSpeed;
-        this.node.y += dt * this.ySpeed;
-        if (this.node.y < -this.node.parent.height / 2) {
+        let ndX = this.node.x,
+            ndY = this.node.y;
+        ndX += dt * this.xSpeed;
+        ndY += dt * this.ySpeed;
+        if (ndX <= -(this.node.parent.width - this.node.width) / 2) {
+            ndX = (this.node.parent.width - this.node.width) / 2;
+            this.xSpeed = -this.xSpeed;
+        } else if (ndX >= (this.node.parent.width - this.node.width) / 2) {
+            ndX = (this.node.parent.width - this.node.width) / 2;
+            this.xSpeed = -this.xSpeed;
+        } else {
+            this.node.x = ndX;
+        };
+        this.node.y = ndY;
+        if (this.node.y < -this.node.parent.height / 2 - this.node.height / 2) {
             this.buffGroup.buffDied(this.node);
         }
     }

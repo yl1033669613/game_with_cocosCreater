@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "buffBullet",
+    "_name": "buffheart",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -50,7 +50,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 16,
-      "height": 16
+      "height": 12.8
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -77,7 +77,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "0f72a8f0-58a8-4460-9a8c-223afaaccbbb"
+      "__uuid__": "9357e41f-b355-4a8f-a811-4be9db1ac7f7"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -104,8 +104,8 @@
       "__id__": 1
     },
     "_enabled": true,
-    "xMinSpeed": -10,
-    "xMaxSpeed": 30,
+    "xMinSpeed": 10,
+    "xMaxSpeed": 20,
     "yMinSpeed": -50,
     "yMaxSpeed": -50
   },
@@ -126,7 +126,7 @@
     "_size": {
       "__type__": "cc.Size",
       "width": 16,
-      "height": 16
+      "height": 12.8
     }
   },
   {
@@ -135,9 +135,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "d173ec7c-2f7f-4cb2-a625-79e84979b6ba"
+      "__uuid__": "e650751e-009f-418f-a4eb-e38992798f17"
     },
-    "fileId": "7d34dlF/ItAT7OxWiAHDBsz",
+    "fileId": "a7a+qNSrRLKrLal7nqg+3j",
     "sync": false
   }
 ]

@@ -104,8 +104,8 @@
       "__id__": 1
     },
     "_enabled": true,
-    "xMinSpeed": 0,
-    "xMaxSpeed": 0,
+    "xMinSpeed": 10,
+    "xMaxSpeed": 30,
     "yMinSpeed": -50,
     "yMaxSpeed": -50
   },
