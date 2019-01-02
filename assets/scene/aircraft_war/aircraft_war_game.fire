@@ -1467,24 +1467,12 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "d55183ac-b855-4334-b3a8-4f8820374582"
-    },
-    "_N$pressedSprite": {
-      "__uuid__": "230f65ec-0a1a-4865-8e07-6180292a1684"
-    },
-    "pressedSprite": {
-      "__uuid__": "230f65ec-0a1a-4865-8e07-6180292a1684"
-    },
-    "_N$hoverSprite": {
-      "__uuid__": "230f65ec-0a1a-4865-8e07-6180292a1684"
-    },
-    "hoverSprite": {
-      "__uuid__": "230f65ec-0a1a-4865-8e07-6180292a1684"
-    },
-    "_N$disabledSprite": {
-      "__uuid__": "230f65ec-0a1a-4865-8e07-6180292a1684"
-    },
+    "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
     "_N$target": {
       "__id__": 39
     }
