@@ -487,7 +487,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "maskbg",
+    "_name": "AwMaskbg",
     "_objFlags": 0,
     "_parent": {
       "__id__": 12
@@ -549,7 +549,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "7415fcb0-44d7-4f17-ba62-d10ac3d5bdfe"
     },
     "_type": 0,
     "_sizeMode": 0,

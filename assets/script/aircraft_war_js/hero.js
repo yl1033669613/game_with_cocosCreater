@@ -81,7 +81,7 @@ cc.Class({
                 this.main.getBuffBomb()
             } else if (other.node.name == 'buffHeart') {
                 if (this.heroInitHp - this.heroHp >= 5) {
-                    this.heroHp += 5
+                    this.heroHp = this.heroHp + 5
                 } else {
                     this.heroHp = this.heroInitHp
                 }

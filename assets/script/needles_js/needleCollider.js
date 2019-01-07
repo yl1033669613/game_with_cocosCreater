@@ -11,7 +11,7 @@ cc.Class({
     },
 
     onCollisionEnter: function (other, self) {
-        let canvas = self.parent.parent.parent;
+        let canvas = self.node.parent.parent.parent;
         canvas.getComponent('needles_main').gameOver();
     }
 });
