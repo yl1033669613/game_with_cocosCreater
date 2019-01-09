@@ -404,7 +404,9 @@
     "_file": {
       "__uuid__": "b2687ac4-099e-403c-a192-ff477686f4f5"
     },
-    "_texture": null,
+    "_texture": {
+      "__uuid__": "9d8f9f01-3f23-4d72-bb7e-cb5d29998c72"
+    },
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "playOnLoad": true,
@@ -444,7 +446,7 @@
     },
     "_angle": 90,
     "_angleVar": 1,
-    "_startSize": 25,
+    "_startSize": 10,
     "_startSizeVar": 0,
     "_endSize": 0,
     "_endSizeVar": 0,
@@ -561,7 +563,9 @@
     "_file": {
       "__uuid__": "b2687ac4-099e-403c-a192-ff477686f4f5"
     },
-    "_texture": null,
+    "_texture": {
+      "__uuid__": "9d8f9f01-3f23-4d72-bb7e-cb5d29998c72"
+    },
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "playOnLoad": true,
@@ -601,7 +605,7 @@
     },
     "_angle": 90,
     "_angleVar": 1,
-    "_startSize": 25,
+    "_startSize": 10,
     "_startSizeVar": 0,
     "_endSize": 0,
     "_endSizeVar": 0,
@@ -692,6 +696,12 @@
     },
     "texturePic": {
       "__id__": 2
+    },
+    "ptcSys1": {
+      "__id__": 10
+    },
+    "ptcSys2": {
+      "__id__": 13
     }
   },
   {
@@ -704,7 +714,7 @@
     "_enabled": true,
     "_spriteFrame": null,
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",

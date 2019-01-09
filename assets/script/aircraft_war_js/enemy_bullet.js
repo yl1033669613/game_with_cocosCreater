@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 
 cc.Class({
     extends: cc.Component,
@@ -19,7 +19,7 @@ cc.Class({
         }
     },
     update(dt) {
-        if (this.enemyBulletGroup.eState != D.commonInfo.gameState.start) {
+        if (this.enemyBulletGroup.curState != Gdt.commonInfo.gameState.start) {
             return
         };
         this.node.x += dt * this.xSpeed;

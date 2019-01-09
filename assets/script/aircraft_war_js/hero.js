@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 
 cc.Class({
     extends: cc.Component,
@@ -7,6 +7,11 @@ cc.Class({
         moveRatio: 0.8,
         heroInitHp: 10,
         heroHp: 10,
+        progressW: 60,
+        hpProgressBar: {
+            default: null,
+            type: cc.Node
+        },
         main: {
             default: null,
             type: require('main'),
@@ -14,10 +19,6 @@ cc.Class({
         bulletGroup: {
             default: null,
             type: require('bullet_group'),
-        },
-        heroHpLabel: {
-            default: null,
-            type: cc.Label
         },
         heroDropHpBg: {
             default: null,
@@ -28,14 +29,13 @@ cc.Class({
     onLoad() {
         let manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        this.eState = D.commonInfo.gameState.none;
+        this.curState = Gdt.commonInfo.gameState.none;
         this.currX = 0;
         this.onDrag();
         //setting hero pos
         this.node.x = 0;
         this.node.y = -(this.node.parent.height / 2) + (this.node.height / 2) + 12;
-
-        this.heroHpLabel.string = this.heroHp
+        this.setHeroHpPregress()
     },
     onDrag() {
         this.node.parent.on(cc.Node.EventType.TOUCH_START, this.dragStart, this);
@@ -63,6 +63,14 @@ cc.Class({
             location.x = maxX;
         };
         this.node.setPosition(location);
+    },
+    // hero hp progress
+    setHeroHpPregress() {
+        if (this.heroHp > 0) {
+            this.hpProgressBar.width = (this.heroHp / this.heroInitHp) * this.progressW;
+        } else {
+            this.hpProgressBar.width = 0;
+        }
     },
     heroHitByEnemyShowBlood() {
         this.heroDropHpBg.active = true;
@@ -103,7 +111,7 @@ cc.Class({
             return false;
         };
         //hp 小于0 gameOver播放动画
-        this.heroHpLabel.string = this.heroHp > 0 ? this.heroHp : 0;
+        this.setHeroHpPregress();
         if (this.heroHp <= 0) {
             let animation = this.node.getComponent(cc.Animation);
             animation.play('blow_up');

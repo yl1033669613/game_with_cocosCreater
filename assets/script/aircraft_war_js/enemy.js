@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 
 cc.Class({
     extends: cc.Component,
@@ -21,6 +21,14 @@ cc.Class({
         texturePic: {
             default: null,
             type: cc.Node
+        },
+        ptcSys1: {
+            default: null,
+            type: cc.ParticleSystem
+        },
+        ptcSys2: {
+            default: null,
+            type: cc.ParticleSystem
         }
     },
     onLoad() {
@@ -47,9 +55,13 @@ cc.Class({
         };
         this.texturePic.active = true;
         this.nodeCollision.group = 'enemy'; //恢复碰撞状态
+        if (this.ptcSys1 && this.ptcSys2) {
+            this.ptcSys1.resetSystem();
+            this.ptcSys2.resetSystem()
+        }
     },
     update(dt) {
-        if (this.enemyGroup.eState != D.commonInfo.gameState.start) {
+        if (this.enemyGroup.curState != Gdt.commonInfo.gameState.start) {
             return;
         };
         if (this.hP == 0) return;
@@ -93,6 +105,10 @@ cc.Class({
         };
         this.texturePic.active = false;
         this.buffGroup.createHeroBuff(this.node);
+        if (this.ptcSys1 && this.ptcSys2) {
+            this.ptcSys1.stopSystem();
+            this.ptcSys2.stopSystem()
+        };
         anim.play(animName);
         anim.on('finished', function() {
             this.node.getComponent(cc.Sprite).spriteFrame = null;

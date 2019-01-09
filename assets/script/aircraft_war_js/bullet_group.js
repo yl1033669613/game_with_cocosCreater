@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 
 //子弹生成位置
 let bPosition = cc.Class({
@@ -55,16 +55,16 @@ cc.Class({
         }
     }),
     onLoad() {
-        this.eState = D.commonInfo.gameState.none;
+        this.curState = Gdt.commonInfo.gameState.none;
         this.isDeadBullet = false;
         //初始化无限子弹组
-        D.common.initObjPool(this, this.bulletInfinite);
+        Gdt.common.initObjPool(this, this.bulletInfinite);
         //初始化有限子弹组
-        D.common.batchInitObjPool(this, this.bulletFiniteG);
+        Gdt.common.batchInitObjPool(this, this.bulletFiniteG);
     },
 
     startAction() {
-        this.eState = D.commonInfo.gameState.start;
+        this.curState = Gdt.commonInfo.gameState.start;
         //生成子弹
         this.getNewbullet(this.bulletInfinite);
         this.bICallback = function() { this.getNewbullet(this.bulletInfinite); this.isDeadBullet = false }.bind(this);
@@ -72,11 +72,11 @@ cc.Class({
     },
     pauseAction() {
         this.enabled = false;
-        this.eState = D.commonInfo.gameState.pause;
+        this.curState = Gdt.commonInfo.gameState.pause;
     },
     resumeAction() {
         this.enabled = true;
-        this.eState = D.commonInfo.gameState.start;
+        this.curState = Gdt.commonInfo.gameState.start;
     },
     //换子弹
     changeBullet(BuffBullet) {
@@ -96,7 +96,7 @@ cc.Class({
     getNewbullet(bulletInfo) {
         let poolName = bulletInfo.name + 'Pool';
         for (let bc = 0; bc < bulletInfo.position.length; bc++) {
-            let newNode = D.common.genNewNode(this[poolName], bulletInfo.prefab, this.node);
+            let newNode = Gdt.common.genNewNode(this[poolName], bulletInfo.prefab, this.node);
             let newV2 = this.getBulletPostion(bulletInfo.position[bc]);
             newNode.setPosition(newV2);
             newNode.getComponent('bullet').poolName = poolName;
@@ -112,6 +112,6 @@ cc.Class({
     //回收节点
     bulletDied(nodeinfo) {
         let poolName = nodeinfo.getComponent('bullet').poolName;
-        D.common.backObjPool(this, poolName, nodeinfo);
+        Gdt.common.backObjPool(this, poolName, nodeinfo);
     }
 })

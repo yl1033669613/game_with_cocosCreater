@@ -1,4 +1,5 @@
 module.exports = {
     common: null, 
-    commonInfo: null
+    commonInfo: null,
+    loopBg: ''
 };

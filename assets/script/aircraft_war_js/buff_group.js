@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 let buffG = cc.Class({
     name: 'buffG',
     properties: {
@@ -21,8 +21,8 @@ cc.Class({
         }
     },
     onLoad() {
-        this.eState = D.commonInfo.gameState.start;
-        D.common.batchInitObjPool(this, this.buffG);
+        this.curState = Gdt.commonInfo.gameState.start;
+        Gdt.common.batchInitObjPool(this, this.buffG);
     },
     createHeroBuff(emInfo) {
         let theEnemy = emInfo.getComponent('enemy');
@@ -36,7 +36,7 @@ cc.Class({
     },
     getNewBuff(BuffInfo, emInfo) {
         let poolName = BuffInfo.name + 'Pool',
-            newNode = D.common.genNewNode(this[poolName], BuffInfo.prefab, this.node),
+            newNode = Gdt.common.genNewNode(this[poolName], BuffInfo.prefab, this.node),
             emPos = emInfo.getPosition(),
             newPos = cc.p(emPos.x, emPos.y);
         newNode.setPosition(newPos);
@@ -45,16 +45,16 @@ cc.Class({
     //重新开始
     resumeAction() {
         this.enabled = true;
-        this.eState = D.commonInfo.gameState.start;
+        this.curState = Gdt.commonInfo.gameState.start;
     },
     //暂停
     pauseAction() {
         this.enabled = false;
-        this.eState = D.commonInfo.gameState.pause;
+        this.curState = Gdt.commonInfo.gameState.pause;
     },
     buffDied(nodeinfo) {
         //回收节点
         let poolName = nodeinfo.getComponent('buff').poolName;
-        D.common.backObjPool(this, poolName, nodeinfo);
+        Gdt.common.backObjPool(this, poolName, nodeinfo);
     }
 })

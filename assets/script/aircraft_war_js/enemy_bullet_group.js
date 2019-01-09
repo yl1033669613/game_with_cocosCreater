@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 let enemyBPosition = cc.Class({
 	name: 'enemyBPosition',
 	properties: {
@@ -32,26 +32,26 @@ cc.Class({
 		}
 	}),
 	onLoad() {
-		this.eState = D.commonInfo.gameState.start;
+		this.curState = Gdt.commonInfo.gameState.start;
 		//初始enemy bullet
-		D.common.initObjPool(this, this.enemybulletIfe);
+		Gdt.common.initObjPool(this, this.enemybulletIfe);
 	},
 	enemyOpenFire(gteBEnemyInfo) {
 		this.getNewbullet(this.enemybulletIfe, gteBEnemyInfo)
 	},
 	pauseAction() {
 		this.enabled = false;
-		this.eState = D.commonInfo.gameState.pause;
+		this.curState = Gdt.commonInfo.gameState.pause;
 	},
 	resumeAction() {
 		this.enabled = true;
-		this.eState = D.commonInfo.gameState.start;
+		this.curState = Gdt.commonInfo.gameState.start;
 	},
 	//生成敌机子弹
 	getNewbullet(bulletInfo, gteInfo) {
 		let poolName = bulletInfo.name + 'Pool';
 		for (let bc = 0; bc < bulletInfo.position.length; bc++) {
-			let newNode = D.common.genNewNode(this[poolName], bulletInfo.prefab, this.node);
+			let newNode = Gdt.common.genNewNode(this[poolName], bulletInfo.prefab, this.node);
 			let newV2 = this.getBulletPostion(bulletInfo.position[bc], gteInfo);
 			newNode.setPosition(newV2);
 			let newNodeComp = newNode.getComponent('enemy_bullet');
@@ -68,7 +68,7 @@ cc.Class({
 	//回收节点
 	bulletDied(nodeinfo) {
 		let poolName = nodeinfo.getComponent('enemy_bullet').poolName;
-		D.common.backObjPool(this, poolName, nodeinfo);
+		Gdt.common.backObjPool(this, poolName, nodeinfo);
 	}
 })
 

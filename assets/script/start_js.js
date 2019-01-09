@@ -83,7 +83,7 @@ cc.Class({
         this.bottBanner.runAction(moveAction);
     },
 
-    //加载notice  wx cloud
+    //加载notice wx cloud
     loadNoticePic(cb) {
         let self = this;
         let sprite = self.noticePic.getComponent(cc.Sprite);
@@ -115,4 +115,4 @@ cc.Class({
             }
         })
     }
-});
+})

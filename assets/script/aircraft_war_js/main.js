@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 
 cc.Class({
     extends: cc.Component,
@@ -62,7 +62,7 @@ cc.Class({
         this.isGameOver = false;
         this.scoreDisplay.string = this.score;
         this.bombNoDisplay.string = this.bombNo;
-        this.eState = D.commonInfo.gameState.start;
+        this.curState = Gdt.commonInfo.gameState.start;
 
         this.bulletGroup.startAction();
         this.enemyGroup.startAction();
@@ -79,12 +79,12 @@ cc.Class({
     },
     pauseClick() {
         if (!this.isGameOver) {
-            if (this.eState == D.commonInfo.gameState.pause) {
+            if (this.curState == Gdt.commonInfo.gameState.pause) {
                 this.resumeAction();
-                this.eState = D.commonInfo.gameState.start;
-            } else if (this.eState == D.commonInfo.gameState.start) {
+                this.curState = Gdt.commonInfo.gameState.start;
+            } else if (this.curState == Gdt.commonInfo.gameState.start) {
                 this.pauseAction();
-                this.eState = D.commonInfo.gameState.pause;
+                this.curState = Gdt.commonInfo.gameState.pause;
             }
         }
     },

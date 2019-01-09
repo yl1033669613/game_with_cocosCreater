@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 
 //敌机组
 let enemyG = cc.Class({
@@ -25,11 +25,11 @@ cc.Class({
     }),
     onLoad() {
         //初始化敌机组
-        this.eState = D.commonInfo.gameState.none;
-        D.common.batchInitObjPool(this, this.enemyG)
+        this.curState = Gdt.commonInfo.gameState.none;
+        Gdt.common.batchInitObjPool(this, this.enemyG)
     },
     startAction() {
-        this.eState = D.commonInfo.gameState.start;
+        this.curState = Gdt.commonInfo.gameState.start;
         //定时生成敌机
         for (let i = 0; i < this.enemyG.length; ++i) {
             let freqTime = this.enemyG[i].freqTime;
@@ -41,17 +41,17 @@ cc.Class({
     //重新开始
     resumeAction() {
         this.enabled = true;
-        this.eState = D.commonInfo.gameState.start;
+        this.curState = Gdt.commonInfo.gameState.start;
     },
     //暂停
     pauseAction() {
         this.enabled = false;
-        this.eState = D.commonInfo.gameState.pause;
+        this.curState = Gdt.commonInfo.gameState.pause;
     },
     //生成敌机
     getNewEnemy(enemyInfo) {
         let poolName = enemyInfo.name + 'Pool';
-        let newNode = D.common.genNewNode(this[poolName], enemyInfo.prefab, this.node);
+        let newNode = Gdt.common.genNewNode(this[poolName], enemyInfo.prefab, this.node);
         let newV2 = this.getNewEnemyPositon(newNode);
         newNode.setPosition(newV2);
         newNode.getComponent('enemy').poolName = poolName;
@@ -66,7 +66,7 @@ cc.Class({
     },
     enemyDied(nodeinfo, score) {
         let poolName = nodeinfo.getComponent('enemy').poolName;
-        D.common.backObjPool(this, poolName, nodeinfo);
+        Gdt.common.backObjPool(this, poolName, nodeinfo);
         //增加分数
         if (parseInt(score) > 0) {
             this.main.gainScore(score);

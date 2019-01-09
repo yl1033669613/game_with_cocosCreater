@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 
 let gameState = cc.Enum({
     none: 0,
@@ -14,25 +14,25 @@ let common = cc.Class({
         gameState
     },
     onLoad() {
-        D.commonInfo = common;
-        D.common = this;
+        Gdt.commonInfo = common;
+        Gdt.common = this;
     },
     //批量初始化对象池 
-    batchInitObjPool(thisO, objArray) {
+    batchInitObjPool(ptO, objArray) {
         for (let i = 0; i < objArray.length; i++) {
             let objinfo = objArray[i];
-            this.initObjPool(thisO, objinfo);
+            this.initObjPool(ptO, objinfo);
         }
     },
     //初始化对象池
-    initObjPool(thisO, objInfo) {
+    initObjPool(ptO, objInfo) {
         let name = objInfo.name;
         let poolName = name + 'Pool';
-        thisO[poolName] = new cc.NodePool();
+        ptO[poolName] = new cc.NodePool();
         let initPoolCount = objInfo.initPoolCount;
         for (let i = 0; i < initPoolCount; ++i) {
             let nodeO = cc.instantiate(objInfo.prefab);
-            thisO[poolName].put(nodeO);
+            ptO[poolName].put(nodeO);
         }
     },
     //生成节点
@@ -47,7 +47,7 @@ let common = cc.Class({
         return newNode
     },
     //放回对象池
-    backObjPool(thisO, poolName, nodeinfo) {
-        thisO[poolName].put(nodeinfo);
+    backObjPool(ptO, poolName, nodeinfo) {
+        ptO[poolName].put(nodeinfo);
     }
 })

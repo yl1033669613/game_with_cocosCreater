@@ -1,4 +1,4 @@
-const D = require('globals');
+const Gdt = require('globals');
 
 cc.Class({
     extends: cc.Component,
@@ -20,7 +20,7 @@ cc.Class({
         this.buffGroup.buffDied(self.node);
     },
     update(dt) {
-        if (this.buffGroup.eState != D.commonInfo.gameState.start) {
+        if (this.buffGroup.curState != Gdt.commonInfo.gameState.start) {
             return;
         };
         let ndX = this.node.x,
