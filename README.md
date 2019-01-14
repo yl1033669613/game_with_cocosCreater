@@ -1,10 +1,10 @@
-## 使用cocosCreator 开发的wx小游戏 有贪吃蛇，flappy bird， 2048, 见缝插针，烟花，俄罗斯方块
+## 使用cocosCreator 开发的wx小游戏 有贪吃蛇，flappy bird， 2048, 见缝插针，烟花，俄罗斯方块， 飞机大战
 
 ## 新增
-目前有6款游戏，后续可能会新增更多小游戏
+目前有7款游戏，后续可能会新增更多小游戏
 
 ## 声明
-大部分游戏为经典游戏，使用js开发编写，仅供学习参考，不会用于任何商业用途。
+大部分游戏为经典游戏，使用js开发编写，仅供学习参考，不能用于任何商业用途。
 
 ## 注意事项 
 在cocosCreator 1.x 编辑器下运行以及构建
@@ -16,4 +16,7 @@
 更多关于wx小游戏点击[这里](https://developers.weixin.qq.com/minigame/dev/index.html)
 
 更多关于cocosCreator点击[这里](http://www.cocos.com/)
+
+## 参考，致谢
+飞机大战思路参考 [用cocosCreator做的微信经典飞机大战](https://github.com/A123asdo11/aircraft_war)
 
