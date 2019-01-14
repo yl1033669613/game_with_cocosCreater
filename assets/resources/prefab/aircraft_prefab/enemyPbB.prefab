@@ -343,7 +343,7 @@
     "_enabled": true,
     "xMinSpeed": 0,
     "xMaxSpeed": 0,
-    "yMinSpeed": -30,
+    "yMinSpeed": -40,
     "yMaxSpeed": -80,
     "initHP": 5,
     "score": 2500,
@@ -357,7 +357,9 @@
     },
     "texturePic": {
       "__id__": 2
-    }
+    },
+    "ptcSys1": null,
+    "ptcSys2": null
   },
   {
     "__type__": "cc.Sprite",

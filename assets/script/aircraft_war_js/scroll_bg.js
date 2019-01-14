@@ -9,23 +9,37 @@ cc.Class({
         main: {
             default: null,
             type: require('main')
+        },
+        loopBg1: {
+            default: null,
+            type: cc.Node
+        },
+        loopBg2: {
+            default: null,
+            type: cc.Node
         }
-    },
-    onLoad() {
-        this.resetY = -(this.node.parent.height / 2)
     },
     start() {
+        this.loopBg1.y = 0;
+        this.loopBg2.y = this.node.parent.height;
         if (Gdt.loopBg) {
-            this.node.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(Gdt.loopBg)
+            this.loopBg1.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(Gdt.loopBg);
+            this.loopBg2.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(Gdt.loopBg)
         }
     },
-    update (dt) {
-        if (this.main.curState != Gdt.commonInfo.gameState.start) {
-            return;
+    bgMove(dt) {
+        this.loopBg1.y += this.speed * dt;
+        if (this.loopBg1.y < -this.node.parent.height) {
+            this.loopBg1.y = this.node.parent.height - 5;
         };
-        this.node.y += this.speed * dt;
-        if (this.node.y <= this.resetY) {
-            this.node.y = this.node.parent.height / 2;
+        this.loopBg2.y += this.speed * dt;
+        if (this.loopBg2.y < -this.node.parent.height) {
+            this.loopBg2.y = this.node.parent.height - 5;
+        }
+    },
+    update(dt) {
+        if (this.main.curState == Gdt.commonInfo.gameState.start) {
+            this.bgMove(dt)
         }
     }
 })

@@ -28,6 +28,8 @@ cc.Class({
             needleLevelModeLevels: 1,
 
             tetrisBestScore: 0,
+            
+            aircraftWarBestScore: 0,
 
             'createTime': this.db.serverDate(),
             'updateTime': this.db.serverDate()
@@ -94,7 +96,6 @@ cc.Class({
         wx.cloud.callFunction({
             name: 'getNeedleLevel',
             success: res => {
-                // console.log(res)
                 self.needleLevelData = res.result.data;
             },
             fail: err => {

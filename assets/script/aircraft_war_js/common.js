@@ -3,7 +3,8 @@ const Gdt = require('globals');
 let gameState = cc.Enum({
     none: 0,
     start: 1,
-    stop: 2
+    stop: 2,
+    pause: 3
 });
 let common = cc.Class({
     extends: cc.Component,

@@ -34,8 +34,6 @@ cc.Class({
         }
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         this.needlesNum = '';
         this.freeModeCurrNeedle = 0;

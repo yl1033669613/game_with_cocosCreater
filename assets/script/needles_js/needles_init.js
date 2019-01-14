@@ -14,8 +14,6 @@ cc.Class({
         }
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         let globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
 

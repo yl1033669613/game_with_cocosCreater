@@ -64,6 +64,16 @@ cc.Class({
         this.bombNoDisplay.string = this.bombNo;
         this.curState = Gdt.commonInfo.gameState.start;
 
+        // wx cloud
+        this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
+        this.db = wx.cloud.database();
+        this.bestScore = this.globalUser.userGameInfo.aircraftWarBestScore || 0;
+        this.maskBestScore.string = 'Best Score: ' + this.bestScore;
+        //判断数据库字段 不存在则先更新字段
+        if (typeof this.globalUser.userGameInfo.aircraftWarBestScore != 'number') {
+            this.requestDbAircraftWarScore()
+        };
+
         this.bulletGroup.startAction();
         this.enemyGroup.startAction();
         this.bomb.on(cc.Node.EventType.TOUCH_START, this.bombOnclick, this);
@@ -99,6 +109,7 @@ cc.Class({
     },
     //游戏暂停
     pauseAction() {
+        this.curState = Gdt.commonInfo.gameState.pause;
         this.enemyGroup.pauseAction();
         this.enemyBulletGroup.pauseAction();
         this.bulletGroup.pauseAction();
@@ -108,15 +119,13 @@ cc.Class({
     },
     //增加分数
     gainScore(scoreno) {
+        if (this.isGameOver) return;
         this.score += scoreno;
         this.scoreDisplay.string = this.score.toString();
     },
     //get分数
     getScore() {
         return parseInt(this.scoreDisplay.string);
-    },
-    updateScore() {
-        let currentScore = this.scoreDisplay.string;
     },
     //炸弹清除敌机
     removeAllEnemy() {
@@ -140,7 +149,6 @@ cc.Class({
     gameOver() {
         this.isGameOver = true;
         this.pauseAction();
-        this.updateScore();
         this.gameOverMaskVis()
     },
     gameOverMaskVis() {
@@ -149,12 +157,38 @@ cc.Class({
         this.gameOverMask.runAction(
             cc.fadeIn(0.3)
         );
-        this.maskCurrScore.string = 'Current Score: ' + this.getScore()
+        if (this.score > this.bestScore) {
+            this.bestScore = this.score;
+            this.requestDbAircraftWarScore()
+        };
+        this.maskCurrScore.string = 'Current Score: ' + this.score;
+        this.maskBestScore.string = 'Best Score: ' + this.bestScore;
     },
     playAgain() {
         cc.director.loadScene('aircraft_war_game')
     },
     backStartScene() {
         cc.director.loadScene('aircraft_war_start')
+    },
+
+    //db request
+    requestDbAircraftWarScore() {
+        let self = this;
+        self.db.collection('userGameInfo').where({
+            _openid: self.globalUser.openid
+        }).get({
+            success: function(res) {
+                self.db.collection('userGameInfo').doc(res.data[0]._id).update({
+                    data: {
+                        aircraftWarBestScore: self.bestScore,
+                        updateTime: self.db.serverDate()
+                    },
+                    success: function(sc) {
+                        self.globalUser.setUserGameInfo('aircraftWarBestScore', self.bestScore);
+                        console.log('保存成功')
+                    }
+                })
+            }
+        })
     }
 })
