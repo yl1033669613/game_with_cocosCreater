@@ -569,7 +569,7 @@
       "__id__": 6
     },
     "_enabled": true,
-    "speed": -100,
+    "speed": -20,
     "main": {
       "__id__": 15
     },

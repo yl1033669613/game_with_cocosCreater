@@ -20,8 +20,6 @@ cc.Class({
         }
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         let theScore = this.canvas.getComponent("snake_game").score;
         this.scoreLabel.string = "Score:" + theScore.toString();

@@ -261,6 +261,8 @@ cc.Class({
             let startPoint = e.getLocation();
             sx = startPoint.x;
             sy = startPoint.y;
+            dx = 0;
+            dy = 0
         }, this);
 
         this.node.on(cc.Node.EventType.TOUCH_MOVE, (e) => {
@@ -275,7 +277,7 @@ cc.Class({
             if (Math.abs(cury) > 12 || Math.abs(curx / cury) > 2) {
                 dy = cury
             }
-        }, this)
+        }, this);
 
         this.node.on(cc.Node.EventType.TOUCH_END, (e) => {
             //根据横纵坐标位移判断滑动方向 up to rotate, left to left, right to right, down to down
@@ -287,7 +289,7 @@ cc.Class({
             };
             if (dx < -25 && Math.abs(dx / dy) > 2) this.moveLeft();
             if (dx > 25 && Math.abs(dx / dy) > 2) this.moveRight();
-        }, this);
+        }, this)
     },
 
     //保存最高得分 wx cloud

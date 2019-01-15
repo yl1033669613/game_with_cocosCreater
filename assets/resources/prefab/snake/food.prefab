@@ -71,7 +71,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "particle",
+    "_name": "particlesystem",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -142,39 +142,39 @@
     "_autoRemoveOnFinish": false,
     "_totalParticles": 150,
     "_duration": -1,
-    "_emissionRate": 8,
-    "_life": 1,
+    "_emissionRate": 20,
+    "_life": 0.5,
     "_lifeVar": 0,
     "_startColor": {
       "__type__": "cc.Color",
-      "r": 93,
-      "g": 184,
-      "b": 9,
-      "a": 255
+      "r": 0,
+      "g": 255,
+      "b": 0,
+      "a": 182
     },
     "_startColorVar": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
+      "r": 10,
+      "g": 255,
       "b": 0,
-      "a": 255
+      "a": 182
     },
     "_endColor": {
       "__type__": "cc.Color",
-      "r": 11,
-      "g": 129,
-      "b": 21,
-      "a": 0
+      "r": 0,
+      "g": 255,
+      "b": 10,
+      "a": 182
     },
     "_endColorVar": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
+      "r": 10,
+      "g": 255,
       "b": 0,
-      "a": 0
+      "a": 182
     },
-    "_angle": 90,
-    "_angleVar": 20,
+    "_angle": 360,
+    "_angleVar": 360,
     "_startSize": 15,
     "_startSizeVar": 0,
     "_endSize": 0,
@@ -194,22 +194,22 @@
       "y": 0
     },
     "_positionType": 0,
-    "_emitterMode": 0,
+    "_emitterMode": 1,
     "_gravity": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
-    "_speed": 20,
-    "_speedVar": 20,
-    "_tangentialAccel": 80,
+    "_speed": 180,
+    "_speedVar": 50,
+    "_tangentialAccel": 0,
     "_tangentialAccelVar": 0,
     "_radialAccel": 0,
     "_radialAccelVar": 0,
     "_rotationIsDir": false,
     "_startRadius": 0,
     "_startRadiusVar": 0,
-    "_endRadius": 0,
+    "_endRadius": 20,
     "_endRadiusVar": 0,
     "_rotatePerS": 0,
     "_rotatePerSVar": 0,
@@ -223,7 +223,7 @@
     "asset": {
       "__uuid__": "4af8cc81-435f-4823-a641-7b002fe1c047"
     },
-    "fileId": "03Km97i9dGuaRVa+xqV3T5",
+    "fileId": "06VxcLhHhIG5rjjWwXwsDc",
     "sync": false
   },
   {

@@ -5,7 +5,8 @@ cc.Class({
         circlesNum: 10,
         r: 163,
         g: 163,
-        b: 163
+        b: 163,
+        type: 1
     },
 
     // LIFE-CYCLE CALLBACKS:

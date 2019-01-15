@@ -8,15 +8,13 @@ cc.Class({
         }
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         // 创建食物对象池
         this.foodPool = new cc.NodePool();
         let initCount = 3;
         for (let i = 0; i < initCount; ++i) {
             let food = cc.instantiate(this.foodPrefab); // 创建节点
-            this.foodPool.put(food); // 通过 putInPool 接口放入对象池
+            this.foodPool.put(food)
         };
 
         this.foodInstance = null;
@@ -35,7 +33,7 @@ cc.Class({
         this.foodY = 0;
 
         // 初始显示一个食物
-        this.foodPosShow();
+        this.foodPosShow()
     },
 
     // 根据范围获取随机数
@@ -50,7 +48,6 @@ cc.Class({
         this.isOnSnake = true;
         let indexX, indexY;
         while (this.isOnSnake) {
-            //执行后先将判定条件设置为false，如果判定不重合，则不会再执行下列语句
             this.isOnSnake = false;
             indexX = this.getNumberInRange(0, this.node.width / 30 - 1);
             indexY = this.getNumberInRange(0, this.node.height / 30 - 1);
@@ -73,6 +70,10 @@ cc.Class({
                         break;
                     }
                 }
+            };
+
+            if (indexX * 15 < -this.node.width / 2 + 15 || indexX * 15 > this.node.width / 2 - 15 || indexY * 15 < -this.node.height / 2 + 15 || indexY * 15 > this.node.height / 2 - 15) {
+                this.isOnSnake = true
             }
         };
         // 判断对象池中是否有空闲对象
@@ -84,9 +85,9 @@ cc.Class({
         this.node.addChild(this.foodInstance);
         this.foodInstance.setPosition(cc.p(indexX * 15, indexY * 15));
 
-        // 暴露食物的位置
+        // 设置食物的位置
         this.foodX = indexX * 15;
-        this.foodY = indexY * 15;
+        this.foodY = indexY * 15
     },
 
     // 回收食物
@@ -94,4 +95,4 @@ cc.Class({
         this.foodPool.put(this.foodInstance);
         this.foodInstance = null;
     }
-});
+})

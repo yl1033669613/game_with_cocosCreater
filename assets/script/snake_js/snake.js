@@ -23,15 +23,13 @@ cc.Class({
         }
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         // 创建蛇身体对象池
         this.snakeBodyPool = new cc.NodePool();
         let initCount = 3;
         for (let i = 0; i < initCount; ++i) {
-            let snakeBody = cc.instantiate(this.snakebody); // 创建节点
-            this.snakeBodyPool.put(snakeBody); // 通过 putInPool 接口放入对象池
+            let snakeBody = cc.instantiate(this.snakebody);
+            this.snakeBodyPool.put(snakeBody)
         };
 
         //画出2个方块，的蛇身体
@@ -78,12 +76,7 @@ cc.Class({
 
     //蛇的移动方式
     snakeMove() {
-        //1、画一个灰色的方块，位置与蛇头重叠
-        //2、将这个方块插到数组中蛇头后面一个的位置
-        //3、砍去末尾的方块
-        //4、将蛇头向设定方向移动一格
         let rect = null;
-        // 先判断对象池中是否有空闲对象
         if (this.snakeBodyPool.size() > 0) {
             rect = this.snakeBodyPool.get();
         } else {
@@ -93,9 +86,6 @@ cc.Class({
         rect.setPosition(cc.p(this.head.x, this.head.y))
         this.snakeArray.splice(1, 0, rect);
 
-        //判断是否吃到食物
-        //吃到则食物重新给位置，不砍去最后一节，即蛇变长
-        //没吃到则末尾砍掉一节，即蛇长度不变
         if (this.isEat()) {
             this.game.score++;
             this.currScore.string = "score:" + this.game.score;
@@ -124,8 +114,6 @@ cc.Class({
             default:
                 break;
         };
-
-        // console.log(this.head.x)
 
         // gameover判定
         // 撞墙

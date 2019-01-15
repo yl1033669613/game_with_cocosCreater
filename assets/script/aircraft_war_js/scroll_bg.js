@@ -29,12 +29,12 @@ cc.Class({
     },
     bgMove(dt) {
         this.loopBg1.y += this.speed * dt;
-        if (this.loopBg1.y < -this.node.parent.height) {
-            this.loopBg1.y = this.node.parent.height - 5;
+        if (this.loopBg1.y <= -this.node.parent.height) {
+            this.loopBg1.y = this.node.parent.height - 10;
         };
         this.loopBg2.y += this.speed * dt;
-        if (this.loopBg2.y < -this.node.parent.height) {
-            this.loopBg2.y = this.node.parent.height - 5;
+        if (this.loopBg2.y <= -this.node.parent.height) {
+            this.loopBg2.y = this.node.parent.height - 10;
         }
     },
     update(dt) {
