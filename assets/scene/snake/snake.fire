@@ -346,7 +346,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -110.17,
+      "x": -112.17,
       "y": 375
     },
     "_skewX": 0,
@@ -367,7 +367,7 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 9,
-    "_left": 4,
+    "_left": 2,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,

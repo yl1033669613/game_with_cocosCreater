@@ -29,13 +29,19 @@ cc.Class({
             type: cc.Label,
             default: null
         },
+        previewBlock: {
+            type: cc.Node,
+            default: null
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
         this.ctx = this.theBoard.getComponent(cc.Graphics);
+        this.previewCtx = this.previewBlock.getComponent(cc.Graphics);
         this.board = [];
+        this.previewShapeBoard = [];
 
         this.SHAPES = [
             [tets.Z, "236/38/66/255"],
@@ -78,10 +84,11 @@ cc.Class({
         let r = Math.floor(Math.random() * this.SHAPES.length);
         this.x = 3;
         this.y = -2;
-        this.rotateIdx = 0;
         this.randomShape = this.SHAPES[r][0];
+        this.rotateIdx = Math.floor(Math.random() * this.randomShape.length);
         this.color = this.SHAPES[r][1];
         this.rotateShape = this.randomShape[this.rotateIdx];
+        this.drawPreviewShape()
     },
 
     //draw board
@@ -92,6 +99,30 @@ cc.Class({
                 this.drawRect(c, r, this.board[r][c]);
             }
         }
+    },
+
+    //绘制预览board
+    drawPreviewShape() {
+        this.previewCtx.clear();
+        for (let r = 0; r < 4; r++) {
+            for (let c = 0; c < 4; c++) {
+                this.previewShapeBoard[r][c] = '255/255/255/0';
+                if (this.rotateShape[r] && this.rotateShape[r][c]) {
+                    this.previewShapeBoard[r][c] = this.color
+                };
+                this.drawPreviewRect(c, r, this.previewShapeBoard[r][c])
+            }
+        }
+    },
+
+    //绘制单个预览矩形
+    drawPreviewRect(x, y, color) {
+        let c = color.split('/');
+        let col = new cc.Color({ r: parseInt(c[0]), g: parseInt(c[1]), b: parseInt(c[2]), a: parseInt(c[3]) });
+        this.previewCtx.fillColor = col;
+        this.previewCtx.rect((x * WIDTH) + (2 * x), (WIDTH * 4 - 22) - ((y * WIDTH) + (2 * y)), WIDTH, WIDTH);
+        this.previewCtx.stroke();
+        this.previewCtx.fill();
     },
 
     //绘制单个矩形 填充颜色
@@ -364,6 +395,14 @@ cc.Class({
                 this.board[r][c] = DFCOLOR;
             }
         };
+        //create preview board
+        for (let r = 0; r < 4; r++) {
+            this.previewShapeBoard[r] = [];
+            for (let c = 0; c < 4; c++) {
+                this.previewShapeBoard[r][c] = '255/255/255/0';
+            }
+        };
+
         this.scoreLabel.string = 'score:' + this.score;
         this.drawBoard();
         this.randomOne();
