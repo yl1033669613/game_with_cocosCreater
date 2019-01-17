@@ -106,7 +106,7 @@ cc.Class({
         this.previewCtx.clear();
         for (let r = 0; r < 4; r++) {
             for (let c = 0; c < 4; c++) {
-                this.previewShapeBoard[r][c] = '255/255/255/0';
+                this.previewShapeBoard[r][c] = '255/255/255/10';
                 if (this.rotateShape[r] && this.rotateShape[r][c]) {
                     this.previewShapeBoard[r][c] = this.color
                 };
@@ -120,7 +120,7 @@ cc.Class({
         let c = color.split('/');
         let col = new cc.Color({ r: parseInt(c[0]), g: parseInt(c[1]), b: parseInt(c[2]), a: parseInt(c[3]) });
         this.previewCtx.fillColor = col;
-        this.previewCtx.rect((x * WIDTH) + (2 * x), (WIDTH * 4 - 22) - ((y * WIDTH) + (2 * y)), WIDTH, WIDTH);
+        this.previewCtx.rect((x * WIDTH) + (2 * x), (WIDTH * 4 - 10) - ((y * WIDTH) + (2 * y)), WIDTH, WIDTH);
         this.previewCtx.stroke();
         this.previewCtx.fill();
     },
@@ -399,7 +399,7 @@ cc.Class({
         for (let r = 0; r < 4; r++) {
             this.previewShapeBoard[r] = [];
             for (let c = 0; c < 4; c++) {
-                this.previewShapeBoard[r][c] = '255/255/255/0';
+                this.previewShapeBoard[r][c] = '255/255/255/10';
             }
         };
 

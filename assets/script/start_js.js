@@ -20,8 +20,6 @@ cc.Class({
         }
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         this.noticeOpen = false;
         this.noticeLoadFirst = true;
