@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         // 触摸敏感距离
         DIFFPX: 15,
@@ -22,11 +21,10 @@ cc.Class({
             type: cc.Label
         }
     },
-
     onLoad() {
         // 创建蛇身体对象池
         this.snakeBodyPool = new cc.NodePool();
-        let initCount = 3;
+        const initCount = 3;
         for (let i = 0; i < initCount; ++i) {
             let snakeBody = cc.instantiate(this.snakebody);
             this.snakeBodyPool.put(snakeBody)
@@ -71,9 +69,8 @@ cc.Class({
         this.initEvent();
 
         // 颜色变换顺序
-        this.colorChange = 0;
+        this.colorChange = 0
     },
-
     //蛇的移动方式
     snakeMove() {
         let rect = null;
@@ -124,13 +121,9 @@ cc.Class({
         for (var i = 1; i < this.snakeArray.length; i++) {
             if (this.snakeArray[i].x == this.head.x && this.snakeArray[i].y == this.head.y) {
                 this.game.gameOver = true;
-            };
-        };
+            }
+        }
     },
-
-    /**
-     * 玩家响应手指的触摸事件
-     */
     initEvent() {
         this.node.on(cc.Node.EventType.TOUCH_START, (e) => {
             let startPoint = e.getLocation();
@@ -174,13 +167,12 @@ cc.Class({
             }
         }, this)
     },
-
     //判定吃到食物，即蛇头坐标与食物坐标重合
     isEat() {
         if (this.head.x == this.food.foodX && this.head.y == this.food.foodY) {
             return true;
         } else {
             return false;
-        };
+        }
     }
-});
+})

@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         rectPfb: {
             default: null,
@@ -27,9 +26,6 @@ cc.Class({
             type: cc.Node
         }
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         let windowSize = cc.view.getVisibleSize();
         this.node.height = this.node.width = windowSize.width - 14;
@@ -58,7 +54,6 @@ cc.Class({
         this.WinTimes = this.globalNode.userGameInfo.tzfeWinNum || 0;
         this.db = wx.cloud.database();
     },
-
     //循环
     loop(func) {
         for (let i = 0; i < 4; i++)
@@ -66,10 +61,9 @@ cc.Class({
                 func(i, j);
             }
     },
-
     //绘制方块背景
     drawBgShadowRect() {
-        let self = this;
+        const self = this;
         let color = new cc.Color(255, 255, 255, 30);
         self.loop(function(i, j) {
             let x = j == 0 ? self.margin_width : j * (self.box_width + self.margin_width) + self.margin_width,
@@ -80,11 +74,10 @@ cc.Class({
             self.ctx.fill();
         })
     },
-
     // 随机生成方块
     produce() {
         // 随机取当前剩余方块以内的数
-        let self = this;
+        const self = this;
         let cot = ~~(Math.random() * self.space);
         let k = 0;
         self.loop(function(i, j) {
@@ -98,7 +91,6 @@ cc.Class({
         });
         self.space -= 1;
     },
-
     clearNumRects() { //销毁方块
         for (let i = 0; i < this.node.children.length; i++) {
             if (this.node.children[i]._name == '2048RectPfb') {
@@ -106,12 +98,11 @@ cc.Class({
             }
         };
     },
-
     // 根据map 数组渲染方块
     block() {
-        let self = this;
+        const self = this;
         self.clearNumRects();
-        self.loop(function(i, j) {
+        self.loop((i, j) => {
             let num = self.map[i][j],
                 color = self.num_color[String(num)];
             if (num != 0) {
@@ -119,7 +110,6 @@ cc.Class({
             }
         });
     },
-
     // 绘制单个矩形
     drawRects(x, y, w, c, n) {
         let rect = cc.instantiate(this.rectPfb);
@@ -132,14 +122,12 @@ cc.Class({
         label.getComponent(cc.Label).string = n;
         this.node.addChild(rect);
     },
-
     // game start 默认生成两个方块
     init() {
         for (let i = 0; i < 2; i++) {
             this.produce();
         }
     },
-
     move(direction) {
         let isValid = false; //判断是否是有效移动
 
@@ -208,7 +196,6 @@ cc.Class({
             return;
         }
     },
-
     gameOver() { //判断是否还有可能的合并
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
@@ -232,43 +219,41 @@ cc.Class({
         };
         return true;
     },
-
     setDbDataWhenScoreChange() {
-        let self = this;
+        const self = this;
         if (self.score > self.bestScore) {
             self.bestScore = self.score;
             self.db.collection('userGameInfo').where({
                 _openid: self.globalNode.openid
             }).get({
-                success: function(res) {
+                success: res => {
                     self.db.collection('userGameInfo').doc(res.data[0]._id).update({
                         data: {
                             'tzfeBestScore': self.bestScore,
                             'updateTime': self.db.serverDate()
                         },
-                        success: function(sc) {
+                        success: sc => {
                             self.globalNode.setUserGameInfo('tzfeBestScore', self.bestScore);
                             console.log('保存成功')
                         }
                     })
                 }
             })
-        };
+        }
     },
-
     setWinTimes() {
-        let self = this;
+        const self = this;
         self.WinTimes = self.WinTimes + 1;
         self.db.collection('userGameInfo').where({
             _openid: globalNode.openid
         }).get({
-            success: function(res) {
+            success: res => {
                 self.db.collection('userGameInfo').doc(res.data[0]._id).update({
                     data: {
                         'tzfeWinNum': self.WinTimes,
                         'updateTime': self.db.serverDate()
                     },
-                    success: function(sc) {
+                    success: sc => {
                         self.globalNode.setUserGameInfo('tzfeWinNum', self.WinTimes);
                         console.log('保存成功')
                     }
@@ -276,7 +261,6 @@ cc.Class({
             }
         })
     },
-
     showTheGamePanel(bool, cpt) {
         if (bool) {
             cpt.active = bool;
@@ -296,7 +280,6 @@ cc.Class({
             )
         }
     },
-
     //玩家触摸事件
     eventHandle() {
         let canvasScr = this.node.parent,
@@ -325,11 +308,9 @@ cc.Class({
             if (dx > 30 && Math.abs(dx / dy) > 2) this.move([1, 0]);
         }, this);
     },
-
     back_game_list() {
         cc.director.loadScene('startscene');
     },
-
     restartGame() {
         this.clearNumRects();
         this.space = 16;
@@ -346,10 +327,9 @@ cc.Class({
         this.currentScore.getComponent(cc.Label).string = 'score:' + this.score;
         this.init();
     },
-
     start() { //初始化
         this.drawBgShadowRect();
         this.eventHandle();
         this.init();
     }
-});
+})

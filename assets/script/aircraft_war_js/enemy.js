@@ -33,7 +33,7 @@ cc.Class({
     },
     onLoad() {
         this.xSpeed = Math.random() * (this.xMaxSpeed - this.xMinSpeed) + this.xMinSpeed;
-        this.ySpeed = cc.random0To1() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
+        this.ySpeed = Math.random() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
         this.enemyGroup = this.node.parent.getComponent('enemy_group');
         this.enemyBulletGroup = cc.find('Canvas/background/enemyBulletGroup').getComponent('enemy_bullet_group');
         this.buffGroup = cc.find('Canvas/background/buffGroup').getComponent('buff_group')

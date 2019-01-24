@@ -8,7 +8,7 @@ cc.Class({
         hpDrop: 0 //掉血
     },
     onLoad() {
-        let manager = cc.director.getCollisionManager();
+        const manager = cc.director.getCollisionManager();
         manager.enabled = true;
         this.enemyBulletGroup = this.node.parent.getComponent('enemy_bullet_group')
     },

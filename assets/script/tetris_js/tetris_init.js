@@ -4,7 +4,6 @@ const ROW = 20;
 const COL = 10;
 const WIDTH = 18;
 const DFCOLOR = "61/60/60/255"; //默认rect color
-
 cc.Class({
     extends: cc.Component,
 
@@ -34,9 +33,6 @@ cc.Class({
             default: null
         }
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         this.ctx = this.theBoard.getComponent(cc.Graphics);
         this.previewCtx = this.previewBlock.getComponent(cc.Graphics);
@@ -78,7 +74,6 @@ cc.Class({
             this.requestDbTetrisBestScore();
         }
     },
-
     //随机获取一个形状
     randomOne() {
         let r = Math.floor(Math.random() * this.SHAPES.length);
@@ -90,7 +85,6 @@ cc.Class({
         this.rotateShape = this.randomShape[this.rotateIdx];
         this.drawPreviewShape()
     },
-
     //draw board
     drawBoard() {
         this.ctx.clear();
@@ -100,7 +94,6 @@ cc.Class({
             }
         }
     },
-
     //绘制预览board
     drawPreviewShape() {
         this.previewCtx.clear();
@@ -114,7 +107,6 @@ cc.Class({
             }
         }
     },
-
     //绘制单个预览矩形
     drawPreviewRect(x, y, color) {
         let c = color.split('/');
@@ -124,7 +116,6 @@ cc.Class({
         this.previewCtx.stroke();
         this.previewCtx.fill();
     },
-
     //绘制单个矩形 填充颜色
     drawRect(x, y, color) {
         let c = color.split('/');
@@ -134,7 +125,6 @@ cc.Class({
         this.ctx.stroke();
         this.ctx.fill();
     },
-
     // 绘制形状
     fills(color) {
         for (let r = 0; r < this.rotateShape.length; r++) {
@@ -146,17 +136,14 @@ cc.Class({
             }
         }
     },
-
     // 绘制带颜色的形状
     draw() {
         this.fills(this.color);
     },
-
     // 绘制空 （覆盖之前有颜色的矩形）
     drawEmpty() {
         this.fills(DFCOLOR);
     },
-
     moveDown() {
         if (!this.collisionDetection(0, 1, this.rotateShape)) {
             this.drawEmpty();
@@ -167,7 +154,6 @@ cc.Class({
             this.randomOne();
         }
     },
-
     // right
     moveRight() {
         if (!this.collisionDetection(1, 0, this.rotateShape)) {
@@ -176,7 +162,6 @@ cc.Class({
             this.draw();
         }
     },
-
     // left 
     moveLeft() {
         if (!this.collisionDetection(-1, 0, this.rotateShape)) {
@@ -185,7 +170,6 @@ cc.Class({
             this.draw();
         }
     },
-
     // rotate
     rotate() {
         let nextBck = this.randomShape[(this.rotateIdx + 1) % this.randomShape.length];
@@ -207,7 +191,6 @@ cc.Class({
             this.draw();
         }
     },
-
     //形状无法向下继续移动时将形状保存到board数组, 并且重新绘制board
     drawOnBoard() {
         this.dropSpeed = DROPSPEED;
@@ -258,7 +241,6 @@ cc.Class({
         // 渲染分数
         this.scoreLabel.string = 'score:' + this.score
     },
-
     //碰撞检测
     collisionDetection(x, y, shape) {
         for (let r = 0; r < shape.length; r++) {
@@ -284,7 +266,6 @@ cc.Class({
         };
         return false
     },
-
     //玩家触控
     initEvent() {
         let sx, sy, dx, dy;
@@ -322,10 +303,9 @@ cc.Class({
             if (dx > 25 && Math.abs(dx / dy) > 2) this.moveRight();
         }, this)
     },
-
     //保存最高得分 wx cloud
     requestDbTetrisBestScore(cb) {
-        let self = this;
+        const self = this;
         self.db.collection('userGameInfo').where({
             _openid: self.globalUser.openid
         }).get({
@@ -344,7 +324,6 @@ cc.Class({
             }
         })
     },
-
     showGameOverInfo() {
         this.overScoreLabel.string = 'score: ' + this.score;
         this.bestScoreLabel.string = 'best score: ' + this.bestScore;
@@ -356,7 +335,6 @@ cc.Class({
             cc.spawn(cc.scaleTo(0.2, 1, 1), cc.fadeIn(0.3))
         ));
     },
-
     newGame() {
         this.gameOverInfo.active = false;
         this.fps = 0;
@@ -374,7 +352,6 @@ cc.Class({
         this.drawBoard();
         this.randomOne();
     },
-
     backList() {
         //游戏非game over时退出任然记录最高分
         if (this.score > this.bestScore) {
@@ -386,7 +363,6 @@ cc.Class({
             cc.director.loadScene('startscene');
         }
     },
-
     start() {
         //create board
         for (let r = 0; r < ROW; r++) {
@@ -408,7 +384,6 @@ cc.Class({
         this.randomOne();
         this.initEvent()
     },
-
     update(dt) {
         this.fps += dt * 1000;
         if (this.fps > this.dropSpeed) {
@@ -417,5 +392,5 @@ cc.Class({
                 this.moveDown();
             }
         }
-    },
+    }
 })

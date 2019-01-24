@@ -378,7 +378,8 @@
     "circlesNum": 20,
     "r": 163,
     "g": 163,
-    "b": 163
+    "b": 163,
+    "type": 1
   },
   {
     "__type__": "cc.Graphics",

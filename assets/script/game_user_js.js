@@ -1,21 +1,13 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
 
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         cc.game.addPersistRootNode(this.node); //设置常驻节点
-
         wx.cloud.init();
-
         this.db = wx.cloud.database();
-
         this.openid = '';
-
         this.userGameInfo = {
             'snakeBestScore': 0,
 
@@ -28,7 +20,7 @@ cc.Class({
             needleLevelModeLevels: 1,
 
             tetrisBestScore: 0,
-            
+
             aircraftWarBestScore: 0,
 
             'createTime': this.db.serverDate(),
@@ -42,12 +34,11 @@ cc.Class({
             needlesNum: 6
         }];
     },
-
     login() {
-        let self = this;
+        const self = this;
         wx.showLoading({
             title: '请稍候...',
-            mask: true 
+            mask: true
         });
         wx.cloud.callFunction({
             name: 'login',
@@ -61,22 +52,20 @@ cc.Class({
             }
         });
     },
-
     checkRecordFromDatabase() {
-        let self = this;
+        const self = this;
         self.db.collection('userGameInfo').where({
             _openid: self.openid
         }).get({
-            success: function(res) {
-                // console.log(res)
+            success: res => {
                 wx.hideLoading();
                 if (res.data.length == 0) {
                     self.db.collection('userGameInfo').add({
                         data: self.userGameInfo,
-                        success: function(res) {
+                        success: res => {
                             console.log(res)
                         },
-                        fail: function(err) {
+                        fail: err => {
                             console.log(err)
                         }
                     })
@@ -84,15 +73,14 @@ cc.Class({
                     self.userGameInfo = res.data[0];
                 }
             },
-            fail: function(err) {
+            fail: err => {
                 wx.hideLoading();
             }
         });
     },
-
     //获取needle level 数组
     getNeedlesLevelData() {
-        let self = this;
+        const self = this;
         wx.cloud.callFunction({
             name: 'getNeedleLevel',
             success: res => {
@@ -103,13 +91,11 @@ cc.Class({
             }
         });
     },
-
     setUserGameInfo(key, data) {
         this.userGameInfo[key] = data
     },
-
     start() {
         this.login();
         this.getNeedlesLevelData();
     }
-});
+})

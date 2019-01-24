@@ -11,7 +11,6 @@ let buffG = cc.Class({
         }
     }
 });
-
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -25,7 +24,7 @@ cc.Class({
         Gdt.common.batchInitObjPool(this, this.buffG);
     },
     createHeroBuff(emInfo) {
-        let theEnemy = emInfo.getComponent('enemy');
+        const theEnemy = emInfo.getComponent('enemy');
         for (let i = 0; i < this.buffG.length; i++) {
             if (theEnemy.buffType == this.buffG[i].name) {
                 if (Math.random() <= this.buffG[i].probability) { //概率生成

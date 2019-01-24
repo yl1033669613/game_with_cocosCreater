@@ -27,7 +27,7 @@ cc.Class({
     },
     //加载背景图片 wx cloud
     loadNoticePic(cb) {
-        let self = this;
+        const self = this;
         if (Gdt.loopBg) {
             cc.loader.load(Gdt.loopBg, (err, texture) => {
                 if (!err) {
@@ -37,7 +37,7 @@ cc.Class({
             });
             return
         };
-        let db = wx.cloud.database();
+        const db = wx.cloud.database();
         db.collection('gameConfig').doc('XDWYPuSiwXKAQnli').get({
             success: (ret) => {
                 let arr = [];

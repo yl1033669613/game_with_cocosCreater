@@ -1,5 +1,4 @@
 const Gdt = require('globals');
-
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -63,7 +62,6 @@ cc.Class({
         this.scoreDisplay.string = this.score;
         this.bombNoDisplay.string = this.bombNo;
         this.curState = Gdt.commonInfo.gameState.start;
-
         // wx cloud
         this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
         this.db = wx.cloud.database();
@@ -129,12 +127,12 @@ cc.Class({
     },
     //炸弹清除敌机
     removeAllEnemy() {
-        let children = this.enemyGroup.node.children;
+        const children = this.enemyGroup.node.children;
         for (let i = 0; i < children.length; i++) {
             children[i].getComponent('enemy').hP = 0;
             children[i].getComponent('enemy').enemyOver()
         };
-        let enemyBulletChildren = this.enemyBulletGroup.node.children;
+        const enemyBulletChildren = this.enemyBulletGroup.node.children;
         for (let i = 0; i < enemyBulletChildren.length; i++) {
             this.enemyBulletGroup.bulletDied(enemyBulletChildren[i])
         }
@@ -173,17 +171,17 @@ cc.Class({
 
     //db request
     requestDbAircraftWarScore() {
-        let self = this;
+        const self = this;
         self.db.collection('userGameInfo').where({
             _openid: self.globalUser.openid
         }).get({
-            success: function(res) {
+            success: res => {
                 self.db.collection('userGameInfo').doc(res.data[0]._id).update({
                     data: {
                         aircraftWarBestScore: self.bestScore,
                         updateTime: self.db.serverDate()
                     },
-                    success: function(sc) {
+                    success: sc => {
                         self.globalUser.setUserGameInfo('aircraftWarBestScore', self.bestScore);
                         console.log('保存成功')
                     }

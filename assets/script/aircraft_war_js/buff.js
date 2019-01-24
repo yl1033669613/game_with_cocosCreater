@@ -1,5 +1,4 @@
 const Gdt = require('globals');
-
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -13,7 +12,7 @@ cc.Class({
         if (Math.ceil(Math.random()*10) < 5) {
             this.xSpeed = - this.xSpeed
         };
-        this.ySpeed = cc.random0To1() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
+        this.ySpeed = Math.random() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
         this.buffGroup = this.node.parent.getComponent('buff_group');
     },
     onCollisionEnter(other, self) {

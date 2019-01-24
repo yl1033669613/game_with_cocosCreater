@@ -23,7 +23,7 @@ cc.Class({
     onLoad() {
         this.noticeOpen = false;
         this.noticeLoadFirst = true;
-        let scenesList = [{
+        const scenesList = [{
             title: ' Snake',
             name: 'snake'
         }, {
@@ -57,7 +57,7 @@ cc.Class({
     },
 
     openNotice() {
-        let self = this;
+        const self = this;
         let dt = 120;
         if (!self.noticeOpen) {
             self.noticeOpen = true;
@@ -83,9 +83,9 @@ cc.Class({
 
     //加载notice wx cloud
     loadNoticePic(cb) {
-        let self = this;
-        let sprite = self.noticePic.getComponent(cc.Sprite);
-        let db = wx.cloud.database();
+        const self = this;
+        const sprite = self.noticePic.getComponent(cc.Sprite);
+        const db = wx.cloud.database();
         db.collection('gameConfig').doc('W9J4AAIrVDZJFtdW').get({
             success: (ret) => {
                 let arr = [];

@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         score: 0,
         gameContainer: {
@@ -12,14 +11,7 @@ cc.Class({
             type: cc.Node
         }
     },
-
-    // use this for initialization
-    onLoad() {
-        // var tic = wx.getSystemInfoSync();
-        // this.node.width = tic.windowWidth;
-        // this.node.height = tic.windowHeight;
-
-        // 设置游戏容器宽高
+    onLoad() { // 设置游戏容器宽高
         this.gameContainer.width = this.node.width;
         this.gameContainer.height = this.node.height;
         // 蛇初始移动速度
@@ -29,63 +21,72 @@ cc.Class({
         // frame
         this.frames = 0;
         // snake 
-        this.snake = this.gameContainer.getComponent("snake");
-
-        this.showGameInfo(false);
-
-        this.infoShowOnce = 0;
+        this.snake = this.gameContainer.getComponent("snake")
     },
-
-    showGameInfo(bool) {
-        this.gameInfo.active = bool;
-        if (bool) {
-            while(!this.infoShowOnce){
-                this.infoShowOnce = 1;
-                this.gameInfo.opacity = 0;
-                this.gameInfo.runAction(
-                    cc.fadeIn(0.2)
-                )
-            }
-        }
+    showGameInfo() {
+        this.gameInfo.active = true;
+        this.gameInfo.opacity = 0;
+        this.gameInfo.runAction(
+            cc.fadeIn(0.2)
+        )
     },
-
     // called every frame
     update(dt) {
         // 判断游戏是否结束
         if (this.gameOver) {
-            this.showGameInfo(true);
-            return;
+            if (!this.gameInfo.active) {
+                this.showGameInfo();
+            };
+            return
         };
         // 蛇移动速度增加
-        switch(this.score){
+        switch (this.score) {
             case 5:
-            this.snakeMoveSpeed = 10;
-            break;
+                this.snakeMoveSpeed = 10;
+                break;
             case 10:
-            this.snakeMoveSpeed = 9;
-            break;
+                this.snakeMoveSpeed = 9;
+                break;
             case 20:
-            this.snakeMoveSpeed = 8;
-            break;
-            case 30:
-            this.snakeMoveSpeed = 7;
-            break;
+                this.snakeMoveSpeed = 8;
+                break;
             case 50:
-            this.snakeMoveSpeed = 6;
-            break;
+                this.snakeMoveSpeed = 7;
+                break;
             case 80:
-            this.snakeMoveSpeed = 5;
-            break;
+                this.snakeMoveSpeed = 6;
+                break;
+            case 100:
+                this.snakeMoveSpeed = 7;
+                break;
             case 120:
-            this.snakeMoveSpeed = 4;
-            break;
-            case 150:
-            this.snakeMoveSpeed = 3;
-            break;
+                this.snakeMoveSpeed = 8;
+                break;
+            case 200:
+                this.snakeMoveSpeed = 9;
+                break;
+            case 250:
+                this.snakeMoveSpeed = 8;
+                break;
+            case 280:
+                this.snakeMoveSpeed = 9;
+                break;
+            case 330:
+                this.snakeMoveSpeed = 8;
+                break;
+            case 380:
+                this.snakeMoveSpeed = 7;
+                break;
+            case 400:
+                this.snakeMoveSpeed = 9;
+                break;
+            case 450:
+                this.snakeMoveSpeed = 8;
+                break;
         };
         this.frames++;
         if (this.frames % this.snakeMoveSpeed === 0) {
             this.snake.snakeMove();
         }
-    },
-});
+    }
+})

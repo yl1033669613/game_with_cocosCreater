@@ -1,8 +1,6 @@
 const gbData = require('./game_global.js');
-
 cc.Class({
     extends: cc.Component,
-
     properties: {
         bigCircle: {
             default: null,
@@ -33,14 +31,13 @@ cc.Class({
             type: cc.Node
         }
     },
-
     onLoad() {
         this.needlesNum = '';
         this.freeModeCurrNeedle = 0;
         this.freeModeCurrScore = 0;
         this.rotateSpeed = 12;
         this.isGameOver = false;
-
+        this.actionInts = null;
         // wx cloud
         this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
         this.db = wx.cloud.database();
@@ -49,16 +46,14 @@ cc.Class({
             this.requestDbNeedleFreeModeScore();
             this.requestDbNeedleLevelModeLevels();
         };
-
         //create obj pool
         this.needlesPool = new cc.NodePool();
-        let initCount = 40;
+        const initCount = 40;
         for (let i = 0; i < initCount; ++i) {
             let needles = cc.instantiate(this.needlePfb); // 创建节点
             this.needlesPool.put(needles); // 通过 putInPool 接口放入对象池
         };
     },
-
     LevelSceneInit() {
         if (gbData.mode === 'level') { //初始化level mode 渲染
             let level = gbData.gameLevel,
@@ -79,16 +74,15 @@ cc.Class({
                     needleBody.getComponent('draw_needles').speed = isL[0].speed;
                     this.bigCircle.addChild(needleBody);
                 };
-                this.circleRotate(isL[0].speed);
+                this.actionInts = this.circleRotate(isL[0].speed);
                 this.needlesNum = isL[0].needlesNum;
                 this.rotateSpeed = isL[0].speed;
             }
         } else {
-            this.circleRotate(5);
+            this.actionInts = this.circleRotate(4);
             this.needlesNum = '';
         }
     },
-
     createNeedles(cb) {
         let needleBody;
         if (this.needlesPool.size() > 0) {
@@ -110,12 +104,11 @@ cc.Class({
         needleBody.getComponent('draw_needles').speed = speed;
         this.bigCircle.addChild(needleBody);
     },
-
     circleRotate(speed) {
         let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(speed, 360)));
         this.bigCircle.runAction(rotate);
+        return rotate
     },
-
     userHandle() {
         this.node.on(cc.Node.EventType.TOUCH_START, function(e) {
             if (!this.isGameOver) {
@@ -123,7 +116,6 @@ cc.Class({
             }
         }, this)
     },
-
     needleMove() {
         this.moveNeedle.active = true;
         if (gbData.mode === 'level') {
@@ -150,7 +142,6 @@ cc.Class({
             }, this));
         this.moveNeedle.runAction(moveAction);
     },
-
     waitNeedlesNumUpdate() {
         let child = this.waitContent.children;
         if (gbData.mode === 'level') {
@@ -172,23 +163,21 @@ cc.Class({
             }
         }
     },
-
     backStart() {
         cc.director.loadScene('game_needles_start');
     },
-
     gameOver() {
         if (!this.isGameOver) {
             this.isGameOver = true;
+            this.bigCircle.stopAction(this.actionInts);
             this.gameOverShowInfoMask();
             if (gbData.mode === 'free' && this.freeModeCurrScore === this.freeModeCurrNeedle) {
                 this.freeModeCurrScore--
             }
         }
     },
-
     gameOverShowInfoMask() {
-        let gameMode = this.gameInfoMask.getChildByName('gameMaskModeType'),
+        const gameMode = this.gameInfoMask.getChildByName('gameMaskModeType'),
             freeModeBestScore = this.gameInfoMask.getChildByName('freeModeBestScore'),
             levelModeTxt = this.gameInfoMask.getChildByName('levelModeTxt'),
             btnRestart = this.gameInfoMask.getChildByName('restart');
@@ -209,9 +198,8 @@ cc.Class({
         };
         this.gameOverMaskVis();
     },
-
     gameLevelModeThislevelWin() {
-        let gameMode = this.gameInfoMask.getChildByName('gameMaskModeType'),
+        const gameMode = this.gameInfoMask.getChildByName('gameMaskModeType'),
             freeModeBestScore = this.gameInfoMask.getChildByName('freeModeBestScore'),
             levelModeTxt = this.gameInfoMask.getChildByName('levelModeTxt'),
             btnRestart = this.gameInfoMask.getChildByName('restart'),
@@ -232,20 +220,19 @@ cc.Class({
         this.requestDbNeedleLevelModeLevels(); //wx db
         this.gameOverMaskVis();
     },
-
     //保存free mode 分数
     requestDbNeedleFreeModeScore() { 
-        let self = this;
+        const self = this;
         self.db.collection('userGameInfo').where({
             _openid: self.globalUser.openid
         }).get({
-            success: function(res) {
+            success: res => {
                 self.db.collection('userGameInfo').doc(res.data[0]._id).update({
                     data: {
                         'needleFreeModeScore': gbData.freeBestScore,
                         'updateTime': self.db.serverDate()
                     },
-                    success: function(sc) {
+                    success: sc => {
                         self.globalUser.setUserGameInfo('needleFreeModeScore', gbData.freeBestScore);
                         console.log('保存成功')
                     }
@@ -253,20 +240,19 @@ cc.Class({
             }
         })
     },
-
     //保存level mode levels
     requestDbNeedleLevelModeLevels() {
-        let self = this;
+        const self = this;
         self.db.collection('userGameInfo').where({
             _openid: self.globalUser.openid
         }).get({
-            success: function(res) {
+            success: res => {
                 self.db.collection('userGameInfo').doc(res.data[0]._id).update({
                     data: {
                         'needleLevelModeLevels': gbData.gameLevel,
                         'updateTime': self.db.serverDate()
                     },
-                    success: function(sc) {
+                    success: sc => {
                         self.globalUser.setUserGameInfo('needleLevelModeLevels', gbData.gameLevel);
                         console.log('保存成功')
                     }
@@ -274,7 +260,6 @@ cc.Class({
             }
         })
     },
-
     gameOverMaskVis() {
         this.gameInfoMask.active = true;
         this.gameInfoMask.opacity = 0;
@@ -283,11 +268,9 @@ cc.Class({
             cc.spawn(cc.scaleTo(0.2, 1, 1), cc.fadeIn(0.3))
         ));
     },
-
     reLoadThisScene() {
         cc.director.loadScene('game_needles');
     },
-
     start() {
         this.modeTypeTxt.getComponent(cc.Label).string = gbData.mode + ' mode';
         if (gbData.mode === 'level') {
@@ -298,4 +281,4 @@ cc.Class({
         this.waitNeedlesNumUpdate();
         this.userHandle();
     }
-});
+})

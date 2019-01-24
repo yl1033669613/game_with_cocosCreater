@@ -1,17 +1,15 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         foodPrefab: {
             default: null,
             type: cc.Prefab
         }
     },
-
     onLoad() {
         // 创建食物对象池
         this.foodPool = new cc.NodePool();
-        let initCount = 3;
+        const initCount = 3;
         for (let i = 0; i < initCount; ++i) {
             let food = cc.instantiate(this.foodPrefab); // 创建节点
             this.foodPool.put(food)
@@ -35,14 +33,12 @@ cc.Class({
         // 初始显示一个食物
         this.foodPosShow()
     },
-
     // 根据范围获取随机数
     getNumberInRange(min, max) {
-        var range = max - min;
-        var r = cc.randomMinus1To1();
+        let range = max - min;
+        let r = cc.randomMinus1To1();
         return Math.round(r * range + min);
     },
-
     //设置食物出现的随机位置
     foodPosShow() {
         this.isOnSnake = true;
@@ -63,7 +59,7 @@ cc.Class({
 
             // 判断食物是否与障碍物重合
             if (!this.isOnSnake) {
-                for (var i = 0; i < this.obstacleArr.length; i++) {
+                for (let i = 0; i < this.obstacleArr.length; i++) {
                     if (indexX * 15 == this.obstacleArr[i].x && indexY * 15 == this.obstacleArr[i].y) {
                         //如果判定重合，将其设置为true，使随机数重给
                         this.isOnSnake = true;
@@ -72,7 +68,7 @@ cc.Class({
                 }
             };
 
-            if (indexX * 15 < -this.node.width / 2 + 15 || indexX * 15 > this.node.width / 2 - 15 || indexY * 15 < -this.node.height / 2 + 15 || indexY * 15 > this.node.height / 2 - 15) {
+            if (indexX * 15 < -this.node.width / 2 + 30 || indexX * 15 > this.node.width / 2 - 30 || indexY * 15 < -this.node.height / 2 + 30 || indexY * 15 > this.node.height / 2 - 30) {
                 this.isOnSnake = true
             }
         };
@@ -89,7 +85,6 @@ cc.Class({
         this.foodX = indexX * 15;
         this.foodY = indexY * 15
     },
-
     // 回收食物
     releaseFood() {
         this.foodPool.put(this.foodInstance);

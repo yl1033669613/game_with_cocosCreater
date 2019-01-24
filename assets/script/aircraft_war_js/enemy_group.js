@@ -1,5 +1,4 @@
 const Gdt = require('globals');
-
 //敌机组
 let enemyG = cc.Class({
     name: 'enemyG',
@@ -10,7 +9,6 @@ let enemyG = cc.Class({
         prefab: cc.Prefab
     }
 });
-
 cc.Class({
     extends: cc.Component,
     properties: () => ({

@@ -1,58 +1,44 @@
-var PipeManager = require('pipe_manager');
-var Bird = require('bird');
-var Scroller = require('scroller');
-
+const PipeManager = require('pipe_manager');
+const Bird = require('bird');
+const Scroller = require('scroller');
 cc.Class({
     extends: cc.Component,
-
     properties: {
-        /** 得金牌的分数 */
         goldScore: 20,
-        /** 得银牌的分数 */
         silverScore: 10,
-        /** 管道管理组件 */
         pipeManager: PipeManager,
-        /** 小鸟组件 */
         bird: Bird,
-        /** 分数显示节点 */
         scoreLabel: cc.Label,
-        /** 遮罩节点 */
         maskLayer: {
             default: null,
             type: cc.Node
         },
-        /** 地面节点 */
         ground: {
             default: null,
             type: cc.Node
         },
-        /** 准备开始菜单节点 */
         readyMenu: {
             default: null,
             type: cc.Node
         },
-        /** 游戏结束的菜单节点 */
         gameOverMenu: {
             default: null,
             type: cc.Node
         }
     },
-
     onLoad() {
         this.score = 0;
         this.scoreLabel.string = this.score;
         this.bird.init(this);
-        this._enableInput(true);
-        this._revealScene();
+        this.enableInput(true);
+        this.revealScene();
     },
-
-    _revealScene() {
+    revealScene() {
         this.maskLayer.active = true;
         this.maskLayer.color = cc.Color.BLACK;
         this.maskLayer.runAction(cc.fadeOut(0.3));
     },
-
-    /** 点击游戏结束菜单中的重新开始游戏按钮会调用此方法 */
+    //点击游戏结束菜单中的重新开始游戏按钮会调用此方法
     restart() {
         this.maskLayer.color = cc.Color.BLACK;
         this.maskLayer.runAction(
@@ -67,9 +53,9 @@ cc.Class({
     },
 
     //游戏开始
-    _gameStart() {
+    gameStart() {
         // 隐藏准备提示
-        this._hideReadyMenu();
+        this.hideReadyMenu();
         // 生成管道
         this.pipeManager.startSpawn();
         // bird fly
@@ -83,11 +69,11 @@ cc.Class({
         // 地面停止滚动
         this.ground.getComponent(Scroller).stopScroll();
         // 停止游戏输入监听
-        this._enableInput(false);
+        this.enableInput(false);
         // 屏幕闪烁
-        this._blinkOnce();
+        this.blinkOnce();
         // 显示游戏结束面板
-        this._showGameOverMenu();
+        this.showGameOverMenu();
     },
 
     // 返回开始页面
@@ -102,7 +88,7 @@ cc.Class({
     },
 
     // 隐藏准备面板
-    _hideReadyMenu() {
+    hideReadyMenu() {
         this.scoreLabel.node.runAction(cc.fadeIn(0.3));
         this.readyMenu.runAction(
             cc.sequence(
@@ -114,8 +100,8 @@ cc.Class({
         );
     },
 
-    /** 屏幕闪烁一下 */
-    _blinkOnce() {
+    //屏幕闪烁一下
+    blinkOnce() {
         this.maskLayer.color = cc.Color.WHITE;
         this.maskLayer.runAction(
             cc.sequence(
@@ -126,7 +112,7 @@ cc.Class({
     },
 
     // 显示游戏结束面板
-    _showGameOverMenu() {
+    showGameOverMenu() {
         // 隐藏分数
         this.scoreLabel.node.runAction(
             cc.sequence(
@@ -138,32 +124,32 @@ cc.Class({
         );
 
         // 获取游戏结束界面的各个节点
-        let gameOverNode = this.gameOverMenu.getChildByName("gameOverLabel");
-        let resultBoardNode = this.gameOverMenu.getChildByName("resultBoard");
-        let startButtonNode = this.gameOverMenu.getChildByName("startBtn");
-        let backButtonNode = this.gameOverMenu.getChildByName("backbtn");
-        let currentScoreNode = resultBoardNode.getChildByName("currentScore");
-        let bestScoreNode = resultBoardNode.getChildByName("bestScore");
-        let medalNode = resultBoardNode.getChildByName("medal");
+        const gameOverNode = this.gameOverMenu.getChildByName("gameOverLabel");
+        const resultBoardNode = this.gameOverMenu.getChildByName("resultBoard");
+        const startButtonNode = this.gameOverMenu.getChildByName("startBtn");
+        const backButtonNode = this.gameOverMenu.getChildByName("backbtn");
+        const currentScoreNode = resultBoardNode.getChildByName("currentScore");
+        const bestScoreNode = resultBoardNode.getChildByName("bestScore");
+        const medalNode = resultBoardNode.getChildByName("medal");
 
         // 保存最高分到服务
 
-        let globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
+        const globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
+        const db = wx.cloud.database();
         let bestScore = globalNode.userGameInfo.fbBestScore || 0;
-        let db = wx.cloud.database();
 
         if (this.score > bestScore) {
             bestScore = this.score;
             db.collection('userGameInfo').where({
                 _openid: globalNode.openid
             }).get({
-                success: function(res) {
+                success: res => {
                     db.collection('userGameInfo').doc(res.data[0]._id).update({
                         data: {
                             'fbBestScore': bestScore,
                             'updateTime': db.serverDate()
                         },
-                        success: function(sc) {
+                        success: sc => {
                             globalNode.setUserGameInfo('fbBestScore', bestScore);
                             console.log('保存成功')
                         }
@@ -225,20 +211,20 @@ cc.Class({
     },
 
     // 开始或者bird jump
-    _startGameOrJumpBird() {
+    startGameOrJumpBird() {
         if (this.bird.state === Bird.State.Ready) {
-            this._gameStart();
+            this.gameStart();
         } else {
             this.bird.rise();
         }
     },
 
     // 事件控制
-    _enableInput(enable) {
+    enableInput(enable) {
         if (enable) {
-            this.node.on(cc.Node.EventType.TOUCH_START, this._startGameOrJumpBird, this);
+            this.node.on(cc.Node.EventType.TOUCH_START, this.startGameOrJumpBird, this);
         } else {
-            this.node.off(cc.Node.EventType.TOUCH_START, this._startGameOrJumpBird, this);
+            this.node.off(cc.Node.EventType.TOUCH_START, this.startGameOrJumpBird, this);
         }
-    },
-});
+    }
+})

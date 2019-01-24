@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         circlesNum: 10,
         r: 163,
@@ -8,9 +7,6 @@ cc.Class({
         b: 163,
         type: 1
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         this.ctx = this.node.getComponent(cc.Graphics);
         this.circles = [];
@@ -29,13 +25,11 @@ cc.Class({
             this.circles.push(obj);
         }
     },
-
     createCircle(circleObj) {
         this.ctx.arc(circleObj.cx, circleObj.cy, circleObj.r, 0, Math.PI * 2);
         this.ctx.fillColor = new cc.Color(this.r, this.g, this.b, circleObj.alpha);
         this.ctx.fill();
     },
-
     updateDirection(item) { //更新方向
         item.tick++;
         item.cx += Math.cos(item.angle) * this.speed / 10;
@@ -57,15 +51,13 @@ cc.Class({
         };
         this.createCircle(item);
     },
-
     random(min, max) { //获取随机数
         return Math.random() * (max - min) + min;
     },
-
     update(dt) {
         this.ctx.clear();
-        for (var i = 0; i < this.circles.length; i++) {
+        for (let i = 0; i < this.circles.length; i++) {
             this.updateDirection(this.circles[i]);
         }
     }
-});
+})

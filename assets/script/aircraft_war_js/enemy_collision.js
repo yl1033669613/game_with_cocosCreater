@@ -4,12 +4,12 @@ cc.Class({
 
     },
     onLoad() {
-        let manager = cc.director.getCollisionManager();
+        const manager = cc.director.getCollisionManager();
         manager.enabled = true;
     },
     onCollisionEnter(other, self) {
         if (self.node.group == 'enemy') {
-            let enemyObj = this.node.parent.getComponent('enemy');
+            const enemyObj = this.node.parent.getComponent('enemy');
             if (other.node.group == 'heroBullet') {
                 let bullet = other.node.getComponent('bullet');
                 if (enemyObj.hP > 0) {

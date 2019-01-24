@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         canvas: {
             default: null,
@@ -11,9 +10,6 @@ cc.Class({
             type: cc.Prefab
         }
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         this.finger = { down: false, x: 0, y: 0 };
         // particle color change range
@@ -33,15 +29,13 @@ cc.Class({
         this.node.width = this.canvas.width;
         this.node.height = this.canvas.height;
     },
-
     back_game_list() {
         cc.director.loadScene('startscene');
     },
-
     // 事件处理
     handlerEvents() {
         this.node.on(cc.Node.EventType.TOUCH_START, (e) => {
-            let startPoint = e.getLocation();
+            const startPoint = e.getLocation();
             let x = startPoint.x;
             let y = startPoint.y;
 
@@ -52,7 +46,7 @@ cc.Class({
         }, this);
 
         this.node.on(cc.Node.EventType.TOUCH_MOVE, (e) => {
-            let startPoint = e.getLocation();
+            const startPoint = e.getLocation();
             let x = startPoint.x;
             let y = startPoint.y;
 
@@ -64,14 +58,12 @@ cc.Class({
             this.finger.down = false
         }, this);
     },
-
     createFireworksBody (){
         let fireworksBody = cc.instantiate(this.fireworksBody);
         fireworksBody.width = this.node.width;
         fireworksBody.height = this.node.height;
         this.node.addChild(fireworksBody);
     },
-
     update(dt) {
         // 固定间隔生成
         if (this.timerTick >= this.timerTotal) {
@@ -82,7 +74,6 @@ cc.Class({
         } else {
             this.timerTick++
         };
-
         // 限制手指触摸发生次数
         if (this.clickLimiterTick >= this.clickLimiterTotal) {
             if (this.finger.down) {

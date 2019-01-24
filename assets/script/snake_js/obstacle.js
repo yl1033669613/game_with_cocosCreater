@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         obstaclePfb: {
             default: null,
@@ -8,9 +7,6 @@ cc.Class({
         },
         obstacleCount: 0
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
         this.obstacleInstance = [];
         // 判断是否在蛇身上
@@ -21,19 +17,17 @@ cc.Class({
 
         // 初始生成障碍物 
         if (this.obstacleCount) {
-            for (var i = 0; i < this.obstacleCount; i++) {
+            for (let i = 0; i < this.obstacleCount; i++) {
                 this.createObstacle();
-            };
-        };
+            }
+        }
     },
-
     // 根据范围获取随机数
     getNumberInRange(min, max) {
-        var range = max - min;
-        var r = cc.randomMinus1To1();
+        let range = max - min;
+        let r = cc.randomMinus1To1();
         return Math.round(r * range + min);
     },
-
     createObstacle() {
         this.isOnSnake = true;
         let indexX, indexY, pointArr = [];
@@ -54,12 +48,11 @@ cc.Class({
                 aX = aX + 15;
                 for (let v = 0; v < this.snake.length; v++) {
                     if (this.snake[v].x == aX && this.snake[v].y == aY) {
-                        //如果判定重合，将其设置为true，使随机数重给
                         this.isOnSnake = true;
                         break;
                     }
                 };
-                if (aX < -(this.node.width / 2 - 30) || aX > ((this.node.width / 2) - 30) || aY < -(this.node.height / 2 - 30) || aY > ((this.node.height / 2) - 30)) {
+                if (aX < -(this.node.width / 2 - 30) || aX > (this.node.width / 2 - 30) || aY < -(this.node.height / 2 - 30) || aY > (this.node.height / 2 - 30)) {
                     this.isOnSnake = true;
                 };
                 if (this.isOnSnake) break;
@@ -78,7 +71,7 @@ cc.Class({
             let b = cc.instantiate(this.obstaclePfb);
             this.node.addChild(b);
             b.setPosition(cc.p(pointArr[i].x, pointArr[i].y));
-            this.obstacleInstance.push(b);
+            this.obstacleInstance.push(b)
         }
     }
-});
+})

@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         canvas: {
             default: null,
@@ -19,27 +18,26 @@ cc.Class({
             type: cc.Label
         }
     },
-
     onLoad() {
+        const globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
+        const db = wx.cloud.database();
+        let bestScore = globalNode.userGameInfo.snakeBestScore || 0;
+
         let theScore = this.canvas.getComponent("snake_game").score;
         this.scoreLabel.string = "Score:" + theScore.toString();
-
-        let globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
-        let bestScore = globalNode.userGameInfo.snakeBestScore || 0;
-        let db = wx.cloud.database();
 
         if (theScore > bestScore) {
             bestScore = theScore;
             db.collection('userGameInfo').where({
                 _openid: globalNode.openid
             }).get({
-                success: function(res) {
+                success: res => {
                     db.collection('userGameInfo').doc(res.data[0]._id).update({
                         data: {
                             'snakeBestScore': bestScore,
                             'updateTime': db.serverDate()
                         },
-                        success: function(sc) {
+                        success: sc => {
                             globalNode.setUserGameInfo('snakeBestScore', bestScore);
                             console.log('保存成功')
                         }
@@ -56,14 +54,14 @@ cc.Class({
                     cc.fadeOut(0.2),
                     cc.callFunc(() => {
                         // 加载列表
+                        this.node.active = false;
                         cc.director.loadScene('snake');
                     }, this)
                 )
-            );
+            )
         }, this)
     },
-
     backToList() {
         cc.director.loadScene('startscene');
     }
-});
+})

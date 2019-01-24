@@ -7,7 +7,6 @@ cc.Class({
             type: cc.Node
         }
     },
-
     startGame() {
         this.maskLayer.active = true;
         this.maskLayer.opacity = 0;
@@ -20,9 +19,8 @@ cc.Class({
                     cc.director.loadScene('bird_game');
                 }, this)
             )
-        );
+        )
     },
-
     // 返回游戏列表
     backGameList() {
         this.maskLayer.active = true;
@@ -36,6 +34,6 @@ cc.Class({
                     cc.director.loadScene('startscene');
                 }, this)
             )
-        );
+        )
     }
-});
+})

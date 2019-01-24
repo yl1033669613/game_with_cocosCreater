@@ -1,5 +1,4 @@
 const Gdt = require('globals');
-
 //子弹生成位置
 let bPosition = cc.Class({
     name: 'bPosition',
@@ -12,7 +11,6 @@ let bPosition = cc.Class({
         },
     },
 });
-
 //不限时长子弹
 let bulletInfinite = cc.Class({
     name: 'bulletInfinite',
@@ -27,7 +25,6 @@ let bulletInfinite = cc.Class({
         }
     }
 });
-
 //有限时长子弹组
 let bulletFiniteG = cc.Class({
     name: 'bulletFiniteG',
@@ -37,7 +34,6 @@ let bulletFiniteG = cc.Class({
         orginName: '',
     }
 });
-
 cc.Class({
     extends: cc.Component,
     properties: () => ({
