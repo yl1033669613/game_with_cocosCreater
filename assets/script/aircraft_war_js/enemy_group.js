@@ -11,7 +11,7 @@ let enemyG = cc.Class({
 });
 cc.Class({
     extends: cc.Component,
-    properties: () => ({
+    properties: {
         enemyG: {
             default: [],
             type: enemyG
@@ -20,7 +20,7 @@ cc.Class({
             default: null,
             type: require('main'),
         }
-    }),
+    },
     onLoad() {
         //初始化敌机组
         this.curState = Gdt.commonInfo.gameState.none;
@@ -48,7 +48,7 @@ cc.Class({
     },
     //生成敌机
     getNewEnemy(enemyInfo) {
-        let poolName = enemyInfo.name + 'Pool';
+        const poolName = enemyInfo.name + 'Pool';
         let newNode = Gdt.common.genNewNode(this[poolName], enemyInfo.prefab, this.node);
         let newV2 = this.getNewEnemyPositon(newNode);
         newNode.setPosition(newV2);
@@ -58,12 +58,12 @@ cc.Class({
     //敌机随机生成的位置
     getNewEnemyPositon(newEnemy) {
         //位于上方，先不可见
-        let randx = cc.randomMinus1To1() * (this.node.parent.width / 2 - newEnemy.width / 2);
-        let randy = this.node.parent.height / 2 + newEnemy.height / 2;
+        const randx = cc.randomMinus1To1() * (this.node.parent.width / 2 - newEnemy.width / 2),
+            randy = this.node.parent.height / 2 + newEnemy.height / 2;
         return cc.v2(randx, randy);
     },
     enemyDied(nodeinfo, score) {
-        let poolName = nodeinfo.getComponent('enemy').poolName;
+        const poolName = nodeinfo.getComponent('enemy').poolName;
         Gdt.common.backObjPool(this, poolName, nodeinfo);
         //增加分数
         if (parseInt(score) > 0) {

@@ -1,7 +1,7 @@
 const Gdt = require('globals');
 cc.Class({
     extends: cc.Component,
-    properties: {
+    properties: () => ({
         pause: {
             default: null,
             type: cc.Button
@@ -54,7 +54,7 @@ cc.Class({
             default: null,
             type: cc.Label
         }
-    },
+    }),
     onLoad() {
         this.score = 0;
         this.bombNo = 0;

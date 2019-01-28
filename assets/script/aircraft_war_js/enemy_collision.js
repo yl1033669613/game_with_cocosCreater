@@ -1,8 +1,6 @@
 cc.Class({
     extends: cc.Component,
-    properties: {
-
-    },
+    properties: {},
     onLoad() {
         const manager = cc.director.getCollisionManager();
         manager.enabled = true;

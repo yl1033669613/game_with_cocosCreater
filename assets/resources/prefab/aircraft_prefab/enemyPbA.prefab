@@ -316,8 +316,8 @@
       "__id__": 1
     },
     "_enabled": true,
-    "xMinSpeed": 0,
-    "xMaxSpeed": 0,
+    "xMinSpeed": 5,
+    "xMaxSpeed": 15,
     "yMinSpeed": -50,
     "yMaxSpeed": -100,
     "initHP": 1,

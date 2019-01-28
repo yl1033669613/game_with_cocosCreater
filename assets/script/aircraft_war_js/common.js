@@ -8,9 +8,7 @@ let gameState = cc.Enum({
 });
 let common = cc.Class({
     extends: cc.Component,
-    properties: {
-
-    },
+    properties: {},
     statics: {
         gameState
     },
@@ -27,8 +25,8 @@ let common = cc.Class({
     },
     //初始化对象池
     initObjPool(ptO, objInfo) {
-        let name = objInfo.name;
-        let poolName = name + 'Pool';
+        let name = objInfo.name,
+            poolName = name + 'Pool';
         ptO[poolName] = new cc.NodePool();
         let initPoolCount = objInfo.initPoolCount;
         for (let i = 0; i < initPoolCount; ++i) {

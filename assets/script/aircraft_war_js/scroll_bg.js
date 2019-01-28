@@ -1,8 +1,6 @@
 const Gdt = require('globals');
-
 cc.Class({
     extends: cc.Component,
-
     properties: {
         // 滚动的速度，单位px/s
         speed: -150,

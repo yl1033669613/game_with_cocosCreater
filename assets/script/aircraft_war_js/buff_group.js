@@ -34,7 +34,7 @@ cc.Class({
         }
     },
     getNewBuff(BuffInfo, emInfo) {
-        let poolName = BuffInfo.name + 'Pool',
+        const poolName = BuffInfo.name + 'Pool',
             newNode = Gdt.common.genNewNode(this[poolName], BuffInfo.prefab, this.node),
             emPos = emInfo.getPosition(),
             newPos = cc.p(emPos.x, emPos.y);
@@ -53,7 +53,7 @@ cc.Class({
     },
     buffDied(nodeinfo) {
         //回收节点
-        let poolName = nodeinfo.getComponent('buff').poolName;
+        const poolName = nodeinfo.getComponent('buff').poolName;
         Gdt.common.backObjPool(this, poolName, nodeinfo);
     }
 })

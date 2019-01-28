@@ -1,9 +1,7 @@
 const Gdt = require('globals');
-
 cc.Class({
     extends: cc.Component,
-
-    properties: () => ({
+    properties: {
         moveRatio: 0.8,
         heroInitHp: 10,
         heroHp: 10,
@@ -24,10 +22,9 @@ cc.Class({
             default: null,
             type: cc.Node
         }
-    }),
-
+    },
     onLoad() {
-        let manager = cc.director.getCollisionManager();
+        const manager = cc.director.getCollisionManager();
         manager.enabled = true;
         this.curState = Gdt.commonInfo.gameState.none;
         this.currX = 0;
@@ -46,7 +43,7 @@ cc.Class({
         this.node.parent.off(cc.Node.EventType.TOUCH_MOVE, this.dragMove, this);
     },
     dragStart(event) {
-        let locationv = event.getLocation();
+        const locationv = event.getLocation();
         this.currX = locationv.x;
     },
     dragMove(event) {
@@ -95,14 +92,14 @@ cc.Class({
                 }
             }
         } else if (other.node.group == 'enemy') {
-            let enemy = other.node.parent.getComponent('enemy');
+            const enemy = other.node.parent.getComponent('enemy');
             this.heroHp -= enemy.heroDropHp;
             other.node.group = 'default'; //防止敌人死亡之后再次发生碰撞
             if (this.heroHp > 0) {
                 this.heroHitByEnemyShowBlood()
             }
         } else if (other.node.group == 'enemyBullet') {
-            let enemyBullet = other.node.getComponent('enemy_bullet');
+            const enemyBullet = other.node.getComponent('enemy_bullet');
             this.heroHp -= enemyBullet.hpDrop;
             if (this.heroHp > 0) {
                 this.heroHitByEnemyShowBlood()
