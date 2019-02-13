@@ -28,7 +28,6 @@ cc.Class({
         this.schedule(this.spawnPipe, spawnInterval);
         this.isRunning = true;
     },
-
     spawnPipe() {
         let pipeGroup = null;
         if (this.pipePool.size() > 0) {
@@ -41,7 +40,6 @@ cc.Class({
         pipeGroup.init(this);
         this.pipeList.push(pipeGroup);
     },
-
     // 回收管道
     recyclePipe(pipe) {
         pipe.node.active = false;

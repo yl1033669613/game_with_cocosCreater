@@ -1185,9 +1185,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
+      "r": 211,
       "g": 255,
-      "b": 255,
+      "b": 243,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -1364,7 +1364,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 110,
+      "width": 116,
       "height": 50
     },
     "_rotationX": 0,
@@ -1373,7 +1373,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 132.5,
+      "x": 129.5,
       "y": -350
     },
     "_skewX": 0,
@@ -1416,8 +1416,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 110,
-      "height": 30
+      "width": 116,
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1453,7 +1453,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "New game",
+    "_N$string": "NEW GAME",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -1656,9 +1656,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 164,
-      "b": 93,
+      "r": 175,
+      "g": 118,
+      "b": 74,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -1670,7 +1670,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 64,
-      "height": 30
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1706,7 +1706,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "Back",
+    "_N$string": "BACK",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",

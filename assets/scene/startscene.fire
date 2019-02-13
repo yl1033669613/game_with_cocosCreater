@@ -26,6 +26,9 @@
         "__id__": 58
       },
       {
+        "__id__": 61
+      },
+      {
         "__id__": 53
       }
     ],
@@ -731,7 +734,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 375,
-      "height": 600
+      "height": 595
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1755,8 +1758,8 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
+      "r": 240,
+      "g": 250,
       "b": 255,
       "a": 255
     },
@@ -1796,8 +1799,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 10,
-    "_fontSize": 10,
+    "_actualFontSize": 11,
+    "_fontSize": 11,
     "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": {
@@ -2065,7 +2068,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "gameUser",
+    "_name": "version",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -2076,6 +2079,111 @@
     "_components": [
       {
         "__id__": 59
+      },
+      {
+        "__id__": 60
+      }
+    ],
+    "_prefab": null,
+    "_id": "18Z773ZopKoplLVdxpX8wU",
+    "_opacity": 180,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 209,
+      "g": 209,
+      "b": 209,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 39.42,
+      "height": 12.22
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 15,
+      "y": 11.11
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 58
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 11,
+    "_fontSize": 11,
+    "_lineHeight": 40,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "977cfe9b-21c7-498e-b060-541800511a8b"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_N$string": "V : 1.2.2",
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 0,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0
+  },
+  {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 58
+    },
+    "_enabled": true,
+    "alignMode": 1,
+    "_target": null,
+    "_alignFlags": 12,
+    "_left": 15,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 5,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "gameUser",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 62
       }
     ],
     "_prefab": null,
@@ -2120,7 +2228,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 58
+      "__id__": 61
     },
     "_enabled": true
   }

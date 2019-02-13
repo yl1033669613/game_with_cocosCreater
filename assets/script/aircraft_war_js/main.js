@@ -53,6 +53,10 @@ cc.Class({
         maskCurrScore: {
             default: null,
             type: cc.Label
+        },
+        pauseBackBtn: {
+            default: null,
+            type: cc.Node
         }
     }),
     onLoad() {
@@ -90,10 +94,25 @@ cc.Class({
             if (this.curState == Gdt.commonInfo.gameState.pause) {
                 this.resumeAction();
                 this.curState = Gdt.commonInfo.gameState.start;
+                this.showBackBtnPausing(false)
             } else if (this.curState == Gdt.commonInfo.gameState.start) {
                 this.pauseAction();
                 this.curState = Gdt.commonInfo.gameState.pause;
+                this.showBackBtnPausing(true)
             }
+        }
+    },
+    //show back start scene btn fn 
+    showBackBtnPausing(bool) {
+        let action;
+        this.pauseBackBtn.active = bool;
+        if (bool) {
+            this.pauseBackBtn.opacity = 0;
+            action = cc.sequence(
+                cc.scaleTo(0, .95, .95), 
+                cc.spawn(cc.fadeIn(.2), cc.scaleTo(.2, 1, 1))
+            );
+            this.pauseBackBtn.runAction(action)
         }
     },
     //游戏继续

@@ -22,3 +22,7 @@
 ## 参考，致谢
 飞机大战思路参考 [用cocosCreator做的微信经典飞机大战](https://github.com/A123asdo11/aircraft_war)
 
+2048思路参考[canvas2048小游戏](https://github.com/geekape/canvas2048)
+
+flappy bird思路参考 [Flappy Bird game developed by Cocos Creator which can run on Web, Android and iOS](https://github.com/AvatarQing/FlappyBird)
+

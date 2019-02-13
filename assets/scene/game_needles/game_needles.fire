@@ -45,7 +45,7 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0,
-    "autoReleaseAssets": false
+    "autoReleaseAssets": true
   },
   {
     "__type__": "cc.Node",
@@ -378,7 +378,11 @@
       "__id__": 7
     },
     "_enabled": true,
-    "circlesNum": 15
+    "circlesNum": 15,
+    "r": 163,
+    "g": 163,
+    "b": 163,
+    "type": 1
   },
   {
     "__type__": "cc.Graphics",
@@ -2858,7 +2862,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "restart",
+    "_N$string": "RESTART",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -3125,7 +3129,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "next",
+    "_N$string": "NEXT",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -3392,7 +3396,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "back",
+    "_N$string": "BACK",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",

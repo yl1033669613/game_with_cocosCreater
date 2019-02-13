@@ -680,7 +680,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
+      "width": 130,
       "height": 40
     },
     "_rotationX": 0,
@@ -732,7 +732,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
+      "width": 130,
       "height": 40
     },
     "_rotationX": 0,
@@ -762,14 +762,14 @@
     "_useOriginalSize": false,
     "_actualFontSize": 20,
     "_fontSize": 20,
-    "_lineHeight": 50,
+    "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": {
       "__uuid__": "977cfe9b-21c7-498e-b060-541800511a8b"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "restart",
+    "_N$string": "RESTART",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -809,7 +809,7 @@
       "__id__": 18
     },
     "_enabled": true,
-    "transition": 2,
+    "transition": 3,
     "pressedColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -825,7 +825,7 @@
       "a": 255
     },
     "duration": 0.1,
-    "zoomScale": 1.2,
+    "zoomScale": 0.95,
     "clickEvents": [],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": true,
@@ -895,7 +895,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_rotationX": 0,
@@ -947,7 +947,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_rotationX": 0,
@@ -984,7 +984,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "back",
+    "_N$string": "BACK",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -1024,7 +1024,7 @@
       "__id__": 23
     },
     "_enabled": true,
-    "transition": 2,
+    "transition": 3,
     "pressedColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -1040,7 +1040,7 @@
       "a": 255
     },
     "duration": 0.1,
-    "zoomScale": 1.2,
+    "zoomScale": 0.95,
     "clickEvents": [
       {
         "__id__": 28
@@ -1110,9 +1110,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
+      "r": 96,
       "g": 255,
-      "b": 255,
+      "b": 109,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,

@@ -327,8 +327,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 40
+      "width": 55,
+      "height": 30
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -336,8 +336,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -157.5,
-      "y": -355
+      "x": -160,
+      "y": -360
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -366,9 +366,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 231,
-      "g": 207,
-      "b": 31,
+      "r": 185,
+      "g": 170,
+      "b": 56,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -379,7 +379,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
+      "width": 55,
       "height": 30
     },
     "_rotationX": 0,
@@ -407,8 +407,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 18,
-    "_fontSize": 18,
+    "_actualFontSize": 16,
+    "_fontSize": 16,
     "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": {
@@ -416,7 +416,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "back",
+    "_N$string": "BACK",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -534,7 +534,7 @@
       "__id__": 2
     },
     "_alignFlags": 12,
-    "_left": 5,
+    "_left": 0,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,

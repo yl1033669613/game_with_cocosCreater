@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-
     properties: {
         gameBtnPfb: {
             default: null,
@@ -19,31 +18,45 @@ cc.Class({
             type: cc.Node
         }
     },
-
     onLoad() {
         this.noticeOpen = false;
         this.noticeLoadFirst = true;
         const scenesList = [{
-            title: ' Snake',
-            name: 'snake'
-        }, {
-            title: ' Flappy bird',
-            name: 'flappy_bird'
-        }, {
-            title: ' Firework',
-            name: 'firework'
-        }, {
-            title: ' 2048',
-            name: 'game2048'
+            title: ' Aircraft war',
+            name: 'aircraft_war_start'
         }, {
             title: ' Needles',
             name: 'game_needles_start'
         }, {
+            title: ' Flappy bird',
+            name: 'flappy_bird'
+        }, {
+            title: ' Snake',
+            name: 'snake'
+        }, {
+            title: ' 2048',
+            name: 'game2048'
+        }, {
             title: ' Tetris',
             name: 'tetris'
         }, {
-            title: ' Aircraft war',
-            name: 'aircraft_war_start'
+            title: ' Firework',
+            name: 'firework'
+        }, {
+            title: ' Test game 8',
+            name: ''
+        }, {
+            title: ' Test game 9',
+            name: ''
+        }, {
+            title: ' Test game 10',
+            name: ''
+        }, {
+            title: ' Test game 11',
+            name: ''
+        }, {
+            title: ' Test game 12',
+            name: ''
         }];
         let y = -65;
         for (let i = 0; i < scenesList.length; i++) {
@@ -53,9 +66,8 @@ cc.Class({
             if (i > 0) y -= 65;
             item.updateItem(i, y, scenesList[i].title, scenesList[i].name);
         };
-        this.content.height = Math.abs(y) + 15;
+        this.content.height = Math.abs(y) + 55;
     },
-
     openNotice() {
         const self = this;
         let dt = 120;
@@ -75,12 +87,10 @@ cc.Class({
             self.noticeMoveAction(dt);
         }
     },
-
     noticeMoveAction(dt) {
         let moveAction = cc.moveBy(.6, 0, dt).easing(cc.easeBounceOut(.6));
         this.bottBanner.runAction(moveAction);
     },
-
     //加载notice wx cloud
     loadNoticePic(cb) {
         const self = this;

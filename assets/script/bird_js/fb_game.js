@@ -38,7 +38,6 @@ cc.Class({
         this.maskLayer.color = cc.Color.BLACK;
         this.maskLayer.runAction(cc.fadeOut(0.3));
     },
-    //点击游戏结束菜单中的重新开始游戏按钮会调用此方法
     restart() {
         this.maskLayer.color = cc.Color.BLACK;
         this.maskLayer.runAction(
@@ -51,8 +50,6 @@ cc.Class({
             )
         );
     },
-
-    //游戏开始
     gameStart() {
         // 隐藏准备提示
         this.hideReadyMenu();
@@ -61,8 +58,6 @@ cc.Class({
         // bird fly
         this.bird.startFly();
     },
-
-    // 游戏结束
     gameOver() {
         // 管道重置
         this.pipeManager.reset();
@@ -75,18 +70,13 @@ cc.Class({
         // 显示游戏结束面板
         this.showGameOverMenu();
     },
-
-    // 返回开始页面
     backBegainPage(e) {
         cc.director.loadScene('flappy_bird');
     },
-
-    // 分数更新
     gainScore() {
         this.score++;
         this.scoreLabel.string = this.score;
     },
-
     // 隐藏准备面板
     hideReadyMenu() {
         this.scoreLabel.node.runAction(cc.fadeIn(0.3));
@@ -99,7 +89,6 @@ cc.Class({
             )
         );
     },
-
     //屏幕闪烁一下
     blinkOnce() {
         this.maskLayer.color = cc.Color.WHITE;
@@ -110,7 +99,6 @@ cc.Class({
             )
         );
     },
-
     // 显示游戏结束面板
     showGameOverMenu() {
         // 隐藏分数
@@ -122,7 +110,6 @@ cc.Class({
                 }, this)
             )
         );
-
         // 获取游戏结束界面的各个节点
         const gameOverNode = this.gameOverMenu.getChildByName("gameOverLabel");
         const resultBoardNode = this.gameOverMenu.getChildByName("resultBoard");
@@ -157,11 +144,9 @@ cc.Class({
                 }
             })
         };
-
         // 显示当前分数、最高分
         currentScoreNode.getComponent(cc.Label).string = this.score;
         bestScoreNode.getComponent(cc.Label).string = bestScore;
-
         // 决定是否显示奖牌
         let showMedal = (err, spriteFrame) => {
             if (this.score >= this.goldScore) {
@@ -209,7 +194,6 @@ cc.Class({
         );
         this.scheduleOnce(showNodeFunc, 0.55);
     },
-
     // 开始或者bird jump
     startGameOrJumpBird() {
         if (this.bird.state === Bird.State.Ready) {
@@ -218,7 +202,6 @@ cc.Class({
             this.bird.rise();
         }
     },
-
     // 事件控制
     enableInput(enable) {
         if (enable) {
