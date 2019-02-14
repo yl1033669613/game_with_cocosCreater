@@ -78,7 +78,7 @@ cc.Class({
 
         this.bulletGroup.startAction();
         this.enemyGroup.startAction();
-        this.bomb.on(cc.Node.EventType.TOUCH_START, this.bombOnclick, this);
+        this.bomb.on(cc.Node.EventType.TOUCH_START, this.bombOnclick, this)
     },
     bombOnclick() {
         if (this.isGameOver) return;
@@ -148,8 +148,9 @@ cc.Class({
     removeAllEnemy() {
         const children = this.enemyGroup.node.children;
         for (let i = 0; i < children.length; i++) {
-            children[i].getComponent('enemy').hP = 0;
-            children[i].getComponent('enemy').enemyOver()
+            let cidCpt = children[i].getComponent('enemy');
+            cidCpt.hP = 0;
+            cidCpt.enemyOver()
         };
         const enemyBulletChildren = this.enemyBulletGroup.node.children;
         for (let i = 0; i < enemyBulletChildren.length; i++) {

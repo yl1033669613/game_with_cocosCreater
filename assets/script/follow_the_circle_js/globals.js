@@ -1,0 +1,3 @@
+module.exports = {
+    gameState: false
+}

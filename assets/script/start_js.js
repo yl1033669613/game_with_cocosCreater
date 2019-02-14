@@ -1,3 +1,41 @@
+const SCENESLIST = [{
+    title: ' Aircraft war',
+    name: 'aircraft_war_start'
+}, {
+    title: ' Needles',
+    name: 'game_needles_start'
+}, {
+    title: ' Flappy bird',
+    name: 'flappy_bird'
+}, {
+    title: ' Snake',
+    name: 'snake'
+}, {
+    title: ' 2048',
+    name: 'game2048'
+}, {
+    title: ' Tetris',
+    name: 'tetris'
+}, {
+    title: ' Firework',
+    name: 'firework'
+}, {
+    title: ' Follow the circle',
+    name: 'follow_the_circle'
+}, {
+    title: ' Tower_building',
+    name: ''
+}, {
+    title: ' Test game 10',
+    name: ''
+}, {
+    title: ' Test game 11',
+    name: ''
+}, {
+    title: ' Test game 12',
+    name: ''
+}];
+
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -21,50 +59,13 @@ cc.Class({
     onLoad() {
         this.noticeOpen = false;
         this.noticeLoadFirst = true;
-        const scenesList = [{
-            title: ' Aircraft war',
-            name: 'aircraft_war_start'
-        }, {
-            title: ' Needles',
-            name: 'game_needles_start'
-        }, {
-            title: ' Flappy bird',
-            name: 'flappy_bird'
-        }, {
-            title: ' Snake',
-            name: 'snake'
-        }, {
-            title: ' 2048',
-            name: 'game2048'
-        }, {
-            title: ' Tetris',
-            name: 'tetris'
-        }, {
-            title: ' Firework',
-            name: 'firework'
-        }, {
-            title: ' Test game 8',
-            name: ''
-        }, {
-            title: ' Test game 9',
-            name: ''
-        }, {
-            title: ' Test game 10',
-            name: ''
-        }, {
-            title: ' Test game 11',
-            name: ''
-        }, {
-            title: ' Test game 12',
-            name: ''
-        }];
         let y = -65;
-        for (let i = 0; i < scenesList.length; i++) {
+        for (let i = 0; i < SCENESLIST.length; i++) {
             let btn = cc.instantiate(this.gameBtnPfb); // 创建节点
             let item = btn.getComponent('game_start_btn');
             this.content.addChild(btn);
             if (i > 0) y -= 65;
-            item.updateItem(i, y, scenesList[i].title, scenesList[i].name);
+            item.updateItem(i, y, SCENESLIST[i].title, SCENESLIST[i].name);
         };
         this.content.height = Math.abs(y) + 55;
     },
