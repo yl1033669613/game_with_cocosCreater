@@ -1,4 +1,6 @@
 const INITOBJPOOLCOUNT = 15;
+const COLORLIST = ['255/0/0/255', '255/144/0/255', '255/255/0/255', '0/255/0/255', '0/255/255/255', '0/0/255/255', '114/0/255/255'];
+const CIRCLER = 20;
 const Gdt = require('global');
 
 cc.Class({
@@ -10,10 +12,8 @@ cc.Class({
         }
     },
     onLoad () {
+        this.circleGroup = [];
         this.initObjPool();
-        let aaa = this.genNewCircle(this.circleItemObjPool, this.circleItem, this.node);
-        aaa.x = 0;
-        aaa.y = 0;
     },
     initObjPool() {
         this.circleItemObjPool = new cc.NodePool();
@@ -31,6 +31,59 @@ cc.Class({
         };
         nodeParent.addChild(newNode);
         return newNode
+    },
+    backObjPool(nodeinfo) {
+        this.circleItemObjPool.put(nodeinfo);
+    },
+    getRandomCircles() {
+        let self = this;
+        let circlesNum = Math.floor(Math.random() * (COLORLIST.length + 0.4 - 3) + 3);
+        let result = [], currArr = COLORLIST.slice(0);
+        for (let i = 0; i < circlesNum; i++) {
+            let ran = Math.floor(Math.random() * (COLORLIST.length - i));
+            result.push(currArr[ran]);
+            currArr[ran] = currArr[COLORLIST.length - i - 1];
+        };
+        let count = 0;
+        while(count < circlesNum) {
+            let x = cc.randomMinus1To1() * (self.node.width / 2 - CIRCLER + 1),
+                y = cc.randomMinus1To1() * (self.node.height / 2 - CIRCLER + 1);
+            let isOverlap = false,
+                limitDst = Math.sqrt(2*Math.pow(CIRCLER*2, 2));
+            for (let i = 0; i < self.circleGroup.length; i++) {
+                let currDst = Math.abs(Math.sqrt(Math.pow(x - self.circleGroup[i].x, 2) + Math.pow(y - self.circleGroup[i].y, 2)));
+                if (currDst < limitDst) {
+                    isOverlap = true;
+                    break;
+                }
+            };
+            if (!isOverlap) {
+                self.circleGroup.push({color: result[count], x: x, y: y})
+                count++;
+            }
+        };
+        for (let i = 0; i < self.circleGroup.length; i++) {
+            self.scheduleOnce(() => {
+                let item = self.genNewCircle(self.circleItemObjPool, self.circleItem, self.node);
+                let pos = cc.v2(self.circleGroup[i].x, self.circleGroup[i].y);
+                item.setPosition(pos);
+                item.scale = 0;
+                let itemObj = item.getComponent('circle_item');
+                itemObj.itemCircleInit(self.circleGroup[i].color);
+                itemObj.itemCircleInitCount(0);
+                let action = cc.scaleTo(1.1, 1, 1).easing(cc.easeExponentialOut(1.1));
+                item.runAction(action);
+            }, (i + 1) * .5) 
+        }
+    },
+    updateCircleGroup(color) {
+        for (let i = 0; i < this.circleGroup.length; i++) {
+            if (this.circleGroup[i].color == color) {
+                this.circleGroup.splice(i, 1)
+            }
+        };
+        if (this.circleGroup.length == 0) {
+            this.getRandomCircles()
+        }
     }
 })
-

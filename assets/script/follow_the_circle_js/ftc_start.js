@@ -17,7 +17,8 @@ cc.Class({
 
     },
     startGame() {
-        this.gameMask.active = false
+        this.gameMask.active = false;
+        this.circleGroup.getRandomCircles();
     },
     update (dt) {
 
