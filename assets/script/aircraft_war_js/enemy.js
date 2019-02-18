@@ -43,11 +43,11 @@ cc.Class({
     },
     onEnable() {
         if (this.enemyType != 1) {
-            this.schedule(this.startGetEnemyBullet, this.enemyBulletFreq)
+            this.getBulletCb = function (e) {
+                this.enemyBulletGroup.enemyOpenFire(this.node)
+            }.bind(this);
+            this.schedule(this.getBulletCb, this.enemyBulletFreq)
         }
-    },
-    startGetEnemyBullet() {
-        this.enemyBulletGroup.enemyOpenFire(this.node)
     },
     init() {
         if (this.node.group != 'enemy') {
@@ -99,7 +99,7 @@ cc.Class({
         if (this.node.y < -this.node.parent.height / 2 - this.node.height / 2) {
             this.enemyGroup.enemyDied(this.node, 0);
             if (this.enemyType != 1) {
-                this.unschedule(this.startGetEnemyBullet)
+                this.unschedule(this.getBulletCb)
             }
         }
     },
@@ -112,7 +112,7 @@ cc.Class({
             score = this.score
         };
         if (this.enemyType != 1) {
-            this.unschedule(this.startGetEnemyBullet)
+            this.unschedule(this.getBulletCb)
         };
         this.texturePic.active = false;
         this.buffGroup.createHeroBuff(this.node);
