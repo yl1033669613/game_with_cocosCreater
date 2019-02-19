@@ -21,20 +21,23 @@
       },
       {
         "__id__": 6
+      },
+      {
+        "__id__": 9
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 9
+        "__id__": 13
       },
       {
-        "__id__": 10
+        "__id__": 14
       }
     ],
     "_prefab": {
-      "__id__": 11
+      "__id__": 15
     },
     "_id": "",
     "_opacity": 255,
@@ -53,8 +56,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40,
-      "height": 40
+      "width": 50,
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -110,8 +113,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40,
-      "height": 40
+      "width": 50,
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -228,8 +231,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 10,
-      "height": 13.33
+      "width": 10.83,
+      "height": 14.44
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -256,8 +259,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 12,
-    "_fontSize": 12,
+    "_actualFontSize": 13,
+    "_fontSize": 13,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
@@ -283,6 +286,127 @@
     "sync": false
   },
   {
+    "__type__": "cc.Node",
+    "_name": "drawPlanet",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 10
+      },
+      {
+        "__id__": 11
+      }
+    ],
+    "_prefab": {
+      "__id__": 12
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 50,
+      "height": 50
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Graphics",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 9
+    },
+    "_enabled": true,
+    "_lineWidth": 1,
+    "_strokeColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_lineJoin": 2,
+    "_lineCap": 0,
+    "_fillColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_miterLimit": 10
+  },
+  {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 9
+    },
+    "_enabled": true,
+    "alignMode": 1,
+    "_target": null,
+    "_alignFlags": 45,
+    "_left": 0,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "b3d8a9bc-a8e1-4664-92d5-5ea4ecb36c97"
+    },
+    "fileId": "dd2z7j6J9LD4qXrn44cqLk",
+    "sync": false
+  },
+  {
     "__type__": "0aa524r4KVJToVOLcFtzwfb",
     "_name": "",
     "_objFlags": 0,
@@ -290,9 +414,8 @@
       "__id__": 1
     },
     "_enabled": true,
-    "initBorderR": 14,
-    "initCenterR": 20,
     "fadeSpeed": 0.085,
+    "circleMoveSpeed": 0.2,
     "finBorderR": 85,
     "itemInitCount": 5,
     "cirHideMul": 0.8,
@@ -301,6 +424,9 @@
     },
     "centerNum": {
       "__id__": 6
+    },
+    "drawPlanet": {
+      "__id__": 9
     }
   },
   {
@@ -319,8 +445,8 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 44,
-      "height": 44
+      "width": 54,
+      "height": 54
     }
   },
   {

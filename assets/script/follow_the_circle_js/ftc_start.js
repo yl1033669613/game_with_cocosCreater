@@ -11,16 +11,27 @@ cc.Class({
         }
     }),
     onLoad() {
-        // console.log(this.circleGroup)
-    },  
-    gameInit() {
 
     },
     startGame() {
-        this.gameMask.active = false;
-        this.circleGroup.getRandomCircles();
+        this.showGameMask(false);
+        this.circleGroup.startCreateCircles()
     },
-    update (dt) {
-
+    showGameMask(bool) {
+        this.gameMask.active = bool;
+        let action;
+        if (bool) {
+            this.gameMask.opacity = 0;
+            action = cc.fadeIn(.3)
+        } else {
+            action = cc.fadeOut(.3)
+        };
+        this.gameMask.runAction(action)
+    },
+    tapCloseBtnToQuitThisGame() {
+        this.circleGroup.handleGameOver()
+    },
+    backList() {
+        cc.director.loadScene('startscene');
     }
 })
