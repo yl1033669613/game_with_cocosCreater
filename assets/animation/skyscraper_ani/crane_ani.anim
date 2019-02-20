@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "crane_ani",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 2.5,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "props": {
+      "rotation": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.5,
+          "value": -5
+        },
+        {
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "frame": 2,
+          "value": 5
+        },
+        {
+          "frame": 2.5,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}

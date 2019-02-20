@@ -13,7 +13,7 @@ cc.Class({
         },
         centerNum: {
             default: null,
-            type: cc.Node
+            type: cc.Label
         },
         drawPlanet: {
             default: null,
@@ -46,8 +46,8 @@ cc.Class({
         this.unscheduleAllCallbacks();
 
         this.isTouch = false;
-        this.centerNum.opacity = 255;
-        this.centerNum.getComponent(cc.Label).string = this.tapNum;
+        this.centerNum.node.opacity = 255;
+        this.centerNum.string = this.tapNum;
         this.itemCount = this.itemInitCount;
         this.circleMoveObj = {
             angle: this.random(0, Math.PI * 2),
@@ -77,7 +77,7 @@ cc.Class({
             if (this.tapNum > 0) {
                 this.tapNum--;
                 this.planetArr.splice(this.planetArr.length - 1, 1);
-                this.centerNum.getComponent(cc.Label).string = this.tapNum
+                this.centerNum.string = this.tapNum
             };
             if (this.circleActive && this.tapNum == 0) {
                 this.planetCtx.clear();
@@ -140,7 +140,7 @@ cc.Class({
         this.node.runAction(action)
     },
     hideCenterNum() {
-        this.centerNum.runAction(cc.fadeOut(.2))
+        this.centerNum.node.runAction(cc.fadeOut(.2))
     },
     removeThisCircle(node) {
         this.circleGroupO.backObjPool(node)

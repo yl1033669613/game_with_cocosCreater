@@ -65,7 +65,7 @@
         "__id__": 38
       },
       {
-        "__id__": 41
+        "__id__": 42
       },
       {
         "__id__": 47
@@ -364,7 +364,7 @@
     "scoreLabel": {
       "__id__": 37
     },
-    "comboNode": {
+    "comboLabel": {
       "__id__": 40
     }
   },
@@ -1509,18 +1509,42 @@
     "_originalHeight": 0
   },
   {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 41
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 12,
+    "_fontSize": 12,
+    "_lineHeight": 90,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "1ee14f0c-94ea-4471-bd29-f3d10d81f009"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_N$string": "0",
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0
+  },
+  {
     "__type__": "cc.Node",
     "_name": "comboNum",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 42
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 43
+        "__id__": 40
       },
       {
         "__id__": 44
@@ -1572,14 +1596,14 @@
     },
     "_children": [
       {
-        "__id__": 40
+        "__id__": 41
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 42
+        "__id__": 43
       }
     ],
     "_prefab": null,
@@ -1624,7 +1648,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 41
+      "__id__": 42
     },
     "_enabled": true,
     "alignMode": 1,
@@ -1646,35 +1670,11 @@
     "_originalHeight": 0
   },
   {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 40
-    },
-    "_enabled": true,
-    "_useOriginalSize": false,
-    "_actualFontSize": 12,
-    "_fontSize": 12,
-    "_lineHeight": 90,
-    "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "1ee14f0c-94ea-4471-bd29-f3d10d81f009"
-    },
-    "_isSystemFontUsed": false,
-    "_spacingX": 0,
-    "_N$string": "0",
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0
-  },
-  {
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 40
+      "__id__": 41
     },
     "_enabled": true,
     "alignMode": 1,

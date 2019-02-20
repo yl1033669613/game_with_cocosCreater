@@ -26,9 +26,9 @@ cc.Class({
             default: null,
             type: cc.Label
         },
-        comboNode: {
+        comboLabel: {
             default: null,
-            type: cc.Node
+            type: cc.Label
         }
     },
     onLoad() {
@@ -36,7 +36,6 @@ cc.Class({
         this.combo = 0;
         this.score = 0;
         this.circleGroup = [];
-        this.comboLabel = this.comboNode.getComponent(cc.Label);
         this.gameOver = false;
         this.initObjPool();
     },
@@ -47,7 +46,7 @@ cc.Class({
         this.score = 0;
         this.scoreLabel.string = 'SCORE: ' + this.score;
         this.comboLabel.string = 0;
-        this.comboNode.opacity = 0;
+        this.comboLabel.node.opacity = 0;
         this.gameOver = false;
         this.circleGroup = [];
         this.getRandomCircles();
@@ -151,11 +150,11 @@ cc.Class({
         this.scoreLabel.string = 'SCORE: ' + this.score;
         this.comboLabel.string = this.combo;
         if (this.combo) {
-            this.comboNode.scale = 1.4;
-            this.comboNode.opacity = 0;
-            this.comboNode.runAction(cc.spawn(cc.scaleTo(0.6, 1, 1).easing(cc.easeExponentialOut(0.6)), cc.fadeTo(0.6, 200)));
+            this.comboLabel.node.scale = 1.4;
+            this.comboLabel.node.opacity = 0;
+            this.comboLabel.node.runAction(cc.spawn(cc.scaleTo(0.6, 1, 1).easing(cc.easeExponentialOut(0.6)), cc.fadeTo(0.6, 200)));
         } else {
-            this.comboNode.runAction(cc.fadeOut(.8));
+            this.comboLabel.node.runAction(cc.fadeOut(.8));
         }
     },
     updateCircleGroup(color, bool) {

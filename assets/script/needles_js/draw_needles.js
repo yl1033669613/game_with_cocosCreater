@@ -14,7 +14,8 @@ cc.Class({
     },
     onLoad () {
         this.ctx = this.needleDrawContent.getComponent(cc.Graphics);
-        this.startRotate = 0
+        this.startRotate = 0;
+        this.rotateAniObj = '';
     },
     start () {
         this.ctx.moveTo(9, 0);
@@ -22,12 +23,18 @@ cc.Class({
         this.ctx.stroke();
         this.ctx.circle(9, 9, 9);
         this.ctx.fill();
-        this.numTextRotate()
+        this.rotateAniObj = this.numTextRotate()
     },
     numTextRotate (){
         if (this.isRotate) {
             let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(this.speed, -360)));
-            this.numText.runAction(rotate)
+            this.numText.runAction(rotate);
+            return rotate
+        }
+    }, 
+    stopNeedleAction() {
+        if (this.rotateAniObj) {
+            this.node.stopAction(this.rotateAniObj)
         }
     }
 })
