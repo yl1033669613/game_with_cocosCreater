@@ -6,7 +6,7 @@ cc.Class({
         finBorderR: 85,
         itemInitCount: 2,
         cirHideMul: .5,
-        planetR: 4,
+        planetR: 3,
         drawCtn: {
             default: null,
             type: cc.Node
@@ -57,7 +57,7 @@ cc.Class({
         this.planetArr = [];
         this.planetCtx.clear();
         for (let i = 0; i < this.tapNum; i++) {
-            let obj = { ang: this.random(0, Math.PI * 2), speed: this.random(0.005, 0.015), r: this.cirCenterR + 4 + this.planetR + (i * this.planetR * 2), opc: 255 - (60 * i) };
+            let obj = { ang: this.random(0, Math.PI * 2), speed: this.random(0.008, 0.03), r: this.cirCenterR + this.planetR + (i * this.planetR * 2) + 3, opc: 255 - (65 * i) };
             this.drawPlanetPoint(obj.ang, obj.r);
             this.planetArr.push(obj)
         };
@@ -76,10 +76,11 @@ cc.Class({
         if (!this.circleGroupO.circlesCreateState) {
             if (this.tapNum > 0) {
                 this.tapNum--;
-                this.planetArr.splice(-1, 1);
+                this.planetArr.splice(this.planetArr.length - 1, 1);
                 this.centerNum.getComponent(cc.Label).string = this.tapNum
             };
             if (this.circleActive && this.tapNum == 0) {
+                this.planetCtx.clear();
                 this.hideCenterNum();
                 this.isTouch = true;
                 this.circleActive = false;

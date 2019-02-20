@@ -23,7 +23,7 @@ const SCENESLIST = [{
     title: ' Follow the circle',
     name: 'follow_the_circle'
 }, {
-    title: ' Tower_building',
+    title: ' Tower building',
     name: ''
 }, {
     title: ' Test game 10',

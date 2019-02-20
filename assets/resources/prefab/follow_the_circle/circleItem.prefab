@@ -419,6 +419,7 @@
     "finBorderR": 85,
     "itemInitCount": 5,
     "cirHideMul": 0.8,
+    "planetR": 2,
     "drawCtn": {
       "__id__": 2
     },

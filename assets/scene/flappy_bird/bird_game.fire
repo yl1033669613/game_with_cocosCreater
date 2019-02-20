@@ -1261,10 +1261,10 @@
     "_enabled": true,
     "alignMode": 0,
     "_target": null,
-    "_alignFlags": 16,
+    "_alignFlags": 17,
     "_left": 0,
     "_right": 0,
-    "_top": 0,
+    "_top": -229,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -2101,7 +2101,7 @@
       "width": 375,
       "height": 750
     },
-    "_fitWidth": true,
+    "_fitWidth": false,
     "_fitHeight": true
   },
   {

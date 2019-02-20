@@ -186,6 +186,7 @@ cc.Class({
         }
     },
     handleGameOver() {
+        if (this.gameOver) return;
         this.gameOver = true;
         this.circlesCreateState = false;
         this.compStart.showGameMask(true);

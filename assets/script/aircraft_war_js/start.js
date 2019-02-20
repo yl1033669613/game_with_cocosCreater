@@ -45,12 +45,12 @@ cc.Class({
                 wx.cloud.getTempFileURL({
                     fileList: arr,
                     success: res => {
+                        wx.hideLoading();
                         cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
                             if (!err) {
                                 Gdt.loopBg = texture;
                                 this.loadingBg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture)
-                            };
-                            wx.hideLoading()
+                            }
                         })
                     },
                     fail: err => {
