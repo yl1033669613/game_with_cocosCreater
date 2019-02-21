@@ -1,7 +1,6 @@
 const common = require('common');
 cc.Class({
     extends: cc.Component,
-
     properties: {
         houseBar: cc.Node, //待放置的存放容器
         preHouse: cc.Prefab, //房子的预置
@@ -12,20 +11,9 @@ cc.Class({
         scoreUi: cc.Label, //分数
         hp: 0, //生命
         score: 0, //分数
-        houses: cc.Node,
-        closeShot: cc.Node, //近景
-        distantView: cc.Node, //远景
-        cloud: cc.Node, //云端
-        cloudScore: 15, //云端出现分数
+        housesContainer: cc.Node
     },
     onLoad() {
-        this.Init();
-    },
-    update(dt) {
-
-    },
-    //初始化
-    Init() {
         this.physicsManager = cc.director.getPhysicsManager();
         this.physicsManager.enabled = true;
         this.physicsManager.debugDrawFlags = 1;
@@ -37,77 +25,76 @@ cc.Class({
         this.isPut = false; //是否可以放置
         this.putCount = 0; //总放置
         this.isSucceed = true; //放置是否成功
+        this.preBlock = '';
 
         //添加监听
         this.node.on(cc.Node.EventType.TOUCH_END, this.Put, this);
-        //初始化房子的对象池
+
         this.poolHouse = new cc.NodePool();
-        // this.cloudCol = this.cloud.getComponent("clouds");
         this.UpdateUI();
-        this.Embarkation();
+        this.Embarkation()
     },
     //装载
     Embarkation() {
-        if (this.poolHouse.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+        if (this.putCount > 1) {
+            let rgBody = this.preBlock.getComponent(cc.RigidBody);
+            rgBody.type = cc.RigidBodyType.Static;
+            // this.scheduleOnce(() => {
+            //     rgBody.type = cc.RigidBodyType.Static;
+            // }, 0.3)
+        };
+        this.preBlock = this.waitHouse;
+        if (this.poolHouse.size() > 0) {
             this.waitHouse = this.poolHouse.get();
-        } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+        } else {
             this.waitHouse = cc.instantiate(this.preHouse);
-        }
+        };
         this.waitHouse.getComponent("house").Init();
         this.waitHouse.rotation = 0;
         this.waitHouse.setPosition(cc.p(0, 0));
         this.waitHouse.parent = this.houseBar;
-        this.housesCol = this.waitHouse.getComponent("house");
+        this.houseJsComp = this.waitHouse.getComponent("house");
         this.isPut = true;
         this.isSucceed = true;
     },
-
     //放置
     Put(e) {
+        console.log()
         if (this.state == 1 && this.isPut) {
             //允许放置
             this.isPut = false;
             this.putCount++;
-            var rigidbody = this.waitHouse.addComponent(cc.RigidBody); //添加刚体
-            var box = this.waitHouse.addComponent(cc.PhysicsBoxCollider); //添加碰撞体
+            this.waitHouse.rotation = 0;
+            const rigidbody = this.waitHouse.addComponent(cc.RigidBody); //添加刚体
+            const box = this.waitHouse.addComponent(cc.PhysicsBoxCollider); //添加碰撞体
 
             rigidbody.gravityScale = 9.8;
             rigidbody.enabledContactListener = true;
             rigidbody.type = cc.RigidBodyType.Dynamic;
-            box.friction = .01;
-            box.size = this.housesCol.colliderSize;
+            box.friction = 1;
+            box.size = this.houseJsComp.colliderSize;
             box.tag = 101;
             box.apply();
 
-            this.waitHouse.parent = this.houses;
+            this.waitHouse.parent = this.housesContainer;
         }
     },
-
     //移动
     Move() {
         if (this.putCount > 1) {
-            var i = this.score - 1;
+            let i = this.score - 1;
             if (i < 0) {
                 i = 0;
-            }
-            var time = this.housesCol.colliderSize.height / this.cameraSpeed;
+            };
+            let time = this.houseJsComp.colliderSize.height / this.cameraSpeed;
 
             this.camera.node.stopAllActions();
             this.crane.stopAllActions();
-            this.closeShot.stopAllActions();
-            this.distantView.stopAllActions();
-            // this.cloud.stopAllActions();
 
-            var actionMove = cc.moveTo(time, cc.p(0, this.housesCol.colliderSize.height * i));
+            let actionMove = cc.moveTo(time, cc.p(0, this.houseJsComp.colliderSize.height * i));
             this.crane.runAction(actionMove); //吊机移动
-            actionMove = cc.moveTo(time, cc.p(0, this.housesCol.colliderSize.height * i));
+            actionMove = cc.moveTo(time, cc.p(0, this.houseJsComp.colliderSize.height * i));
             this.camera.node.runAction(actionMove); //相机移动
-            var actionMove = cc.moveTo(time, cc.p(0, this.housesCol.colliderSize.height * i * -0.6));
-            this.closeShot.runAction(actionMove);//近景移动
-            actionMove = cc.moveTo(time,cc.p(0,this.housesCol.colliderSize.height * i * -0.1));
-            this.distantView.runAction(actionMove);//远景移动
-            // var actionMove = cc.moveTo(time,cc.p(0,this.housesCol.colliderSize.height * i * -0.6));
-            // this.cloud.runAction(actionMove);//云移动
         }
     },
     //放置成功
@@ -118,22 +105,15 @@ cc.Class({
             this.UpdateUI();
         } else {
             console.log("放置失败！");
-        }
+        };
         this.Move();
         this.scheduleOnce(() => {
-            this.Embarkation();
-        }, 0.5);
+            this.Embarkation()
+        }, 0.3)
     },
-
     //UI面板更新
     UpdateUI() {
         this.hpUi.string = this.hp;
-        this.scoreUi.string = this.score;
-        // if (this.score >= this.cloudScore) {
-        //     console.log("耸入云端");
-        //     this.cloudCol.Play();
-        // } else {
-        //     this.cloudCol.Stop();
-        // }
+        this.scoreUi.string = this.score
     }
 })
