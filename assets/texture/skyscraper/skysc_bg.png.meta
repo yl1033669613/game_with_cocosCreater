@@ -1,14 +1,14 @@
 {
   "ver": "2.0.0",
-  "uuid": "be0cbac4-fd88-455c-b3b3-14a926c6ff05",
+  "uuid": "a9cf3d6f-b00c-4bb6-b785-372ca59fc53f",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "home_1": {
+    "skysc_bg": {
       "ver": "1.0.3",
-      "uuid": "04fdcc98-fd1a-482f-baa8-0e164f65da83",
-      "rawTextureUuid": "be0cbac4-fd88-455c-b3b3-14a926c6ff05",
+      "uuid": "8977a4d6-c253-40a2-9ea8-2a5b4799d50b",
+      "rawTextureUuid": "a9cf3d6f-b00c-4bb6-b785-372ca59fc53f",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 79,
-      "height": 93,
-      "rawWidth": 79,
-      "rawHeight": 93,
+      "width": 1,
+      "height": 1,
+      "rawWidth": 1,
+      "rawHeight": 1,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

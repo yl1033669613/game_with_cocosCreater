@@ -48,7 +48,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 60,
-      "height": 80
+      "height": 60
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -94,9 +94,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 78,
+      "g": 101,
+      "b": 134,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -108,7 +108,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 60,
-      "height": 80
+      "height": 60
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -117,7 +117,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -40
+      "y": -30
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -135,7 +135,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "04fdcc98-fd1a-482f-baa8-0e164f65da83"
+      "__uuid__": "5a3c82dc-5176-4c7c-a30a-605a0088475b"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -218,12 +218,7 @@
     "colliderSize": {
       "__type__": "cc.Size",
       "width": 60,
-      "height": 80
-    },
-    "houseSize": {
-      "__type__": "cc.Size",
-      "width": 60,
-      "height": 80
+      "height": 58
     },
     "spriptAni": {
       "__id__": 4

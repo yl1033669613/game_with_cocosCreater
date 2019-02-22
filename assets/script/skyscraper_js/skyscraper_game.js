@@ -1,119 +1,181 @@
-const common = require('common');
+const POOLINITCOUNT = 15;
+const globals = require('skysc_globals');
 cc.Class({
     extends: cc.Component,
     properties: {
-        houseBar: cc.Node, //待放置的存放容器
-        preHouse: cc.Prefab, //房子的预置
-        camera: cc.Camera, //相机
+        blockTmpCtn: { //待放置的存放容器
+            default: null,
+            type: cc.Node
+        },
+        blockPb: {
+            default: null,
+            type: cc.Prefab
+        },
+        camera: {
+            default: null,
+            type: cc.Camera
+        },
         cameraSpeed: 200, //相机速度
-        crane: cc.Node, //吊机
-        hpUi: cc.Label, //生命
-        scoreUi: cc.Label, //分数
-        hp: 0, //生命
-        score: 0, //分数
-        housesContainer: cc.Node
+        crane: {
+            default: null,
+            type: cc.Node
+        },
+        craneRotation: {
+            default: null,
+            type: require('crane_rotate')
+        },
+        hpUi: {
+            default: null,
+            type: cc.Label
+        },
+        scoreUi: {
+            default: null,
+            type: cc.Label
+        },
+        hp: 0,
+        score: 0,
+        blockContainer: {
+            default: null,
+            type: cc.Node
+        },
+        gameOverMask: {
+            default: null,
+            type: cc.Node
+        },
+        maskCurrScore: {
+            default: null,
+            type: cc.Label
+        },
+        maskBestScore: {
+            default: null,
+            type: cc.Label
+        }
     },
     onLoad() {
         this.physicsManager = cc.director.getPhysicsManager();
         this.physicsManager.enabled = true;
-        this.physicsManager.debugDrawFlags = 1;
+        this.physicsManager.debugDrawFlags = 0;
         this.physicsManager.attachDebugDrawToCamera(this.camera);
 
-        common.gm = this;
+        globals.gm = this;
 
-        this.state = 1; //游戏转态 0 未开始， 1 开始， 2 结束
+        this.state = 1; //游戏状态 0 未开始， 1 开始， 2 结束
         this.isPut = false; //是否可以放置
-        this.putCount = 0; //总放置
+        this.putCount = 0; //生成并释放的总个数（包括失败）
+        this.succeedPutCount = 0; //放置成功个数
         this.isSucceed = true; //放置是否成功
-        this.preBlock = '';
+        this.prevBlock = '';
 
-        //添加监听
-        this.node.on(cc.Node.EventType.TOUCH_END, this.Put, this);
+        this.node.on(cc.Node.EventType.TOUCH_END, this.putNext, this);
 
         this.poolHouse = new cc.NodePool();
-        this.UpdateUI();
-        this.Embarkation()
+        for (let i = 0; i < POOLINITCOUNT; i++) {
+            let blockPb = cc.instantiate(this.blockPb);
+            this.poolHouse.put(blockPb);
+        }
     },
-    //装载
-    Embarkation() {
-        if (this.putCount > 1) {
-            let rgBody = this.preBlock.getComponent(cc.RigidBody);
+    start() {
+        this.craneRotation.craneStrRotate();
+        this.updateUi();
+        this.embarkation()
+    },
+    //重新装载
+    embarkation() {
+        this.crane.runAction(cc.fadeIn(.2));
+        if (this.waitBlock && this.isSucceed) {
+            let rgBody = this.waitBlock.getComponent(cc.RigidBody);
             rgBody.type = cc.RigidBodyType.Static;
-            // this.scheduleOnce(() => {
-            //     rgBody.type = cc.RigidBodyType.Static;
-            // }, 0.3)
         };
-        this.preBlock = this.waitHouse;
         if (this.poolHouse.size() > 0) {
-            this.waitHouse = this.poolHouse.get();
+            this.waitBlock = this.poolHouse.get();
         } else {
-            this.waitHouse = cc.instantiate(this.preHouse);
+            this.waitBlock = cc.instantiate(this.blockPb);
         };
-        this.waitHouse.getComponent("house").Init();
-        this.waitHouse.rotation = 0;
-        this.waitHouse.setPosition(cc.p(0, 0));
-        this.waitHouse.parent = this.houseBar;
-        this.houseJsComp = this.waitHouse.getComponent("house");
+        this.blockJsComp = this.waitBlock.getComponent("skysc_block");
+        this.blockJsComp.Init();
+        this.waitBlock.rotation = 0;
+        this.waitBlock.setPosition(cc.p(0, 0));
+        this.waitBlock.parent = this.blockTmpCtn;
         this.isPut = true;
         this.isSucceed = true;
     },
     //放置
-    Put(e) {
-        console.log()
+    putNext(e) {
         if (this.state == 1 && this.isPut) {
             //允许放置
+            this.crane.runAction(cc.fadeOut(.2));
             this.isPut = false;
             this.putCount++;
-            this.waitHouse.rotation = 0;
-            const rigidbody = this.waitHouse.addComponent(cc.RigidBody); //添加刚体
-            const box = this.waitHouse.addComponent(cc.PhysicsBoxCollider); //添加碰撞体
+            this.waitBlock.rotation = 0;
+            const rigidbody = this.waitBlock.addComponent(cc.RigidBody); //添加刚体
+            const box = this.waitBlock.addComponent(cc.PhysicsBoxCollider); //添加碰撞体
 
             rigidbody.gravityScale = 9.8;
             rigidbody.enabledContactListener = true;
             rigidbody.type = cc.RigidBodyType.Dynamic;
             box.friction = 1;
-            box.size = this.houseJsComp.colliderSize;
+            box.size = this.blockJsComp.colliderSize;
             box.tag = 101;
             box.apply();
 
-            this.waitHouse.parent = this.housesContainer;
+            this.waitBlock.parent = this.blockContainer;
         }
     },
-    //移动
-    Move() {
-        if (this.putCount > 1) {
-            let i = this.score - 1;
+    //视野移动
+    move() {
+        if (this.putCount > 1 && this.succeedPutCount >= 3) {
+            let i = this.succeedPutCount - 2;
             if (i < 0) {
                 i = 0;
             };
-            let time = this.houseJsComp.colliderSize.height / this.cameraSpeed;
-
+            let time = this.blockJsComp.colliderSize.height / this.cameraSpeed;
             this.camera.node.stopAllActions();
             this.crane.stopAllActions();
-
-            let actionMove = cc.moveTo(time, cc.p(0, this.houseJsComp.colliderSize.height * i));
-            this.crane.runAction(actionMove); //吊机移动
-            actionMove = cc.moveTo(time, cc.p(0, this.houseJsComp.colliderSize.height * i));
-            this.camera.node.runAction(actionMove); //相机移动
+            let actionMove = cc.moveTo(time, cc.p(0, this.blockJsComp.colliderSize.height * i));
+            this.crane.runAction(actionMove);
+            actionMove = cc.moveTo(time, cc.p(0, this.blockJsComp.colliderSize.height * i));
+            this.camera.node.runAction(actionMove);
         }
     },
     //放置成功
-    PutSucceed() {
+    handleResult(isPrefect) {
         if (this.isSucceed) {
             console.log("放置成功！");
-            this.score++;
-            this.UpdateUI();
+            this.succeedPutCount++;
+            this.craneRotation.switchDifficulty(); //判断切换吊机旋转速度角度
+            if (this.prevBlock) {
+                this.prevBlock.getComponent(cc.PhysicsBoxCollider).tag = 100;
+            };
+            this.waitBlock.getComponent(cc.PhysicsBoxCollider).tag = 102;
+            this.prevBlock = this.waitBlock;
+            this.score = this.score + (isPrefect ? 10 : 1)
         } else {
             console.log("放置失败！");
         };
-        this.Move();
+        this.updateUi();
+        this.move();
         this.scheduleOnce(() => {
-            this.Embarkation()
+            this.embarkation()
         }, 0.3)
     },
     //UI面板更新
-    UpdateUI() {
+    updateUi() {
         this.hpUi.string = this.hp;
-        this.scoreUi.string = this.score
+        this.scoreUi.string = this.score;
+        this.maskCurrScore.string = 'Current score: ' + this.score;
+    },
+    gameOverHandle() {
+        this.state = 2;
+        this.isPut = false;
+        this.gameOverMask.active = true;
+        this.gameOverMask.opacity = 0;
+        this.gameOverMask.runAction(cc.fadeIn(.3));
+        this.updateUi()
+    },
+    restartTheGame() {
+        cc.director.loadScene('skyscraper_game')
+    },
+    backStartPage() {
+        cc.director.loadScene('skyscraper_start')
     }
 })

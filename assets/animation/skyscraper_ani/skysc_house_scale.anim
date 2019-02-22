@@ -3,7 +3,7 @@
   "_name": "skysc_house_scale",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.25,
+  "_duration": 0.16666666666666666,
   "sample": 60,
   "speed": 1,
   "wrapMode": 1,
@@ -15,11 +15,11 @@
           "value": 1
         },
         {
-          "frame": 0.13333333333333333,
+          "frame": 0.08333333333333333,
           "value": 0.85
         },
         {
-          "frame": 0.25,
+          "frame": 0.16666666666666666,
           "value": 1
         }
       ]
