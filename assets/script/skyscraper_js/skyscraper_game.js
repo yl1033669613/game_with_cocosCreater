@@ -52,15 +52,13 @@ cc.Class({
         }
     },
     onLoad() {
-        this.physicsManager = cc.director.getPhysicsManager();
-        this.physicsManager.enabled = true;
-        this.physicsManager.debugDrawFlags = 0;
-        this.physicsManager.attachDebugDrawToCamera(this.camera);
-
+        const physicsManager = cc.director.getPhysicsManager();
+        physicsManager.enabled = true;
+        physicsManager.debugDrawFlags = 0;
+        physicsManager.attachDebugDrawToCamera(this.camera);
         globals.gm = this;
-
-        this.state = 1; //游戏状态 0 未开始， 1 开始， 2 结束
-        this.isPut = false; //是否可以放置
+        this.state = 1; 
+        this.isPut = false; 
         this.putCount = 0; //生成并释放的总个数（包括失败）
         this.succeedPutCount = 0; //放置成功个数
         this.isSucceed = true; //放置是否成功
@@ -68,26 +66,26 @@ cc.Class({
 
         this.node.on(cc.Node.EventType.TOUCH_END, this.putNext, this);
 
-        this.poolHouse = new cc.NodePool();
+        this.poolBlock = new cc.NodePool();
         for (let i = 0; i < POOLINITCOUNT; i++) {
             let blockPb = cc.instantiate(this.blockPb);
-            this.poolHouse.put(blockPb);
+            this.poolBlock.put(blockPb);
         }
     },
     start() {
         this.craneRotation.craneStrRotate();
         this.updateUi();
-        this.embarkation()
+        this.generateBlock()
     },
     //重新装载
-    embarkation() {
+    generateBlock() {
         this.crane.runAction(cc.fadeIn(.2));
         if (this.waitBlock && this.isSucceed) {
             let rgBody = this.waitBlock.getComponent(cc.RigidBody);
             rgBody.type = cc.RigidBodyType.Static;
         };
-        if (this.poolHouse.size() > 0) {
-            this.waitBlock = this.poolHouse.get();
+        if (this.poolBlock.size() > 0) {
+            this.waitBlock = this.poolBlock.get();
         } else {
             this.waitBlock = cc.instantiate(this.blockPb);
         };
@@ -99,17 +97,18 @@ cc.Class({
         this.isPut = true;
         this.isSucceed = true;
     },
+    backObjPool(nodeInfo) {
+        this.poolBlock.put(nodeInfo)
+    },
     //放置
     putNext(e) {
         if (this.state == 1 && this.isPut) {
-            //允许放置
             this.crane.runAction(cc.fadeOut(.2));
             this.isPut = false;
             this.putCount++;
             this.waitBlock.rotation = 0;
             const rigidbody = this.waitBlock.addComponent(cc.RigidBody); //添加刚体
             const box = this.waitBlock.addComponent(cc.PhysicsBoxCollider); //添加碰撞体
-
             rigidbody.gravityScale = 9.8;
             rigidbody.enabledContactListener = true;
             rigidbody.type = cc.RigidBodyType.Dynamic;
@@ -117,7 +116,6 @@ cc.Class({
             box.size = this.blockJsComp.colliderSize;
             box.tag = 101;
             box.apply();
-
             this.waitBlock.parent = this.blockContainer;
         }
     },
@@ -140,7 +138,7 @@ cc.Class({
     //放置成功
     handleResult(isPrefect) {
         if (this.isSucceed) {
-            console.log("放置成功！");
+            // console.log("放置成功！");
             this.succeedPutCount++;
             this.craneRotation.switchDifficulty(); //判断切换吊机旋转速度角度
             if (this.prevBlock) {
@@ -150,12 +148,12 @@ cc.Class({
             this.prevBlock = this.waitBlock;
             this.score = this.score + (isPrefect ? 10 : 1)
         } else {
-            console.log("放置失败！");
+            // console.log("放置失败！");
         };
         this.updateUi();
         this.move();
         this.scheduleOnce(() => {
-            this.embarkation()
+            this.generateBlock()
         }, 0.3)
     },
     //UI面板更新

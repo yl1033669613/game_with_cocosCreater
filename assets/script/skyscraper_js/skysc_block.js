@@ -10,9 +10,9 @@ cc.Class({
         this.Init();
     },
     Init() {
-        this.isFirstIn = true; //第一次接触
-        this.isFirstOut = true; //第一次离开
-        this.isDestroy = true; //是否允许销毁
+        this.isFirstIn = true; 
+        this.isFirstOut = true; 
+        this.isDestroy = true; 
         this.node.group = "skyscBlock";
         let curW = Math.floor(Math.random()*(MAXW - MINW) + MINW); //随机宽度
         this.colliderSize = cc.size(curW, 58);
@@ -33,17 +33,17 @@ cc.Class({
             if (otherCollider.tag == 200 && globals.gm.putCount != 1) {
                 this.isDestroy = false;
                 let node = selfCollider.node;
-                console.log('落到地面');
+                // console.log('落到地面');
                 if (this.isFirstOut) {
                     this.isFirstOut = false;
                     this.checkHp();
                 };
                 selfCollider.destroy();
                 this.scheduleOnce(() => {
-                    console.log('回收')
+                    // console.log('回收')
                     node.removeComponent(cc.RigidBody);
                     node.removeComponent(cc.PhysicsBoxCollider);
-                    globals.gm.poolHouse.put(node)
+                    globals.gm.backObjPool(node)
                 }, 1)
             }
         }
@@ -62,7 +62,7 @@ cc.Class({
                         let isPrefect = false;
                         if (d <= 3) {
                             isPrefect = true;
-                            console.log(d, "完美");
+                            // console.log(d, "完美");
                         };
                         globals.gm.handleResult(isPrefect);
                     } else {
@@ -80,7 +80,7 @@ cc.Class({
             if (globals.gm.hp == 0) {
                 globals.gm.updateUi();
                 globals.gm.gameOverHandle()
-                console.log('游戏结束')
+                // console.log('游戏结束')
             } else {
                 globals.gm.isSucceed = false;
                 globals.gm.handleResult();
