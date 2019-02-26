@@ -26,8 +26,8 @@ const SCENESLIST = [{
     title: ' Skyscraper',
     name: 'skyscraper_start'
 }, {
-    title: ' Test game 10',
-    name: ''
+    title: ' Don\'t touch white block',
+    name: 'dontt_white_block_start'
 }, {
     title: ' Test game 11',
     name: ''
