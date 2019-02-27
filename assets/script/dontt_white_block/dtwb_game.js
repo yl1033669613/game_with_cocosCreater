@@ -1,15 +1,122 @@
+const INITPOOLCOUNT = 10;
 cc.Class({
     extends: cc.Component,
     properties: {
-
+        scoreLabel: {
+            default: null,
+            type: cc.Label
+        },
+        rowPfb: {
+            default: null,
+            type: cc.Prefab
+        },
+        gameOverMask: {
+        	default: null,
+        	type: cc.Node
+        },
+        maskCurrScore: {
+        	default: null,
+        	type: cc.Label
+        },
+        bestScore: {
+        	default: null,
+        	type: cc.Label
+        },
+        initSpeed: 5
     },
-    onLoad () {
-        
+    onLoad() {
+        this.gameState = 0; // 0 未开始 1 开始 2结束 
+        this.rowNodeList = [];
+        this.speed = 0;
+        this.score = 0;
+        this.rowPool = new cc.NodePool();
+        for (let i = 0; i < INITPOOLCOUNT; ++i) {
+            let nodeO = cc.instantiate(this.rowPfb);
+            this.rowPool.put(nodeO)
+        };
     },
-    start () {
-
+    start() {
+    	this.updateUi();
+        for (let i = 0; i < 6; i++) {
+            this.createMoveRow(i == 0)
+        }
     },
-    update (dt) {
-
+    update(dt) {
+        this.moveEveryRow(dt);
+    },
+    updateScore() {
+        this.score++;
+        this.updateUi()
+    },
+    updateUi() {
+    	this.scoreLabel.string = this.score;
+    	this.maskCurrScore.string = 'Current score: ' + this.score;
+    	// this.bestScore.string = 'Best score: ' + this.score;
+    },
+    createMoveRow(isFirst) {
+        let node,
+            rowHeight = this.node.height / 4,
+            lastNode = this.rowNodeList.length > 0 ? this.rowNodeList[this.rowNodeList.length - 1] : null;
+        if (this.rowPool.size() > 0) {
+            node = this.rowPool.get();
+        } else {
+            node = cc.instantiate(this.rowPfb);
+        };
+        if (lastNode) {
+            node.setPosition(0, lastNode.y + rowHeight)
+        } else {
+            node.setPosition(0, rowHeight)
+        };
+        this.node.addChild(node);
+        let compObj = node.getComponent('block_row');
+        compObj.init(isFirst);
+        this.rowNodeList.push(node)
+    },
+    moveEveryRow(dt) {
+        if (this.gameState == 1) {
+        	// 速度更新 
+            this.rowNodeList.forEach((a) => {
+                a.setPositionY(a.getPositionY() - this.speed)
+            })
+        }
+    },
+    startRowAction() {
+        this.speed = this.initSpeed
+    },
+    backObjPool(nodeInfo) {
+        this.rowPool.put(nodeInfo)
+    },
+    backStartPage() {
+    	cc.director.loadScene('dontt_white_block_start');
+    },
+    restartGame() {
+    	this.showGameOverMask(false);
+    	this.rowNodeList.forEach((a) => {
+    		this.rowPool.put(a)
+    	});
+    	this.rowNodeList = [];
+    	this.gameState = 0;
+        this.speed = 0;
+        this.score = 0;
+        this.updateUi();
+        for (let i = 0; i < 6; i++) {
+            this.createMoveRow(i == 0)
+        }
+    },
+    gameOver() {
+    	this.showGameOverMask(true);
+    },
+    showGameOverMask(bool) {
+    	let action;
+    	if (bool) {
+    		this.gameOverMask.active = true;
+	    	this.gameOverMask.opacity = 0;
+	    	action = cc.fadeIn(.2);
+    	} else {
+    		action = cc.sequence(cc.fadeOut(.2), cc.callFunc(() => {
+    			this.gameOverMask.active = false;
+    		}, this))
+    	};
+    	this.gameOverMask.runAction(action)
     }
 })
