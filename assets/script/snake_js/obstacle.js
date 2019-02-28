@@ -25,7 +25,7 @@ cc.Class({
     // 根据范围获取随机数
     getNumberInRange(min, max) {
         let range = max - min;
-        let r = cc.randomMinus1To1();
+        let r = Math.random() * 2 - 1;
         return Math.round(r * range + min);
     },
     createObstacle() {

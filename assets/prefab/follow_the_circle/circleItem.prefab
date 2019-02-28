@@ -56,8 +56,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 60,
+      "height": 60
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -113,8 +113,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 60,
+      "height": 60
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -323,8 +323,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 60,
+      "height": 60
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -416,10 +416,10 @@
     "_enabled": true,
     "fadeSpeed": 0.085,
     "circleMoveSpeed": 0.2,
-    "finBorderR": 85,
-    "itemInitCount": 5,
+    "finBorderR": 95,
+    "itemInitCount": 3,
     "cirHideMul": 0.8,
-    "planetR": 2,
+    "planetR": 2.5,
     "drawCtn": {
       "__id__": 2
     },
@@ -446,8 +446,8 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 54,
-      "height": 54
+      "width": 64,
+      "height": 64
     }
   },
   {

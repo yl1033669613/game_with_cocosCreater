@@ -58,7 +58,7 @@ cc.Class({
     //敌机随机生成的位置
     getNewEnemyPositon(newEnemy) {
         //位于上方，先不可见
-        const randx = cc.randomMinus1To1() * (this.node.parent.width / 2 - newEnemy.width / 2),
+        const randx = (Math.random() * 2 - 1) * (this.node.parent.width / 2 - newEnemy.width / 2),
             randy = this.node.parent.height / 2 + newEnemy.height / 2;
         return cc.v2(randx, randy);
     },

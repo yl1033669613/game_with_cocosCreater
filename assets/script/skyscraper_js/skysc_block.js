@@ -1,22 +1,18 @@
-const MINW = 45, MAXW = 75;
 const globals = require('skysc_globals');
 cc.Class({
     extends: cc.Component,
     properties: {
-        colliderSize: cc.size(60, 58), //默认大小
-        spriptAni: cc.Animation, 
+        colliderSize: cc.size(55, 58), //默认大小
+        spriptAni: cc.Animation,
     },
     onLoad() {
-        this.Init();
+        this.init();
     },
-    Init() {
-        this.isFirstIn = true; 
-        this.isFirstOut = true; 
-        this.isDestroy = true; 
-        this.node.group = "skyscBlock";
-        let curW = Math.floor(Math.random()*(MAXW - MINW) + MINW); //随机宽度
-        this.colliderSize = cc.size(curW, 58);
-        this.node.width = curW;
+    init() {
+        this.isFirstIn = true;
+        this.isFirstOut = true;
+        this.isDestroy = true;
+        this.node.group = "skyscBlock"
     },
     // 只在两个碰撞体开始接触时被调用一次
     onBeginContact(contact, selfCollider, otherCollider) {
@@ -33,18 +29,16 @@ cc.Class({
             if (otherCollider.tag == 200 && globals.gm.putCount != 1) {
                 this.isDestroy = false;
                 let node = selfCollider.node;
-                // console.log('落到地面');
                 if (this.isFirstOut) {
                     this.isFirstOut = false;
                     this.checkHp();
                 };
                 selfCollider.destroy();
                 this.scheduleOnce(() => {
-                    // console.log('回收')
                     node.removeComponent(cc.RigidBody);
                     node.removeComponent(cc.PhysicsBoxCollider);
                     globals.gm.backObjPool(node)
-                }, 1)
+                }, 1.2)
             }
         }
     },
@@ -62,7 +56,6 @@ cc.Class({
                         let isPrefect = false;
                         if (d <= 3) {
                             isPrefect = true;
-                            // console.log(d, "完美");
                         };
                         globals.gm.handleResult(isPrefect);
                     } else {
@@ -71,7 +64,6 @@ cc.Class({
                 }
             }.bind(this);
             this.scheduleOnce(this.checkDropCallFn, 0.2);
-            // console.log(selfCollider.node.rotation)
         }
     },
     checkHp() {
@@ -80,10 +72,9 @@ cc.Class({
             if (globals.gm.hp == 0) {
                 globals.gm.updateUi();
                 globals.gm.gameOverHandle()
-                // console.log('游戏结束')
             } else {
                 globals.gm.isSucceed = false;
-                globals.gm.handleResult();
+                globals.gm.handleResult()
             }
         }
     }

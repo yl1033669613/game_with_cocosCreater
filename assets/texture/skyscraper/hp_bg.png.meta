@@ -5,7 +5,7 @@
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "mtl_lifepad": {
+    "hp_bg": {
       "ver": "1.0.3",
       "uuid": "4c671d4e-42b9-4252-95eb-c077744b4a4d",
       "rawTextureUuid": "804fa03f-d306-4a46-a755-503afe506419",

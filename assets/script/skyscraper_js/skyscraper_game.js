@@ -3,7 +3,7 @@ const globals = require('skysc_globals');
 cc.Class({
     extends: cc.Component,
     properties: {
-        blockTmpCtn: { //待放置的存放容器
+        blockTmpCtn: {
             default: null,
             type: cc.Node
         },
@@ -15,7 +15,7 @@ cc.Class({
             default: null,
             type: cc.Camera
         },
-        cameraSpeed: 200, //相机速度
+        cameraSpeed: 200,
         crane: {
             default: null,
             type: cc.Node
@@ -57,8 +57,8 @@ cc.Class({
         physicsManager.debugDrawFlags = 0;
         physicsManager.attachDebugDrawToCamera(this.camera);
         globals.gm = this;
-        this.state = 1; 
-        this.isPut = false; 
+        this.state = 1;
+        this.isPut = false;
         this.putCount = 0; //生成并释放的总个数（包括失败）
         this.succeedPutCount = 0; //放置成功个数
         this.isSucceed = true; //放置是否成功
@@ -90,7 +90,7 @@ cc.Class({
             this.waitBlock = cc.instantiate(this.blockPb);
         };
         this.blockJsComp = this.waitBlock.getComponent("skysc_block");
-        this.blockJsComp.Init();
+        this.blockJsComp.init();
         this.waitBlock.rotation = 0;
         this.waitBlock.setPosition(cc.p(0, 0));
         this.waitBlock.parent = this.blockTmpCtn;
@@ -138,7 +138,6 @@ cc.Class({
     //放置成功
     handleResult(isPrefect) {
         if (this.isSucceed) {
-            // console.log("放置成功！");
             this.succeedPutCount++;
             this.craneRotation.switchDifficulty(); //判断切换吊机旋转速度角度
             if (this.prevBlock) {
@@ -156,7 +155,6 @@ cc.Class({
             this.generateBlock()
         }, 0.3)
     },
-    //UI面板更新
     updateUi() {
         this.hpUi.string = this.hp;
         this.scoreUi.string = this.score;

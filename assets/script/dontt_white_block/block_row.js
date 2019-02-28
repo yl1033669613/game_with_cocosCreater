@@ -15,10 +15,22 @@ cc.Class({
             this.colItems[i].setPositionX(i * itemW + 1);
             this.colItems[i].width = itemW - 2
         };
-        this.gm = this.node.parent.getComponent('dtwb_game')
+        this.gm = this.node.parent.getComponent('dtwb_game');
+        for (let i = 0; i < this.colItems.length; i++) this.colItems[i].on(cc.Node.EventType.TOUCH_START, this.handleClick, this)
     },
     update(dt) {
-        this.checkPos()
+        if (this.gm.gameState == 1) {
+            if (this.node.y <= 0) {
+                if (this.state == 2) {
+                    if (this.isFirst) this.colItems[this.blackIdx].children[0].active = false;
+                    this.gm.rowNodeList.shift();
+                    this.gm.createMoveRow(false);
+                    this.gm.backObjPool(this.node)
+                } else {
+                    this.gm.gameOver()
+                }
+            }
+        }
     },
     init(isFirst) {
         this.state = 1; //1 未触发状态 2正确点击态
@@ -26,9 +38,7 @@ cc.Class({
         this.blackIdx = this.getBlack();
         this.isFirst = isFirst;
         this.setNormal();
-        if (isFirst) {
-            this.colItems[this.blackIdx].children[0].active = true;
-        }
+        if (isFirst) this.colItems[this.blackIdx].children[0].active = true;
     },
     getBlack() {
         let randomN = Math.floor(Math.random() * (this.colItems.length - .4));
@@ -36,21 +46,19 @@ cc.Class({
         return randomN
     },
     setBlockGray(idx) {
-        let indexNode = this.colItems[idx];
-        indexNode.runAction(cc.tintTo(.2, 134, 134, 134, 255));
+        this.colItems[idx].runAction(cc.tintTo(.15, 134, 134, 134, 255))
     },
     setBlockRed(idx) {
-        let indexNode = this.colItems[idx];
-        indexNode.runAction(cc.tintTo(.2, 255, 0, 0, 255));
+        this.colItems[idx].runAction(cc.tintTo(.15, 255, 0, 0, 255))
     },
     setNormal() {
         for (let i = 0; i < this.colItems.length; i++) {
             if (i == this.blackIdx) continue;
-            this.colItems[i].color = cc.Color.WHITE;
+            this.colItems[i].color = cc.Color.WHITE
         }
     },
-    handleClick(e, idx) {
-        let touchIdx = parseInt(idx);
+    handleClick(e) {
+        let touchIdx = parseInt(e.target.name.split('_')[1]) - 1;
         if (this.gm.gameState == 0 && this.isFirst && this.blackIdx == touchIdx) { //开始第一块时 限制必须为第一行正确块 保证第一次点击正确
             this.gm.gameState = 1;
             this.gm.startRowAction()
@@ -63,27 +71,9 @@ cc.Class({
                     this.gm.updateScore()
                 }
             } else {
-                this.gm.gameState = 2;
                 this.redIdx = touchIdx;
                 this.setBlockRed(this.redIdx);
                 this.gm.gameOver()
-            }
-        }
-    },
-    checkPos() {
-        if (this.gm.gameState == 1) {
-            if (this.node.y <= 0) {
-                if (this.state == 2) {
-                    if (this.isFirst) {
-                        this.colItems[this.blackIdx].children[0].active = false;
-                    };
-                    this.gm.rowNodeList.shift();
-                    this.gm.backObjPool(this.node);
-                    this.gm.createMoveRow(false)
-                } else {
-                    this.gm.gameState = 2;
-                    this.gm.gameOver()
-                }
             }
         }
     }

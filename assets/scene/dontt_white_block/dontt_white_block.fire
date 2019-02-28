@@ -323,7 +323,8 @@
     "bestScore": {
       "__id__": 22
     },
-    "initSpeed": 5
+    "initSpeed": 7,
+    "maxSpeed": 13
   },
   {
     "__type__": "cc.Label",

@@ -47,7 +47,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
+      "width": 55,
       "height": 60
     },
     "_rotationX": 0,
@@ -107,7 +107,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
+      "width": 55,
       "height": 60
     },
     "_rotationX": 0,
@@ -217,7 +217,7 @@
     "_enabled": true,
     "colliderSize": {
       "__type__": "cc.Size",
-      "width": 60,
+      "width": 55,
       "height": 58
     },
     "spriptAni": {

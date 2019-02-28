@@ -347,11 +347,11 @@
       "__id__": 7
     },
     "_enabled": true,
-    "initBorderR": 17,
-    "initCenterR": 25,
+    "initBorderR": 22,
+    "initCenterR": 30,
     "intervalMul": 0.5,
-    "tapMax": 3.4,
-    "gameOverScore": -10,
+    "tapMax": 3.6,
+    "gameOverScore": -30,
     "compStart": {
       "__id__": 9
     },

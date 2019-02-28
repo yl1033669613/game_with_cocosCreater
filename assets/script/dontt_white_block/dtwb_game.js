@@ -11,18 +11,19 @@ cc.Class({
             type: cc.Prefab
         },
         gameOverMask: {
-        	default: null,
-        	type: cc.Node
+            default: null,
+            type: cc.Node
         },
         maskCurrScore: {
-        	default: null,
-        	type: cc.Label
+            default: null,
+            type: cc.Label
         },
         bestScore: {
-        	default: null,
-        	type: cc.Label
+            default: null,
+            type: cc.Label
         },
-        initSpeed: 5
+        initSpeed: 7,
+        maxSpeed: 13
     },
     onLoad() {
         this.gameState = 0; // 0 未开始 1 开始 2结束 
@@ -36,22 +37,25 @@ cc.Class({
         };
     },
     start() {
-    	this.updateUi();
-        for (let i = 0; i < 6; i++) {
-            this.createMoveRow(i == 0)
-        }
+        this.updateUi();
+        for (let i = 0; i < 6; i++) this.createMoveRow(i == 0)
     },
     update(dt) {
-        this.moveEveryRow(dt);
+        if (this.gameState == 1) {
+            this.rowNodeList.forEach((a) => {
+                a.setPositionY(a.getPositionY() - this.speed)
+            })
+        }
     },
     updateScore() {
         this.score++;
+        if (this.score != 0 && !(this.score % 10) && this.speed < this.maxSpeed) this.speed += (this.maxSpeed - this.initSpeed) / 40; //速度均匀递增 400分打到最大速度， 每10分递增一次
         this.updateUi()
     },
     updateUi() {
-    	this.scoreLabel.string = this.score;
-    	this.maskCurrScore.string = 'Current score: ' + this.score;
-    	// this.bestScore.string = 'Best score: ' + this.score;
+        this.scoreLabel.string = this.score;
+        this.maskCurrScore.string = 'Current score: ' + this.score;
+        // this.bestScore.string = 'Best score: ' + this.score;
     },
     createMoveRow(isFirst) {
         let node,
@@ -72,14 +76,6 @@ cc.Class({
         compObj.init(isFirst);
         this.rowNodeList.push(node)
     },
-    moveEveryRow(dt) {
-        if (this.gameState == 1) {
-        	// 速度更新 
-            this.rowNodeList.forEach((a) => {
-                a.setPositionY(a.getPositionY() - this.speed)
-            })
-        }
-    },
     startRowAction() {
         this.speed = this.initSpeed
     },
@@ -87,36 +83,35 @@ cc.Class({
         this.rowPool.put(nodeInfo)
     },
     backStartPage() {
-    	cc.director.loadScene('dontt_white_block_start');
+        cc.director.loadScene('dontt_white_block_start');
     },
     restartGame() {
-    	this.showGameOverMask(false);
-    	this.rowNodeList.forEach((a) => {
-    		this.rowPool.put(a)
-    	});
-    	this.rowNodeList = [];
-    	this.gameState = 0;
+        this.showGameOverMask(false);
+        this.rowNodeList.forEach((a) => {
+            this.rowPool.put(a)
+        });
+        this.rowNodeList = [];
+        this.gameState = 0;
         this.speed = 0;
         this.score = 0;
         this.updateUi();
-        for (let i = 0; i < 6; i++) {
-            this.createMoveRow(i == 0)
-        }
+        for (let i = 0; i < 6; i++) this.createMoveRow(i == 0)
     },
     gameOver() {
-    	this.showGameOverMask(true);
+    	this.gameState = 2;
+        this.showGameOverMask(true)
     },
     showGameOverMask(bool) {
-    	let action;
-    	if (bool) {
-    		this.gameOverMask.active = true;
-	    	this.gameOverMask.opacity = 0;
-	    	action = cc.fadeIn(.2);
-    	} else {
-    		action = cc.sequence(cc.fadeOut(.2), cc.callFunc(() => {
-    			this.gameOverMask.active = false;
-    		}, this))
-    	};
-    	this.gameOverMask.runAction(action)
+        let action;
+        if (bool) {
+            this.gameOverMask.active = true;
+            this.gameOverMask.opacity = 0;
+            action = cc.fadeIn(.2);
+        } else {
+            action = cc.sequence(cc.fadeOut(.2), cc.callFunc(() => {
+                this.gameOverMask.active = false;
+            }, this))
+        };
+        this.gameOverMask.runAction(action)
     }
 })

@@ -3,10 +3,10 @@ cc.Class({
     properties: {
         fadeSpeed: 0.085,
         circleMoveSpeed: 0.2,
-        finBorderR: 85,
-        itemInitCount: 2,
-        cirHideMul: .5,
-        planetR: 3,
+        finBorderR: 95,
+        itemInitCount: 3,
+        cirHideMul: .8,
+        planetR: 2.5,
         drawCtn: {
             default: null,
             type: cc.Node
@@ -22,12 +22,6 @@ cc.Class({
     },
     onLoad() {
         this.color = '';
-        this.tapNum = 1;
-        this.cirBorderR = 17;
-        this.cirCenterR = 25;
-
-        this.isTouch = false;
-        this.circleActive = false;
         this.animationCircleR = null;
 
         this.circleGroupO = cc.find('Canvas/ftcGameComtainer/circleGroup').getComponent('circle_group');

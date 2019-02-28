@@ -1,14 +1,13 @@
 const INITOBJPOOLCOUNT = 15;
 const COLORLIST = ['255/0/0/255', '255/144/0/255', '255/255/0/255', '0/255/0/255', '0/255/255/255', '0/0/255/255', '114/0/255/255'];
-const CIRCLER = 25;
 
 cc.Class({
     extends: cc.Component,
     properties: {
-        initBorderR: 17,
-        initCenterR: 25,
+        initBorderR: 22,
+        initCenterR: 30,
         intervalMul: 0.5,
-        tapMax: 5,
+        tapMax: 3.6,
         gameOverScore: -30,
         compStart: {
             default: null,
@@ -85,10 +84,10 @@ cc.Class({
         };
         let count = 0;
         while (count < circlesNum) {
-            let x = cc.randomMinus1To1() * (self.node.width / 2 - (CIRCLER + 2)),
-                y = cc.randomMinus1To1() * (self.node.height / 2 - (CIRCLER + 2) - CIRCLER);
+            let x = (Math.random() * 2 - 1) * (self.node.width / 2 - (self.initCenterR + 2)),
+                y = (Math.random() * 2 - 1) * (self.node.height / 2 - (self.initCenterR + 2) - self.initCenterR);
             let isOverlap = false,
-                limitDst = Math.sqrt(2 * Math.pow(CIRCLER * 2, 2));
+                limitDst = Math.sqrt(2 * Math.pow(self.initCenterR * 2, 2));
             for (let i = 0; i < self.circleGroup.length; i++) {
                 let currDst = Math.abs(Math.sqrt(Math.pow(x - self.circleGroup[i].x, 2) + Math.pow(y - self.circleGroup[i].y, 2)));
                 if (currDst < limitDst) {
