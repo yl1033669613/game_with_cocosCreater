@@ -79,6 +79,23 @@ cc.Class({
     startRowAction() {
         this.speed = this.initSpeed
     },
+    gameOver() {
+        this.gameState = 2;
+        this.showGameOverMask(true)
+    },
+    showGameOverMask(bool) {
+        let action;
+        if (bool) {
+            this.gameOverMask.active = true;
+            this.gameOverMask.opacity = 0;
+            action = cc.fadeIn(.2);
+        } else {
+            action = cc.sequence(cc.fadeOut(.2), cc.callFunc(() => {
+                this.gameOverMask.active = false;
+            }, this))
+        };
+        this.gameOverMask.runAction(action)
+    },
     backObjPool(nodeInfo) {
         this.rowPool.put(nodeInfo)
     },
@@ -96,22 +113,5 @@ cc.Class({
         this.score = 0;
         this.updateUi();
         for (let i = 0; i < 6; i++) this.createMoveRow(i == 0)
-    },
-    gameOver() {
-    	this.gameState = 2;
-        this.showGameOverMask(true)
-    },
-    showGameOverMask(bool) {
-        let action;
-        if (bool) {
-            this.gameOverMask.active = true;
-            this.gameOverMask.opacity = 0;
-            action = cc.fadeIn(.2);
-        } else {
-            action = cc.sequence(cc.fadeOut(.2), cc.callFunc(() => {
-                this.gameOverMask.active = false;
-            }, this))
-        };
-        this.gameOverMask.runAction(action)
     }
 })
