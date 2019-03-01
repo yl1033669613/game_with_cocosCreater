@@ -57,9 +57,7 @@ cc.Class({
         this.nextPipe = this.game.pipeManager.getNext();
     },
     update(dt) {
-        if (this.state === State.Ready || this.state === State.Dead) {
-            return;
-        }
+        if (this.state === State.Ready || this.state === State.Dead) return;
         // 每帧更新bird位置
         this.updatePosition(dt);
         // 每帧更新状态
@@ -85,19 +83,13 @@ cc.Class({
                 }
                 break;
             case State.Drop:
-                if (this.collideWithGround) {
-                    this.state = State.Dead;
-                }
+                if (this.collideWithGround) this.state = State.Dead;
                 break;
         }
     },
     detectCollision() {
-        if (!this.nextPipe) {
-            return;
-        }
-        if (this.state === State.Ready || this.state === State.Dead || this.state === State.Drop) {
-            return;
-        }
+        if (!this.nextPipe) return;
+        if (this.state === State.Ready || this.state === State.Dead || this.state === State.Drop) return;
         // 处理碰撞结果
         if (this.collideWithPipe || this.collideWithGround) {
             if (this.collideWithGround) { // 与地面碰撞
@@ -120,19 +112,13 @@ cc.Class({
         }
     },
     fixBirdFinalPosition() {
-        if (this.collideWithGround) {
-            this.node.y = this.ground.y + this.ground.height/2 + this.node.width / 2;
-        }
+        if (this.collideWithGround) this.node.y = this.ground.y + this.ground.height/2 + this.node.width / 2
     },
     onCollisionEnter(other, self) {
         // 检测bird与管道碰撞
-        if (other.node._name === "topPipe" || other.node._name === "bottomPipe") {
-            this.collideWithPipe = true;
-        }
+        if (other.node._name === "topPipe" || other.node._name === "bottomPipe") this.collideWithPipe = true;
         // 检测与地面碰撞情况
-        if (other.node._name === "ground") {
-            this.collideWithGround = true;
-        }
+        if (other.node._name === "ground") this.collideWithGround = true
     },
     rise() {
         this.state = State.Rise;
@@ -153,9 +139,7 @@ cc.Class({
     },
     // 碰撞管道 speed = 0
     runDropAction() {
-        if (this.currentSpeed > 0) {
-            this.currentSpeed = 0;
-        }
+        if (this.currentSpeed > 0) this.currentSpeed = 0;
         this.runFallAction(0.4);
     }
 })

@@ -34,9 +34,7 @@ cc.Class({
     update(dt) {
         // 判断游戏是否结束
         if (this.gameOver) {
-            if (!this.gameInfo.active) {
-                this.showGameInfo();
-            };
+            if (!this.gameInfo.active) this.showGameInfo();
             return
         };
         // 蛇移动速度增加
@@ -85,8 +83,6 @@ cc.Class({
                 break;
         };
         this.frames++;
-        if (this.frames % this.snakeMoveSpeed === 0) {
-            this.snake.snakeMove();
-        }
+        if (this.frames % this.snakeMoveSpeed === 0) this.snake.snakeMove()
     }
 })

@@ -53,12 +53,8 @@ cc.Class({
             maxX = -minX;
         location.x += (locationv.x - this.currX) * this.moveRatio;
         this.currX = locationv.x;
-        if (location.x < minX) {
-            location.x = minX;
-        };
-        if (location.x > maxX) {
-            location.x = maxX;
-        };
+        if (location.x < minX) location.x = minX;
+        if (location.x > maxX) location.x = maxX;
         this.node.setPosition(location);
     },
     // hero hp progress
@@ -95,15 +91,11 @@ cc.Class({
             const enemy = other.node.parent.getComponent('enemy');
             this.heroHp -= enemy.heroDropHp;
             other.node.group = 'default'; //防止敌人死亡之后再次发生碰撞
-            if (this.heroHp > 0) {
-                this.heroHitByEnemyShowBlood()
-            }
+            if (this.heroHp > 0) this.heroHitByEnemyShowBlood()
         } else if (other.node.group == 'enemyBullet') {
             const enemyBullet = other.node.getComponent('enemy_bullet');
             this.heroHp -= enemyBullet.hpDrop;
-            if (this.heroHp > 0) {
-                this.heroHitByEnemyShowBlood()
-            }
+            if (this.heroHp > 0) this.heroHitByEnemyShowBlood()
         } else {
             return false;
         };
@@ -117,6 +109,6 @@ cc.Class({
         }
     },
     onFinished(event) { //动画结束后
-        this.node.destroy();
+        this.node.destroy()
     }
 })

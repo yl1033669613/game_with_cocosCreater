@@ -3,7 +3,7 @@ cc.Class({
     properties: {
         // 触摸敏感距离
         DIFFPX: 15,
-        colorArr:[cc.String],
+        colorArr: [cc.String],
         canvas: {
             default: null,
             type: cc.Node
@@ -17,7 +17,7 @@ cc.Class({
             type: cc.Prefab
         },
         currScore: {
-        	default: null,
+            default: null,
             type: cc.Label
         }
     },
@@ -114,15 +114,10 @@ cc.Class({
 
         // gameover判定
         // 撞墙
-        if (this.head.x >= (this.node.width - 15) / 2 || this.head.x < -this.node.width / 2 || this.head.y >= this.node.height / 2 || this.head.y < -this.node.height / 2) {
-            this.game.gameOver = true;
-        };
+        if (this.head.x >= (this.node.width - 15) / 2 || this.head.x < -this.node.width / 2 || this.head.y >= this.node.height / 2 || this.head.y < -this.node.height / 2) this.game.gameOver = true;
         // 撞自己，循环从1开始，避开蛇头与蛇头比较的情况
-        for (var i = 1; i < this.snakeArray.length; i++) {
-            if (this.snakeArray[i].x == this.head.x && this.snakeArray[i].y == this.head.y) {
-                this.game.gameOver = true;
-            }
-        }
+        for (let i = 1; i < this.snakeArray.length; i++)
+            if (this.snakeArray[i].x == this.head.x && this.snakeArray[i].y == this.head.y) this.game.gameOver = true
     },
     initEvent() {
         this.node.on(cc.Node.EventType.TOUCH_START, (e) => {
@@ -145,34 +140,22 @@ cc.Class({
             let diffY = y - this.touchY;
 
             if (diffX <= -this.DIFFPX && Math.abs(diffX) >= Math.abs(diffY)) {
-
-                if (this.direction !== 39) {
-                    this.direction = 37
-                }
+                if (this.direction !== 39) this.direction = 37
             } else if (diffX >= this.DIFFPX && Math.abs(diffX) >= Math.abs(diffY)) {
-
-                if (this.direction !== 37) {
-                    this.direction = 39
-                }
+                if (this.direction !== 37) this.direction = 39
             } else if (diffY <= -this.DIFFPX && Math.abs(diffY) > Math.abs(diffX)) {
-
-                if (this.direction !== 40) {
-                    this.direction = 38
-                }
+                if (this.direction !== 40) this.direction = 38
             } else if (diffY >= this.DIFFPX && Math.abs(diffY) > Math.abs(diffX)) {
-
-                if (this.direction !== 38) {
-                    this.direction = 40
-                }
+                if (this.direction !== 38) this.direction = 40
             }
         }, this)
     },
     //判定吃到食物，即蛇头坐标与食物坐标重合
     isEat() {
         if (this.head.x == this.food.foodX && this.head.y == this.food.foodY) {
-            return true;
+            return true
         } else {
-            return false;
+            return false
         }
     }
 })

@@ -7,9 +7,7 @@ cc.Class({
         }
     },
     loadGame () {
-        if (this.url) {
-            cc.director.loadScene(this.url);
-        }
+        if (this.url) cc.director.loadScene(this.url)
     },
     updateItem (idx, y, name, url) {
         this.index = idx;

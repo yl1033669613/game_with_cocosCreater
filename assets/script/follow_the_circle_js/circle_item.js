@@ -125,9 +125,7 @@ cc.Class({
     //非点击消失动画
     noTouchHideAnimation(isMult) {
         this.unschedule(this.circleCountCb);
-        if (!isMult) {
-            this.circleGroupO.updateCircleGroup(this.color, false);
-        };
+        if (!isMult) this.circleGroupO.updateCircleGroup(this.color, false);
         let action = cc.sequence(cc.scaleTo(1.1, 0, 0).easing(cc.easeExponentialOut(1.1)), cc.callFunc(() => {
             this.removeThisCircle(this.node);
         }, this));
@@ -208,7 +206,7 @@ cc.Class({
             this.drawPlanetPoint(this.planetArr[i].ang, this.planetArr[i].r, this.planetArr[i].opc)
         }
     },
-    update(dt) {
+    update(dt) { //circle实时的调用Graphics API 进行动画绘制，消耗大量性能不建议使用，最好的方法是只调用一次绘制利用js动作API操作组件
         if (this.isTouch) {
             let fBR = this.animationCircleR ? this.animationCircleR.bR : this.cirBorderR,
                 fCR = this.animationCircleR ? this.animationCircleR.cR : this.cirCenterR,

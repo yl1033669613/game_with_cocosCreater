@@ -112,9 +112,7 @@ cc.Class({
     },
     userHandle() {
         this.node.on(cc.Node.EventType.TOUCH_START, function(e) {
-            if (!this.isGameOver) {
-                this.needleMove();
-            }
+            if (!this.isGameOver) this.needleMove()
         }, this)
     },
     needleMove() {
@@ -137,9 +135,7 @@ cc.Class({
                     this.isGameOver = true;
                     this.gameLevelModeThislevelWin()
                 };
-                if (!this.isGameOver && gbData.mode === 'free') {
-                    this.freeModeCurrScore++
-                }
+                if (!this.isGameOver && gbData.mode === 'free') this.freeModeCurrScore++
             }, this));
         this.moveNeedle.runAction(moveAction);
     },
@@ -147,21 +143,13 @@ cc.Class({
         let child = this.waitContent.children;
         if (gbData.mode === 'level') {
             if (this.needlesNum >= 6) {
-                for (let i = 6; i > 0; i--) {
-                    child[6 - i].getChildByName('wcTxt').getComponent(cc.Label).string = this.needlesNum - 6 + i;
-                }
+                for (let i = 6; i > 0; i--) child[6 - i].getChildByName('wcTxt').getComponent(cc.Label).string = this.needlesNum - 6 + i
             } else {
-                for (let i = this.needlesNum; i > 0; i--) {
-                    child[this.needlesNum - i].getChildByName('wcTxt').getComponent(cc.Label).string = i;
-                };
-                for (let i = this.needlesNum; i < 6; i++) {
-                    child[i].active = false;
-                }
+                for (let i = this.needlesNum; i > 0; i--) child[this.needlesNum - i].getChildByName('wcTxt').getComponent(cc.Label).string = i;
+                for (let i = this.needlesNum; i < 6; i++) child[i].active = false
             }
         } else {
-            for (let i = 0; i < 6; i++) {
-                child[i].getChildByName('wcTxt').getComponent(cc.Label).string = this.freeModeCurrNeedle + i + 1;
-            }
+            for (let i = 0; i < 6; i++) child[i].getChildByName('wcTxt').getComponent(cc.Label).string = this.freeModeCurrNeedle + i + 1
         }
     },
     backStart() {
@@ -178,9 +166,7 @@ cc.Class({
                 a.getComponent('draw_needles').stopNeedleAction()
             });
             this.gameOverShowInfoMask();
-            if (gbData.mode === 'free' && this.freeModeCurrScore === this.freeModeCurrNeedle) {
-                this.freeModeCurrScore--
-            }
+            if (gbData.mode === 'free' && this.freeModeCurrScore === this.freeModeCurrNeedle) this.freeModeCurrScore--
         }
     },
     gameOverShowInfoMask() {

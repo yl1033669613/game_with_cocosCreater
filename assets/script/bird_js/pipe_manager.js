@@ -12,7 +12,6 @@ cc.Class({
     onLoad() {
         this.pipeList = [];
         this.isRunning = false;
-
         // 创建pipe对象池
         this.pipePool = new cc.NodePool();
         const initCount = 3;

@@ -9,19 +9,15 @@ cc.Class({
     },
     onLoad() {
         this.xSpeed = Math.random() * (this.xMaxSpeed - this.xMinSpeed) + this.xMinSpeed;
-        if (Math.ceil(Math.random()*10) < 5) {
-            this.xSpeed = - this.xSpeed
-        };
+        if (Math.ceil(Math.random() * 10) < 5) this.xSpeed = -this.xSpeed;
         this.ySpeed = Math.random() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
-        this.buffGroup = this.node.parent.getComponent('buff_group');
+        this.buffGroup = this.node.parent.getComponent('buff_group')
     },
     onCollisionEnter(other, self) {
         this.buffGroup.buffDied(self.node);
     },
     update(dt) {
-        if (this.buffGroup.curState != Gdt.commonInfo.gameState.start) {
-            return;
-        };
+        if (this.buffGroup.curState != Gdt.commonInfo.gameState.start) return;
         let ndX = this.node.x,
             ndY = this.node.y;
         ndX += dt * this.xSpeed;
@@ -36,8 +32,6 @@ cc.Class({
             this.node.x = ndX;
         };
         this.node.y = ndY;
-        if (this.node.y < -this.node.parent.height / 2 - this.node.height / 2) {
-            this.buffGroup.buffDied(this.node);
-        }
+        if (this.node.y < -this.node.parent.height / 2 - this.node.height / 2) this.buffGroup.buffDied(this.node)
     }
 })

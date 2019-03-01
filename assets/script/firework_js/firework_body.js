@@ -26,9 +26,7 @@ cc.Class({
 
         // 坐标数组
         this.coordinates = [];
-        for (let i = 0; i < 3; i++) {
-            this.coordinates.push([this.x, this.y])
-        };
+        for (let i = 0; i < 3; i++) this.coordinates.push([this.x, this.y]);
 
         this.angle = Math.atan2(this.ty - this.y, this.tx - this.x); //夹角
         this.targetDirection = true;
@@ -89,7 +87,7 @@ cc.Class({
         while (particleCount--) {
             let coordinates = [];
             // 使用初始数据填充坐标数组
-            for (var i = 0; i < 5; i++) {
+            for (let i = 0; i < 5; i++) {
                 coordinates.push([x, y]);
             };
             this.particles.push({

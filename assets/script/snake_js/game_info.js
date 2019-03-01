@@ -62,6 +62,6 @@ cc.Class({
         }, this)
     },
     backToList() {
-        cc.director.loadScene('startscene');
+        cc.director.loadScene('startscene')
     }
 })

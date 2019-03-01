@@ -33,8 +33,6 @@ cc.Class({
         }
     }, 
     stopNeedleAction() {
-        if (this.rotateAniObj) {
-            this.node.stopAction(this.rotateAniObj)
-        }
+        if (this.rotateAniObj) this.node.stopAction(this.rotateAniObj)
     }
 })

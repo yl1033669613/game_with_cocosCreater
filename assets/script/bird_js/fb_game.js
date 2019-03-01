@@ -31,12 +31,12 @@ cc.Class({
         this.scoreLabel.string = this.score;
         this.bird.init(this);
         this.enableInput(true);
-        this.revealScene();
+        this.revealScene()
     },
     revealScene() {
         this.maskLayer.active = true;
         this.maskLayer.color = cc.Color.BLACK;
-        this.maskLayer.runAction(cc.fadeOut(0.3));
+        this.maskLayer.runAction(cc.fadeOut(0.3))
     },
     restart() {
         this.maskLayer.color = cc.Color.BLACK;
@@ -56,7 +56,7 @@ cc.Class({
         // 生成管道
         this.pipeManager.startSpawn();
         // bird fly
-        this.bird.startFly();
+        this.bird.startFly()
     },
     gameOver() {
         // 管道重置
@@ -68,14 +68,14 @@ cc.Class({
         // 屏幕闪烁
         this.blinkOnce();
         // 显示游戏结束面板
-        this.showGameOverMenu();
+        this.showGameOverMenu()
     },
     backBegainPage(e) {
-        cc.director.loadScene('flappy_bird');
+        cc.director.loadScene('flappy_bird')
     },
     gainScore() {
         this.score++;
-        this.scoreLabel.string = this.score;
+        this.scoreLabel.string = this.score
     },
     // 隐藏准备面板
     hideReadyMenu() {
@@ -84,7 +84,7 @@ cc.Class({
             cc.sequence(
                 cc.fadeOut(0.5),
                 cc.callFunc(() => {
-                    this.readyMenu.active = false;
+                    this.readyMenu.active = false
                 }, this)
             )
         );
@@ -118,13 +118,10 @@ cc.Class({
         const currentScoreNode = resultBoardNode.getChildByName("currentScore");
         const bestScoreNode = resultBoardNode.getChildByName("bestScore");
         const medalNode = resultBoardNode.getChildByName("medal");
-
         // 保存最高分到服务
-
         const globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
         const db = wx.cloud.database();
         let bestScore = globalNode.userGameInfo.fbBestScore || 0;
-
         if (this.score > bestScore) {
             bestScore = this.score;
             db.collection('userGameInfo').where({
@@ -158,7 +155,6 @@ cc.Class({
             }
         };
         cc.loader.loadRes("texture/res_bundle", cc.SpriteAtlas, showMedal);
-
         // 依次显示各个节点
         let showNode = (node, action, callback) => {
             startButtonNode.active = true;
@@ -166,15 +162,11 @@ cc.Class({
             node.runAction(cc.sequence(
                 action,
                 cc.callFunc(() => {
-                    if (callback) {
-                        callback();
-                    }
+                    callback && callback()
                 }, this)
             ));
         };
-
         this.gameOverMenu.active = true;
-
         let showNodeFunc = () => showNode(
             gameOverNode,
             cc.spawn(
@@ -192,22 +184,22 @@ cc.Class({
                     cc.fadeIn(0.5))
             )
         );
-        this.scheduleOnce(showNodeFunc, 0.55);
+        this.scheduleOnce(showNodeFunc, 0.55)
     },
     // 开始或者bird jump
     startGameOrJumpBird() {
         if (this.bird.state === Bird.State.Ready) {
-            this.gameStart();
+            this.gameStart()
         } else {
-            this.bird.rise();
+            this.bird.rise()
         }
     },
     // 事件控制
     enableInput(enable) {
         if (enable) {
-            this.node.on(cc.Node.EventType.TOUCH_START, this.startGameOrJumpBird, this);
+            this.node.on(cc.Node.EventType.TOUCH_START, this.startGameOrJumpBird, this)
         } else {
-            this.node.off(cc.Node.EventType.TOUCH_START, this.startGameOrJumpBird, this);
+            this.node.off(cc.Node.EventType.TOUCH_START, this.startGameOrJumpBird, this)
         }
     }
 })

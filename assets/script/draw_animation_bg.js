@@ -56,8 +56,6 @@ cc.Class({
     },
     update(dt) {
         this.ctx.clear();
-        for (let i = 0; i < this.circles.length; i++) {
-            this.updateDirection(this.circles[i]);
-        }
+        for (let i = 0; i < this.circles.length; i++) this.updateDirection(this.circles[i])
     }
 })

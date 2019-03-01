@@ -123,9 +123,7 @@ cc.Class({
     move() {
         if (this.putCount > 1 && this.succeedPutCount >= 3) {
             let i = this.succeedPutCount - 2;
-            if (i < 0) {
-                i = 0;
-            };
+            if (i < 0) i = 0;
             let time = this.blockJsComp.colliderSize.height / this.cameraSpeed;
             this.camera.node.stopAllActions();
             this.crane.stopAllActions();
@@ -140,9 +138,7 @@ cc.Class({
         if (this.isSucceed) {
             this.succeedPutCount++;
             this.craneRotation.switchDifficulty(); //判断切换吊机旋转速度角度
-            if (this.prevBlock) {
-                this.prevBlock.getComponent(cc.PhysicsBoxCollider).tag = 100;
-            };
+            if (this.prevBlock) this.prevBlock.getComponent(cc.PhysicsBoxCollider).tag = 100;
             this.waitBlock.getComponent(cc.PhysicsBoxCollider).tag = 102;
             this.prevBlock = this.waitBlock;
             this.score = this.score + (isPrefect ? 10 : 1)

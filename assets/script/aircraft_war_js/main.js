@@ -72,9 +72,7 @@ cc.Class({
         this.bestScore = this.globalUser.userGameInfo.aircraftWarBestScore || 0;
         this.maskBestScore.string = 'Best Score: ' + this.bestScore;
         //判断数据库字段 不存在则先更新字段
-        if (typeof this.globalUser.userGameInfo.aircraftWarBestScore != 'number') {
-            this.requestDbAircraftWarScore()
-        };
+        if (typeof this.globalUser.userGameInfo.aircraftWarBestScore != 'number') this.requestDbAircraftWarScore();
 
         this.bulletGroup.startAction();
         this.enemyGroup.startAction();
@@ -109,7 +107,7 @@ cc.Class({
         if (bool) {
             this.pauseBackBtn.opacity = 0;
             action = cc.sequence(
-                cc.scaleTo(0, .95, .95), 
+                cc.scaleTo(0, .95, .95),
                 cc.spawn(cc.fadeIn(.2), cc.scaleTo(.2, 1, 1))
             );
             this.pauseBackBtn.runAction(action)
@@ -153,15 +151,11 @@ cc.Class({
             cidCpt.enemyOver()
         };
         const enemyBulletChildren = this.enemyBulletGroup.node.children;
-        for (let i = 0; i < enemyBulletChildren.length; i++) {
-            this.enemyBulletGroup.bulletDied(enemyBulletChildren[i])
-        }
+        for (let i = 0; i < enemyBulletChildren.length; i++) this.enemyBulletGroup.bulletDied(enemyBulletChildren[i])
     },
     //接到炸弹
     getBuffBomb() {
-        if (parseInt(this.bombNoDisplay.string) < 3) { //多于三个炸弹就不累加
-            this.bombNoDisplay.string += 1;
-        }
+        if (parseInt(this.bombNoDisplay.string) < 3) this.bombNoDisplay.string += 1 //多于三个炸弹就不累加
     },
     //游戏结束
     gameOver() {

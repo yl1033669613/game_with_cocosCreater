@@ -17,13 +17,9 @@ cc.Class({
         this.bulletGroup.bulletDied(self.node);
     },
     update(dt) {
-        if (this.bulletGroup.curState != Gdt.commonInfo.gameState.start) {
-            return
-        };
+        if (this.bulletGroup.curState != Gdt.commonInfo.gameState.start) return;
         this.node.x += dt * this.xSpeed;
         this.node.y += dt * this.ySpeed;
-        if (this.node.y > this.node.parent.height / 2) {
-            this.bulletGroup.bulletDied(this.node)
-        }
+        if (this.node.y > this.node.parent.height / 2) this.bulletGroup.bulletDied(this.node)
     }
 })

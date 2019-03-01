@@ -33,9 +33,7 @@ cc.Class({
     },
     onLoad() {
         this.xSpeed = Math.random() * (this.xMaxSpeed - this.xMinSpeed) + this.xMinSpeed;
-        if (this.xMaxSpeed && Math.ceil(Math.random() * 10) < 5) {
-            this.xSpeed = -this.xSpeed
-        };
+        if (this.xMaxSpeed && Math.ceil(Math.random() * 10) < 5) this.xSpeed = -this.xSpeed;
         this.ySpeed = Math.random() * (this.yMaxSpeed - this.yMinSpeed) + this.yMinSpeed;
         this.enemyGroup = this.node.parent.getComponent('enemy_group');
         this.enemyBulletGroup = cc.find('Canvas/background/enemyBulletGroup').getComponent('enemy_bullet_group');
@@ -43,19 +41,15 @@ cc.Class({
     },
     onEnable() {
         if (this.enemyType != 1) {
-            this.getBulletCb = function (e) {
+            this.getBulletCb = function(e) {
                 this.enemyBulletGroup.enemyOpenFire(this.node)
             }.bind(this);
             this.schedule(this.getBulletCb, this.enemyBulletFreq)
         }
     },
     init() {
-        if (this.node.group != 'enemy') {
-            this.node.group = 'enemy'
-        };
-        if (this.hP != this.initHP) {
-            this.hP = this.initHP
-        };
+        if (this.node.group != 'enemy') this.node.group = 'enemy';
+        if (this.hP != this.initHP) this.hP = this.initHP;
         this.texturePic.active = true;
         this.nodeCollision.group = 'enemy'; //恢复碰撞状态
         if (this.ptcSys1 && this.ptcSys2) { //恢复粒子
@@ -98,9 +92,7 @@ cc.Class({
         //出屏幕后 回收节点
         if (this.node.y < -this.node.parent.height / 2 - this.node.height / 2) {
             this.enemyGroup.enemyDied(this.node, 0);
-            if (this.enemyType != 1) {
-                this.unschedule(this.getBulletCb)
-            }
+            if (this.enemyType != 1) this.unschedule(this.getBulletCb)
         }
     },
     //节点回收
@@ -108,12 +100,8 @@ cc.Class({
         let score = 0,
             anim = this.node.getComponent(cc.Animation),
             animName = 'blow_up';
-        if (isHero != 'isHero') {
-            score = this.score
-        };
-        if (this.enemyType != 1) {
-            this.unschedule(this.getBulletCb)
-        };
+        if (isHero != 'isHero') score = this.score;
+        if (this.enemyType != 1) this.unschedule(this.getBulletCb);
         this.texturePic.active = false;
         this.buffGroup.createHeroBuff(this.node);
         if (this.ptcSys1 && this.ptcSys2) {

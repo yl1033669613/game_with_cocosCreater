@@ -16,11 +16,8 @@ cc.Class({
         this.snake = this.node.getComponent("snake").snakeArray;
 
         // 初始生成障碍物 
-        if (this.obstacleCount) {
-            for (let i = 0; i < this.obstacleCount; i++) {
-                this.createObstacle();
-            }
-        }
+        if (this.obstacleCount)
+            for (let i = 0; i < this.obstacleCount; i++) this.createObstacle()
     },
     // 根据范围获取随机数
     getNumberInRange(min, max) {
@@ -52,21 +49,16 @@ cc.Class({
                         break;
                     }
                 };
-                if (aX < -(this.node.width / 2 - 30) || aX > (this.node.width / 2 - 30) || aY < -(this.node.height / 2 - 30) || aY > (this.node.height / 2 - 30)) {
-                    this.isOnSnake = true;
-                };
+                if (aX < -(this.node.width / 2 - 30) || aX > (this.node.width / 2 - 30) || aY < -(this.node.height / 2 - 30) || aY > (this.node.height / 2 - 30)) this.isOnSnake = true;
                 if (this.isOnSnake) break;
-
                 let p = {
                     x: aX,
                     y: aY
                 };
                 pointArr.push(p);
             };
-
             if (this.isOnSnake) pointArr = [];
         };
-
         for (let i = 0; i < pointArr.length; i++) {
             let b = cc.instantiate(this.obstaclePfb);
             this.node.addChild(b);

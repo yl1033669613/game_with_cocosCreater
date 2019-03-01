@@ -53,24 +53,22 @@ cc.Class({
         let newV2 = this.getNewEnemyPositon(newNode);
         newNode.setPosition(newV2);
         newNode.getComponent('enemy').poolName = poolName;
-        newNode.getComponent('enemy').init();
+        newNode.getComponent('enemy').init()
     },
     //敌机随机生成的位置
     getNewEnemyPositon(newEnemy) {
         //位于上方，先不可见
         const randx = (Math.random() * 2 - 1) * (this.node.parent.width / 2 - newEnemy.width / 2),
             randy = this.node.parent.height / 2 + newEnemy.height / 2;
-        return cc.v2(randx, randy);
+        return cc.v2(randx, randy)
     },
     enemyDied(nodeinfo, score) {
         const poolName = nodeinfo.getComponent('enemy').poolName;
         Gdt.common.backObjPool(this, poolName, nodeinfo);
         //增加分数
-        if (parseInt(score) > 0) {
-            this.main.gainScore(score);
-        }
+        if (parseInt(score) > 0) this.main.gainScore(score)
     },
     getScore() {
-        return this.main.getScore();
+        return this.main.getScore()
     }
 })

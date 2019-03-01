@@ -70,9 +70,7 @@ cc.Class({
         this.bestScore = this.globalUser.userGameInfo.tetrisBestScore || 0;
         this.db = wx.cloud.database();
         //判断数据库字段 不存在则先更新字段
-        if (typeof this.globalUser.userGameInfo.tetrisBestScore != 'number') {
-            this.requestDbTetrisBestScore();
-        }
+        if (typeof this.globalUser.userGameInfo.tetrisBestScore != 'number') this.requestDbTetrisBestScore()
     },
     //随机获取一个形状
     randomOne() {
@@ -88,11 +86,8 @@ cc.Class({
     //draw board
     drawBoard() {
         this.ctx.clear();
-        for (let r = 0; r < ROW; r++) {
-            for (let c = 0; c < COL; c++) {
-                this.drawRect(c, r, this.board[r][c]);
-            }
-        }
+        for (let r = 0; r < ROW; r++)
+            for (let c = 0; c < COL; c++) this.drawRect(c, r, this.board[r][c])
     },
     //绘制预览board
     drawPreviewShape() {
@@ -100,9 +95,7 @@ cc.Class({
         for (let r = 0; r < 4; r++) {
             for (let c = 0; c < 4; c++) {
                 this.previewShapeBoard[r][c] = '255/255/255/10';
-                if (this.rotateShape[r] && this.rotateShape[r][c]) {
-                    this.previewShapeBoard[r][c] = this.color
-                };
+                if (this.rotateShape[r] && this.rotateShape[r][c]) this.previewShapeBoard[r][c] = this.color;
                 this.drawPreviewRect(c, r, this.previewShapeBoard[r][c])
             }
         }
@@ -128,12 +121,9 @@ cc.Class({
     // 绘制形状
     fills(color) {
         for (let r = 0; r < this.rotateShape.length; r++) {
-            for (let c = 0; c < this.rotateShape.length; c++) {
-                // 只渲染被占用的位置
-                if (this.rotateShape[r][c]) {
-                    this.drawRect(this.x + c, this.y + r, color);
-                }
-            }
+            for (let c = 0; c < this.rotateShape.length; c++)
+            // 只渲染被占用的位置
+                if (this.rotateShape[r][c]) this.drawRect(this.x + c, this.y + r, color)
         }
     },
     // 绘制带颜色的形状
@@ -197,9 +187,7 @@ cc.Class({
         for (let r = 0; r < this.rotateShape.length; r++) {
             for (let c = 0; c < this.rotateShape.length; c++) {
                 // 跳过空格
-                if (!this.rotateShape[r][c]) {
-                    continue;
-                }
+                if (!this.rotateShape[r][c]) continue;
                 // 当形状触碰到board 上边界时游戏结束
                 if (this.y + r < 0) {
                     this.gameOver = true;
@@ -217,20 +205,13 @@ cc.Class({
         // 移除填满的行
         for (let r = 0; r < ROW; r++) {
             let isRowFull = true;
-            for (let c = 0; c < COL; c++) {
-                isRowFull = isRowFull && (this.board[r][c] != DFCOLOR);
-            };
+            for (let c = 0; c < COL; c++) isRowFull = isRowFull && (this.board[r][c] != DFCOLOR);
             if (isRowFull) {
                 // 当一行被填满时将 上面的方块向下移动
-                for (let y = r; y > 1; y--) {
-                    for (let c = 0; c < COL; c++) {
-                        this.board[y][c] = this.board[y - 1][c];
-                    }
-                };
+                for (let y = r; y > 1; y--)
+                    for (let c = 0; c < COL; c++) this.board[y][c] = this.board[y - 1][c];
                 // 第一行
-                for (let c = 0; c < COL; c++) {
-                    this.board[0][c] = DFCOLOR;
-                };
+                for (let c = 0; c < COL; c++) this.board[0][c] = DFCOLOR;
                 // 更新分数
                 this.score += 10
             }
@@ -246,22 +227,14 @@ cc.Class({
         for (let r = 0; r < shape.length; r++) {
             for (let c = 0; c < shape.length; c++) {
                 // 非形状所在区域 跳过
-                if (!shape[r][c]) {
-                    continue;
-                };
+                if (!shape[r][c]) continue;
                 let nxtX = this.x + c + x,
                     nxtY = this.y + r + y;
-                if (nxtX < 0 || nxtX >= COL || nxtY >= ROW) {
-                    return true;
-                };
+                if (nxtX < 0 || nxtX >= COL || nxtY >= ROW) return true;
                 // 跳过 nxtY < 0 初始位置为负数的情况
-                if (nxtY < 0) {
-                    continue;
-                };
+                if (nxtY < 0) continue;
                 // 判断是是否为非空格
-                if (this.board[nxtY][nxtX] != DFCOLOR) {
-                    return true;
-                }
+                if (this.board[nxtY][nxtX] != DFCOLOR) return true
             }
         };
         return false
@@ -281,14 +254,10 @@ cc.Class({
             let startPoint = e.getLocation();
             let ex = startPoint.x;
             let ey = startPoint.y;
-            let curx = ex - sx, 
+            let curx = ex - sx,
                 cury = ey - sy;
-            if (Math.abs(curx) > 12 || Math.abs(cury / curx) > 2) {
-                dx = curx
-            };
-            if (Math.abs(cury) > 12 || Math.abs(curx / cury) > 2) {
-                dy = cury
-            }
+            if (Math.abs(curx) > 12 || Math.abs(cury / curx) > 2) dx = curx;
+            if (Math.abs(cury) > 12 || Math.abs(curx / cury) > 2) dy = cury
         }, this);
 
         this.node.on(cc.Node.EventType.TOUCH_END, (e) => {
@@ -345,9 +314,7 @@ cc.Class({
 
         for (let r = 0; r < ROW; r++) {
             this.board[r] = [];
-            for (let c = 0; c < COL; c++) {
-                this.board[r][c] = DFCOLOR;
-            }
+            for (let c = 0; c < COL; c++) this.board[r][c] = DFCOLOR;
         };
         this.drawBoard();
         this.randomOne();
@@ -367,16 +334,12 @@ cc.Class({
         //create board
         for (let r = 0; r < ROW; r++) {
             this.board[r] = [];
-            for (let c = 0; c < COL; c++) {
-                this.board[r][c] = DFCOLOR;
-            }
+            for (let c = 0; c < COL; c++) this.board[r][c] = DFCOLOR
         };
         //create preview board
         for (let r = 0; r < 4; r++) {
             this.previewShapeBoard[r] = [];
-            for (let c = 0; c < 4; c++) {
-                this.previewShapeBoard[r][c] = '255/255/255/10';
-            }
+            for (let c = 0; c < 4; c++) this.previewShapeBoard[r][c] = '255/255/255/10'
         };
 
         this.scoreLabel.string = 'score:' + this.score;
@@ -388,9 +351,7 @@ cc.Class({
         this.fps += dt * 1000;
         if (this.fps > this.dropSpeed) {
             this.fps = 0;
-            if (!this.gameOver) {
-                this.moveDown();
-            }
+            if (!this.gameOver) this.moveDown()
         }
     }
 })

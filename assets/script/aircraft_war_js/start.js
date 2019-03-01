@@ -12,7 +12,7 @@ cc.Class({
         cc.director.preloadScene('aircraft_war_game');
         this.loadingBgAction();
 
-        wx.showLoading({title: '请稍候...', mask: true});
+        wx.showLoading({ title: '请稍候...', mask: true });
         this.loadNoticePic()
     },
     startGame() {
@@ -30,9 +30,7 @@ cc.Class({
         const self = this;
         if (Gdt.loopBg) {
             cc.loader.load(Gdt.loopBg, (err, texture) => {
-                if (!err) {
-                    this.loadingBg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture)
-                };
+                if (!err) this.loadingBg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
                 wx.hideLoading()
             });
             return

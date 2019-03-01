@@ -10,13 +10,9 @@ cc.Class({
         this.canScroll = true;
     },
     update(dt) {
-        if (!this.canScroll) {
-            return;
-        }
+        if (!this.canScroll) return;
         this.node.x += this.speed * dt;
-        if (this.node.x <= this.resetX) {
-            this.node.x -= this.resetX;
-        }
+        if (this.node.x <= this.resetX) this.node.x -= this.resetX
     },
     stopScroll() {
         this.canScroll = false;

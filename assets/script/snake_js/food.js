@@ -37,7 +37,7 @@ cc.Class({
     getNumberInRange(min, max) {
         let range = max - min;
         let r = Math.random() * 2 - 1;
-        return Math.round(r * range + min);
+        return Math.round(r * range + min)
     },
     //设置食物出现的随机位置
     foodPosShow() {
@@ -47,30 +47,25 @@ cc.Class({
             this.isOnSnake = false;
             indexX = this.getNumberInRange(0, this.node.width / 30 - 1);
             indexY = this.getNumberInRange(0, this.node.height / 30 - 1);
-
             // 先判断位置是否重合
             for (let i = 0; i < this.snake.length; i++) {
                 if (this.snake[i].x == indexX * 15 && this.snake[i].y == indexY * 15) {
                     //如果判定重合，将其设置为true，使随机数重给
                     this.isOnSnake = true;
-                    break;
+                    break
                 }
             };
-
             // 判断食物是否与障碍物重合
             if (!this.isOnSnake) {
                 for (let i = 0; i < this.obstacleArr.length; i++) {
                     if (indexX * 15 == this.obstacleArr[i].x && indexY * 15 == this.obstacleArr[i].y) {
                         //如果判定重合，将其设置为true，使随机数重给
                         this.isOnSnake = true;
-                        break;
+                        break
                     }
                 }
             };
-
-            if (indexX * 15 < -this.node.width / 2 + 30 || indexX * 15 > this.node.width / 2 - 30 || indexY * 15 < -this.node.height / 2 + 30 || indexY * 15 > this.node.height / 2 - 30) {
-                this.isOnSnake = true
-            }
+            if (indexX * 15 < -this.node.width / 2 + 30 || indexX * 15 > this.node.width / 2 - 30 || indexY * 15 < -this.node.height / 2 + 30 || indexY * 15 > this.node.height / 2 - 30) this.isOnSnake = true
         };
         // 判断对象池中是否有空闲对象
         if (this.foodPool.size() > 0) {
@@ -88,6 +83,6 @@ cc.Class({
     // 回收食物
     releaseFood() {
         this.foodPool.put(this.foodInstance);
-        this.foodInstance = null;
+        this.foodInstance = null
     }
 })

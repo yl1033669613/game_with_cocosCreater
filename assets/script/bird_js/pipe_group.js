@@ -17,7 +17,7 @@ cc.Class({
     init(pipeManager) {
         this.pipeManager = pipeManager;
         this.initPositionX();
-        this.initPositionY();
+        this.initPositionY()
     },
     // 设置节点在x轴的初始位置
     initPositionX() {
@@ -25,26 +25,22 @@ cc.Class({
         let sceneLeft = -visibleSize.width / 2;
         let sceneRight = visibleSize.width / 2;
         this.node.x = sceneRight + 300;
-        this.recylceX = sceneLeft - Math.max(this.topPipe.width, this.bottomPipe.width);
+        this.recylceX = sceneLeft - Math.max(this.topPipe.width, this.bottomPipe.width)
     },
     // 设置上、下管道y轴位置以及之间的距离 
     initPositionY() {
         const visibleSize = cc.director.getVisibleSize();
         let topPipeMaxY = visibleSize.height / 2 - this.topPipeMinHeight;
-        let bottomPipeMinY = cc.find("Canvas/ground").y + cc.find("Canvas/ground").height / 2 + this.bottomPipeMinHeight; // Prefab不能通过属性检查器获取节点，只能动态查找
+        let bottomPipeMinY = cc.find("Canvas/ground").y + cc.find("Canvas/ground").height / 2 + this.bottomPipeMinHeight; 
         let spacing = this.spacingMinValue + Math.random() * (this.spacingMaxValue - this.spacingMinValue);
         this.topPipe.y = topPipeMaxY - Math.random() * (topPipeMaxY - bottomPipeMinY - spacing);
-        this.bottomPipe.y = this.topPipe.y - spacing;
+        this.bottomPipe.y = this.topPipe.y - spacing
     },
     update(dt) {
-        if (!this.pipeManager.isRunning) {
-            return;
-        }
+        if (!this.pipeManager.isRunning) return;
         // 实时更新管道位置
         this.node.x += this.pipeManager.pipeMoveSpeed * dt;
         // 超出屏幕显示范围了，就可以回收本对象了
-        if (this.node.x < this.recylceX) {
-            this.pipeManager.recyclePipe(this);
-        }
+        if (this.node.x < this.recylceX) this.pipeManager.recyclePipe(this)
     }
 })

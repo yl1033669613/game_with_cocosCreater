@@ -26,11 +26,8 @@ cc.Class({
     createHeroBuff(emInfo) {
         const theEnemy = emInfo.getComponent('enemy');
         for (let i = 0; i < this.buffG.length; i++) {
-            if (theEnemy.buffType == this.buffG[i].name) {
-                if (Math.random() <= this.buffG[i].probability) { //概率生成
-                    this.getNewBuff(this.buffG[i], emInfo)
-                }
-            }
+            if (theEnemy.buffType == this.buffG[i].name)
+                if (Math.random() <= this.buffG[i].probability) this.getNewBuff(this.buffG[i], emInfo) //概率生成buff
         }
     },
     getNewBuff(BuffInfo, emInfo) {
@@ -39,21 +36,21 @@ cc.Class({
             emPos = emInfo.getPosition(),
             newPos = cc.p(emPos.x, emPos.y);
         newNode.setPosition(newPos);
-        newNode.getComponent('buff').poolName = poolName;
+        newNode.getComponent('buff').poolName = poolName
     },
     //重新开始
     resumeAction() {
         this.enabled = true;
-        this.curState = Gdt.commonInfo.gameState.start;
+        this.curState = Gdt.commonInfo.gameState.start
     },
     //暂停
     pauseAction() {
         this.enabled = false;
-        this.curState = Gdt.commonInfo.gameState.pause;
+        this.curState = Gdt.commonInfo.gameState.pause
     },
     buffDied(nodeinfo) {
         //回收节点
         const poolName = nodeinfo.getComponent('buff').poolName;
-        Gdt.common.backObjPool(this, poolName, nodeinfo);
+        Gdt.common.backObjPool(this, poolName, nodeinfo)
     }
 })

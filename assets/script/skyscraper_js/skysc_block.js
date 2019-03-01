@@ -54,9 +54,7 @@ cc.Class({
                     let d = Math.abs(Math.abs(selfNode.x) - Math.abs(otherNode.x));
                     if (d <= otherCollider.node.width / 2) {
                         let isPrefect = false;
-                        if (d <= 3) {
-                            isPrefect = true;
-                        };
+                        if (d <= 3) isPrefect = true;
                         globals.gm.handleResult(isPrefect);
                     } else {
                         this.checkHp()
