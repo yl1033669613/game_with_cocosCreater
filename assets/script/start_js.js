@@ -29,8 +29,8 @@ const SCENESLIST = [{
     title: ' Don\'t touch white block',
     name: 'dontt_white_block_start'
 }, {
-    title: ' Test game 11',
-    name: ''
+    title: ' Fruit Ninja',
+    name: 'fruit_ninja_start'
 }, {
     title: ' Test game 12',
     name: ''
@@ -82,7 +82,7 @@ cc.Class({
         if (self.noticeOpen && self.noticeLoadFirst) {
             wx.showLoading({ title: '请稍候...' });
             self.loadNoticePic(() => { //wx cloud
-                self.noticeMoveAction(dt);
+                self.noticeMoveAction(dt)
             });
         } else {
             self.noticeMoveAction(dt);

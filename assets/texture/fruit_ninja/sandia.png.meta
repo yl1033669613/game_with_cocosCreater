@@ -1,0 +1,30 @@
+{
+  "ver": "2.0.0",
+  "uuid": "1b272bda-0c4b-40a6-96c7-21464b2c8018",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "sandia": {
+      "ver": "1.0.3",
+      "uuid": "14e27ebd-e62e-4e82-af5a-9d8a4b7e5d62",
+      "rawTextureUuid": "1b272bda-0c4b-40a6-96c7-21464b2c8018",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 98,
+      "height": 85,
+      "rawWidth": 98,
+      "rawHeight": 85,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
