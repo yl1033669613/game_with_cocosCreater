@@ -20,18 +20,27 @@ cc.Class({
     knifeMove() {
         this.node.on(cc.Node.EventType.TOUCH_START, this.startEvent, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.moveEvent, this);
+        this.node.on(cc.Node.EventType.TOUCH_END, this.endEvent, this);
     },
     offKnifeMove() {
         this.node.off(cc.Node.EventType.TOUCH_START, this.startEvent, this);
         this.node.off(cc.Node.EventType.TOUCH_MOVE, this.moveEvent, this);
+        this.node.off(cc.Node.EventType.TOUCH_END, this.endEvent, this);
     },
     startEvent(e) {
         let pos = this.node.convertToNodeSpaceAR(new cc.Vec2(e.getLocation()));
         this.knife.setPosition(pos);
+        this.knife.group = 'knife';
         this.knifeMotionS.reset();
     },
     moveEvent(e) {
         let pos = this.node.convertToNodeSpaceAR(new cc.Vec2(e.getLocation()));
         this.knife.setPosition(pos);
+    },
+    endEvent(e) {
+        this.knife.group = 'default';
+    },
+    backStart() {
+        console.log(111)
     }
 });
