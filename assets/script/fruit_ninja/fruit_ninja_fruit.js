@@ -10,6 +10,7 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        type: 'fruit',
         forceHorzMin: 0,
         forceHorzMax: 1000,
         forceMin: 30000,
@@ -17,15 +18,21 @@ cc.Class({
     },
     onLoad() {
         this.poolName = '';
+        this.gameObj = cc.find('/Canvas/gameContainer').getComponent('fruit_ninja_game');
         this.parent = this.node.parent.getComponent('fruit_ninja_group');
-        this.ani = this.splitAni.getComponent('cc.Animation');
+        if (this.type == 'fruit') { //如果是炸弹没有被切开的动画
+            this.ani = this.splitAni.getComponent('cc.Animation');
+        }
     },
-    init(poolName) {
+    init(poolName, score) {
         this.poolName = poolName;
+        this.score = score;
         this.isCut = false;
-        this.complFruit.active = true;
-        this.splitAni.active = false;
-        this.recoveryAniFirstFps();
+        if (this.type == 'fruit') {
+            this.complFruit.active = true;
+            this.splitAni.active = false;
+            this.recoveryAniFirstFps();
+        };
         let fruitNodeRigidBody = this.node.getComponent(cc.RigidBody);
         let forceY = Math.floor(utils.random(this.forceMin, this.forceMax)),
             forceX = Math.floor(utils.random(this.forceHorzMin, this.forceHorzMax));
@@ -34,7 +41,15 @@ cc.Class({
     },
     onCollisionEnter(other, self) {
         if (other.tag == 50) {
-            if (!this.isCut) this.playSplitAni();
+            if (!this.isCut) {
+                if (this.type == 'fruit') {
+                    this.playSplitAni();
+                    this.gameObj.updateScore(1, this.score);
+                } else {
+                    // 炸弹
+                    this.parent.cutBombRemoveAllChildren()
+                }
+            };
             this.isCut = true;
         };
         if (other.tag == 100) {
@@ -57,7 +72,10 @@ cc.Class({
             curve.sample(info.time, info.ratio, this);
         }
     },
-    backThisNode() {
+    backThisNode(isBombBack) {
+        if (!isBombBack && this.type == 'fruit' && !this.isCut) {
+            this.gameObj.updateScore(0, this.score);
+        };
         utils.backObjPool(this.parent, this.poolName, this.node);
     }
 });

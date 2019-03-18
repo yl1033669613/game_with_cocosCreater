@@ -1,0 +1,63 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "fruitDSplit",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.4,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "sptRight": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 13
+            },
+            {
+              "frame": 0.4,
+              "value": 30
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.4,
+              "value": 30
+            }
+          ]
+        }
+      },
+      "sptLeft": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": -11
+            },
+            {
+              "frame": 0.4,
+              "value": -30
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.4,
+              "value": -40
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}
