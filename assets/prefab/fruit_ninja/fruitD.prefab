@@ -988,10 +988,12 @@
     "splitAni": {
       "__id__": 11
     },
+    "type": "fruit",
     "forceHorzMin": 0,
     "forceHorzMax": 1000,
     "forceMin": 35000,
-    "forceMax": 40000
+    "forceMax": 40000,
+    "colorType": 4
   },
   {
     "__type__": "cc.RigidBody",

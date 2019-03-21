@@ -14,12 +14,14 @@ cc.Class({
         forceHorzMin: 0,
         forceHorzMax: 1000,
         forceMin: 30000,
-        forceMax: 35000
+        forceMax: 35000,
+        colorType: 1 
     },
     onLoad() {
         this.poolName = '';
         this.gameObj = cc.find('/Canvas/gameContainer').getComponent('fruit_ninja_game');
         this.parent = this.node.parent.getComponent('fruit_ninja_group');
+        this.fruitJuiceGroup = cc.find('/Canvas/gameContainer/fruitJuice').getComponent('fruit_juice_group');
         if (this.type == 'fruit') { //如果是炸弹没有被切开的动画
             this.ani = this.splitAni.getComponent('cc.Animation');
         }
@@ -43,6 +45,7 @@ cc.Class({
         if (other.tag == 50) {
             if (!this.isCut) {
                 if (this.type == 'fruit') {
+                    this.fruitJuiceGroup.createjuiceBg(this.node.getPosition(), this.colorType);
                     this.playSplitAni();
                     this.gameObj.updateScore(1, this.score);
                 } else {

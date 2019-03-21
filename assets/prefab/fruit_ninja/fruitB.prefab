@@ -1011,10 +1011,12 @@
     "splitAni": {
       "__id__": 11
     },
+    "type": "fruit",
     "forceHorzMin": 500,
     "forceHorzMax": 1000,
     "forceMin": 35000,
-    "forceMax": 40000
+    "forceMax": 40000,
+    "colorType": 2
   },
   {
     "__type__": "cc.PolygonCollider",

@@ -433,7 +433,8 @@
     "forceHorzMin": 0,
     "forceHorzMax": 1000,
     "forceMin": 38000,
-    "forceMax": 46000
+    "forceMax": 46000,
+    "colorType": 4
   },
   {
     "__type__": "cc.RigidBody",

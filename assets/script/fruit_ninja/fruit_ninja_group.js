@@ -5,7 +5,6 @@ let fruitG = cc.Class({
     properties: {
         name: '',
         initPoolCount: 10,
-        juiceColor: 1,
         score: 0,
         type: 'fruit',
         prefab: {
@@ -81,7 +80,7 @@ cc.Class({
     flashScreen() {
         this.flashNode.active = true;
         this.flashNode.opacity = 230;
-        let action = cc.sequence(cc.fadeOut(0.65), cc.callFunc(() => {
+        let action = cc.sequence(cc.fadeOut(0.8), cc.callFunc(() => {
             this.flashNode.active = false;
         }, this));
         this.flashNode.runAction(action);
