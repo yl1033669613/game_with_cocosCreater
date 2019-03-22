@@ -1,4 +1,4 @@
-## 使用cocosCreator 开发的wx小游戏 有贪吃蛇，flappy bird， 2048, 见缝插针，烟花，俄罗斯方块， 飞机大战， follow the circle， skyscraper(简化版), 别踩白块（无限模式）,fruit ninja（未完成）
+## 使用cocosCreator 开发的wx小游戏 有贪吃蛇，flappy bird， 2048, 见缝插针，烟花，俄罗斯方块， 飞机大战， follow the circle， skyscraper(简化版), 别踩白块（无限模式）,fruit ninja
 
 > cocosCreator project
 
