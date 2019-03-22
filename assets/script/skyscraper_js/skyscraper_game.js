@@ -75,7 +75,7 @@ cc.Class({
     start() {
         this.craneRotation.craneStrRotate();
         this.updateUi();
-        this.generateBlock()
+        this.generateBlock();
     },
     //重新装载
     generateBlock() {
@@ -98,7 +98,7 @@ cc.Class({
         this.isSucceed = true;
     },
     backObjPool(nodeInfo) {
-        this.poolBlock.put(nodeInfo)
+        this.poolBlock.put(nodeInfo);
     },
     //放置
     putNext(e) {
@@ -141,14 +141,14 @@ cc.Class({
             if (this.prevBlock) this.prevBlock.getComponent(cc.PhysicsBoxCollider).tag = 100;
             this.waitBlock.getComponent(cc.PhysicsBoxCollider).tag = 102;
             this.prevBlock = this.waitBlock;
-            this.score = this.score + (isPrefect ? 10 : 1)
+            this.score = this.score + (isPrefect ? 10 : 1);
         } else {
             // console.log("放置失败！");
         };
         this.updateUi();
         this.move();
         this.scheduleOnce(() => {
-            this.generateBlock()
+            this.generateBlock();
         }, 0.3)
     },
     updateUi() {
@@ -162,12 +162,12 @@ cc.Class({
         this.gameOverMask.active = true;
         this.gameOverMask.opacity = 0;
         this.gameOverMask.runAction(cc.fadeIn(.3));
-        this.updateUi()
+        this.updateUi();
     },
     restartTheGame() {
-        cc.director.loadScene('skyscraper_game')
+        cc.director.loadScene('skyscraper_game');
     },
     backStartPage() {
-        cc.director.loadScene('skyscraper_start')
+        cc.director.loadScene('skyscraper_start');
     }
 })

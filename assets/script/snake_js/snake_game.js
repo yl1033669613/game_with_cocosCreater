@@ -21,7 +21,7 @@ cc.Class({
         // frame
         this.frames = 0;
         // snake 
-        this.snake = this.gameContainer.getComponent("snake")
+        this.snake = this.gameContainer.getComponent("snake");
     },
     showGameInfo() {
         this.gameInfo.active = true;
@@ -83,6 +83,6 @@ cc.Class({
                 break;
         };
         this.frames++;
-        if (this.frames % this.snakeMoveSpeed === 0) this.snake.snakeMove()
+        if (this.frames % this.snakeMoveSpeed === 0) this.snake.snakeMove();
     }
 })

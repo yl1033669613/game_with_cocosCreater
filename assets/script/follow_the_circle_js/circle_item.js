@@ -53,16 +53,16 @@ cc.Class({
         for (let i = 0; i < this.tapNum; i++) {
             let obj = { ang: this.random(0, Math.PI * 2), speed: this.random(0.008, 0.03), r: this.cirCenterR + this.planetR + (i * this.planetR * 2) + 3, opc: 255 - (65 * i) };
             this.drawPlanetPoint(obj.ang, obj.r);
-            this.planetArr.push(obj)
+            this.planetArr.push(obj);
         };
         this.circleActive = true;
-        this.drawCircleItem(this.color, this.cirBorderR, this.cirCenterR)
+        this.drawCircleItem(this.color, this.cirBorderR, this.cirCenterR);
     },
     itemCircleInitCount(num) {
         this.itemCount = this.itemCount + num * this.cirHideMul;
         this.circleCountCb = function(e) {
             this.circleActive = false;
-            this.noTouchHideAnimation()
+            this.noTouchHideAnimation();
         }.bind(this);
         this.scheduleOnce(this.circleCountCb, this.itemCount);
     },
@@ -71,7 +71,7 @@ cc.Class({
             if (this.tapNum > 0) {
                 this.tapNum--;
                 this.planetArr.splice(this.planetArr.length - 1, 1);
-                this.centerNum.string = this.tapNum
+                this.centerNum.string = this.tapNum;
             };
             if (this.circleActive && this.tapNum == 0) {
                 this.planetCtx.clear();
@@ -79,7 +79,7 @@ cc.Class({
                 this.isTouch = true;
                 this.circleActive = false;
                 this.unschedule(this.circleCountCb);
-                this.circleGroupO.updateCircleGroup(this.color, true)
+                this.circleGroupO.updateCircleGroup(this.color, true);
             }
         }
     },
@@ -99,7 +99,7 @@ cc.Class({
         this.ctx.close();
         this.ctx.fillColor = new cc.Color(currColor[0], currColor[1], currColor[2], currColor[3]);
         this.ctx.circle(centerPointX, centerPointY, centerR);
-        this.ctx.fill()
+        this.ctx.fill();
     },
     // 点击动画
     drawCircleItemAnimationTouched(currBR, currCR, currOpc) {
@@ -115,11 +115,11 @@ cc.Class({
                 bR: bR,
                 cR: cR,
                 opc: opc
-            }
+            };
         } else {
             this.isTouch = false;
             this.removeThisCircle(this.node);
-            return ''
+            return '';
         }
     },
     //非点击消失动画
@@ -129,13 +129,13 @@ cc.Class({
         let action = cc.sequence(cc.scaleTo(1.1, 0, 0).easing(cc.easeExponentialOut(1.1)), cc.callFunc(() => {
             this.removeThisCircle(this.node);
         }, this));
-        this.node.runAction(action)
+        this.node.runAction(action);
     },
     hideCenterNum() {
-        this.centerNum.node.runAction(cc.fadeOut(.2))
+        this.centerNum.node.runAction(cc.fadeOut(.2));
     },
     removeThisCircle(node) {
-        this.circleGroupO.backObjPool(node)
+        this.circleGroupO.backObjPool(node);
     },
     updateCirclesPos() {
         let parentW = this.node.parent.width,
@@ -144,14 +144,14 @@ cc.Class({
         this.node.x += Math.cos(this.circleMoveObj.angle) * this.circleMoveSpeed;
         this.node.y += Math.sin(this.circleMoveObj.angle) * this.circleMoveSpeed;
         if (this.node.x < -parentW / 2 + this.node.width / 2) {
-            this.circleMoveObj.angle = this.getWallCollisionDir(this.circleMoveObj.angle, 'left')
+            this.circleMoveObj.angle = this.getWallCollisionDir(this.circleMoveObj.angle, 'left');
         } else if (this.node.x > parentW / 2 - this.node.width / 2) {
-            this.circleMoveObj.angle = this.getWallCollisionDir(this.circleMoveObj.angle, 'right')
+            this.circleMoveObj.angle = this.getWallCollisionDir(this.circleMoveObj.angle, 'right');
         };
         if (this.node.y < -parentH / 2 + this.node.height / 2) {
-            this.circleMoveObj.angle = this.getWallCollisionDir(this.circleMoveObj.angle, 'bottom')
+            this.circleMoveObj.angle = this.getWallCollisionDir(this.circleMoveObj.angle, 'bottom');
         } else if (this.node.y > parentH / 2 - this.node.height) {
-            this.circleMoveObj.angle = this.getWallCollisionDir(this.circleMoveObj.angle, 'top')
+            this.circleMoveObj.angle = this.getWallCollisionDir(this.circleMoveObj.angle, 'top');
         };
         if (this.circleMoveObj.tick > this.circleMoveObj.tickMax) {
             this.circleMoveObj.angle = this.random(0, Math.PI * 2);
@@ -161,29 +161,29 @@ cc.Class({
     },
     getWallCollisionDir(ang, wallType) { //获取撞墙之后的角度
         if (ang == 0) {
-            return Math.PI
+            return Math.PI;
         } else if (ang == Math.PI) {
-            return 0
+            return 0;
         } else if (ang == 2 * Math.PI) {
-            return Math.PI
+            return Math.PI;
         };
         if (wallType == 'left' || wallType == 'right') {
             if (ang < Math.PI) {
-                return Math.PI - ang
+                return Math.PI - ang;
             } else {
-                return 3 * Math.PI - ang
+                return 3 * Math.PI - ang;
             }
         } else {
-            return 2 * Math.PI - ang
+            return 2 * Math.PI - ang;
         }
     },
     onCollisionEnter(other, self) {
         if (this.circleMoveObj.angle < Math.PI) {
-            this.circleMoveObj.angle = Math.PI + this.circleMoveObj.angle
+            this.circleMoveObj.angle = Math.PI + this.circleMoveObj.angle;
         } else {
-            this.circleMoveObj.angle = this.circleMoveObj.angle - Math.PI
+            this.circleMoveObj.angle = this.circleMoveObj.angle - Math.PI;
         };
-        this.isCollision = true
+        this.isCollision = true;
     },
     random(min, max) { //获取随机数
         return Math.random() * (max - min) + min;
@@ -197,13 +197,13 @@ cc.Class({
         currY = centerPY + r * Math.sin(ang);
         this.planetCtx.fillColor = new cc.Color(currColor[0], currColor[1], currColor[2], opc);
         this.planetCtx.circle(currX, currY, this.planetR);
-        this.planetCtx.fill()
+        this.planetCtx.fill();
     },
     updatePlanetPointMove() {
         this.planetCtx.clear();
         for (let i = 0; i < this.planetArr.length; i++) {
             this.planetArr[i].ang += this.planetArr[i].speed;
-            this.drawPlanetPoint(this.planetArr[i].ang, this.planetArr[i].r, this.planetArr[i].opc)
+            this.drawPlanetPoint(this.planetArr[i].ang, this.planetArr[i].r, this.planetArr[i].opc);
         }
     },
     update(dt) { //circle实时的调用Graphics API 进行动画绘制，消耗大量性能不建议使用，最好的方法是只调用一次绘制利用js动作API操作组件
@@ -215,7 +215,7 @@ cc.Class({
         };
         if (this.circleActive) {
             this.updateCirclesPos();
-            this.updatePlanetPointMove()
+            this.updatePlanetPointMove();
         }
     }
 })

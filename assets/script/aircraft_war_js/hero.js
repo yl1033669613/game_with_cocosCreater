@@ -32,7 +32,7 @@ cc.Class({
         //setting hero pos
         this.node.x = 0;
         this.node.y = -(this.node.parent.height / 2) + (this.node.height / 2) + 12;
-        this.setHeroHpPregress()
+        this.setHeroHpPregress();
     },
     onDrag() {
         this.node.parent.on(cc.Node.EventType.TOUCH_START, this.dragStart, this);
@@ -71,31 +71,31 @@ cc.Class({
         let act = cc.sequence(cc.fadeTo(.2, 100), cc.fadeTo(.2, 0), cc.callFunc(() => {
             this.heroDropHpBg.active = false;
         }, this));
-        this.heroDropHpBg.runAction(act)
+        this.heroDropHpBg.runAction(act);
     },
     //碰撞监测
     onCollisionEnter(other, self) {
         if (other.node.group == 'buff') {
             if (other.node.name == 'buffBullet') {
-                this.bulletGroup.changeBullet(other.node.name)
+                this.bulletGroup.changeBullet(other.node.name);
             } else if (other.node.name == 'buffBomb') {
-                this.main.getBuffBomb()
+                this.main.getBuffBomb();
             } else if (other.node.name == 'buffHeart') {
                 if (this.heroInitHp - this.heroHp >= 5) {
-                    this.heroHp = this.heroHp + 5
+                    this.heroHp = this.heroHp + 5;
                 } else {
-                    this.heroHp = this.heroInitHp
+                    this.heroHp = this.heroInitHp;
                 }
             }
         } else if (other.node.group == 'enemy') {
             const enemy = other.node.parent.getComponent('enemy');
             this.heroHp -= enemy.heroDropHp;
             other.node.group = 'default'; //防止敌人死亡之后再次发生碰撞
-            if (this.heroHp > 0) this.heroHitByEnemyShowBlood()
+            if (this.heroHp > 0) this.heroHitByEnemyShowBlood();
         } else if (other.node.group == 'enemyBullet') {
             const enemyBullet = other.node.getComponent('enemy_bullet');
             this.heroHp -= enemyBullet.hpDrop;
-            if (this.heroHp > 0) this.heroHitByEnemyShowBlood()
+            if (this.heroHp > 0) this.heroHitByEnemyShowBlood();
         } else {
             return false;
         };
@@ -105,10 +105,10 @@ cc.Class({
             let animation = this.node.getComponent(cc.Animation);
             animation.play('blow_up');
             animation.on('finished', this.onFinished, this);
-            this.main.gameOver()
+            this.main.gameOver();
         }
     },
     onFinished(event) { //动画结束后
-        this.node.destroy()
+        this.node.destroy();
     }
 })

@@ -19,7 +19,7 @@ cc.Class({
         gbData.gameLevelData = globalUser.needleLevelData;
 
         //设置level text
-        this.levelBtnLevelTxt.string = 'level '+ gbData.gameLevel +' play'
+        this.levelBtnLevelTxt.string = 'level '+ gbData.gameLevel +' play';
     },
     levelModeMaskOpen() {
         this.levelModeMask.active = true;
@@ -39,13 +39,13 @@ cc.Class({
     },
     freeMode() {
         gbData.mode = 'free';
-        cc.director.loadScene('game_needles')
+        cc.director.loadScene('game_needles');
     },
     levelModePlay() {
         gbData.mode = 'level';
-        cc.director.loadScene('game_needles')
+        cc.director.loadScene('game_needles');
     },
     backList() {
-        cc.director.loadScene('startscene')
+        cc.director.loadScene('startscene');
     }
 })

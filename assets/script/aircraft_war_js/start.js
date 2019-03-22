@@ -13,17 +13,17 @@ cc.Class({
         this.loadingBgAction();
 
         wx.showLoading({ title: '请稍候...', mask: true });
-        this.loadNoticePic()
+        this.loadNoticePic();
     },
     startGame() {
-        cc.director.loadScene('aircraft_war_game')
+        cc.director.loadScene('aircraft_war_game');
     },
     backList() {
-        cc.director.loadScene('startscene')
+        cc.director.loadScene('startscene');
     },
     loadingBgAction() {
         const act = cc.repeatForever(cc.sequence(cc.tintTo(.6, 202, 111, 111), cc.tintTo(.6, 206, 154, 114), cc.tintTo(.6, 206, 202, 114), cc.tintTo(.6, 118, 206, 114), cc.tintTo(.6, 114, 188, 206), cc.tintTo(.6, 114, 136, 206), cc.tintTo(.6, 185, 114, 206)));
-        this.loadingBg.runAction(act)
+        this.loadingBg.runAction(act);
     },
     //加载背景图片 wx cloud
     loadNoticePic(cb) {
@@ -31,9 +31,9 @@ cc.Class({
         if (Gdt.loopBg) {
             cc.loader.load(Gdt.loopBg, (err, texture) => {
                 if (!err) this.loadingBg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
-                wx.hideLoading()
+                wx.hideLoading();
             });
-            return
+            return;
         };
         const db = wx.cloud.database();
         db.collection('gameConfig').doc('XDWYPuSiwXKAQnli').get({
@@ -47,19 +47,19 @@ cc.Class({
                         cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
                             if (!err) {
                                 Gdt.loopBg = texture;
-                                this.loadingBg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture)
+                                this.loadingBg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
                             }
                         })
                     },
                     fail: err => {
                         wx.hideLoading();
-                        console.log(err)
+                        console.log(err);
                     }
                 })
             },
             fail: e => {
                 wx.hideLoading();
-                console.log(e)
+                console.log(e);
             }
         })
     }

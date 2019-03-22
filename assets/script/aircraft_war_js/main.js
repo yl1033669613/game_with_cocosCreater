@@ -76,7 +76,7 @@ cc.Class({
 
         this.bulletGroup.startAction();
         this.enemyGroup.startAction();
-        this.bomb.on(cc.Node.EventType.TOUCH_START, this.bombOnclick, this)
+        this.bomb.on(cc.Node.EventType.TOUCH_START, this.bombOnclick, this);
     },
     bombOnclick() {
         if (this.isGameOver) return;
@@ -92,11 +92,11 @@ cc.Class({
             if (this.curState == Gdt.commonInfo.gameState.pause) {
                 this.resumeAction();
                 this.curState = Gdt.commonInfo.gameState.start;
-                this.showBackBtnPausing(false)
+                this.showBackBtnPausing(false);
             } else if (this.curState == Gdt.commonInfo.gameState.start) {
                 this.pauseAction();
                 this.curState = Gdt.commonInfo.gameState.pause;
-                this.showBackBtnPausing(true)
+                this.showBackBtnPausing(true);
             }
         }
     },
@@ -110,7 +110,7 @@ cc.Class({
                 cc.scaleTo(0, .95, .95),
                 cc.spawn(cc.fadeIn(.2), cc.scaleTo(.2, 1, 1))
             );
-            this.pauseBackBtn.runAction(action)
+            this.pauseBackBtn.runAction(action);
         }
     },
     //游戏继续
@@ -148,10 +148,10 @@ cc.Class({
         for (let i = 0; i < children.length; i++) {
             let cidCpt = children[i].getComponent('enemy');
             cidCpt.hP = 0;
-            cidCpt.enemyOver()
+            cidCpt.enemyOver();
         };
         const enemyBulletChildren = this.enemyBulletGroup.node.children;
-        for (let i = 0; i < enemyBulletChildren.length; i++) this.enemyBulletGroup.bulletDied(enemyBulletChildren[i])
+        for (let i = 0; i < enemyBulletChildren.length; i++) this.enemyBulletGroup.bulletDied(enemyBulletChildren[i]);
     },
     //接到炸弹
     getBuffBomb() {
@@ -161,7 +161,7 @@ cc.Class({
     gameOver() {
         this.isGameOver = true;
         this.pauseAction();
-        this.gameOverMaskVis()
+        this.gameOverMaskVis();
     },
     gameOverMaskVis() {
         this.gameOverMask.active = true;
@@ -177,10 +177,10 @@ cc.Class({
         this.maskBestScore.string = 'Best Score: ' + this.bestScore;
     },
     playAgain() {
-        cc.director.loadScene('aircraft_war_game')
+        cc.director.loadScene('aircraft_war_game');
     },
     backStartScene() {
-        cc.director.loadScene('aircraft_war_start')
+        cc.director.loadScene('aircraft_war_start');
     },
 
     //db request
@@ -197,7 +197,7 @@ cc.Class({
                     },
                     success: sc => {
                         self.globalUser.setUserGameInfo('aircraftWarBestScore', self.bestScore);
-                        console.log('保存成功')
+                        console.log('保存成功');
                     }
                 })
             }

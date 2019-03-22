@@ -27,6 +27,10 @@ cc.Class({
         fruitGroup: {
             default: null,
             type: require('fruit_ninja_group')
+        },
+        gameOverMask: {
+            default: null,
+            type: cc.Node
         }
     },
     onLoad() {
@@ -45,6 +49,9 @@ cc.Class({
         this.gameOver = false;
         this.score = 0;
         this.life = 0;
+        this.lifeG.forEach((a) => {
+            a.lifeConsume.active = false;
+        });
         this.upDateUi();
         this.fruitGroup.createFruitList();
     },
@@ -52,11 +59,6 @@ cc.Class({
         this.node.on(cc.Node.EventType.TOUCH_START, this.startEvent, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.moveEvent, this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.endEvent, this);
-    },
-    offKnifeMove() {
-        this.node.off(cc.Node.EventType.TOUCH_START, this.startEvent, this);
-        this.node.off(cc.Node.EventType.TOUCH_MOVE, this.moveEvent, this);
-        this.node.off(cc.Node.EventType.TOUCH_END, this.endEvent, this);
     },
     startEvent(e) {
         let pos = this.node.convertToNodeSpaceAR(new cc.Vec2(e.getLocation()));
@@ -96,8 +98,24 @@ cc.Class({
     gameOverHandle() {
         this.gameOver = true;
         this.knife.group = 'default';
+        this.scheduleOnce(() => {
+            this.showTheGameOverMask(true);
+        }, .5, this);
     },
     backStart() {
-        console.log(111)
+        cc.director.loadScene('fruit_ninja_start');
+    },
+    restartGame() {
+        this.showTheGameOverMask(false);
+        this.init();
+    },
+    showTheGameOverMask(bool) {
+        if (bool) {
+            this.gameOverMask.active = true;
+            this.gameOverMask.opacity = 0;
+            this.gameOverMask.runAction(cc.sequence(cc.scaleTo(0, 0.9, 0.9), cc.spawn(cc.scaleTo(0.4, 1, 1), cc.fadeIn(0.4))));
+        } else {
+            this.gameOverMask.runAction(cc.sequence(cc.fadeOut(0.4), cc.callFunc(() => { this.gameOverMask.active = false; }, this)))
+        }
     }
 });

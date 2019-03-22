@@ -33,7 +33,7 @@ cc.Class({
         this.rowPool = new cc.NodePool();
         for (let i = 0; i < INITPOOLCOUNT; ++i) {
             let nodeO = cc.instantiate(this.rowPfb);
-            this.rowPool.put(nodeO)
+            this.rowPool.put(nodeO);
         };
     },
     start() {
@@ -43,14 +43,14 @@ cc.Class({
     update(dt) {
         if (this.gameState == 1) {
             this.rowNodeList.forEach((a) => {
-                a.setPositionY(a.getPositionY() - this.speed)
+                a.setPositionY(a.getPositionY() - this.speed);
             })
         }
     },
     updateScore() {
         this.score++;
         if (this.score != 0 && !(this.score % 10) && this.speed < this.maxSpeed) this.speed += (this.maxSpeed - this.initSpeed) / 40; //速度均匀递增 400分打到最大速度， 每10分递增一次
-        this.updateUi()
+        this.updateUi();
     },
     updateUi() {
         this.scoreLabel.string = this.score;
@@ -67,21 +67,21 @@ cc.Class({
             node = cc.instantiate(this.rowPfb);
         };
         if (lastNode) {
-            node.setPosition(0, lastNode.y + rowHeight)
+            node.setPosition(0, lastNode.y + rowHeight);
         } else {
-            node.setPosition(0, rowHeight)
+            node.setPosition(0, rowHeight);
         };
         this.node.addChild(node);
         let compObj = node.getComponent('block_row');
         compObj.init(isFirst);
-        this.rowNodeList.push(node)
+        this.rowNodeList.push(node);
     },
     startRowAction() {
-        this.speed = this.initSpeed
+        this.speed = this.initSpeed;
     },
     gameOver() {
         this.gameState = 2;
-        this.showGameOverMask(true)
+        this.showGameOverMask(true);
     },
     showGameOverMask(bool) {
         let action;
@@ -92,12 +92,12 @@ cc.Class({
         } else {
             action = cc.sequence(cc.fadeOut(.2), cc.callFunc(() => {
                 this.gameOverMask.active = false;
-            }, this))
+            }, this));
         };
-        this.gameOverMask.runAction(action)
+        this.gameOverMask.runAction(action);
     },
     backObjPool(nodeInfo) {
-        this.rowPool.put(nodeInfo)
+        this.rowPool.put(nodeInfo);
     },
     backStartPage() {
         cc.director.loadScene('dontt_white_block_start');
@@ -105,13 +105,13 @@ cc.Class({
     restartGame() {
         this.showGameOverMask(false);
         this.rowNodeList.forEach((a) => {
-            this.rowPool.put(a)
+            this.rowPool.put(a);
         });
         this.rowNodeList = [];
         this.gameState = 0;
         this.speed = 0;
         this.score = 0;
         this.updateUi();
-        for (let i = 0; i < 6; i++) this.createMoveRow(i == 0)
+        for (let i = 0; i < 6; i++) this.createMoveRow(i == 0);
     }
 })

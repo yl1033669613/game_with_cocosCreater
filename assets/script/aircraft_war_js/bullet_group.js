@@ -65,15 +65,15 @@ cc.Class({
         this.getNewbullet(this.bulletInfinite);
         this.bICallback = function() { this.getNewbullet(this.bulletInfinite);
             this.isDeadBullet = false }.bind(this);
-        this.schedule(this.bICallback, this.bulletInfinite.freqTime)
+        this.schedule(this.bICallback, this.bulletInfinite.freqTime);
     },
     pauseAction() {
         this.enabled = false;
-        this.curState = Gdt.commonInfo.gameState.pause
+        this.curState = Gdt.commonInfo.gameState.pause;
     },
     resumeAction() {
         this.enabled = true;
-        this.curState = Gdt.commonInfo.gameState.start
+        this.curState = Gdt.commonInfo.gameState.start;
     },
     //换子弹
     changeBullet(BuffBullet) {
@@ -105,7 +105,7 @@ cc.Class({
         const hPos = this.hero.getPosition(),
             newV2_x = hPos.x + parseFloat(posInfo.xAxis),
             newV2_y = hPos.y + parseFloat(posInfo.yAxis);
-        return cc.p(newV2_x, newV2_y)
+        return cc.p(newV2_x, newV2_y);
     },
     //回收节点
     bulletDied(nodeinfo) {

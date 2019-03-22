@@ -8,6 +8,6 @@ cc.Class({
         }
     },
     start() {
-        if (Gdt.loopBg) this.loopBg1.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(Gdt.loopBg)
+        if (Gdt.loopBg) this.loopBg1.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(Gdt.loopBg);
     }
 })

@@ -10,7 +10,7 @@ cc.Class({
     onLoad() {
         const manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        this.bulletGroup = this.node.parent.getComponent('bullet_group')
+        this.bulletGroup = this.node.parent.getComponent('bullet_group');
     },
     //碰撞检测
     onCollisionEnter(other, self) {
@@ -20,6 +20,6 @@ cc.Class({
         if (this.bulletGroup.curState != Gdt.commonInfo.gameState.start) return;
         this.node.x += dt * this.xSpeed;
         this.node.y += dt * this.ySpeed;
-        if (this.node.y > this.node.parent.height / 2) this.bulletGroup.bulletDied(this.node)
+        if (this.node.y > this.node.parent.height / 2) this.bulletGroup.bulletDied(this.node);
     }
 })

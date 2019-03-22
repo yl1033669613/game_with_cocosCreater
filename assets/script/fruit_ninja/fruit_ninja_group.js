@@ -28,13 +28,13 @@ cc.Class({
     },
     onLoad() {
         this.gameObj = this.node.parent.getComponent('fruit_ninja_game');
+        this.noBombArr = this.fruitG.filter((a) => {
+            return a.type == 'fruit'
+        });
         utils.batchInitObjPool(this, this.fruitG);
     },
     createFruitList() {
-        let totalFr = this.fruitG,
-            currNoBomb = this.fruitG.filter((a) => {
-                return a.type == 'fruit'
-            });
+        let totalFr = this.fruitG;
         let randomLength = Math.floor(utils.random(1, this.maxLength + 0.4));
         for (let i = 0; i < randomLength; i++) {
             let ran = 0,
@@ -46,7 +46,7 @@ cc.Class({
             fruitNode.setPosition(cc.p(utils.random(-this.node.width / 2 + fruitNode.width / 2, this.node.width / 2 - fruitNode.width / 2), -(this.node.height / 2 - fruitNode.height / 2)));
             fruitNode.getComponent('fruit_ninja_fruit').init(poolName, fruit.score);
             if (fruit.type == 'bomb') {
-                totalFr = currNoBomb;
+                totalFr = this.noBombArr;
             };
         };
     },

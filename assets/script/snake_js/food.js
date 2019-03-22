@@ -12,7 +12,7 @@ cc.Class({
         const initCount = 3;
         for (let i = 0; i < initCount; ++i) {
             let food = cc.instantiate(this.foodPrefab); // 创建节点
-            this.foodPool.put(food)
+            this.foodPool.put(food);
         };
 
         this.foodInstance = null;
@@ -31,13 +31,13 @@ cc.Class({
         this.foodY = 0;
 
         // 初始显示一个食物
-        this.foodPosShow()
+        this.foodPosShow();
     },
     // 根据范围获取随机数
     getNumberInRange(min, max) {
         let range = max - min;
         let r = Math.random() * 2 - 1;
-        return Math.round(r * range + min)
+        return Math.round(r * range + min);
     },
     //设置食物出现的随机位置
     foodPosShow() {
@@ -52,7 +52,7 @@ cc.Class({
                 if (this.snake[i].x == indexX * 15 && this.snake[i].y == indexY * 15) {
                     //如果判定重合，将其设置为true，使随机数重给
                     this.isOnSnake = true;
-                    break
+                    break;
                 }
             };
             // 判断食物是否与障碍物重合
@@ -61,7 +61,7 @@ cc.Class({
                     if (indexX * 15 == this.obstacleArr[i].x && indexY * 15 == this.obstacleArr[i].y) {
                         //如果判定重合，将其设置为true，使随机数重给
                         this.isOnSnake = true;
-                        break
+                        break;
                     }
                 }
             };
@@ -78,11 +78,11 @@ cc.Class({
 
         // 设置食物的位置
         this.foodX = indexX * 15;
-        this.foodY = indexY * 15
+        this.foodY = indexY * 15;
     },
     // 回收食物
     releaseFood() {
         this.foodPool.put(this.foodInstance);
-        this.foodInstance = null
+        this.foodInstance = null;
     }
 })

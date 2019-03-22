@@ -99,8 +99,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 375,
+      "height": 750
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -108,8 +108,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 480,
-      "y": 320
+      "x": 187.5,
+      "y": 375
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -158,8 +158,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 375,
+      "height": 750
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -167,8 +167,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -480,
-      "y": -320
+      "x": -187.5,
+      "y": -375
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -213,8 +213,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 375,
+      "height": 750
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -222,8 +222,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 480,
-      "y": 320
+      "x": 187.5,
+      "y": 375
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -325,8 +325,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 375,
+      "height": 750
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -334,8 +334,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 480,
-      "y": 320
+      "x": 187.5,
+      "y": 375
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -499,8 +499,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 485
+      "width": 375,
+      "height": 595
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -508,8 +508,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 480,
-      "y": 397.5
+      "x": 187.5,
+      "y": 452.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -562,7 +562,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 12,
-      "height": 485
+      "height": 595
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -570,7 +570,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 480,
+      "x": 187.5,
       "y": 0
     },
     "_skewX": 0,
@@ -733,7 +733,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
+      "width": 375,
       "height": 595
     },
     "_rotationX": 0,
@@ -792,8 +792,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 485
+      "width": 375,
+      "height": 595
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1022,7 +1022,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
+      "width": 375,
       "height": 140
     },
     "_rotationX": 0,
@@ -1031,7 +1031,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 480,
+      "x": 187.5,
       "y": -50
     },
     "_skewX": 0,
@@ -1087,7 +1087,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
+      "width": 375,
       "height": 120
     },
     "_rotationX": 0,
@@ -1158,7 +1158,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 480,
+      "x": 187.5,
       "y": 0
     },
     "_skewX": 0,
@@ -1325,7 +1325,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 930,
+      "width": 345,
       "height": 120
     },
     "_rotationX": 0,
@@ -1384,7 +1384,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 950,
+      "width": 365,
       "height": 110
     },
     "_rotationX": 0,
@@ -1479,7 +1479,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 930,
+      "width": 345,
       "height": 100
     },
     "_rotationX": 0,
@@ -2102,7 +2102,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 39.72,
+      "width": 40.03,
       "height": 12.22
     },
     "_rotationX": 0,
@@ -2139,7 +2139,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "V : 1.2.5",
+    "_N$string": "V : 1.2.6",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",

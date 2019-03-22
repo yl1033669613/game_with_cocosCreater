@@ -37,7 +37,7 @@ cc.Class({
         Gdt.common.initObjPool(this, this.enemybulletIfe);
     },
     enemyOpenFire(gteBEnemyInfo) {
-        this.getNewbullet(this.enemybulletIfe, gteBEnemyInfo)
+        this.getNewbullet(this.enemybulletIfe, gteBEnemyInfo);
     },
     pauseAction() {
         this.enabled = false;

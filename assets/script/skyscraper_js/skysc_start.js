@@ -4,9 +4,9 @@ cc.Class({
 
     },
     backTheGameList() {
-        cc.director.loadScene('startscene')
+        cc.director.loadScene('startscene');
     },
     startGame() {
-        cc.director.loadScene('skyscraper_game')
+        cc.director.loadScene('skyscraper_game');
     }
 })

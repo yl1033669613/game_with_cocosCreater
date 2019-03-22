@@ -17,7 +17,7 @@ cc.Class({
 
         // 初始生成障碍物 
         if (this.obstacleCount)
-            for (let i = 0; i < this.obstacleCount; i++) this.createObstacle()
+            for (let i = 0; i < this.obstacleCount; i++) this.createObstacle();
     },
     // 根据范围获取随机数
     getNumberInRange(min, max) {
@@ -63,7 +63,7 @@ cc.Class({
             let b = cc.instantiate(this.obstaclePfb);
             this.node.addChild(b);
             b.setPosition(cc.p(pointArr[i].x, pointArr[i].y));
-            this.obstacleInstance.push(b)
+            this.obstacleInstance.push(b);
         }
     }
 })

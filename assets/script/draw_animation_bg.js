@@ -37,12 +37,12 @@ cc.Class({
         if (item.cx < 0) {
             item.cx = 0;
         } else if (item.cx > this.node.width) {
-            item.cx = this.node.width
+            item.cx = this.node.width;
         };
         if (item.cy < 0) {
             item.cy = 0;
         } else if (item.cy > this.node.height) {
-            item.cy = this.node.height
+            item.cy = this.node.height;
         };
         if (item.tick > item.tickMax) {
             item.angle = this.random(0, Math.PI * 2);
@@ -56,6 +56,6 @@ cc.Class({
     },
     update(dt) {
         this.ctx.clear();
-        for (let i = 0; i < this.circles.length; i++) this.updateDirection(this.circles[i])
+        for (let i = 0; i < this.circles.length; i++) this.updateDirection(this.circles[i]);
     }
 })

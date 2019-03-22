@@ -108,7 +108,7 @@ cc.Class({
     circleRotate(speed) {
         let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(speed, 360)));
         this.bigCircle.runAction(rotate);
-        return rotate
+        return rotate;
     },
     userHandle() {
         this.node.on(cc.Node.EventType.TOUCH_START, function(e) {
@@ -135,7 +135,7 @@ cc.Class({
                     this.isGameOver = true;
                     this.gameLevelModeThislevelWin()
                 };
-                if (!this.isGameOver && gbData.mode === 'free') this.freeModeCurrScore++
+                if (!this.isGameOver && gbData.mode === 'free') this.freeModeCurrScore++;
             }, this));
         this.moveNeedle.runAction(moveAction);
     },
@@ -146,10 +146,10 @@ cc.Class({
                 for (let i = 6; i > 0; i--) child[6 - i].getChildByName('wcTxt').getComponent(cc.Label).string = this.needlesNum - 6 + i
             } else {
                 for (let i = this.needlesNum; i > 0; i--) child[this.needlesNum - i].getChildByName('wcTxt').getComponent(cc.Label).string = i;
-                for (let i = this.needlesNum; i < 6; i++) child[i].active = false
+                for (let i = this.needlesNum; i < 6; i++) child[i].active = false;
             }
         } else {
-            for (let i = 0; i < 6; i++) child[i].getChildByName('wcTxt').getComponent(cc.Label).string = this.freeModeCurrNeedle + i + 1
+            for (let i = 0; i < 6; i++) child[i].getChildByName('wcTxt').getComponent(cc.Label).string = this.freeModeCurrNeedle + i + 1;
         }
     },
     backStart() {
@@ -160,13 +160,13 @@ cc.Class({
             this.isGameOver = true;
             this.bigCircle.stopAction(this.actionInts);
             let arr = this.bigCircle.children.filter((a) => {
-                return a.name == 'needle'
+                return a.name == 'needle';
             });
             arr.forEach((a) => {
-                a.getComponent('draw_needles').stopNeedleAction()
+                a.getComponent('draw_needles').stopNeedleAction();
             });
             this.gameOverShowInfoMask();
-            if (gbData.mode === 'free' && this.freeModeCurrScore === this.freeModeCurrNeedle) this.freeModeCurrScore--
+            if (gbData.mode === 'free' && this.freeModeCurrScore === this.freeModeCurrNeedle) this.freeModeCurrScore--;
         }
     },
     gameOverShowInfoMask() {
@@ -227,7 +227,7 @@ cc.Class({
                     },
                     success: sc => {
                         self.globalUser.setUserGameInfo('needleFreeModeScore', gbData.freeBestScore);
-                        console.log('保存成功')
+                        console.log('保存成功');
                     }
                 })
             }
@@ -247,7 +247,7 @@ cc.Class({
                     },
                     success: sc => {
                         self.globalUser.setUserGameInfo('needleLevelModeLevels', gbData.gameLevel);
-                        console.log('保存成功')
+                        console.log('保存成功');
                     }
                 })
             }

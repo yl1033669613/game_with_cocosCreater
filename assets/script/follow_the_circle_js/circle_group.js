@@ -54,7 +54,7 @@ cc.Class({
         this.circleItemObjPool = new cc.NodePool();
         for (let i = 0; i < INITOBJPOOLCOUNT; ++i) {
             let nodeO = cc.instantiate(this.circleItem);
-            this.circleItemObjPool.put(nodeO)
+            this.circleItemObjPool.put(nodeO);
         }
     },
     genNewCircle(pool, prefab, nodeParent) {
@@ -65,7 +65,7 @@ cc.Class({
             newNode = cc.instantiate(prefab);
         };
         nodeParent.addChild(newNode);
-        return newNode
+        return newNode;
     },
     backObjPool(nodeinfo) {
         this.circleItemObjPool.put(nodeinfo);
@@ -96,7 +96,7 @@ cc.Class({
                 }
             };
             if (!isOverlap) {
-                self.circleGroup.push({ color: result[count], x: x, y: y })
+                self.circleGroup.push({ color: result[count], x: x, y: y });
                 count++;
             }
         };
@@ -115,7 +115,7 @@ cc.Class({
                     if (i == self.circleGroup.length - 1) {
                         self.circlesCreateState = false;
                         let childs = self.node.children;
-                        for (let v = 0; v < childs.length; v++) childs[v].getComponent('circle_item').itemCircleInitCount(v)
+                        for (let v = 0; v < childs.length; v++) childs[v].getComponent('circle_item').itemCircleInitCount(v);
                     }
                 }
             }, (i + 1) * self.intervalMul)
@@ -131,13 +131,13 @@ cc.Class({
         if (bool) {
             this.score += score;
             this.combo++;
-            if (this.combo > 0 && this.combo % 10 == 0) this.score += this.combo / 10
+            if (this.combo > 0 && this.combo % 10 == 0) this.score += this.combo / 10;
         } else {
             this.combo = 0;
             this.score -= score;
         };
         this.renderComboAndScoreNum();
-        if (this.score <= this.gameOverScore) this.handleGameOver()
+        if (this.score <= this.gameOverScore) this.handleGameOver();
     },
     renderComboAndScoreNum() {
         this.scoreLabel.string = 'SCORE: ' + this.score;
@@ -147,7 +147,7 @@ cc.Class({
             this.comboLabel.node.opacity = 0;
             this.comboLabel.node.runAction(cc.spawn(cc.scaleTo(0.6, 1, 1).easing(cc.easeExponentialOut(0.6)), cc.fadeTo(0.6, 200)));
         } else {
-            this.comboLabel.node.runAction(cc.fadeOut(.8))
+            this.comboLabel.node.runAction(cc.fadeOut(.8));
         }
     },
     updateCircleGroup(color, bool) {
@@ -163,14 +163,14 @@ cc.Class({
                     for (let i = 0; i < childs.length; i++) {
                         let childComponent = childs[i].getComponent('circle_item');
                         for (let i = 0; i < multArr.length; i++)
-                            if (multArr[i].color == childComponent.color) childComponent.noTouchHideAnimation(true)
+                            if (multArr[i].color == childComponent.color) childComponent.noTouchHideAnimation(true);
                     }
                 };
-                break
+                break;
             }
         };
         this.updateComboAndScore(multArr.length > 0 ? false : bool, multArr.length > 0 ? multArr.length : 1);
-        if (this.circleGroup.length == 0 && !this.gameOver) this.getRandomCircles()
+        if (this.circleGroup.length == 0 && !this.gameOver) this.getRandomCircles();
     },
     handleGameOver() {
         if (this.gameOver) return;
@@ -181,7 +181,7 @@ cc.Class({
         for (let i = 0; i < childs.length; i++) {
             let childComponent = childs[i].getComponent('circle_item');
             for (let i = 0; i < this.circleGroup.length; i++)
-                if (this.circleGroup[i].color == childComponent.color) childComponent.noTouchHideAnimation(true)
+                if (this.circleGroup[i].color == childComponent.color) childComponent.noTouchHideAnimation(true);
         }
     }
 })

@@ -11,20 +11,20 @@ cc.Class({
             if (other.node.group == 'heroBullet') {
                 let bullet = other.node.getComponent('bullet');
                 if (enemyObj.hP > 0) {
-                    enemyObj.hP -= bullet.hpDrop
+                    enemyObj.hP -= bullet.hpDrop;
                 } else {
-                    return
+                    return;
                 };
                 if (enemyObj.hP <= 0) {
                     this.node.group = 'default';
                     enemyObj.enemyOver()
                 };
-                return
+                return;
             };
             if (other.node.group == 'hero') {
                 enemyObj.hP = 0;
                 enemyObj.enemyOver('isHero');
-                return
+                return;
             }
         }
     }

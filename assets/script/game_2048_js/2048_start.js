@@ -52,12 +52,12 @@ cc.Class({
         this.globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
         this.bestScore = this.globalNode.userGameInfo.tzfeBestScore || 0;
         this.WinTimes = this.globalNode.userGameInfo.tzfeWinNum || 0;
-        this.db = wx.cloud.database()
+        this.db = wx.cloud.database();
     },
     //循环
     loop(func) {
         for (let i = 0; i < 4; i++)
-            for (let j = 0; j < 4; j++) func(i, j)
+            for (let j = 0; j < 4; j++) func(i, j);
     },
     //绘制方块背景
     drawBgShadowRect() {
@@ -69,7 +69,7 @@ cc.Class({
             self.ctx.lineWidth = 0;
             self.ctx.rect(x, y, self.box_width, self.box_width);
             self.ctx.fillColor = color;
-            self.ctx.fill()
+            self.ctx.fill();
         })
     },
     // 随机生成方块
@@ -87,11 +87,11 @@ cc.Class({
                 k += 1;
             }
         });
-        self.space -= 1
+        self.space -= 1;
     },
     clearNumRects() { //销毁方块
         for (let i = 0; i < this.node.children.length; i++) {
-            if (this.node.children[i]._name == '2048RectPfb') this.node.children[i].destroy()
+            if (this.node.children[i]._name == '2048RectPfb') this.node.children[i].destroy();
         }
     },
     // 根据map 数组渲染方块
@@ -120,7 +120,7 @@ cc.Class({
     },
     // game start 默认生成两个方块
     init() {
-        for (let i = 0; i < 2; i++) this.produce()
+        for (let i = 0; i < 2; i++) this.produce();
     },
     move(direction) {
         let isValid = false; //判断是否是有效移动
@@ -167,7 +167,7 @@ cc.Class({
                     tj = convert(i, j)[1];
                 if (this.map[ti][tj] == 0 && tmp[j] > 0)
                     if (!isValid) isValid = true; //数字发生移动，（原来为0的数字变为大于0被认为是有效移动）
-                this.map[ti][tj] = isNaN(tmp[j]) ? 0 : tmp[j]
+                this.map[ti][tj] = isNaN(tmp[j]) ? 0 : tmp[j];
             }
         };
         if (isValid && this.space > 0) { //如果是有效移动则在随机空位新生成一个数字2
@@ -214,7 +214,7 @@ cc.Class({
                         },
                         success: sc => {
                             self.globalNode.setUserGameInfo('tzfeBestScore', self.bestScore);
-                            console.log('保存成功')
+                            console.log('保存成功');
                         }
                     })
                 }
@@ -235,7 +235,7 @@ cc.Class({
                     },
                     success: sc => {
                         self.globalNode.setUserGameInfo('tzfeWinNum', self.WinTimes);
-                        console.log('保存成功')
+                        console.log('保存成功');
                     }
                 })
             }
@@ -278,7 +278,7 @@ cc.Class({
             let ey = startPoint.y;
             dx = ex - sx;
             dy = ey - sy;
-        }, this)
+        }, this);
 
         canvasScr.on(cc.Node.EventType.TOUCH_END, (e) => {
             //根据横纵坐标位移判断滑动方向

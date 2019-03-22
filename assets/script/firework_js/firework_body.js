@@ -33,7 +33,7 @@ cc.Class({
         this.reachTarget = false; //是否到达目标
 
         // particle 粒子数组
-        this.particles = []
+        this.particles = [];
     },
     // 每帧更新函数
     fireworksBodyUpdate() {
@@ -79,7 +79,7 @@ cc.Class({
         canvasCtx.strokeColor = color;
         // Draw the target (pulsing circle)
         canvasCtx.arc(this.tx, this.ty, this.targetRadius, 0, Math.PI * 2);
-        canvasCtx.stroke()
+        canvasCtx.stroke();
     },
     //创建随机个数粒子
     createParticles(x, y) {
@@ -116,9 +116,9 @@ cc.Class({
         if (item.alpha <= item.decay) {
             this.particles.splice(index, 1);
             if (this.particles.length === 0) {
-                this.node.destroy()
+                this.node.destroy();
             };
-            return
+            return;
         };
         //draw
         let lastCoordinate = item.coordinates[item.coordinates.length - 1];
@@ -129,7 +129,7 @@ cc.Class({
         canvasCtx.moveTo(lastCoordinate[0], lastCoordinate[1]);
         canvasCtx.lineTo(item.x, item.y);
         canvasCtx.strokeColor = new cc.Color({ r: changeRGB.r, g: changeRGB.g, b: changeRGB.b, a: item.alpha });
-        canvasCtx.stroke()
+        canvasCtx.stroke();
     },
     randomColorInRange(rgbObj, range) {
         return { r: Math.round(this.random(rgbObj.r - range, rgbObj.r + range)), g: Math.round(this.random(rgbObj.g - range, rgbObj.g + range)), b: Math.round(this.random(rgbObj.b - range, rgbObj.b + range)) }
@@ -144,7 +144,7 @@ cc.Class({
         return { r: Math.round(this.random(this.parent.range, 255 - this.parent.range)), g: Math.round(this.random(this.parent.range, 255 - this.parent.range)), b: Math.round(this.random(this.parent.range, 255 - this.parent.range)) }
     },
     random(min, max) {
-        return Math.random() * (max - min) + min
+        return Math.random() * (max - min) + min;
     },
     update(dt) {
         if (!this.reachTarget) {

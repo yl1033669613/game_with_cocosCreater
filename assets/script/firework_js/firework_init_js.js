@@ -81,7 +81,7 @@ cc.Class({
                 this.clickLimiterTick = 0;
             }
         } else {
-            this.clickLimiterTick++
+            this.clickLimiterTick++;
         }
     },
 });

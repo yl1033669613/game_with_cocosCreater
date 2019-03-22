@@ -23,16 +23,16 @@ cc.Class({
         this.ctx.stroke();
         this.ctx.circle(9, 9, 9);
         this.ctx.fill();
-        this.rotateAniObj = this.numTextRotate()
+        this.rotateAniObj = this.numTextRotate();
     },
     numTextRotate (){
         if (this.isRotate) {
             let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(this.speed, -360)));
             this.numText.runAction(rotate);
-            return rotate
+            return rotate;
         }
     }, 
     stopNeedleAction() {
-        if (this.rotateAniObj) this.node.stopAction(this.rotateAniObj)
+        if (this.rotateAniObj) this.node.stopAction(this.rotateAniObj);
     }
 })

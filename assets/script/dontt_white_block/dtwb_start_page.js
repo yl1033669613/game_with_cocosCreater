@@ -4,9 +4,9 @@ cc.Class({
 
     },
     backTheGameList() {
-        cc.director.loadScene('startscene')
+        cc.director.loadScene('startscene');
     },
     startGame() {
-        cc.director.loadScene('dontt_white_block')
+        cc.director.loadScene('dontt_white_block');
     }
 })

@@ -10,16 +10,16 @@ cc.Class({
     onLoad() {
         const manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        this.enemyBulletGroup = this.node.parent.getComponent('enemy_bullet_group')
+        this.enemyBulletGroup = this.node.parent.getComponent('enemy_bullet_group');
     },
     //碰撞检测
     onCollisionEnter(other, self) {
-        if (other.node.group == 'hero' || other.node.group == 'heroBullet') this.enemyBulletGroup.bulletDied(this.node)
+        if (other.node.group == 'hero' || other.node.group == 'heroBullet') this.enemyBulletGroup.bulletDied(this.node);
     },
     update(dt) {
         if (this.enemyBulletGroup.curState != Gdt.commonInfo.gameState.start) return;
         this.node.x += dt * this.xSpeed;
         this.node.y += dt * this.ySpeed;
-        if (this.node.y < -this.node.parent.height / 2) this.enemyBulletGroup.bulletDied(this.node)
+        if (this.node.y < -this.node.parent.height / 2) this.enemyBulletGroup.bulletDied(this.node);
     }
 })

@@ -12,7 +12,7 @@ cc.Class({
         this.isFirstIn = true;
         this.isFirstOut = true;
         this.isDestroy = true;
-        this.node.group = "skyscBlock"
+        this.node.group = "skyscBlock";
     },
     // 只在两个碰撞体开始接触时被调用一次
     onBeginContact(contact, selfCollider, otherCollider) {
@@ -21,9 +21,9 @@ cc.Class({
             this.isFirstIn = false;
             if (globals.gm.putCount == 1) {
                 selfCollider.node.getComponent(cc.RigidBody).gravityScale = 100;
-                globals.gm.handleResult()
+                globals.gm.handleResult();
             };
-            this.spriptAni.play()
+            this.spriptAni.play();
         };
         if (this.isDestroy) {
             if (otherCollider.tag == 200 && globals.gm.putCount != 1) {
@@ -37,7 +37,7 @@ cc.Class({
                 this.scheduleOnce(() => {
                     node.removeComponent(cc.RigidBody);
                     node.removeComponent(cc.PhysicsBoxCollider);
-                    globals.gm.backObjPool(node)
+                    globals.gm.backObjPool(node);
                 }, 1.2)
             }
         }
@@ -57,7 +57,7 @@ cc.Class({
                         if (d <= 3) isPrefect = true;
                         globals.gm.handleResult(isPrefect);
                     } else {
-                        this.checkHp()
+                        this.checkHp();
                     }
                 }
             }.bind(this);
@@ -69,10 +69,10 @@ cc.Class({
             globals.gm.hp--;
             if (globals.gm.hp == 0) {
                 globals.gm.updateUi();
-                globals.gm.gameOverHandle()
+                globals.gm.gameOverHandle();
             } else {
                 globals.gm.isSucceed = false;
-                globals.gm.handleResult()
+                globals.gm.handleResult();
             }
         }
     }

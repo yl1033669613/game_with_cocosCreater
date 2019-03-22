@@ -39,7 +39,7 @@ cc.Class({
                         },
                         success: sc => {
                             globalNode.setUserGameInfo('snakeBestScore', bestScore);
-                            console.log('保存成功')
+                            console.log('保存成功');
                         }
                     })
                 }
@@ -62,6 +62,6 @@ cc.Class({
         }, this)
     },
     backToList() {
-        cc.director.loadScene('startscene')
+        cc.director.loadScene('startscene');
     }
 })

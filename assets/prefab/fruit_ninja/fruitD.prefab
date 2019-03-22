@@ -993,7 +993,7 @@
     "forceHorzMax": 1000,
     "forceMin": 35000,
     "forceMax": 40000,
-    "colorType": 4
+    "colorType": 2
   },
   {
     "__type__": "cc.RigidBody",

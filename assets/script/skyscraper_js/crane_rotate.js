@@ -28,7 +28,7 @@ cc.Class({
             cc.rotateTo(this.speed / 2, -this.angle).easing(cc.easeQuadraticActionInOut()),
             cc.rotateTo(this.speed / 2, this.angle).easing(cc.easeQuadraticActionInOut())
         ));
-        this.blockTmpCtn.runAction(blockAction)
+        this.blockTmpCtn.runAction(blockAction);
     },
     switchDifficulty() {
         switch (this.mainGm.succeedPutCount) {
