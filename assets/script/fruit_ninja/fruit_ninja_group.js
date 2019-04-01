@@ -28,9 +28,7 @@ cc.Class({
     },
     onLoad() {
         this.gameObj = this.node.parent.getComponent('fruit_ninja_game');
-        this.noBombArr = this.fruitG.filter((a) => {
-            return a.type == 'fruit'
-        });
+        this.noBombArr = this.fruitG.filter(a => a.type == 'fruit');
         utils.batchInitObjPool(this, this.fruitG);
     },
     createFruitList() {

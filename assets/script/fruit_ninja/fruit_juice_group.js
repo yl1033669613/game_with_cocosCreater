@@ -32,9 +32,7 @@ cc.Class({
         utils.initObjPool(this, createPoolObj);
     },
     createjuiceBg(pos, colorType) {
-        let currjuiceColor = this.juiceColor.filter((a) => {
-            return a.code == colorType
-        })[0];
+        let currjuiceColor = this.juiceColor.filter(a => a.code == colorType)[0];
         let color = currjuiceColor.color;
         let rotation = utils.random(0, 359);
         let opacity = currjuiceColor.opacity;
