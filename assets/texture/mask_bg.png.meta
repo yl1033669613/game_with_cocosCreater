@@ -5,7 +5,7 @@
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "mask_bg ": {
+    "mask_bg": {
       "ver": "1.0.3",
       "uuid": "b2440100-0e9f-4348-95ea-d8f64067dc44",
       "rawTextureUuid": "99acf1ab-c047-444a-b861-894795f00279",
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 375,
-      "height": 750,
-      "rawWidth": 375,
-      "rawHeight": 750,
+      "width": 30,
+      "height": 30,
+      "rawWidth": 30,
+      "rawHeight": 30,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,
