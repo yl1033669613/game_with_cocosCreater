@@ -31,9 +31,6 @@ const SCENESLIST = [{
 }, {
     title: ' Follow the circle',
     name: 'follow_the_circle'
-}, {
-    title: ' Test game 12',
-    name: ''
 }];
 
 cc.Class({
