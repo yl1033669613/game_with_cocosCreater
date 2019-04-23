@@ -28,6 +28,7 @@ cc.Class({
         manager.enabled = true;
         this.curState = Gdt.commonInfo.gameState.none;
         this.currX = 0;
+        this.currY = 0;
         this.onDrag();
         //setting hero pos
         this.node.x = 0;
@@ -45,16 +46,23 @@ cc.Class({
     dragStart(event) {
         const locationv = event.getLocation();
         this.currX = locationv.x;
+        this.currY = locationv.y;
     },
     dragMove(event) {
         let locationv = event.getLocation(),
             location = { x: this.node.x, y: this.node.y },
             minX = -this.node.parent.width / 2 + this.node.width / 2,
-            maxX = -minX;
+            maxX = -minX,
+            minY = -this.node.parent.height / 2 + this.node.height / 2,
+            maxY = -minY;
         location.x += (locationv.x - this.currX) * this.moveRatio;
+        location.y += (locationv.y - this.currY) * this.moveRatio;
         this.currX = locationv.x;
+        this.currY = locationv.y;
         if (location.x < minX) location.x = minX;
         if (location.x > maxX) location.x = maxX;
+        if (location.y < minY) location.y = minY;
+        if (location.y > maxY) location.y = maxY;
         this.node.setPosition(location);
     },
     // hero hp progress

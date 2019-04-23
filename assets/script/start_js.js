@@ -2,11 +2,20 @@ const SCENESLIST = [{
     title: ' Aircraft war',
     name: 'aircraft_war_start'
 }, {
-    title: ' Needles',
-    name: 'game_needles_start'
+    title: ' Fruit Ninja',
+    name: 'fruit_ninja_start'
+}, {
+    title: ' Don\'t touch white block',
+    name: 'dontt_white_block_start'
 }, {
     title: ' Flappy bird',
     name: 'flappy_bird'
+}, {
+    title: ' Skyscraper',
+    name: 'skyscraper_start'
+}, {
+    title: ' Needles',
+    name: 'game_needles_start'
 }, {
     title: ' Snake',
     name: 'snake'
@@ -22,15 +31,6 @@ const SCENESLIST = [{
 }, {
     title: ' Follow the circle',
     name: 'follow_the_circle'
-}, {
-    title: ' Skyscraper',
-    name: 'skyscraper_start'
-}, {
-    title: ' Don\'t touch white block',
-    name: 'dontt_white_block_start'
-}, {
-    title: ' Fruit Ninja',
-    name: 'fruit_ninja_start'
 }, {
     title: ' Test game 12',
     name: ''
