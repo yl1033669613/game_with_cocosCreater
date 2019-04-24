@@ -1,3 +1,5 @@
+const Utils = require('../utils.js');
+
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -41,18 +43,26 @@ cc.Class({
         this.box_width = this.node.width * 0.86 * 0.25; //单个方块宽度
         this.margin_width = this.node.width * 0.14 * 0.2; //方块之间的间隔
         //不同数字的背景颜色信息
-        this.num_color = { '0': "#ccc0b3", '2': "#ffeecd", '4': "#ffcb6a", '8': "#ffa65a", '16': "#ff8545", '32': "#ff643f", '64': "#e4451e", '128': "#bd3b18", '256': "#ece688", '512': "#f8ec24", '1024': "#42f391", '2048': "#00ffae" };
-
+        this.num_color = {
+            '0': "#ccc0b3",
+            '2': "#ffeecd",
+            '4': "#ffcb6a",
+            '8': "#ffa65a",
+            '16': "#ff8545",
+            '32': "#ff643f",
+            '64': "#e4451e",
+            '128': "#bd3b18",
+            '256': "#ece688",
+            '512': "#f8ec24",
+            '1024': "#42f391",
+            '2048': "#00ffae"
+        };
         //space表示当前剩余的空格块数，score表示当前的分数
         this.space = 16;
         this.score = 0;
-
         this.isGameOver = false;
-
-        this.globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
-        this.bestScore = this.globalNode.userGameInfo.tzfeBestScore || 0;
-        this.WinTimes = this.globalNode.userGameInfo.tzfeWinNum || 0;
-        this.db = wx.cloud.database();
+        this.bestScore = Utils.GD.userGameInfo.tzfeBestScore || 0;
+        this.WinTimes = Utils.GD.userGameInfo.tzfeWinNum || 0;
     },
     //循环
     loop(func) {
@@ -63,7 +73,7 @@ cc.Class({
     drawBgShadowRect() {
         const self = this;
         let color = new cc.Color(255, 255, 255, 30);
-        self.loop(function(i, j) {
+        self.loop(function (i, j) {
             let x = j == 0 ? self.margin_width : j * (self.box_width + self.margin_width) + self.margin_width,
                 y = i == 3 ? self.margin_width : (3 - i) * (self.box_width + self.margin_width) + self.margin_width;
             self.ctx.lineWidth = 0;
@@ -78,7 +88,7 @@ cc.Class({
         const self = this;
         let cot = ~~(Math.random() * self.space);
         let k = 0;
-        self.loop(function(i, j) {
+        self.loop(function (i, j) {
             if (self.map[i][j] == 0) {
                 if (cot == k) {
                     self.map[i][j] = 2;
@@ -151,7 +161,7 @@ cc.Class({
                         if (tmp[tmp.length - 1] == 2048) { //如果获得2048则游戏结束
                             this.isGameOver = true;
                             this.showTheGamePanel(true, this.gameWinMask);
-                            this.setWinTimes(true);
+                            this.setWinTimes();
                         };
                         isadd = true;
                         this.space += 1;
@@ -178,7 +188,7 @@ cc.Class({
             this.isGameOver = true;
             this.infoScore.getComponent(cc.Label).string = 'score:' + this.score;
 
-            this.setDbDataWhenScoreChange(); //保存最高分到服务
+            this.setDbDataWhenScoreChange(); //保存最高分
             this.infoBestScore.getComponent(cc.Label).string = 'best:' + this.bestScore;
             this.showTheGamePanel(true, this.infoPanel);
             return;
@@ -203,42 +213,18 @@ cc.Class({
         const self = this;
         if (self.score > self.bestScore) {
             self.bestScore = self.score;
-            self.db.collection('userGameInfo').where({
-                _openid: self.globalNode.openid
-            }).get({
-                success: res => {
-                    self.db.collection('userGameInfo').doc(res.data[0]._id).update({
-                        data: {
-                            'tzfeBestScore': self.bestScore,
-                            'updateTime': self.db.serverDate()
-                        },
-                        success: sc => {
-                            self.globalNode.setUserGameInfo('tzfeBestScore', self.bestScore);
-                            console.log('保存成功');
-                        }
-                    })
-                }
+            Utils.GD.updateGameScore({tzfeBestScore: self.bestScore}, () => {
+                Utils.GD.setUserGameInfo('tzfeBestScore', self.bestScore);
+                console.log('保存成功');
             })
         }
     },
     setWinTimes() {
         const self = this;
         self.WinTimes = self.WinTimes + 1;
-        self.db.collection('userGameInfo').where({
-            _openid: globalNode.openid
-        }).get({
-            success: res => {
-                self.db.collection('userGameInfo').doc(res.data[0]._id).update({
-                    data: {
-                        'tzfeWinNum': self.WinTimes,
-                        'updateTime': self.db.serverDate()
-                    },
-                    success: sc => {
-                        self.globalNode.setUserGameInfo('tzfeWinNum', self.WinTimes);
-                        console.log('保存成功');
-                    }
-                })
-            }
+        Utils.GD.updateGameScore({tzfeWinNum: self.WinTimes}, () => {
+            Utils.GD.setUserGameInfo('tzfeWinNum', self.WinTimes);
+            console.log('保存成功');
         })
     },
     showTheGamePanel(bool, cpt) {

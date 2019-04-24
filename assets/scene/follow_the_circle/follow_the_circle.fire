@@ -366,6 +366,12 @@
     },
     "comboLabel": {
       "__id__": 40
+    },
+    "maskBestScore": {
+      "__id__": 13
+    },
+    "maskBestCombo": {
+      "__id__": 16
     }
   },
   {

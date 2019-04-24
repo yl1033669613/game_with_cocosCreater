@@ -991,6 +991,9 @@
     },
     "gameOverMask": {
       "__id__": 62
+    },
+    "bestScoreLabel": {
+      "__id__": 67
     }
   },
   {
@@ -2174,7 +2177,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 198,
+      "width": 194.67,
       "height": 26.67
     },
     "_rotationX": 0,
@@ -2211,7 +2214,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "Best Score: 10000",
+    "_N$string": "Best score: 10000",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",

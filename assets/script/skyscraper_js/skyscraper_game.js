@@ -1,5 +1,6 @@
 const POOLINITCOUNT = 15;
 const globals = require('skysc_globals');
+const Utils = require('../utils.js');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -56,6 +57,7 @@ cc.Class({
         physicsManager.enabled = true;
         physicsManager.debugDrawFlags = 0;
         physicsManager.attachDebugDrawToCamera(this.camera);
+
         globals.gm = this;
         this.state = 1;
         this.isPut = false;
@@ -63,6 +65,7 @@ cc.Class({
         this.succeedPutCount = 0; //放置成功个数
         this.isSucceed = true; //放置是否成功
         this.prevBlock = '';
+        this.bestScore = Utils.GD.userGameInfo.skyscraperBestScore || 0;
 
         this.node.on(cc.Node.EventType.TOUCH_END, this.putNext, this);
 
@@ -155,10 +158,15 @@ cc.Class({
         this.hpUi.string = this.hp;
         this.scoreUi.string = this.score;
         this.maskCurrScore.string = 'Current score: ' + this.score;
+        this.maskBestScore.string = 'Best score: ' + this.bestScore;
     },
     gameOverHandle() {
         this.state = 2;
         this.isPut = false;
+        if (this.score > this.bestScore) {
+            this.bestScore = this.score;
+            this.updateBestScore();
+        };
         this.gameOverMask.active = true;
         this.gameOverMask.opacity = 0;
         this.gameOverMask.runAction(cc.fadeIn(.3));
@@ -169,5 +177,14 @@ cc.Class({
     },
     backStartPage() {
         cc.director.loadScene('skyscraper_start');
+    },
+    updateBestScore() {
+        const self = this;
+        Utils.GD.updateGameScore({
+            skyscraperBestScore: self.bestScore
+        }, () => {
+            Utils.GD.setUserGameInfo('skyscraperBestScore', self.bestScore);
+            console.log('保存成功')
+        })
     }
 })

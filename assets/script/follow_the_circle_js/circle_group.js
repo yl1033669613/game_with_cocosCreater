@@ -1,5 +1,6 @@
 const INITOBJPOOLCOUNT = 15;
-const COLORLIST = ['255/0/0/255', '255/144/0/255', '255/255/0/255', '0/255/0/255', '0/255/255/255', '0/0/255/255', '114/0/255/255']; 
+const COLORLIST = ['255/0/0/255', '255/144/0/255', '255/255/0/255', '0/255/0/255', '0/255/255/255', '0/0/255/255', '114/0/255/255'];
+const Utils = require('../utils.js');
 
 cc.Class({
     extends: cc.Component,
@@ -28,12 +29,25 @@ cc.Class({
         comboLabel: {
             default: null,
             type: cc.Label
-        }
+        },
+        maskBestScore: {
+            default: null,
+            type: cc.Label
+        },
+        maskBestCombo: {
+            default: null,
+            type: cc.Label
+        },
     },
     onLoad() {
         this.circlesCreateState = false;
         this.combo = 0;
         this.score = 0;
+        this.bestComboIsUpdate = false;
+        this.bestScore = Utils.GD.userGameInfo.ftcBestScore || 0;
+        this.bestCombo = Utils.GD.userGameInfo.ftcBestCombo || 0;
+        this.maskBestScore.string = 'Best score: ' + this.bestScore;
+        this.maskBestCombo.string = 'Best combo: ' + this.bestCombo;
         this.circleGroup = [];
         this.gameOver = false;
         this.initObjPool();
@@ -96,7 +110,11 @@ cc.Class({
                 }
             };
             if (!isOverlap) {
-                self.circleGroup.push({ color: result[count], x: x, y: y });
+                self.circleGroup.push({
+                    color: result[count],
+                    x: x,
+                    y: y
+                });
                 count++;
             }
         };
@@ -131,6 +149,10 @@ cc.Class({
         if (bool) {
             this.score += score;
             this.combo++;
+            if (this.combo > this.bestCombo) {
+                this.bestComboIsUpdate = true;
+                this.bestCombo = this.combo;
+            };
             if (this.combo > 0 && this.combo % 10 == 0) this.score += this.combo / 10;
         } else {
             this.combo = 0;
@@ -176,12 +198,39 @@ cc.Class({
         if (this.gameOver) return;
         this.gameOver = true;
         this.circlesCreateState = false;
+        this.updateScore();
+        this.updateCombo();
         this.compStart.showGameMask(true);
         const childs = this.node.children;
         for (let i = 0; i < childs.length; i++) {
             let childComponent = childs[i].getComponent('circle_item');
             for (let i = 0; i < this.circleGroup.length; i++)
                 if (this.circleGroup[i].color == childComponent.color) childComponent.noTouchHideAnimation(true);
+        }
+    },
+    updateScore() {
+        const self = this;
+        if (self.score > self.bestScore) {
+            self.bestScore = self.score;
+            this.maskBestScore.string = 'Best score: ' + this.bestScore;
+            Utils.GD.updateGameScore({
+                ftcBestScore: self.bestScore
+            }, () => {
+                Utils.GD.setUserGameInfo('ftcBestScore', self.bestScore);
+                console.log('分数保存成功')
+            })
+        }
+    },
+    updateCombo() {
+        const self = this;
+        if (self.bestComboIsUpdate) {
+            this.maskBestCombo.string = 'Best combo: ' + this.bestCombo;
+            Utils.GD.updateGameScore({
+                ftcBestCombo: self.bestCombo
+            }, () => {
+                Utils.GD.setUserGameInfo('ftcBestCombo', self.bestCombo);
+                console.log('连击保存成功')
+            })
         }
     }
 })

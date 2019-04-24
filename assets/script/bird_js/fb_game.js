@@ -1,6 +1,7 @@
 const PipeManager = require('pipe_manager');
 const Bird = require('bird');
 const Scroller = require('scroller');
+const Utils = require('../utils.js');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -118,33 +119,21 @@ cc.Class({
         const currentScoreNode = resultBoardNode.getChildByName("currentScore");
         const bestScoreNode = resultBoardNode.getChildByName("bestScore");
         const medalNode = resultBoardNode.getChildByName("medal");
-        // 保存最高分到服务
-        const globalNode = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
-        const db = wx.cloud.database();
-        let bestScore = globalNode.userGameInfo.fbBestScore || 0;
+        // 保存最高分
+        let bestScore = Utils.GD.userGameInfo.fbBestScore || 0;
         if (this.score > bestScore) {
             bestScore = this.score;
-            db.collection('userGameInfo').where({
-                _openid: globalNode.openid
-            }).get({
-                success: res => {
-                    db.collection('userGameInfo').doc(res.data[0]._id).update({
-                        data: {
-                            'fbBestScore': bestScore,
-                            'updateTime': db.serverDate()
-                        },
-                        success: sc => {
-                            globalNode.setUserGameInfo('fbBestScore', bestScore);
-                            console.log('保存成功')
-                        }
-                    })
-                }
+            Utils.GD.updateGameScore({
+                fbBestScore: bestScore
+            }, () => {
+                Utils.GD.setUserGameInfo('fbBestScore', bestScore);
+                console.log('保存成功')
             })
         };
         // 显示当前分数、最高分
         currentScoreNode.getComponent(cc.Label).string = this.score;
         bestScoreNode.getComponent(cc.Label).string = bestScore;
-        // 决定是否显示奖牌
+        // 判断是否显示奖牌
         let showMedal = (err, spriteFrame) => {
             if (this.score >= this.goldScore) {
                 medalNode.getComponent(cc.Sprite).spriteFrame = spriteFrame._spriteFrames.medal_gold;

@@ -1,4 +1,5 @@
 const gbData = require('./game_global.js');
+const Utils = require('../utils.js');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -12,11 +13,9 @@ cc.Class({
         }
     },
     onLoad() {
-        const globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
-
-        gbData.freeBestScore = globalUser.userGameInfo.needleFreeModeScore || 0;
-        gbData.gameLevel = globalUser.userGameInfo.needleLevelModeLevels || 1;
-        gbData.gameLevelData = globalUser.needleLevelData;
+        gbData.freeBestScore = Utils.GD.userGameInfo.needleFreeModeScore || 0;
+        gbData.gameLevel = Utils.GD.userGameInfo.needleLevelModeLevels || 1;
+        gbData.gameLevelData = Utils.GD.needleLevelData;
 
         //设置level text
         this.levelBtnLevelTxt.string = 'level '+ gbData.gameLevel +' play';

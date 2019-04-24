@@ -1,4 +1,5 @@
 const gbData = require('./game_global.js');
+const Utils = require('../utils.js');
 const DEFAULTSPEED = 4;
 cc.Class({
     extends: cc.Component,
@@ -39,14 +40,6 @@ cc.Class({
         this.rotateSpeed = 12;
         this.isGameOver = false;
         this.actionInts = null;
-        // wx cloud
-        this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
-        this.db = wx.cloud.database();
-        //判断数据库字段 不存在则先更新字段
-        if (!this.globalUser.userGameInfo.needleLevelModeLevels || typeof this.globalUser.userGameInfo.needleFreeModeScore != 'number') {
-            this.requestDbNeedleFreeModeScore();
-            this.requestDbNeedleLevelModeLevels();
-        };
         //create obj pool
         this.needlesPool = new cc.NodePool();
         const initCount = 40;
@@ -185,7 +178,7 @@ cc.Class({
             btnRestart.active = true;
             if (this.freeModeCurrScore > gbData.freeBestScore) {
                 gbData.freeBestScore = this.freeModeCurrScore;
-                this.requestDbNeedleFreeModeScore(); //wx db
+                this.requestDbNeedleFreeModeScore();
             };
             freeModeBestScore.getComponent(cc.Label).string = 'best score: ' + gbData.freeBestScore;
         };
@@ -216,41 +209,17 @@ cc.Class({
     //保存free mode 分数
     requestDbNeedleFreeModeScore() {
         const self = this;
-        self.db.collection('userGameInfo').where({
-            _openid: self.globalUser.openid
-        }).get({
-            success: res => {
-                self.db.collection('userGameInfo').doc(res.data[0]._id).update({
-                    data: {
-                        'needleFreeModeScore': gbData.freeBestScore,
-                        'updateTime': self.db.serverDate()
-                    },
-                    success: sc => {
-                        self.globalUser.setUserGameInfo('needleFreeModeScore', gbData.freeBestScore);
-                        console.log('保存成功');
-                    }
-                })
-            }
+        Utils.GD.updateGameScore({needleFreeModeScore: gbData.freeBestScore}, () => {
+            Utils.GD.setUserGameInfo('needleFreeModeScore', gbData.freeBestScore);
+            console.log('保存成功');
         })
     },
     //保存level mode levels
     requestDbNeedleLevelModeLevels() {
         const self = this;
-        self.db.collection('userGameInfo').where({
-            _openid: self.globalUser.openid
-        }).get({
-            success: res => {
-                self.db.collection('userGameInfo').doc(res.data[0]._id).update({
-                    data: {
-                        'needleLevelModeLevels': gbData.gameLevel,
-                        'updateTime': self.db.serverDate()
-                    },
-                    success: sc => {
-                        self.globalUser.setUserGameInfo('needleLevelModeLevels', gbData.gameLevel);
-                        console.log('保存成功');
-                    }
-                })
-            }
+        Utils.GD.updateGameScore({needleLevelModeLevels: gbData.gameLevel}, () => {
+            Utils.GD.setUserGameInfo('needleLevelModeLevels', gbData.gameLevel);
+            console.log('保存成功');
         })
     },
     gameOverMaskVis() {

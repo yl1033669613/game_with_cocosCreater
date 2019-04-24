@@ -1,4 +1,5 @@
 module.exports = {
+    GD: null, // req user obj
     //批量初始化对象池 
     batchInitObjPool(ptO, objArray) {
         for (let i = 0; i < objArray.length; i++) {

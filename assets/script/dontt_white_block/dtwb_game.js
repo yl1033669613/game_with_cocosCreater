@@ -1,4 +1,5 @@
 const INITPOOLCOUNT = 10;
+const Utils = require('../utils.js');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -30,6 +31,7 @@ cc.Class({
         this.rowNodeList = [];
         this.speed = 0;
         this.score = 0;
+        this.bestSco = Utils.GD.userGameInfo.donttWhiteBlockScore || 0;
         this.rowPool = new cc.NodePool();
         for (let i = 0; i < INITPOOLCOUNT; ++i) {
             let nodeO = cc.instantiate(this.rowPfb);
@@ -49,13 +51,14 @@ cc.Class({
     },
     updateScore() {
         this.score++;
-        if (this.score != 0 && !(this.score % 10) && this.speed < this.maxSpeed) this.speed += (this.maxSpeed - this.initSpeed) / 40; //速度均匀递增 400分打到最大速度， 每10分递增一次
+        //速度均匀递增 400分打到最大速度， 每10分递增一次
+        if (this.score != 0 && !(this.score % 10) && this.speed < this.maxSpeed) this.speed += (this.maxSpeed - this.initSpeed) / 40;
         this.updateUi();
     },
     updateUi() {
         this.scoreLabel.string = this.score;
         this.maskCurrScore.string = 'Current score: ' + this.score;
-        // this.bestScore.string = 'Best score: ' + this.score;
+        this.bestScore.string = 'Best score: ' + this.bestSco;
     },
     createMoveRow(isFirst) {
         let node,
@@ -81,6 +84,11 @@ cc.Class({
     },
     gameOver() {
         this.gameState = 2;
+        if (this.score > this.bestSco) {
+            this.bestSco = this.score;
+            this.updateUi();
+            this.upadteBestScore();
+        };
         this.showGameOverMask(true);
     },
     showGameOverMask(bool) {
@@ -113,5 +121,14 @@ cc.Class({
         this.score = 0;
         this.updateUi();
         for (let i = 0; i < 6; i++) this.createMoveRow(i == 0);
+    },
+    upadteBestScore() {
+        const self = this;
+        Utils.GD.updateGameScore({
+            donttWhiteBlockScore: self.bestSco
+        }, () => {
+            Utils.GD.setUserGameInfo('donttWhiteBlockScore', self.bestSco);
+            console.log('保存成功');
+        })
     }
 })

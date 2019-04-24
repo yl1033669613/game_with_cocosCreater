@@ -1,3 +1,5 @@
+const Utils = require('../utils.js');
+
 let lifeG = cc.Class({
     name: 'lifeG',
     properties: {
@@ -31,6 +33,10 @@ cc.Class({
         gameOverMask: {
             default: null,
             type: cc.Node
+        },
+        bestScoreLabel: {
+            default: null,
+            type: cc.Label
         }
     },
     onLoad() {
@@ -48,6 +54,7 @@ cc.Class({
     init() {
         this.gameOver = false;
         this.score = 0;
+        this.bestScore = Utils.GD.userGameInfo.fruitNinjaBestScore || 0;
         this.life = 0;
         this.lifeG.forEach((a) => {
             a.lifeConsume.active = false;
@@ -98,6 +105,11 @@ cc.Class({
     gameOverHandle() {
         this.gameOver = true;
         this.knife.group = 'default';
+        if (this.score > this.bestScore) {
+            this.bestScore = this.score;
+            this.bestScoreLabel.string = 'Best score: ' + this.bestScore;
+            this.updateBestScore();
+        };
         this.scheduleOnce(() => {
             this.showTheGameOverMask(true);
         }, .5, this);
@@ -119,5 +131,14 @@ cc.Class({
                 this.gameOverMask.active = false;
             }, this)))
         }
+    },
+    updateBestScore() {
+        const self = this;
+        Utils.GD.updateGameScore({
+            fruitNinjaBestScore: self.bestScore
+        }, () => {
+            Utils.GD.setUserGameInfo('fruitNinjaBestScore', self.bestScore);
+            console.log('保存成功');
+        })
     }
 });

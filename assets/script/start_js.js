@@ -33,6 +33,8 @@ const SCENESLIST = [{
     name: 'follow_the_circle'
 }];
 
+const Utils = require('./utils.js');
+
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -77,8 +79,10 @@ cc.Class({
             dt = -120;
         };
         if (self.noticeOpen && self.noticeLoadFirst) {
-            wx.showLoading({ title: '请稍候...' });
-            self.loadNoticePic(() => { //wx cloud
+            wx.showLoading({
+                title: '请稍候...'
+            });
+            self.loadNoticePic(() => { //请求notice pic
                 self.noticeMoveAction(dt)
             });
         } else {
@@ -93,32 +97,16 @@ cc.Class({
     loadNoticePic(cb) {
         const self = this;
         const sprite = self.noticePic.getComponent(cc.Sprite);
-        const db = wx.cloud.database();
-        db.collection('gameConfig').doc('W9J4AAIrVDZJFtdW').get({
-            success: (ret) => {
-                let arr = [];
-                arr.push(ret.data.indexBottomBanner);
-                wx.cloud.getTempFileURL({
-                    fileList: arr,
-                    success: res => {
-                        wx.hideLoading();
-                        self.noticeLoadFirst = false;
-                        cb && cb();
-                        cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
-                            sprite.spriteFrame = new cc.SpriteFrame(texture);
-                            self.noticePic.parent.height = self.noticePic.height;
-                        })
-                    },
-                    fail: err => {
-                        wx.hideLoading();
-                        console.log(err)
-                    }
-                })
-            },
-            fail: e => {
-                wx.hideLoading();
-                console.log(e)
-            }
+        Utils.GD.getIndexNoticePic(res => {
+            wx.hideLoading();
+            self.noticeLoadFirst = false;
+            cb && cb();
+            cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
+                if (texture) {
+                    sprite.spriteFrame = new cc.SpriteFrame(texture);
+                    self.noticePic.parent.height = self.noticePic.height;
+                }
+            })
         })
     }
 })

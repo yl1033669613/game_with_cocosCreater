@@ -1,4 +1,5 @@
 const Gdt = require('globals');
+const Utils = require('../utils.js');
 cc.Class({
     extends: cc.Component,
     properties: () => ({
@@ -66,13 +67,8 @@ cc.Class({
         this.scoreDisplay.string = this.score;
         this.bombNoDisplay.string = this.bombNo;
         this.curState = Gdt.commonInfo.gameState.start;
-        // wx cloud
-        this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
-        this.db = wx.cloud.database();
-        this.bestScore = this.globalUser.userGameInfo.aircraftWarBestScore || 0;
+        this.bestScore = Utils.GD.userGameInfo.aircraftWarBestScore || 0;
         this.maskBestScore.string = 'Best Score: ' + this.bestScore;
-        //判断数据库字段 不存在则先更新字段
-        if (typeof this.globalUser.userGameInfo.aircraftWarBestScore != 'number') this.requestDbAircraftWarScore();
 
         this.bulletGroup.startAction();
         this.enemyGroup.startAction();
@@ -182,25 +178,14 @@ cc.Class({
     backStartScene() {
         cc.director.loadScene('aircraft_war_start');
     },
-
-    //db request
+    //保存最高分数
     requestDbAircraftWarScore() {
         const self = this;
-        self.db.collection('userGameInfo').where({
-            _openid: self.globalUser.openid
-        }).get({
-            success: res => {
-                self.db.collection('userGameInfo').doc(res.data[0]._id).update({
-                    data: {
-                        aircraftWarBestScore: self.bestScore,
-                        updateTime: self.db.serverDate()
-                    },
-                    success: sc => {
-                        self.globalUser.setUserGameInfo('aircraftWarBestScore', self.bestScore);
-                        console.log('保存成功');
-                    }
-                })
-            }
+        Utils.GD.updateGameScore({
+            aircraftWarBestScore: self.bestScore
+        }, () => {
+            Utils.GD.setUserGameInfo('aircraftWarBestScore', self.bestScore);
+            console.log('保存成功');
         })
     }
 })

@@ -1,4 +1,5 @@
 const tets = require('./tetris_type.js');
+const Utils = require('../utils.js');
 const DROPSPEED = 500;
 const ROW = 20;
 const COL = 10;
@@ -64,13 +65,7 @@ cc.Class({
         this.color = ''; //当前形状对应颜色
         this.rotateIdx = 0; //当前形状对应旋转位置index
         this.rotateShape = ''; //当前形状对应旋转位置
-
-        // wx cloud
-        this.globalUser = cc.director.getScene().getChildByName('gameUser').getComponent('game_user_js');
-        this.bestScore = this.globalUser.userGameInfo.tetrisBestScore || 0;
-        this.db = wx.cloud.database();
-        //判断数据库字段 不存在则先更新字段
-        if (typeof this.globalUser.userGameInfo.tetrisBestScore != 'number') this.requestDbTetrisBestScore();
+        this.bestScore = Utils.GD.userGameInfo.tetrisBestScore || 0;
     },
     //随机获取一个形状
     randomOne() {
@@ -275,22 +270,10 @@ cc.Class({
     //保存最高得分 wx cloud
     requestDbTetrisBestScore(cb) {
         const self = this;
-        self.db.collection('userGameInfo').where({
-            _openid: self.globalUser.openid
-        }).get({
-            success: (res) => {
-                self.db.collection('userGameInfo').doc(res.data[0]._id).update({
-                    data: {
-                        'tetrisBestScore': self.score,
-                        'updateTime': self.db.serverDate()
-                    },
-                    success: (sc) => {
-                        self.globalUser.setUserGameInfo('tetrisBestScore', self.score);
-                        cb && cb();
-                        console.log('保存成功');
-                    }
-                })
-            }
+        Utils.GD.updateGameScore({tetrisBestScore: self.score}, () => {
+            Utils.GD.setUserGameInfo('tetrisBestScore', self.score);
+            cb && cb();
+            console.log('保存成功');
         })
     },
     showGameOverInfo() {

@@ -71,7 +71,12 @@ cc.Class({
     // 绘制函数
     fireworksBodyDraw(canvasCtx) {
         let lastCoordinate = this.coordinates[this.coordinates.length - 1];
-        let color = new cc.Color({ r: this.fireworksBodycolorRandom.r, g: this.fireworksBodycolorRandom.g, b: this.fireworksBodycolorRandom.b, a: 255 });
+        let color = new cc.Color({
+            r: this.fireworksBodycolorRandom.r,
+            g: this.fireworksBodycolorRandom.g,
+            b: this.fireworksBodycolorRandom.b,
+            a: 255
+        });
         // Draw the rocket
         canvasCtx.clear();
         canvasCtx.moveTo(lastCoordinate[0], lastCoordinate[1]);
@@ -128,11 +133,20 @@ cc.Class({
         };
         canvasCtx.moveTo(lastCoordinate[0], lastCoordinate[1]);
         canvasCtx.lineTo(item.x, item.y);
-        canvasCtx.strokeColor = new cc.Color({ r: changeRGB.r, g: changeRGB.g, b: changeRGB.b, a: item.alpha });
+        canvasCtx.strokeColor = new cc.Color({
+            r: changeRGB.r,
+            g: changeRGB.g,
+            b: changeRGB.b,
+            a: item.alpha
+        });
         canvasCtx.stroke();
     },
     randomColorInRange(rgbObj, range) {
-        return { r: Math.round(this.random(rgbObj.r - range, rgbObj.r + range)), g: Math.round(this.random(rgbObj.g - range, rgbObj.g + range)), b: Math.round(this.random(rgbObj.b - range, rgbObj.b + range)) }
+        return {
+            r: Math.round(this.random(rgbObj.r - range, rgbObj.r + range)),
+            g: Math.round(this.random(rgbObj.g - range, rgbObj.g + range)),
+            b: Math.round(this.random(rgbObj.b - range, rgbObj.b + range))
+        }
     },
     calculateDistance(p1x, p1y, p2x, p2y) {
         let xDistance = p1x - p2x;
@@ -141,7 +155,11 @@ cc.Class({
     },
     // 获取随机颜色
     colorRandom() {
-        return { r: Math.round(this.random(this.parent.range, 255 - this.parent.range)), g: Math.round(this.random(this.parent.range, 255 - this.parent.range)), b: Math.round(this.random(this.parent.range, 255 - this.parent.range)) }
+        return {
+            r: Math.round(this.random(this.parent.range, 255 - this.parent.range)),
+            g: Math.round(this.random(this.parent.range, 255 - this.parent.range)),
+            b: Math.round(this.random(this.parent.range, 255 - this.parent.range))
+        }
     },
     random(min, max) {
         return Math.random() * (max - min) + min;

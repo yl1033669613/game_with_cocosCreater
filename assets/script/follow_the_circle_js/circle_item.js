@@ -51,7 +51,12 @@ cc.Class({
         this.planetArr = [];
         this.planetCtx.clear();
         for (let i = 0; i < this.tapNum; i++) {
-            let obj = { ang: this.random(0, Math.PI * 2), speed: this.random(0.008, 0.03), r: this.cirCenterR + this.planetR + (i * this.planetR * 2) + 3, opc: 255 - (65 * i) };
+            let obj = {
+                ang: this.random(0, Math.PI * 2),
+                speed: this.random(0.008, 0.03),
+                r: this.cirCenterR + this.planetR + (i * this.planetR * 2) + 3,
+                opc: 255 - (65 * i)
+            };
             this.drawPlanetPoint(obj.ang, obj.r);
             this.planetArr.push(obj);
         };
@@ -60,7 +65,7 @@ cc.Class({
     },
     itemCircleInitCount(num) {
         this.itemCount = this.itemCount + num * this.cirHideMul;
-        this.circleCountCb = function(e) {
+        this.circleCountCb = function (e) {
             this.circleActive = false;
             this.noTouchHideAnimation();
         }.bind(this);

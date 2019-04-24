@@ -1,4 +1,5 @@
 const Gdt = require('globals');
+const Utils = require('../utils.js');
 
 cc.Class({
     extends: cc.Component,
@@ -11,8 +12,10 @@ cc.Class({
     onLoad() {
         cc.director.preloadScene('aircraft_war_game');
         this.loadingBgAction();
-
-        wx.showLoading({ title: '请稍候...', mask: true });
+        wx.showLoading({
+            title: '请稍候...',
+            mask: true
+        });
         this.loadNoticePic();
     },
     startGame() {
@@ -28,39 +31,22 @@ cc.Class({
     //加载背景图片 wx cloud
     loadNoticePic(cb) {
         const self = this;
+        const bgSprite = self.loadingBg.getComponent(cc.Sprite);
         if (Gdt.loopBg) {
             cc.loader.load(Gdt.loopBg, (err, texture) => {
-                if (!err) this.loadingBg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+                if (!err) bgSprite.spriteFrame = new cc.SpriteFrame(texture);
                 wx.hideLoading();
             });
             return;
         };
-        const db = wx.cloud.database();
-        db.collection('gameConfig').doc('XDWYPuSiwXKAQnli').get({
-            success: (ret) => {
-                let arr = [];
-                arr.push(ret.data.loopbg);
-                wx.cloud.getTempFileURL({
-                    fileList: arr,
-                    success: res => {
-                        wx.hideLoading();
-                        cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
-                            if (!err) {
-                                Gdt.loopBg = texture;
-                                this.loadingBg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
-                            }
-                        })
-                    },
-                    fail: err => {
-                        wx.hideLoading();
-                        console.log(err);
-                    }
-                })
-            },
-            fail: e => {
-                wx.hideLoading();
-                console.log(e);
-            }
+        Utils.GD.getAircaftWarBg((res) => {
+            wx.hideLoading();
+            cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
+                if (!err) {
+                    Gdt.loopBg = texture;
+                    bgSprite.spriteFrame = new cc.SpriteFrame(texture);
+                }
+            })
         })
     }
 })

@@ -1,8 +1,6 @@
 cc.Class({
     extends: cc.Component,
-    properties: {
-
-    },
+    properties: {},
     backTheGameList() {
         cc.director.loadScene('startscene');
     },

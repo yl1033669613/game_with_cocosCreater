@@ -11,7 +11,11 @@ cc.Class({
         }
     },
     onLoad() {
-        this.finger = { down: false, x: 0, y: 0 };
+        this.finger = {
+            down: false,
+            x: 0,
+            y: 0
+        };
         // particle color change range
         this.range = 40;
         // particle number
@@ -58,7 +62,7 @@ cc.Class({
             this.finger.down = false
         }, this);
     },
-    createFireworksBody (){
+    createFireworksBody() {
         let fireworksBody = cc.instantiate(this.fireworksBody);
         fireworksBody.width = this.node.width;
         fireworksBody.height = this.node.height;

@@ -15,7 +15,7 @@ cc.Class({
         forceHorzMax: 1000,
         forceMin: 30000,
         forceMax: 35000,
-        colorType: 1 
+        colorType: 1
     },
     onLoad() {
         this.poolName = '';
