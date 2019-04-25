@@ -442,6 +442,9 @@
     "_enabled": true,
     "speed": -300,
     "resetX": -300,
+    "canvasNode": {
+      "__id__": 2
+    },
     "longGround": {
       "__id__": 7
     }

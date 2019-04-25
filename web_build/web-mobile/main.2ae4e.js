@@ -210,7 +210,7 @@
     }
 
     if (window.jsb) {
-        require('src/settings.f145b.js');
+        require('src/settings.2101f.js');
         require('src/jsb_polyfill.js');
         boot();
         return;
