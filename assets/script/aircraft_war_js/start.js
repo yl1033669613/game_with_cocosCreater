@@ -12,10 +12,7 @@ cc.Class({
     onLoad() {
         cc.director.preloadScene('aircraft_war_game');
         this.loadingBgAction();
-        wx.showLoading({
-            title: '请稍候...',
-            mask: true
-        });
+        Utils.GD.showWxLoading(true);
         this.loadNoticePic();
     },
     startGame() {
@@ -29,24 +26,26 @@ cc.Class({
         this.loadingBg.runAction(act);
     },
     //加载背景图片 wx cloud
-    loadNoticePic(cb) {
+    loadNoticePic() {
         const self = this;
         const bgSprite = self.loadingBg.getComponent(cc.Sprite);
         if (Gdt.loopBg) {
             cc.loader.load(Gdt.loopBg, (err, texture) => {
                 if (!err) bgSprite.spriteFrame = new cc.SpriteFrame(texture);
-                wx.hideLoading();
+                Utils.GD.showWxLoading(false);
             });
             return;
         };
         Utils.GD.getAircaftWarBg((res) => {
-            wx.hideLoading();
-            cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
-                if (!err) {
-                    Gdt.loopBg = texture;
-                    bgSprite.spriteFrame = new cc.SpriteFrame(texture);
-                }
-            })
+            Utils.GD.showWxLoading(false);
+            if (res) {
+                cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
+                    if (!err) {
+                        Gdt.loopBg = texture;
+                        bgSprite.spriteFrame = new cc.SpriteFrame(texture);
+                    }
+                })   
+            }
         })
     }
 })

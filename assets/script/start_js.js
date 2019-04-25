@@ -79,9 +79,7 @@ cc.Class({
             dt = -120;
         };
         if (self.noticeOpen && self.noticeLoadFirst) {
-            wx.showLoading({
-                title: '请稍候...'
-            });
+            Utils.GD.showWxLoading(true);
             self.loadNoticePic(() => { //请求notice pic
                 self.noticeMoveAction(dt)
             });
@@ -98,15 +96,17 @@ cc.Class({
         const self = this;
         const sprite = self.noticePic.getComponent(cc.Sprite);
         Utils.GD.getIndexNoticePic(res => {
-            wx.hideLoading();
-            self.noticeLoadFirst = false;
+            Utils.GD.showWxLoading(false);
+            if (res) {
+                self.noticeLoadFirst = false;
+                cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
+                    if (texture) {
+                        sprite.spriteFrame = new cc.SpriteFrame(texture);
+                        self.noticePic.parent.height = self.noticePic.height;
+                    }
+                })
+            };
             cb && cb();
-            cc.loader.load(res.fileList[0].tempFileURL, (err, texture) => {
-                if (texture) {
-                    sprite.spriteFrame = new cc.SpriteFrame(texture);
-                    self.noticePic.parent.height = self.noticePic.height;
-                }
-            })
         })
     }
 })
