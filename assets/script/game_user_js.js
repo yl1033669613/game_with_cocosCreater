@@ -109,7 +109,7 @@ cc.Class({
                     mask: true
                 });
             } else {
-                self.showWxLoading(false);
+                wx.hideLoading();
             }
         }
     },
