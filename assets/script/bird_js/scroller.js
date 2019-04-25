@@ -12,6 +12,8 @@ cc.Class({
     },
     onLoad() {
         this.canScroll = true;
+    },
+    start() {
         console.log(this.node.width)
         this.longGround.width = this.node.width;
         this.longGround.x = this.node.width;
