@@ -4,6 +4,10 @@
 
 所有游戏都未添加游戏音频，可能考虑后续通过微信云开发添加。
 
+## 游戏demo (pc端请使用移动设备模拟)
+
+查看[demo](https://yl1033669613.github.io/game_with_cocosCreater/tree/master/web_build/web-mobile/index.html)
+
 ## 新增
 共有11款游戏。
 
@@ -17,7 +21,7 @@
 
 内部对接云开发api, 实现记录玩家游戏分数，游戏阶段等功能。
 
-剔除代码内微信小程序云开发代码，可以通过cocosCreator发布为其他平台游戏。
+可以通过cocosCreator发布为其他移动平台游戏。
 
 更多关于wx小游戏点击[这里](https://developers.weixin.qq.com/minigame/dev/index.html)
 
