@@ -3,8 +3,6 @@ cc.Class({
     properties: {
         // 滚动的速度，单位px/s
         speed: -300,
-        // x到达此位置后开始重头滚动
-        resetX: -200,
         canvasNode: {
             default: null,
             type: cc.Node
@@ -16,9 +14,10 @@ cc.Class({
     },
     onLoad() {
         this.canScroll = true;
+        this.resetX = -300;
     },
     start() {
-        console.log(this.canvasNode.width)
+        this.resetX = -(this.canvasNode.width - 100);
         this.longGround.width = this.canvasNode.width;
         this.longGround.x = this.canvasNode.width;
     },
