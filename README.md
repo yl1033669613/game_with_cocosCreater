@@ -6,7 +6,7 @@
 
 ## 游戏demo (pc端请使用移动设备模拟)
 
-查看[demo](https://yl1033669613.github.io/game_with_cocosCreater/tree/master/web_build/web-mobile/index.html)
+查看[demo](https://yl1033669613.github.io/game_with_cocosCreater/web_build/web-mobile/index.html)
 
 ## 新增
 共有11款游戏。
