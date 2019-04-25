@@ -491,7 +491,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ground",
+    "_name": "groundLong",
     "_objFlags": 0,
     "_parent": {
       "__id__": 12
@@ -682,7 +682,7 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 375,
+      "width": 3000,
       "height": 164
     }
   },

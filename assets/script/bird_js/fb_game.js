@@ -1,6 +1,5 @@
 const PipeManager = require('pipe_manager');
 const Bird = require('bird');
-const Scroller = require('scroller');
 const Utils = require('../utils.js');
 cc.Class({
     extends: cc.Component,
@@ -63,7 +62,7 @@ cc.Class({
         // 管道重置
         this.pipeManager.reset();
         // 地面停止滚动
-        this.ground.getComponent(Scroller).stopScroll();
+        this.ground.getComponent('scroller').stopScroll();
         // 停止游戏输入监听
         this.enableInput(false);
         // 屏幕闪烁

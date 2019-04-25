@@ -12,7 +12,8 @@ cc.Class({
     },
     onLoad() {
         this.canScroll = true;
-        longGround.width = this.node.width;
+        this.longGround.width = this.node.width;
+        this.longGround.x = this.node.width;
     },
     update(dt) {
         if (!this.canScroll) return;
