@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "f3779477-7dbf-4751-902f-985973720152",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "mikado_outline_shadow": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "492c193b-97a4-42f3-b7a9-6a6e4cecc0e9",
       "rawTextureUuid": "f3779477-7dbf-4751-902f-985973720152",
       "trimType": "auto",

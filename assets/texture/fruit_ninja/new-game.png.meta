@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "98544f23-1b1e-43f1-b2e2-131464f392aa",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "new-game": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "b5c4d7d3-9bb4-4334-8c49-f257b48bfe01",
       "rawTextureUuid": "98544f23-1b1e-43f1-b2e2-131464f392aa",
       "trimType": "auto",

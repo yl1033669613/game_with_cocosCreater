@@ -7,7 +7,7 @@ cc.Class({
         this.ctx = this.node.getComponent(cc.Graphics);
     },
     start(){
-        this.ctx.circle(this.r, this.r, this.r);
+        this.ctx.circle(0, 0, this.r);
         this.ctx.fill();
     }
 })

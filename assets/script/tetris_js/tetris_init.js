@@ -97,8 +97,8 @@ cc.Class({
     },
     //绘制单个预览矩形
     drawPreviewRect(x, y, color) {
-        let c = color.split('/');
-        let col = new cc.Color({ r: parseInt(c[0]), g: parseInt(c[1]), b: parseInt(c[2]), a: parseInt(c[3]) });
+        let c = color.split('/').map(a => parseFloat(a));
+        let col = new cc.Color({ r: c[0], g: c[1], b: c[2], a: c[3] });
         this.previewCtx.fillColor = col;
         this.previewCtx.rect((x * WIDTH) + (2 * x), (WIDTH * 4 - 10) - ((y * WIDTH) + (2 * y)), WIDTH, WIDTH);
         this.previewCtx.stroke();
@@ -106,8 +106,8 @@ cc.Class({
     },
     //绘制单个矩形 填充颜色
     drawRect(x, y, color) {
-        let c = color.split('/');
-        let col = new cc.Color({ r: parseInt(c[0]), g: parseInt(c[1]), b: parseInt(c[2]), a: parseInt(c[3]) });
+        let c = color.split('/').map(a => parseFloat(a));
+        let col = new cc.Color({ r: c[0], g: c[1], b: c[2], a: c[3] });
         this.ctx.fillColor = col;
         this.ctx.rect((x * WIDTH) + (2 * x), (WIDTH * ROW + 22) - ((y * WIDTH) + (2 * y)), WIDTH, WIDTH);
         this.ctx.stroke();

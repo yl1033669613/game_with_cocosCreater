@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "3dd278cf-db84-4ccb-b903-097959ecdf60",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "peach-2": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "d5e68d01-f00c-45df-9dc3-466b06788310",
       "rawTextureUuid": "3dd278cf-db84-4ccb-b903-097959ecdf60",
       "trimType": "auto",

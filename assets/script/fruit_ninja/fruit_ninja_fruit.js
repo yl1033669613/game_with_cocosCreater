@@ -39,7 +39,7 @@ cc.Class({
         let forceY = Math.floor(utils.random(this.forceMin, this.forceMax)),
             forceX = Math.floor(utils.random(this.forceHorzMin, this.forceHorzMax));
         fruitNodeRigidBody.angularVelocity = utils.random(-1, 1) > 0 ? 100 : -100; //角速度 默认100
-        fruitNodeRigidBody.applyForceToCenter(cc.p(this.node.x > 0 ? -forceX : forceX, forceY), true);
+        fruitNodeRigidBody.applyForceToCenter(cc.v2(this.node.x > 0 ? -forceX : forceX, forceY), true);
     },
     onCollisionEnter(other, self) {
         if (other.tag == 50) {

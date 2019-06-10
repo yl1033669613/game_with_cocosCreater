@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "0a308ffc-11ec-482c-9d5a-d949606aff17",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "fnij_bg_blackopc": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "1cb59c82-d6e5-4f14-9b82-10eae5328b35",
       "rawTextureUuid": "0a308ffc-11ec-482c-9d5a-d949606aff17",
       "trimType": "auto",

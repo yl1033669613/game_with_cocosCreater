@@ -74,7 +74,7 @@ cc.Class({
             this.foodInstance = cc.instantiate(this.foodPrefab);
         };
         this.node.addChild(this.foodInstance);
-        this.foodInstance.setPosition(cc.p(indexX * 15, indexY * 15));
+        this.foodInstance.setPosition(cc.v2(indexX * 15, indexY * 15));
 
         // 设置食物的位置
         this.foodX = indexX * 15;

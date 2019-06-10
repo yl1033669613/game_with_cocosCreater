@@ -45,7 +45,7 @@ cc.Class({
     update(dt) {
         if (this.gameState == 1) {
             this.rowNodeList.forEach((a) => {
-                a.setPositionY(a.getPositionY() - this.speed);
+                a.y = a.y - this.speed;
             })
         }
     },

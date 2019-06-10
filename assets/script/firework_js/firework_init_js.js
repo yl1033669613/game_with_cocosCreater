@@ -68,7 +68,7 @@ cc.Class({
         fireworksBody.height = this.node.height;
         this.node.addChild(fireworksBody);
     },
-    update(dt) {
+    update() {
         // 固定间隔生成
         if (this.timerTick >= this.timerTotal) {
             if (!this.finger.down) {

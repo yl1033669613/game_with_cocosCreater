@@ -11,7 +11,7 @@ cc.Class({
     },
     onLoad() {
         this.pipeList = [];
-        this.isRunning = false;
+        this.pipeIsRunning = false;
         // 创建pipe对象池
         this.pipePool = new cc.NodePool();
         const initCount = 3;
@@ -25,7 +25,7 @@ cc.Class({
         this.spawnPipe();
         let spawnInterval = Math.abs(this.pipeSpacing / this.pipeMoveSpeed);
         this.schedule(this.spawnPipe, spawnInterval);
-        this.isRunning = true;
+        this.pipeIsRunning = true;
     },
     spawnPipe() {
         let pipeGroup = null;
@@ -52,6 +52,6 @@ cc.Class({
     reset() {
         this.unschedule(this.spawnPipe);
         this.pipeList = [];
-        this.isRunning = false;
+        this.pipeIsRunning = false;
     }
 })

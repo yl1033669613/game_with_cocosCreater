@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "70632306-e034-479d-882d-f986d9676cfb",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "skysc_block": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "5a3c82dc-5176-4c7c-a30a-605a0088475b",
       "rawTextureUuid": "70632306-e034-479d-882d-f986d9676cfb",
       "trimType": "auto",

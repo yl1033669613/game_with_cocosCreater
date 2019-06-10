@@ -1,17 +1,12 @@
 {
-  "appKey": "",
-  "appSecret": "",
   "encryptJs": true,
   "excludeScenes": [],
   "fb-instant-games": {},
-  "includeAnySDK": false,
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
   "md5Cache": true,
   "mergeStartScene": false,
-  "oauthLoginServer": "",
   "optimizeHotUpdate": false,
   "orientation": {
     "landscapeLeft": true,
@@ -20,12 +15,10 @@
     "upsideDown": false
   },
   "packageName": "org.cocos2d.helloworld",
-  "privateKey": "",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "renderMode": "0",
   "startScene": "f7e086a6-2b59-4ec6-86cb-2e752d60e9f2",
   "title": "wx_mini_game",
   "webOrientation": "portrait",
@@ -36,5 +29,20 @@
     "orientation": "portrait"
   },
   "xxteaKey": "a017c6bb-f42b-43",
-  "zipCompressJs": true
+  "zipCompressJs": true,
+  "baidugame": {
+    "appid": "testappid",
+    "orientation": "portrait",
+    "REMOTE_SERVER_ROOT": "",
+    "subContext": ""
+  },
+  "android-instant": {
+    "REMOTE_SERVER_ROOT": "",
+    "pathPattern": "",
+    "scheme": "https",
+    "host": "",
+    "skipRecord": false,
+    "recordPath": ""
+  },
+  "appBundle": false
 }

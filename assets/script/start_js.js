@@ -26,11 +26,11 @@ const SCENESLIST = [{
     title: ' Tetris',
     name: 'tetris'
 }, {
-    title: ' Firework',
-    name: 'firework'
-}, {
     title: ' Follow the circle',
     name: 'follow_the_circle'
+}, {
+    title: ' Firework',
+    name: 'firework'
 }];
 
 const Utils = require('./utils.js');

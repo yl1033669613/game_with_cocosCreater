@@ -17,7 +17,7 @@ cc.Class({
     // 只在两个碰撞体开始接触时被调用一次
     onBeginContact(contact, selfCollider, otherCollider) {
         if (this.isFirstIn) {
-            selfCollider.node.getComponent(cc.RigidBody).linearVelocity = cc.p(0, 0);
+            selfCollider.node.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 0);
             this.isFirstIn = false;
             if (globals.gm.putCount == 1) {
                 selfCollider.node.getComponent(cc.RigidBody).gravityScale = 100;

@@ -56,7 +56,6 @@ cc.Class({
         const physicsManager = cc.director.getPhysicsManager();
         physicsManager.enabled = true;
         physicsManager.debugDrawFlags = 0;
-        physicsManager.attachDebugDrawToCamera(this.camera);
 
         globals.gm = this;
         this.state = 1;
@@ -95,7 +94,7 @@ cc.Class({
         this.blockJsComp = this.waitBlock.getComponent("skysc_block");
         this.blockJsComp.init();
         this.waitBlock.rotation = 0;
-        this.waitBlock.setPosition(cc.p(0, 0));
+        this.waitBlock.setPosition(cc.v2(0, 0));
         this.waitBlock.parent = this.blockTmpCtn;
         this.isPut = true;
         this.isSucceed = true;
@@ -130,9 +129,9 @@ cc.Class({
             let time = this.blockJsComp.colliderSize.height / this.cameraSpeed;
             this.camera.node.stopAllActions();
             this.crane.stopAllActions();
-            let actionMove = cc.moveTo(time, cc.p(0, this.blockJsComp.colliderSize.height * i));
+            let actionMove = cc.moveTo(time, cc.v2(0, this.blockJsComp.colliderSize.height * i));
             this.crane.runAction(actionMove);
-            actionMove = cc.moveTo(time, cc.p(0, this.blockJsComp.colliderSize.height * i));
+            actionMove = cc.moveTo(time, cc.v2(0, this.blockJsComp.colliderSize.height * i));
             this.camera.node.runAction(actionMove);
         }
     },

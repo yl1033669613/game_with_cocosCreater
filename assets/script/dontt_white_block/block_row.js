@@ -7,18 +7,18 @@ cc.Class({
         }
     },
     onLoad() {
-        let visSize = cc.director.getVisibleSize();
+        const visSize = cc.find("Canvas");
         this.node.width = visSize.width;
         this.node.height = visSize.height / 4;
         let itemW = this.node.width / 4;
         for (let i = 0; i < this.colItems.length; i++) {
-            this.colItems[i].setPositionX(i * itemW + 1);
+            this.colItems[i].x = i * itemW + 1;
             this.colItems[i].width = itemW - 2;
         };
         this.gm = this.node.parent.getComponent('dtwb_game');
         for (let i = 0; i < this.colItems.length; i++) this.colItems[i].on(cc.Node.EventType.TOUCH_START, this.handleClick, this);
     },
-    update(dt) {
+    update() {
         if (this.gm.gameState == 1) {
             if (this.node.y <= 0) {
                 if (this.state == 2) {
@@ -33,11 +33,15 @@ cc.Class({
         }
     },
     init(isFirst) {
+        console.log(isFirst)
         this.state = 1; //1 未触发状态 2正确点击态
-        this.redIdx = -1;
-        this.blackIdx = this.getBlack();
-        this.isFirst = isFirst;
+        this.redIdx = -1; // 点击错误红色块index
+        this.blackIdx = this.getBlack(); // 黑色块index
+        this.isFirst = isFirst; //是否是首次生成
         this.setNormal();
+        this.colItems.forEach(a => {
+            a.children[0].active = false;
+        });
         if (isFirst) this.colItems[this.blackIdx].children[0].active = true;
     },
     getBlack() {

@@ -29,7 +29,7 @@ cc.Class({
         }
     },
     onLoad() {
-        let windowSize = cc.view.getVisibleSize();
+        let windowSize = cc.find("Canvas");
         this.node.height = this.node.width = windowSize.width - 14;
         let rectBgNode = this.node.getChildByName('gameShadowRect');
         this.ctx = rectBgNode.getComponent(cc.Graphics);
@@ -118,13 +118,14 @@ cc.Class({
     },
     // 绘制单个矩形
     drawRects(x, y, w, c, n) {
+        let colorObj = new cc.Color();
         let rect = cc.instantiate(this.rectPfb);
         rect.width = rect.height = w;
-        rect.setPosition(cc.p(x, y));
+        rect.setPosition(cc.v2(x, y));
         let label = rect.getChildByName('2048Number'),
             bg = rect.getChildByName('2048RectBg');
-        bg.color = cc.hexToColor(String(c));
-        label.color = (n <= 4) ? cc.hexToColor("#ffb638") : cc.Color.WHITE;
+        bg.color = colorObj.fromHEX(String(c));
+        label.color = (n <= 4) ? colorObj.fromHEX("#ffb638") : cc.Color.WHITE;
         label.getComponent(cc.Label).string = n;
         this.node.addChild(rect);
     },

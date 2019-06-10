@@ -41,13 +41,13 @@ cc.Class({
                 rect = cc.instantiate(this.snakebody);
             };
             this.node.addChild(rect);
-            rect.setPosition(cc.p(i * 15, 0)); //设置蛇身位置
+            rect.setPosition(cc.v2(i * 15, 0)); //设置蛇身位置
             this.snakeArray.splice(0, 0, rect);
         };
         // 插入蛇头
         let snakeHead = cc.instantiate(this.snakeHead);
         this.node.addChild(snakeHead);
-        snakeHead.setPosition(cc.p(15, 0)); //设置蛇头位置
+        snakeHead.setPosition(cc.v2(15, 0)); //设置蛇头位置
         this.snakeArray.splice(0, 0, snakeHead);
         // 设置蛇头
         this.head = this.snakeArray[0];
@@ -80,7 +80,7 @@ cc.Class({
             rect = cc.instantiate(this.snakebody);
         };
         this.node.addChild(rect);
-        rect.setPosition(cc.p(this.head.x, this.head.y))
+        rect.setPosition(cc.v2(this.head.x, this.head.y))
         this.snakeArray.splice(1, 0, rect);
 
         if (this.isEat()) {

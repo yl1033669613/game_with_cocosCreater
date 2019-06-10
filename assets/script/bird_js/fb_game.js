@@ -160,13 +160,13 @@ cc.Class({
             cc.spawn(
                 cc.fadeIn(0.2),
                 cc.sequence(
-                    cc.moveBy(0.2, cc.p(0, 10)),
-                    cc.moveBy(0.5, cc.p(0, -10))
+                    cc.moveBy(0.2, cc.v2(0, 10)),
+                    cc.moveBy(0.5, cc.v2(0, -10))
                 )
             ),
             () => showNode(
                 resultBoardNode,
-                cc.moveTo(0.5, cc.p(resultBoardNode.x, -150)).easing(cc.easeCubicActionOut()),
+                cc.moveTo(0.5, cc.v2(resultBoardNode.x, -150)).easing(cc.easeCubicActionOut()),
                 () => showNode(
                     startButtonNode,
                     cc.fadeIn(0.5))

@@ -129,6 +129,14 @@ cc.Class({
                     this.gameLevelModeThislevelWin()
                 };
                 if (!this.isGameOver && gbData.mode === 'free') this.freeModeCurrScore++;
+                if(this.isGameOver) {
+                    let arr = this.bigCircle.children.filter((a) => {
+                        return a.name == 'needle';
+                    });
+                    arr.forEach((a) => {
+                        a.getComponent('draw_needles').stopNeedleAction();
+                    });
+                }
             }, this));
         this.moveNeedle.runAction(moveAction);
     },
@@ -152,12 +160,6 @@ cc.Class({
         if (!this.isGameOver) {
             this.isGameOver = true;
             this.bigCircle.stopAction(this.actionInts);
-            let arr = this.bigCircle.children.filter((a) => {
-                return a.name == 'needle';
-            });
-            arr.forEach((a) => {
-                a.getComponent('draw_needles').stopNeedleAction();
-            });
             this.gameOverShowInfoMask();
             if (gbData.mode === 'free' && this.freeModeCurrScore === this.freeModeCurrNeedle) this.freeModeCurrScore--;
         }
@@ -203,12 +205,11 @@ cc.Class({
         } else {
             levelModeTxt.getComponent(cc.Label).string = 'level: ' + gbData.gameLevel;
         };
-        this.requestDbNeedleLevelModeLevels(); //wx db
+        this.requestDbNeedleLevelModeLevels();
         this.gameOverMaskVis();
     },
     //保存free mode 分数
     requestDbNeedleFreeModeScore() {
-        const self = this;
         Utils.GD.updateGameScore({needleFreeModeScore: gbData.freeBestScore}, () => {
             Utils.GD.setUserGameInfo('needleFreeModeScore', gbData.freeBestScore);
             console.log('保存成功');
@@ -216,7 +217,6 @@ cc.Class({
     },
     //保存level mode levels
     requestDbNeedleLevelModeLevels() {
-        const self = this;
         Utils.GD.updateGameScore({needleLevelModeLevels: gbData.gameLevel}, () => {
             Utils.GD.setUserGameInfo('needleLevelModeLevels', gbData.gameLevel);
             console.log('保存成功');
@@ -225,10 +225,7 @@ cc.Class({
     gameOverMaskVis() {
         this.gameInfoMask.active = true;
         this.gameInfoMask.opacity = 0;
-        this.gameInfoMask.runAction(cc.sequence(
-            cc.scaleTo(0, 0.9, 0.9),
-            cc.spawn(cc.scaleTo(0.2, 1, 1), cc.fadeIn(0.3))
-        ));
+        this.gameInfoMask.runAction(cc.sequence(cc.scaleTo(0, 0.9, 0.9), cc.spawn(cc.scaleTo(0.4, 1, 1), cc.fadeIn(0.4))));
     },
     reLoadThisScene() {
         cc.director.loadScene('game_needles');

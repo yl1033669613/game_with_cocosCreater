@@ -41,7 +41,7 @@ cc.Class({
             fruit = totalFr[ran];
             poolName = fruit.name + 'Pool';
             let fruitNode = utils.genNewNode(this[poolName], fruit.prefab, this.node);
-            fruitNode.setPosition(cc.p(utils.random(-this.node.width / 2 + fruitNode.width / 2, this.node.width / 2 - fruitNode.width / 2), -(this.node.height / 2 - fruitNode.height / 2)));
+            fruitNode.setPosition(cc.v2(utils.random(-this.node.width / 2 + fruitNode.width / 2, this.node.width / 2 - fruitNode.width / 2), -(this.node.height / 2 - fruitNode.height / 2)));
             fruitNode.getComponent('fruit_ninja_fruit').init(poolName, fruit.score);
             if (fruit.type == 'bomb') {
                 totalFr = this.noBombArr;

@@ -63,7 +63,7 @@ cc.Class({
         const hPos = gteInfo.getPosition(),
             newV2_x = hPos.x + parseFloat(posInfo.xAxis),
             newV2_y = hPos.y + parseFloat(posInfo.yAxis);
-        return cc.p(newV2_x, newV2_y);
+        return cc.v2(newV2_x, newV2_y);
     },
     //回收节点
     bulletDied(nodeinfo) {

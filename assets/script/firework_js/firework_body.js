@@ -164,7 +164,7 @@ cc.Class({
     random(min, max) {
         return Math.random() * (max - min) + min;
     },
-    update(dt) {
+    update() {
         if (!this.reachTarget) {
             this.fireworksBodyDraw(this.canvasCtx);
             this.fireworksBodyUpdate();

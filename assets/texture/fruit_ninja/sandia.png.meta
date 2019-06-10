@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "1b272bda-0c4b-40a6-96c7-21464b2c8018",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "sandia": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "14e27ebd-e62e-4e82-af5a-9d8a4b7e5d62",
       "rawTextureUuid": "1b272bda-0c4b-40a6-96c7-21464b2c8018",
       "trimType": "auto",

@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "83cfd33c-60d9-4c4c-9b7f-7c366162956f",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "apple": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "25f10d71-6eee-4033-b69d-74af4f73825f",
       "rawTextureUuid": "83cfd33c-60d9-4c4c-9b7f-7c366162956f",
       "trimType": "auto",

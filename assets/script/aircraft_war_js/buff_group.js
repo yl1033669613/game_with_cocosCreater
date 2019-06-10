@@ -34,7 +34,7 @@ cc.Class({
         const poolName = BuffInfo.name + 'Pool',
             newNode = Gdt.common.genNewNode(this[poolName], BuffInfo.prefab, this.node),
             emPos = emInfo.getPosition(),
-            newPos = cc.p(emPos.x, emPos.y);
+            newPos = cc.v2(emPos.x, emPos.y);
         newNode.setPosition(newPos);
         newNode.getComponent('buff').poolName = poolName;
     },

@@ -9,7 +9,7 @@
   "type": "Texture Packer",
   "subMetas": {
     "N_bombBg.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "1d075238-a37b-4bde-b3ce-37dd9ddefef9",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -31,7 +31,7 @@
       "subMetas": {}
     },
     "buff_blood.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "9357e41f-b355-4a8f-a811-4be9db1ac7f7",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -53,7 +53,7 @@
       "subMetas": {}
     },
     "buff_bomb.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "69ded426-cd60-48f2-a15e-48818e861461",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -75,7 +75,7 @@
       "subMetas": {}
     },
     "buff_bullet.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "0f72a8f0-58a8-4460-9a8c-223afaaccbbb",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -97,7 +97,7 @@
       "subMetas": {}
     },
     "enemyA.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "cbe54bb8-f2f5-4a03-9566-603d7f4969b0",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -119,7 +119,7 @@
       "subMetas": {}
     },
     "enemyB.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "31e4c585-b2d5-442f-85d7-6e8693b37a62",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -141,7 +141,7 @@
       "subMetas": {}
     },
     "enemyBullet.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "44a4fb85-b468-4986-8981-fa56c9873f23",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -163,7 +163,7 @@
       "subMetas": {}
     },
     "enemyC.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "c46880fc-af11-4216-8372-79e3060f6338",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -185,7 +185,7 @@
       "subMetas": {}
     },
     "enemyD.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "d367fd81-f443-49c5-ab8a-db323781e90b",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -207,7 +207,7 @@
       "subMetas": {}
     },
     "enemyE.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "ac1af57e-b24b-42b9-945b-7451eb367447",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -229,7 +229,7 @@
       "subMetas": {}
     },
     "exp1.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "14a3bf95-daed-41d4-a757-0ba2baa6b5da",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -251,7 +251,7 @@
       "subMetas": {}
     },
     "exp10.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "a04d49e2-b9be-47e7-809f-12d0b3111e23",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -273,7 +273,7 @@
       "subMetas": {}
     },
     "exp11.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "a2f76d0d-77ca-4fee-be58-6ddb2fdf349f",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -295,7 +295,7 @@
       "subMetas": {}
     },
     "exp2.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "64a8bd63-b1ea-4c2e-89ef-f9d3d4d6563f",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -317,7 +317,7 @@
       "subMetas": {}
     },
     "exp3.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "d0e4966d-a6e6-41e0-8303-2727944f4e66",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -339,7 +339,7 @@
       "subMetas": {}
     },
     "exp4.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "a4b6384e-1fc9-4cf4-9515-012e4d1c1b37",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -361,7 +361,7 @@
       "subMetas": {}
     },
     "exp5.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "80903ce9-63be-4064-8dcf-e411c7567565",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -383,7 +383,7 @@
       "subMetas": {}
     },
     "exp6.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "3eabb28f-e5eb-4688-a610-5445dd1fcc58",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -405,7 +405,7 @@
       "subMetas": {}
     },
     "exp7.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "8b916d10-32d4-43ed-bfb2-2d7025c16fc8",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -427,7 +427,7 @@
       "subMetas": {}
     },
     "exp8.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "2cbca1be-6e15-4cab-ac40-bf1cd359129f",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -449,7 +449,7 @@
       "subMetas": {}
     },
     "exp9.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "1ce0c836-741c-479f-84c5-f5c031b8bde1",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -471,7 +471,7 @@
       "subMetas": {}
     },
     "hero.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "1918fe00-f85b-49ab-94c4-92648dfa7bc2",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -493,7 +493,7 @@
       "subMetas": {}
     },
     "heroBullet.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "3bc3a753-a0ea-4662-959a-6dc782bab564",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -515,7 +515,7 @@
       "subMetas": {}
     },
     "heroBulletNormal.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "07a82331-adef-4f82-8293-3053201b181d",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -537,7 +537,7 @@
       "subMetas": {}
     },
     "hp.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "6a58b680-1a60-4244-8c78-ef1bde6dc92b",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -559,7 +559,7 @@
       "subMetas": {}
     },
     "pause.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "1a28236e-d85c-484e-a639-cba466d48019",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -581,7 +581,7 @@
       "subMetas": {}
     },
     "play.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "05a2a6d5-3a28-497b-9e56-2df8080dc478",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",
@@ -603,7 +603,7 @@
       "subMetas": {}
     },
     "redBlood.png": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "47311bf4-6386-4cec-b8db-027d5a790b9a",
       "rawTextureUuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
       "trimType": "auto",

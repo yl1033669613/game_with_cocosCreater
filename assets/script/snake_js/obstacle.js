@@ -62,7 +62,7 @@ cc.Class({
         for (let i = 0; i < pointArr.length; i++) {
             let b = cc.instantiate(this.obstaclePfb);
             this.node.addChild(b);
-            b.setPosition(cc.p(pointArr[i].x, pointArr[i].y));
+            b.setPosition(cc.v2(pointArr[i].x, pointArr[i].y));
             this.obstacleInstance.push(b);
         }
     }

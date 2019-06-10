@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "cb54b56a-0b6e-4404-ac3c-0aea692551eb",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "basaha": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "015c370d-15c6-442b-8590-75b6bf0af9cb",
       "rawTextureUuid": "cb54b56a-0b6e-4404-ac3c-0aea692551eb",
       "trimType": "auto",

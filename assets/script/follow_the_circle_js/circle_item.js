@@ -89,10 +89,10 @@ cc.Class({
         }
     },
     drawCircleItem(color, borderR, centerR, opc) {
-        let currColor = color.split('/'),
+        let currColor = color.split('/').map(a => parseFloat(a)),
             centerPointY,
             centerPointX;
-        centerPointX = centerPointY = this.node.width / 2;
+        centerPointX = centerPointY = 0;
         this.ctx.clear();
         this.ctx.strokeColor = new cc.Color(currColor[0], currColor[1], currColor[2], opc);
         this.ctx.lineWidth = 8;
@@ -194,9 +194,9 @@ cc.Class({
         return Math.random() * (max - min) + min;
     },
     drawPlanetPoint(ang, r, opc) {
-        let currColor = this.color.split('/'),
+        let currColor = this.color.split('/').map(a => parseFloat(a)),
             centerPX,
-            centerPY = centerPX = this.node.width / 2,
+            centerPY = centerPX = 0,
             currX, currY;
         currX = centerPX + r * Math.cos(ang);
         currY = centerPY + r * Math.sin(ang);
@@ -211,7 +211,7 @@ cc.Class({
             this.drawPlanetPoint(this.planetArr[i].ang, this.planetArr[i].r, this.planetArr[i].opc);
         }
     },
-    update(dt) { //circle实时的调用Graphics API 进行动画绘制，消耗大量性能不建议使用，最好的方法是只调用一次绘制利用js动作API操作组件
+    update() { //circle实时的调用Graphics API 进行动画绘制，消耗大量性能不建议使用，最好的方法是只调用一次绘制利用js动作API操作组件
         if (this.isTouch) {
             let fBR = this.animationCircleR ? this.animationCircleR.bR : this.cirBorderR,
                 fCR = this.animationCircleR ? this.animationCircleR.cR : this.cirCenterR,

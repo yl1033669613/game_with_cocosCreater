@@ -1,12 +1,13 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "938813fc-361d-425b-8cb5-81ecdf0a1ace",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "ninja": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "ebabad66-348b-4c51-abbb-29054b3505ac",
       "rawTextureUuid": "938813fc-361d-425b-8cb5-81ecdf0a1ace",
       "trimType": "auto",
