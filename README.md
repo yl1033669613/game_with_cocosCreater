@@ -17,7 +17,7 @@
 关于资源贴图皆来自互联网，如有侵权，请联系删除。谢谢！
 
 ## 注意事项 
-在 ~~cocosCreator 1.10.2~~ 编辑器下运行以及构建 (cocosCreator已升级至 2.0.10)
+在 ~~cocosCreator 1.10.2~~ 编辑器下运行以及构建 (cocosCreator已升级至 2.0.10) 修改部分代码适应cocosCreator 2.0.10版本 具体修改请参考[v2.0升级指南](https://docs.cocos.com/creator/manual/zh/release-notes/upgrade-guide-v2.0.html)
 
 内部对接云开发api, 实现记录玩家游戏分数，游戏阶段等功能。
 
