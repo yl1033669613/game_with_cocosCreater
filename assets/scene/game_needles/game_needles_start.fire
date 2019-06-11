@@ -736,7 +736,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "b2440100-0e9f-4348-95ea-d8f64067dc44"
+      "__uuid__": "65e76b36-1824-4da4-bd8e-296d41efe519"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -842,8 +842,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "needles_init",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "9b71d3kBf9IQKtD0FfvVopm",
     "handler": "freeMode",
     "customEventData": ""
   },
@@ -1042,7 +1042,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "b2440100-0e9f-4348-95ea-d8f64067dc44"
+      "__uuid__": "65e76b36-1824-4da4-bd8e-296d41efe519"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1148,8 +1148,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "needles_init",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "9b71d3kBf9IQKtD0FfvVopm",
     "handler": "levelModeMaskOpen",
     "customEventData": ""
   },
@@ -1349,7 +1349,9 @@
     "_enabled": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "0a0cc2ea-0828-4531-a377-58c6c1a293b1"
+    },
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1452,8 +1454,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "needles_init",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "9b71d3kBf9IQKtD0FfvVopm",
     "handler": "backList",
     "customEventData": ""
   },
@@ -1840,7 +1842,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "b7d3fef8-2379-40ea-bb85-fbcc9c22a689"
+      "__uuid__": "0a0cc2ea-0828-4531-a377-58c6c1a293b1"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1946,8 +1948,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "needles_init",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "9b71d3kBf9IQKtD0FfvVopm",
     "handler": "levelModePlay",
     "customEventData": ""
   },
@@ -2248,8 +2250,8 @@
     "target": {
       "__id__": 2
     },
-    "component": "needles_init",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "9b71d3kBf9IQKtD0FfvVopm",
     "handler": "levelModeMaskClose",
     "customEventData": ""
   },

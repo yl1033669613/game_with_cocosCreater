@@ -124,7 +124,7 @@ cc.Class({
     showTheGameOverMask(bool) {
         if (bool) {
             this.gameOverMask.active = true;
-            this.gameOverMask.opacity = 0;
+            this.gameOverMask.opacity = 1;
             this.gameOverMask.runAction(cc.sequence(cc.scaleTo(0, 0.9, 0.9), cc.spawn(cc.scaleTo(0.4, 1, 1), cc.fadeIn(0.4))));
         } else {
             this.gameOverMask.runAction(cc.sequence(cc.fadeOut(0.4), cc.callFunc(() => {

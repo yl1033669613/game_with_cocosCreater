@@ -224,7 +224,7 @@ cc.Class({
     },
     gameOverMaskVis() {
         this.gameInfoMask.active = true;
-        this.gameInfoMask.opacity = 0;
+        this.gameInfoMask.opacity = 1; // 不能设置成0 否则会引起node active设置失效
         this.gameInfoMask.runAction(cc.sequence(cc.scaleTo(0, 0.9, 0.9), cc.spawn(cc.scaleTo(0.4, 1, 1), cc.fadeIn(0.4))));
     },
     reLoadThisScene() {

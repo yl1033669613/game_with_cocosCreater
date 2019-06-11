@@ -32,7 +32,7 @@
         "__id__": 55
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -87,7 +87,7 @@
       }
     ],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 14
@@ -603,7 +603,7 @@
       }
     ],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 28
@@ -1185,7 +1185,7 @@
       }
     ],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 58
@@ -2213,8 +2213,8 @@
     "target": {
       "__id__": 55
     },
-    "component": "start_js",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "afc2dQHtItCX4XFZCnu2PdY",
     "handler": "openNotice",
     "customEventData": ""
   },
@@ -2227,7 +2227,7 @@
     },
     "_children": [],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 56
@@ -2391,7 +2391,7 @@
     },
     "_children": [],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 61
@@ -2411,7 +2411,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 39.42,
+      "width": 40.03,
       "height": 12.22
     },
     "_anchorPoint": {
@@ -2454,8 +2454,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "V : 1.2.7",
-    "_N$string": "V : 1.2.7",
+    "_string": "V : 1.2.8",
+    "_N$string": "V : 1.2.8",
     "_fontSize": 11,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -2508,7 +2508,7 @@
     },
     "_children": [],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 64

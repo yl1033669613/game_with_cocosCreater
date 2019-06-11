@@ -161,7 +161,7 @@ cc.Class({
     },
     gameOverMaskVis() {
         this.gameOverMask.active = true;
-        this.gameOverMask.opacity = 0;
+        this.gameOverMask.opacity = 1;
         this.gameOverMask.runAction(
             cc.fadeIn(0.3)
         );

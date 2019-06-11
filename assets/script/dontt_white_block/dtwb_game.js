@@ -95,7 +95,7 @@ cc.Class({
         let action;
         if (bool) {
             this.gameOverMask.active = true;
-            this.gameOverMask.opacity = 0;
+            this.gameOverMask.opacity = 1;
             action = cc.fadeIn(.2);
         } else {
             action = cc.sequence(cc.fadeOut(.2), cc.callFunc(() => {

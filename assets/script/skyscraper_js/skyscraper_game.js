@@ -167,7 +167,7 @@ cc.Class({
             this.updateBestScore();
         };
         this.gameOverMask.active = true;
-        this.gameOverMask.opacity = 0;
+        this.gameOverMask.opacity = 1;
         this.gameOverMask.runAction(cc.fadeIn(.3));
         this.updateUi();
     },

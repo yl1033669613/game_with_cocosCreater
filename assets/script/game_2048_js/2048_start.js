@@ -231,7 +231,7 @@ cc.Class({
     showTheGamePanel(bool, cpt) {
         if (bool) {
             cpt.active = bool;
-            cpt.opacity = 0;
+            cpt.opacity = 1;
             cpt.runAction(
                 cc.fadeIn(0.2)
             )

@@ -8,7 +8,7 @@ cc.Class({
     },
     startGame() {
         this.maskLayer.active = true;
-        this.maskLayer.opacity = 0;
+        this.maskLayer.opacity = 1;
         this.maskLayer.color = cc.Color.BLACK;
         this.maskLayer.runAction(
             cc.sequence(
@@ -23,7 +23,7 @@ cc.Class({
     // 返回游戏列表
     backGameList() {
         this.maskLayer.active = true;
-        this.maskLayer.opacity = 0;
+        this.maskLayer.opacity = 1;
         this.maskLayer.color = cc.Color.BLACK;
         this.maskLayer.runAction(
             cc.sequence(

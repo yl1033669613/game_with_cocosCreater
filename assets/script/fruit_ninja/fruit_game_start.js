@@ -12,6 +12,14 @@ cc.Class({
         btnQuitCir: {
             default: null,
             type: cc.Node
+        },
+        btnBeginfR: {
+            default: null,
+            type: cc.Node
+        },
+        btnQuitfR: {
+            default: null,
+            type: cc.Node
         }
     },
     onLoad() {
@@ -36,14 +44,26 @@ cc.Class({
     },
     circleRotate() {
         let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, 360)));
-        let rotate1 = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, 360)));
+        let rotate1 = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, -360)));
+        let frRotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, -360)));
+        let frRotate1 = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, 360)));
         this.btnBeginCir.runAction(rotate);
         this.btnQuitCir.runAction(rotate1);
+        this.btnBeginfR.runAction(frRotate);
+        this.btnQuitfR.runAction(frRotate1);
+    },
+    stopBtnAction() {
+        this.btnBeginCir.stopAllActions();
+        this.btnQuitCir.stopAllActions();
+        this.btnBeginfR.stopAllActions();
+        this.btnQuitfR.stopAllActions();
     },
     backList() {
+        this.stopBtnAction();
         cc.director.loadScene('startscene');
     },
     gameStart() {
+        this.stopBtnAction();
         cc.director.loadScene('fruit_ninja_game');
     }
 });

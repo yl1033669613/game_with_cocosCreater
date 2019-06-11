@@ -21,7 +21,7 @@ cc.Class({
         this.gameMask.active = bool;
         let action;
         if (bool) {
-            this.gameMask.opacity = 0;
+            this.gameMask.opacity = 1;
             action = cc.fadeIn(.3);
         } else {
             action = cc.fadeOut(.3);

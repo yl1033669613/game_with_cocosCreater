@@ -281,10 +281,10 @@ cc.Class({
         this.bestScoreLabel.string = 'best score: ' + this.bestScore;
 
         this.gameOverInfo.active = true;
-        this.gameOverInfo.opacity = 0;
+        this.gameOverInfo.opacity = 1;
         this.gameOverInfo.runAction(cc.sequence(
             cc.scaleTo(0, 0.9, 0.9),
-            cc.spawn(cc.scaleTo(0.2, 1, 1), cc.fadeIn(0.3))
+            cc.spawn(cc.scaleTo(0.3, 1, 1), cc.fadeIn(0.3))
         ));
     },
     newGame() {

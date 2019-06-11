@@ -25,7 +25,7 @@ cc.Class({
     },
     showGameInfo() {
         this.gameInfo.active = true;
-        this.gameInfo.opacity = 0;
+        this.gameInfo.opacity = 1;
         this.gameInfo.runAction(
             cc.fadeIn(0.2)
         )
