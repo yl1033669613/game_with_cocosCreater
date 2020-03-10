@@ -11,7 +11,6 @@ cc.Class({
     },
     onLoad() {
         cc.director.preloadScene('aircraft_war_game');
-        this.loadingBgAction();
         Utils.GD.showWxLoading(true);
         this.loadNoticePic();
     },
@@ -20,10 +19,6 @@ cc.Class({
     },
     backList() {
         cc.director.loadScene('startscene');
-    },
-    loadingBgAction() {
-        const act = cc.repeatForever(cc.sequence(cc.tintTo(.6, 202, 111, 111), cc.tintTo(.6, 206, 154, 114), cc.tintTo(.6, 206, 202, 114), cc.tintTo(.6, 118, 206, 114), cc.tintTo(.6, 114, 188, 206), cc.tintTo(.6, 114, 136, 206), cc.tintTo(.6, 185, 114, 206)));
-        this.loadingBg.runAction(act);
     },
     //加载背景图片 wx cloud
     loadNoticePic() {

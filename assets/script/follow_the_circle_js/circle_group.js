@@ -128,8 +128,7 @@ cc.Class({
                     let itemObj = item.getComponent('circle_item'),
                         randomNum = Math.floor(Math.random() * (self.tapMax - 1) + 1);
                     itemObj.itemCircleInit(self.circleGroup[i].color, randomNum, self.initBorderR, self.initCenterR);
-                    let action = cc.scaleTo(1.1, 1, 1).easing(cc.easeExponentialOut(1.1));
-                    item.runAction(action);
+                    cc.tween(item).to(1.1, { scale: 1 }, { easing: 'cubicInOut' }).start()
                     if (i == self.circleGroup.length - 1) {
                         self.circlesCreateState = false;
                         let childs = self.node.children;
@@ -140,10 +139,12 @@ cc.Class({
         }
     },
     loadingBgAni(num) {
-        let totalTime = (num + 1) * this.intervalMul,
-            action;
-        action = cc.sequence(cc.tintTo(.3, 90, 146, 185), cc.tintTo(totalTime - .3, 255, 255, 255));
-        this.gameBg.runAction(action)
+        let totalTime = (num + 1) * this.intervalMul;
+        cc.tween(this.gameBg).to(.3, { color: new cc.Color(90, 146, 185, 255) }).call(() => {
+            this.scheduleOnce(() => {
+                cc.tween(this.gameBg).to(.3, { color: new cc.Color(255, 255, 255, 255) }).start()
+            }, totalTime - 0.1)
+        }).start()
     },
     updateComboAndScore(bool, score) {
         if (bool) {
@@ -166,10 +167,10 @@ cc.Class({
         this.comboLabel.string = this.combo;
         if (this.combo) {
             this.comboLabel.node.scale = 1.4;
-            this.comboLabel.node.opacity = 0;
-            this.comboLabel.node.runAction(cc.spawn(cc.scaleTo(0.6, 1, 1).easing(cc.easeExponentialOut(0.6)), cc.fadeTo(0.6, 200)));
+            this.comboLabel.node.opacity = 1;
+            cc.tween(this.comboLabel.node).to(.4, { scale: 1, opacity: 200 }, { easing: 'fade' }).start();
         } else {
-            this.comboLabel.node.runAction(cc.fadeOut(.8));
+            cc.tween(this.comboLabel.node).to(.8, { opacity: 0 }, { easing: 'fade' }).start();
         }
     },
     updateCircleGroup(color, bool) {

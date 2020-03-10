@@ -88,8 +88,7 @@ cc.Class({
         }
     },
     noticeMoveAction(dt) {
-        let moveAction = cc.moveBy(.6, 0, dt).easing(cc.easeBounceOut(.6));
-        this.bottBanner.runAction(moveAction);
+        cc.tween(this.bottBanner).by(.6, {position: cc.v2(0, dt)}, {easing: 'bounceOut'} ).start();
     },
     //加载notice wx cloud
     loadNoticePic(cb) {

@@ -11,16 +11,6 @@
     "paths": {
       "sptLeft": {
         "props": {
-          "rotation": [
-            {
-              "frame": 0,
-              "value": 0
-            },
-            {
-              "frame": 0.4,
-              "value": -30
-            }
-          ],
           "x": [
             {
               "frame": 0,
@@ -40,6 +30,16 @@
               "frame": 0.4,
               "value": -10
             }
+          ],
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.4,
+              "value": 30
+            }
           ]
         }
       },
@@ -55,14 +55,14 @@
               "value": 30
             }
           ],
-          "rotation": [
+          "angle": [
             {
               "frame": 0,
               "value": 0
             },
             {
               "frame": 0.4,
-              "value": 90
+              "value": -90
             }
           ]
         }

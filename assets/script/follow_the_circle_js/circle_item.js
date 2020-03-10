@@ -131,13 +131,12 @@ cc.Class({
     noTouchHideAnimation(isMult) {
         this.unschedule(this.circleCountCb);
         if (!isMult) this.circleGroupO.updateCircleGroup(this.color, false);
-        let action = cc.sequence(cc.scaleTo(1.1, 0, 0).easing(cc.easeExponentialOut(1.1)), cc.callFunc(() => {
+        cc.tween(this.node).to(.6, { scale: 0 }, { easing: 'quartInOut' }).call(() => {
             this.removeThisCircle(this.node);
-        }, this));
-        this.node.runAction(action);
+        }).start()
     },
     hideCenterNum() {
-        this.centerNum.node.runAction(cc.fadeOut(.2));
+        cc.tween(this.centerNum.node).to(.2, { opacity: 0 }).start();
     },
     removeThisCircle(node) {
         this.circleGroupO.backObjPool(node);

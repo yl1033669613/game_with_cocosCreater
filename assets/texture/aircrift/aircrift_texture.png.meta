@@ -1,10 +1,15 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.4",
   "uuid": "93a33f47-f3d7-40bc-b0e0-abdbe5b9df65",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 124,
+  "height": 596,
+  "platformSettings": {},
   "subMetas": {
     "aircrift_texture": {
       "ver": "1.0.4",

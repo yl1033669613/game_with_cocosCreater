@@ -132,7 +132,14 @@
   ],
   "design-resolution-height": 640,
   "design-resolution-width": 960,
-  "excluded-modules": [],
+  "excluded-modules": [
+    "Geom Utils",
+    "3D",
+    "3D Primitive",
+    "3D Physics/cannon.js",
+    "3D Physics/Builtin",
+    "3D Particle"
+  ],
   "facebook": {
     "appID": "",
     "audience": {
@@ -160,7 +167,7 @@
     "sk_ui",
     "sk_env"
   ],
-  "last-module-event-record-time": 0,
+  "last-module-event-record-time": 1583840943754,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,

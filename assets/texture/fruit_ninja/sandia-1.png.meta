@@ -1,10 +1,15 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.4",
   "uuid": "4ed83ad5-beab-468b-88e1-5e0fbab42316",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 98,
+  "height": 85,
+  "platformSettings": {},
   "subMetas": {
     "sandia-1": {
       "ver": "1.0.4",

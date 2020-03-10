@@ -102,11 +102,8 @@ cc.Class({
         this.pauseBackBtn.active = bool;
         if (bool) {
             this.pauseBackBtn.opacity = 0;
-            action = cc.sequence(
-                cc.scaleTo(0, .95, .95),
-                cc.spawn(cc.fadeIn(.2), cc.scaleTo(.2, 1, 1))
-            );
-            this.pauseBackBtn.runAction(action);
+            this.pauseBackBtn.scale = .95;
+            cc.tween(this.pauseBackBtn).to(.2, {scale: 1, opacity: 255}).start();
         }
     },
     //游戏继续
@@ -151,7 +148,8 @@ cc.Class({
     },
     //接到炸弹
     getBuffBomb() {
-        if (parseInt(this.bombNoDisplay.string) < 3) this.bombNoDisplay.string += 1 //多于三个炸弹就不累加
+        let no = parseInt(this.bombNoDisplay.string);
+        if (no < 3) this.bombNoDisplay.string = no + 1 //多于三个炸弹就不累加
     },
     //游戏结束
     gameOver() {
@@ -162,9 +160,7 @@ cc.Class({
     gameOverMaskVis() {
         this.gameOverMask.active = true;
         this.gameOverMask.opacity = 1;
-        this.gameOverMask.runAction(
-            cc.fadeIn(0.3)
-        );
+        cc.tween(this.gameOverMask).to(.3, {opacity: 255}).start();
         if (this.score > this.bestScore) {
             this.bestScore = this.score;
             this.requestDbAircraftWarScore()

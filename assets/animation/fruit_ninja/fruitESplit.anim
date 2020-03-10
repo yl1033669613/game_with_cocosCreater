@@ -21,14 +21,14 @@
               "value": -30
             }
           ],
-          "rotation": [
+          "angle": [
             {
               "frame": 0,
               "value": 0
             },
             {
               "frame": 0.4,
-              "value": -80
+              "value": 80
             }
           ]
         }
@@ -45,14 +45,14 @@
               "value": 20
             }
           ],
-          "rotation": [
+          "angle": [
             {
               "frame": 0,
               "value": 0
             },
             {
               "frame": 0.4,
-              "value": -20
+              "value": 20
             }
           ]
         }

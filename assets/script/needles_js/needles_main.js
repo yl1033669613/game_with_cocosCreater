@@ -64,7 +64,7 @@ cc.Class({
                     } else {
                         needleBody = cc.instantiate(this.needlePfb);
                     };
-                    needleBody.rotation = gdn[i];
+                    needleBody.angle = gdn[i];
                     needleBody.getComponent('draw_needles').speed = isL[0].speed;
                     this.bigCircle.addChild(needleBody);
                 };
@@ -84,8 +84,8 @@ cc.Class({
         } else {
             needleBody = cc.instantiate(this.needlePfb);
         };
-        let rotation = 360 - (this.bigCircle.rotation % 360);
-        needleBody.rotation = rotation;
+        let rotation = 360 - (this.bigCircle.angle % 360);
+        needleBody.angle = rotation;
         let num = 0,
             speed = DEFAULTSPEED;
         if (gbData.mode === 'level') {
@@ -99,12 +99,11 @@ cc.Class({
         this.bigCircle.addChild(needleBody);
     },
     circleRotate(speed) {
-        let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(speed, 360)));
-        this.bigCircle.runAction(rotate);
+        let rotate = cc.tween(this.bigCircle).by(speed, { angle: 360 }).repeatForever().start();
         return rotate;
     },
     userHandle() {
-        this.node.on(cc.Node.EventType.TOUCH_START, function(e) {
+        this.node.on(cc.Node.EventType.TOUCH_START, function (e) {
             if (!this.isGameOver) this.needleMove()
         }, this)
     },
@@ -117,28 +116,23 @@ cc.Class({
         };
 
         this.waitNeedlesNumUpdate(); //更新等待视图
-
-        let moveAction = cc.sequence(
-            cc.moveBy(.06, 0, 41),
-            cc.moveTo(0, 0, 39),
-            cc.callFunc(() => {
-                this.moveNeedle.active = false;
-                this.createNeedles();
-                if (!this.isGameOver && gbData.mode === 'level' && this.needlesNum == 0) {
-                    this.isGameOver = true;
-                    this.gameLevelModeThislevelWin()
-                };
-                if (!this.isGameOver && gbData.mode === 'free') this.freeModeCurrScore++;
-                if(this.isGameOver) {
-                    let arr = this.bigCircle.children.filter((a) => {
-                        return a.name == 'needle';
-                    });
-                    arr.forEach((a) => {
-                        a.getComponent('draw_needles').stopNeedleAction();
-                    });
-                }
-            }, this));
-        this.moveNeedle.runAction(moveAction);
+        cc.tween(this.moveNeedle).by(.06, { position: cc.v2(0, 41) }).to(0, { position: cc.v2(0, 39) }).call(() => {
+            this.moveNeedle.active = false;
+            this.createNeedles();
+            if (!this.isGameOver && gbData.mode === 'level' && this.needlesNum == 0) {
+                this.isGameOver = true;
+                this.gameLevelModeThislevelWin()
+            };
+            if (!this.isGameOver && gbData.mode === 'free') this.freeModeCurrScore++;
+            if (this.isGameOver) {
+                let arr = this.bigCircle.children.filter((a) => {
+                    return a.name == 'needle';
+                });
+                arr.forEach((a) => {
+                    a.getComponent('draw_needles').stopNeedleAction();
+                });
+            }
+        }).start()
     },
     waitNeedlesNumUpdate() {
         let child = this.waitContent.children;
@@ -159,7 +153,7 @@ cc.Class({
     gameOver() {
         if (!this.isGameOver) {
             this.isGameOver = true;
-            this.bigCircle.stopAction(this.actionInts);
+            this.actionInts.stop();
             this.gameOverShowInfoMask();
             if (gbData.mode === 'free' && this.freeModeCurrScore === this.freeModeCurrNeedle) this.freeModeCurrScore--;
         }
@@ -210,22 +204,22 @@ cc.Class({
     },
     //保存free mode 分数
     requestDbNeedleFreeModeScore() {
-        Utils.GD.updateGameScore({needleFreeModeScore: gbData.freeBestScore}, () => {
+        Utils.GD.updateGameScore({ needleFreeModeScore: gbData.freeBestScore }, () => {
             Utils.GD.setUserGameInfo('needleFreeModeScore', gbData.freeBestScore);
             console.log('保存成功');
         })
     },
     //保存level mode levels
     requestDbNeedleLevelModeLevels() {
-        Utils.GD.updateGameScore({needleLevelModeLevels: gbData.gameLevel}, () => {
+        Utils.GD.updateGameScore({ needleLevelModeLevels: gbData.gameLevel }, () => {
             Utils.GD.setUserGameInfo('needleLevelModeLevels', gbData.gameLevel);
             console.log('保存成功');
         })
     },
     gameOverMaskVis() {
         this.gameInfoMask.active = true;
-        this.gameInfoMask.opacity = 1; // 不能设置成0 否则会引起node active设置失效
-        this.gameInfoMask.runAction(cc.sequence(cc.scaleTo(0, 0.9, 0.9), cc.spawn(cc.scaleTo(0.4, 1, 1), cc.fadeIn(0.4))));
+        this.gameInfoMask.opacity = 1;
+        cc.tween(this.gameInfoMask).to(0, { scale: .95, opacity: 1 }).to(.3, { scale: 1, opacity: 255 }).start()
     },
     reLoadThisScene() {
         cc.director.loadScene('game_needles');

@@ -32,24 +32,29 @@ cc.Class({
     },
     switchDifficulty() {
         switch (this.mainGm.succeedPutCount) {
-            case 10:
+            case 8:
                 this.speed = 2.5;
                 this.angle = 15;
                 this.craneStrRotate();   
                 break;
-            case 25:
+            case 20:
                 this.speed = 2;
                 this.angle = 20;
                 this.craneStrRotate();
                 break;
-            case 50:
+            case 40:
                 this.speed = 1.8;
-                this.angle = 30;
+                this.angle = 25;
+                this.craneStrRotate();
+                break;
+            case 60:
+                this.speed = 1.5;
+                this.angle = 28;
                 this.craneStrRotate();
                 break;
             case 100:
                 this.speed = 1.2;
-                this.angle = 35;
+                this.angle = 28;
                 this.craneStrRotate();
                 break;
         }

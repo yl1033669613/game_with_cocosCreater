@@ -20,7 +20,7 @@
     "orientation": "portrait"
   },
   "startScene": "f7e086a6-2b59-4ec6-86cb-2e752d60e9f2",
-  "title": "wx_mini_game",
+  "title": "cocosCreator_games",
   "webOrientation": "portrait",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
@@ -38,11 +38,22 @@
   },
   "android-instant": {
     "REMOTE_SERVER_ROOT": "",
-    "pathPattern": "",
-    "scheme": "https",
     "host": "",
-    "skipRecord": false,
-    "recordPath": ""
+    "packageName": "org.cocos2d.helloworld",
+    "pathPattern": "",
+    "recordPath": "",
+    "scheme": "https",
+    "skipRecord": false
   },
-  "appBundle": false
+  "appBundle": false,
+  "android": {
+    "packageName": "org.cocos2d.helloworld"
+  },
+  "ios": {
+    "packageName": "org.cocos2d.helloworld"
+  },
+  "mac": {
+    "packageName": "org.cocos2d.helloworld"
+  },
+  "win32": {}
 }

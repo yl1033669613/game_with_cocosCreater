@@ -1,10 +1,15 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.4",
   "uuid": "7b8b851b-2d4d-4153-9fb6-f39da5bb22a6",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 374,
+  "height": 751,
+  "platformSettings": {},
   "subMetas": {
     "frt_game_bg": {
       "ver": "1.0.4",

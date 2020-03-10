@@ -18,23 +18,17 @@ cc.Class({
         gbData.gameLevelData = Utils.GD.needleLevelData;
 
         //设置level text
-        this.levelBtnLevelTxt.string = 'level '+ gbData.gameLevel +' play';
+        this.levelBtnLevelTxt.string = 'level ' + gbData.gameLevel + ' play';
     },
     levelModeMaskOpen() {
         this.levelModeMask.active = true;
-        this.levelModeMask.opacity = 0;
-        this.levelModeMask.runAction(cc.sequence(
-            cc.scaleTo(0, 0.9, 0.9),
-            cc.spawn(cc.scaleTo(0.2, 1, 1), cc.fadeIn(0.3))
-        ))
+        this.levelModeMask.opacity = 1;
+        cc.tween(this.levelModeMask).to(0, { scale: .95, opacity: 1 }).to(.3, { scale: 1, opacity: 255 }).start()
     },
     levelModeMaskClose() {
-        this.levelModeMask.runAction(cc.sequence(
-            cc.spawn(cc.fadeOut(0.2), cc.scaleTo(0.2, 0.9, 0.9)),
-            cc.callFunc(() => {
-                this.levelModeMask.active = false;
-            }, this)
-        ))
+        cc.tween(this.levelModeMask).to(.2, { scale: .95, opacity: 1 }).call(() => {
+            this.levelModeMask.active = false;
+        }).start()
     },
     freeMode() {
         gbData.mode = 'free';

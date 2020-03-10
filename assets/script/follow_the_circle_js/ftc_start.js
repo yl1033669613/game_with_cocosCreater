@@ -19,14 +19,12 @@ cc.Class({
     },
     showGameMask(bool) {
         this.gameMask.active = bool;
-        let action;
         if (bool) {
             this.gameMask.opacity = 1;
-            action = cc.fadeIn(.3);
+            cc.tween(this.gameMask).to(.3, { opacity: 255 }).start();
         } else {
-            action = cc.fadeOut(.3);
-        };
-        this.gameMask.runAction(action);
+            cc.tween(this.gameMask).to(.3, { opacity: 1 }).start();
+        }
     },
     tapCloseBtnToQuitThisGame() {
         this.circleGroup.handleGameOver();

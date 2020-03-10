@@ -12,12 +12,12 @@ cc.Class({
         isRotate: true,
         speed: 10
     },
-    onLoad () {
+    onLoad() {
         this.ctx = this.needleDrawContent.getComponent(cc.Graphics);
         this.startRotate = 0;
         this.rotateAniObj = '';
     },
-    start () {
+    start() {
         this.ctx.moveTo(9, 0);
         this.ctx.lineTo(9, 80);
         this.ctx.stroke();
@@ -25,14 +25,13 @@ cc.Class({
         this.ctx.fill();
         this.rotateAniObj = this.numTextRotate();
     },
-    numTextRotate (){
+    numTextRotate() {
         if (this.isRotate) {
-            let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(this.speed, -360)));
-            this.numText.runAction(rotate);
+            let rotate = cc.tween(this.numText).by(this.speed, { angle: -360 }).repeatForever().start();
             return rotate;
         }
-    }, 
+    },
     stopNeedleAction() {
-        if (this.rotateAniObj) this.node.stopAction(this.rotateAniObj);
+        if (this.rotateAniObj) this.rotateAniObj.stop()
     }
 })
