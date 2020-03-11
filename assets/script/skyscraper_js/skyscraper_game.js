@@ -50,6 +50,10 @@ cc.Class({
         maskBestScore: {
             default: null,
             type: cc.Label
+        },
+        collBott: {
+            default: null,
+            type: cc.Node
         }
     },
     onLoad() {
@@ -81,7 +85,7 @@ cc.Class({
     },
     //重新装载
     generateBlock() {
-        this.crane.runAction(cc.fadeIn(.2));
+        this.crane.opacity = 255;
         if (this.waitBlock && this.isSucceed) {
             let rgBody = this.waitBlock.getComponent(cc.RigidBody);
             rgBody.type = cc.RigidBodyType.Static;
@@ -93,7 +97,7 @@ cc.Class({
         };
         this.blockJsComp = this.waitBlock.getComponent("skysc_block");
         this.blockJsComp.init();
-        this.waitBlock.rotation = 0;
+        this.waitBlock.angle = 0;
         this.waitBlock.setPosition(cc.v2(0, 0));
         this.waitBlock.parent = this.blockTmpCtn;
         this.isPut = true;
@@ -105,10 +109,11 @@ cc.Class({
     //放置
     putNext(e) {
         if (this.state == 1 && this.isPut) {
-            this.crane.runAction(cc.fadeOut(.2));
+            cc.tween(this.crane).stop();
+            this.crane.opacity = 255;
             this.isPut = false;
             this.putCount++;
-            this.waitBlock.rotation = 0;
+            this.waitBlock.angle = 0;
             const rigidbody = this.waitBlock.addComponent(cc.RigidBody); //添加刚体
             const box = this.waitBlock.addComponent(cc.PhysicsBoxCollider); //添加碰撞体
             rigidbody.gravityScale = 9.8;
@@ -119,6 +124,7 @@ cc.Class({
             box.tag = 101;
             box.apply();
             this.waitBlock.parent = this.blockContainer;
+            cc.tween(this.crane).to(.2, { opacity: 0 }).start()
         }
     },
     //视野移动
@@ -127,15 +133,14 @@ cc.Class({
             let i = this.succeedPutCount - 2;
             if (i < 0) i = 0;
             let time = this.blockJsComp.colliderSize.height / this.cameraSpeed;
-            this.camera.node.stopAllActions();
-            this.crane.stopAllActions();
-            let actionMove = cc.moveTo(time, cc.v2(0, this.blockJsComp.colliderSize.height * i));
-            this.crane.runAction(actionMove);
-            actionMove = cc.moveTo(time, cc.v2(0, this.blockJsComp.colliderSize.height * i));
-            this.camera.node.runAction(actionMove);
+            cc.tween(this.camera.node).stop();
+            cc.tween(this.crane).stop();
+            cc.tween(this.crane).to(time, { position: cc.v2(0, this.blockJsComp.colliderSize.height * i) }).start();
+            cc.tween(this.camera.node).to(time, { position: cc.v2(0, this.blockJsComp.colliderSize.height * i) }).start()
+            cc.tween(this.collBott).to(time, { position: cc.v2(0, this.collBott.y + this.blockJsComp.colliderSize.height) }).start()
         }
     },
-    //放置成功
+    //放置成功;
     handleResult(isPrefect) {
         if (this.isSucceed) {
             this.succeedPutCount++;
@@ -144,11 +149,11 @@ cc.Class({
             this.waitBlock.getComponent(cc.PhysicsBoxCollider).tag = 102;
             this.prevBlock = this.waitBlock;
             this.score = this.score + (isPrefect ? 10 : 1);
+            this.move();
         } else {
             // console.log("放置失败！");
         };
         this.updateUi();
-        this.move();
         this.scheduleOnce(() => {
             this.generateBlock();
         }, 0.3)
@@ -168,7 +173,7 @@ cc.Class({
         };
         this.gameOverMask.active = true;
         this.gameOverMask.opacity = 1;
-        this.gameOverMask.runAction(cc.fadeIn(.3));
+        cc.tween(this.gameOverMask).to(.3, { opacity: 255 }).start();
         this.updateUi();
     },
     restartTheGame() {

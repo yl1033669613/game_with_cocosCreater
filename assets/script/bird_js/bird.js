@@ -33,8 +33,10 @@ cc.Class({
     onLoad() {
         const manager = cc.director.getCollisionManager();
         manager.enabled = true;
+        manager.enabledDebugDraw = false;
         this.collideWithPipe = false;
         this.collideWithGround = false;
+        this.tweenAction = null;
     },
     init(game) {
         this.game = game;
@@ -61,7 +63,7 @@ cc.Class({
         // 每帧更新bird位置
         this.updatePosition(dt);
         // 每帧更新状态
-        this.updateState(dt);
+        this.updateState();
         // 碰撞检测 处理
         this.detectCollision();
         // 修正最后落地位置
@@ -74,12 +76,12 @@ cc.Class({
             this.node.y += dt * this.currentSpeed;
         }
     },
-    updateState(dt) {
+    updateState() {
         switch (this.state) {
             case State.Rise:
                 if (this.currentSpeed < 0) {
                     this.state = State.FreeFall;
-                    this.runFallAction();
+                    this.runFallAction(.7);
                 }
                 break;
             case State.Drop:
@@ -97,7 +99,6 @@ cc.Class({
             } else { // 与水管碰撞
                 this.state = State.Drop;
                 this.runDropAction();
-                this.scheduleOnce(() => {}, 0.3);
             };
             this.anim.stop();
             this.game.gameOver();
@@ -127,15 +128,17 @@ cc.Class({
     },
     // 上升动作
     runRiseAction() {
-        this.node.stopAllActions();
-        let jumpAction = cc.rotateTo(0.3, -30).easing(cc.easeCubicActionOut());
-        this.node.runAction(jumpAction);
+        if (this.tweenAction) {
+            this.tweenAction.stop();
+        };
+        this.tweenAction = cc.tween(this.node).to(.3, { angle: 30 }, { easing: 'cubicOut' }).start()
     },
     // 下落动作
-    runFallAction(duration = 0.6) {
-        this.node.stopAllActions();
-        let dropAction = cc.rotateTo(duration, 90).easing(cc.easeCubicActionIn());
-        this.node.runAction(dropAction);
+    runFallAction(duration) {
+        if (this.tweenAction) {
+            this.tweenAction.stop();
+        };
+        this.tweenAction = cc.tween(this.node).to(duration, { angle: -90 }, { easing: 'cubicIn' }).start()
     },
     // 碰撞管道 speed = 0
     runDropAction() {

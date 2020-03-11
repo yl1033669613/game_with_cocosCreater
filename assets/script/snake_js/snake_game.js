@@ -26,9 +26,7 @@ cc.Class({
     showGameInfo() {
         this.gameInfo.active = true;
         this.gameInfo.opacity = 1;
-        this.gameInfo.runAction(
-            cc.fadeIn(0.2)
-        )
+        cc.tween(this.gameInfo).to(.2, { opacity: 255 }).start()
     },
     // called every frame
     update(dt) {

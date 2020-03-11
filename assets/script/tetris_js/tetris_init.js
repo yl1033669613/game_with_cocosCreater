@@ -117,7 +117,7 @@ cc.Class({
     fills(color) {
         for (let r = 0; r < this.rotateShape.length; r++) {
             for (let c = 0; c < this.rotateShape.length; c++)
-            // 只渲染被占用的位置
+                // 只渲染被占用的位置
                 if (this.rotateShape[r][c]) this.drawRect(this.x + c, this.y + r, color);
         }
     },
@@ -270,7 +270,7 @@ cc.Class({
     //保存最高得分 wx cloud
     requestDbTetrisBestScore(cb) {
         const self = this;
-        Utils.GD.updateGameScore({tetrisBestScore: self.score}, () => {
+        Utils.GD.updateGameScore({ tetrisBestScore: self.score }, () => {
             Utils.GD.setUserGameInfo('tetrisBestScore', self.score);
             cb && cb();
             console.log('保存成功');
@@ -282,10 +282,8 @@ cc.Class({
 
         this.gameOverInfo.active = true;
         this.gameOverInfo.opacity = 1;
-        this.gameOverInfo.runAction(cc.sequence(
-            cc.scaleTo(0, 0.9, 0.9),
-            cc.spawn(cc.scaleTo(0.3, 1, 1), cc.fadeIn(0.3))
-        ));
+        this.gameOverInfo.scale = .95;
+        cc.tween(this.gameOverInfo).to(.3, { opacity: 255, scale: 1 }).start()
     },
     newGame() {
         this.gameOverInfo.active = false;

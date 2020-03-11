@@ -125,11 +125,12 @@ cc.Class({
         if (bool) {
             this.gameOverMask.active = true;
             this.gameOverMask.opacity = 1;
-            this.gameOverMask.runAction(cc.sequence(cc.scaleTo(0, 0.9, 0.9), cc.spawn(cc.scaleTo(0.4, 1, 1), cc.fadeIn(0.4))));
+            this.gameOverMask.scale = .95;
+            cc.tween(this.gameOverMask).to(.4, { scale: 1, opacity: 255 }).start();
         } else {
-            this.gameOverMask.runAction(cc.sequence(cc.fadeOut(0.4), cc.callFunc(() => {
+            cc.tween(this.gameOverMask).to(.3, { opacity: 0 }).call(() => {
                 this.gameOverMask.active = false;
-            }, this)))
+            }).start();
         }
     },
     updateBestScore() {

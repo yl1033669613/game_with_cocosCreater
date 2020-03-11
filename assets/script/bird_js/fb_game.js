@@ -36,19 +36,15 @@ cc.Class({
     revealScene() {
         this.maskLayer.active = true;
         this.maskLayer.color = cc.Color.BLACK;
-        this.maskLayer.runAction(cc.fadeOut(0.3))
+        cc.tween(this.maskLayer).to(.3, { opacity: 0 }).start()
     },
     restart() {
         this.maskLayer.color = cc.Color.BLACK;
-        this.maskLayer.runAction(
-            cc.sequence(
-                cc.fadeIn(0.3),
-                cc.callFunc(() => {
-                    // 重新加载场景
-                    cc.director.loadScene('bird_game');
-                }, this)
-            )
-        );
+        this.maskLayer.opacity = 1;
+        cc.tween(this.maskLayer).to(.3, { opacity: 255 }).call(() => {
+            // 重新加载场景
+            cc.director.loadScene('bird_game');
+        }).start()
     },
     gameStart() {
         // 隐藏准备提示
@@ -79,37 +75,23 @@ cc.Class({
     },
     // 隐藏准备面板
     hideReadyMenu() {
-        this.scoreLabel.node.runAction(cc.fadeIn(0.3));
-        this.readyMenu.runAction(
-            cc.sequence(
-                cc.fadeOut(0.5),
-                cc.callFunc(() => {
-                    this.readyMenu.active = false
-                }, this)
-            )
-        );
+        this.scoreLabel.node.opacity = 1;
+        cc.tween(this.scoreLabel.node).to(0, { opacity: 255 }).start();
+        cc.tween(this.readyMenu).to(.5, { opacity: 0 }).call(() => {
+            this.readyMenu.active = false
+        }).start()
     },
     //屏幕闪烁一下
     blinkOnce() {
         this.maskLayer.color = cc.Color.WHITE;
-        this.maskLayer.runAction(
-            cc.sequence(
-                cc.fadeTo(0.1, 200),
-                cc.fadeOut(0.1)
-            )
-        );
+        cc.tween(this.maskLayer).to(.1, { opacity: 200 }).to(.1, { opacity: 0 }).start()
     },
     // 显示游戏结束面板
     showGameOverMenu() {
         // 隐藏分数
-        this.scoreLabel.node.runAction(
-            cc.sequence(
-                cc.fadeOut(0.3),
-                cc.callFunc(() => {
-                    this.scoreLabel.node.active = false;
-                }, this)
-            )
-        );
+        cc.tween(this.scoreLabel.node).to(.3, { opacity: 0 }).call(() => {
+            this.scoreLabel.node.active = false;
+        }).start();
         // 获取游戏结束界面的各个节点
         const gameOverNode = this.gameOverMenu.getChildByName("gameOverLabel");
         const resultBoardNode = this.gameOverMenu.getChildByName("resultBoard");
@@ -142,37 +124,19 @@ cc.Class({
                 medalNode.getComponent(cc.Sprite).spriteFrame = null;
             }
         };
-        cc.loader.loadRes("texture/res_bundle", cc.SpriteAtlas, showMedal);
+        cc.loader.loadRes("res_bundle", cc.SpriteAtlas, showMedal); // 动态加载资源
         // 依次显示各个节点
-        let showNode = (node, action, callback) => {
-            startButtonNode.active = true;
-            backButtonNode.active = true;
-            node.runAction(cc.sequence(
-                action,
-                cc.callFunc(() => {
-                    callback && callback()
-                }, this)
-            ));
-        };
+        startButtonNode.active = true;
+        backButtonNode.active = true;
         this.gameOverMenu.active = true;
-        let showNodeFunc = () => showNode(
-            gameOverNode,
-            cc.spawn(
-                cc.fadeIn(0.2),
-                cc.sequence(
-                    cc.moveBy(0.2, cc.v2(0, 10)),
-                    cc.moveBy(0.5, cc.v2(0, -10))
-                )
-            ),
-            () => showNode(
-                resultBoardNode,
-                cc.moveTo(0.5, cc.v2(resultBoardNode.x, -150)).easing(cc.easeCubicActionOut()),
-                () => showNode(
-                    startButtonNode,
-                    cc.fadeIn(0.5))
-            )
-        );
-        this.scheduleOnce(showNodeFunc, 0.55)
+        startButtonNode.opacity = 1;
+        gameOverNode.opacity = 1;
+        cc.tween(gameOverNode).parallel(
+            cc.tween().to(.2, { opacity: 255 }),
+            cc.tween().by(.2, { position: cc.v2(0, 10) }).by(.3, { position: cc.v2(0, -10) })
+        ).start();
+        cc.tween(startButtonNode).delay(.3).to(.5, { opacity: 255 }).start();
+        cc.tween(resultBoardNode).delay(.3).to(.9, { position: cc.v2(resultBoardNode.x, 200) }, { easing: 'cubicInOut' }).start();
     },
     // 开始或者bird jump
     startGameOrJumpBird() {

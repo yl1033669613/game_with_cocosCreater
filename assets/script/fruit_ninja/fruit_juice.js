@@ -12,11 +12,11 @@
         this.parentObj = this.node.parent.getComponent('fruit_juice_group');
     },
     init(rotation, color, opacity) {
-        this.node.rotation = rotation;
+        this.node.angle = rotation;
         this.juiceSprite.color = color;
         this.juiceSprite.opacity = opacity;
-        this.juiceSprite.runAction(cc.sequence(cc.fadeOut(1.5), cc.callFunc(() => {
+        cc.tween(this.juiceSprite).to(1.5, {opacity: 0}).call(() => {
             this.parentObj.backNode(this.node, this.colorType)
-        }, this)));
+        }).start()
     }
 });

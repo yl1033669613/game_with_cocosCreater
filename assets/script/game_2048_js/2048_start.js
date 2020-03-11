@@ -214,7 +214,7 @@ cc.Class({
         const self = this;
         if (self.score > self.bestScore) {
             self.bestScore = self.score;
-            Utils.GD.updateGameScore({tzfeBestScore: self.bestScore}, () => {
+            Utils.GD.updateGameScore({ tzfeBestScore: self.bestScore }, () => {
                 Utils.GD.setUserGameInfo('tzfeBestScore', self.bestScore);
                 console.log('保存成功');
             })
@@ -223,7 +223,7 @@ cc.Class({
     setWinTimes() {
         const self = this;
         self.WinTimes = self.WinTimes + 1;
-        Utils.GD.updateGameScore({tzfeWinNum: self.WinTimes}, () => {
+        Utils.GD.updateGameScore({ tzfeWinNum: self.WinTimes }, () => {
             Utils.GD.setUserGameInfo('tzfeWinNum', self.WinTimes);
             console.log('保存成功');
         })
@@ -232,19 +232,11 @@ cc.Class({
         if (bool) {
             cpt.active = bool;
             cpt.opacity = 1;
-            cpt.runAction(
-                cc.fadeIn(0.2)
-            )
+            cc.tween(cpt).to(.2, { opacity: 255 }).start()
         } else {
-            cpt.runAction(
-                cc.sequence(
-                    cc.fadeOut(0.2),
-                    cc.callFunc(() => {
-                        // 加载列表
-                        cpt.active = bool;
-                    }, this)
-                )
-            )
+            cc.tween(cpt).to(.2, { opacity: 0 }).call(() => {
+                cpt.active = bool;
+            }).start()
         }
     },
     //玩家触摸事件

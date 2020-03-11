@@ -96,13 +96,13 @@ cc.Class({
         if (bool) {
             this.gameOverMask.active = true;
             this.gameOverMask.opacity = 1;
-            action = cc.fadeIn(.2);
+            action = cc.tween().to(.3, { opacity: 255 });
         } else {
-            action = cc.sequence(cc.fadeOut(.2), cc.callFunc(() => {
+            action = cc.tween().to(.3, { opacity: 0 }).call(() => {
                 this.gameOverMask.active = false;
-            }, this));
+            });
         };
-        this.gameOverMask.runAction(action);
+        cc.tween(this.gameOverMask).then(action).start()
     },
     backObjPool(nodeInfo) {
         this.rowPool.put(nodeInfo);

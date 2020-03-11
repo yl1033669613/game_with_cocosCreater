@@ -6,13 +6,15 @@ cc.Class({
         spriptAni: cc.Animation,
     },
     onLoad() {
-        this.init();
+        this.idx = 0;
     },
     init() {
         this.isFirstIn = true;
         this.isFirstOut = true;
         this.isDestroy = true;
         this.node.group = "skyscBlock";
+        this.colliderSize = cc.size(45 + Math.round((65 - 45) * Math.random()), 58);
+        this.node.width = this.colliderSize.width;
     },
     // 只在两个碰撞体开始接触时被调用一次
     onBeginContact(contact, selfCollider, otherCollider) {
@@ -21,6 +23,7 @@ cc.Class({
             this.isFirstIn = false;
             if (globals.gm.putCount == 1) {
                 selfCollider.node.getComponent(cc.RigidBody).gravityScale = 100;
+                this.idx = globals.gm.succeedPutCount + 1;
                 globals.gm.handleResult();
             };
             this.spriptAni.play();
@@ -43,17 +46,19 @@ cc.Class({
         }
     },
     onPostSolve(contact, selfCollider, otherCollider) {
-        if (selfCollider.tag == 101 && otherCollider.tag == 102) {
+        let otherBlock = otherCollider.node.getComponent('skysc_block');
+        if (selfCollider.tag == 101 && otherCollider.tag == 102 && otherBlock && otherBlock.idx === globals.gm.succeedPutCount) {
             this.unschedule(this.checkDropCallFn);
             this.checkDropCallFn = function(e) {
                 if (this.isFirstOut) {
                     this.isFirstOut = false;
+                    selfCollider.node.angle = 0; // 摆正位置
                     let selfNode = selfCollider.body.getWorldCenter();
                     let otherNode = otherCollider.body.getWorldCenter();
-                    // console.log(selfNode, otherNode)
                     let d = Math.abs(Math.abs(selfNode.x) - Math.abs(otherNode.x));
                     if (d <= otherCollider.node.width / 2) {
                         let isPrefect = false;
+                        this.idx = globals.gm.succeedPutCount + 1;
                         if (d <= 3) isPrefect = true;
                         globals.gm.handleResult(isPrefect);
                     } else {

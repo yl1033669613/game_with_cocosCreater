@@ -43,27 +43,18 @@ cc.Class({
         this.knife.setPosition(pos);
     },
     circleRotate() {
-        let rotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, 360)));
-        let rotate1 = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, -360)));
-        let frRotate = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, -360)));
-        let frRotate1 = cc.repeatForever(cc.sequence(cc.rotateBy(0, 0), cc.rotateBy(7, 360)));
-        this.btnBeginCir.runAction(rotate);
-        this.btnQuitCir.runAction(rotate1);
-        this.btnBeginfR.runAction(frRotate);
-        this.btnQuitfR.runAction(frRotate1);
-    },
-    stopBtnAction() {
-        this.btnBeginCir.stopAllActions();
-        this.btnQuitCir.stopAllActions();
-        this.btnBeginfR.stopAllActions();
-        this.btnQuitfR.stopAllActions();
+        let createRote = (angle) => {
+            return cc.tween().by(7, { angle: angle }).repeatForever();
+        }
+        cc.tween(this.btnBeginCir).then(createRote(360)).start();
+        cc.tween(this.btnQuitCir).then(createRote(360)).start();
+        cc.tween(this.btnBeginfR).then(createRote(-360)).start();
+        cc.tween(this.btnQuitfR).then(createRote(-360)).start();
     },
     backList() {
-        this.stopBtnAction();
         cc.director.loadScene('startscene');
     },
     gameStart() {
-        this.stopBtnAction();
         cc.director.loadScene('fruit_ninja_game');
     }
 });

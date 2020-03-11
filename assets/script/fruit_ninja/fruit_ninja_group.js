@@ -78,9 +78,8 @@ cc.Class({
     flashScreen() {
         this.flashNode.active = true;
         this.flashNode.opacity = 230;
-        let action = cc.sequence(cc.fadeOut(0.8), cc.callFunc(() => {
+        cc.tween(this.flashNode).to(.8, { opacity: 0 }).call(() => {
             this.flashNode.active = false;
-        }, this));
-        this.flashNode.runAction(action);
+        }).start()
     }
 });

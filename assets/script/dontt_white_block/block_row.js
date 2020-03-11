@@ -50,10 +50,10 @@ cc.Class({
         return randomN;
     },
     setBlockGray(idx) {
-        this.colItems[idx].runAction(cc.tintTo(.15, 134, 134, 134, 255));
+        cc.tween(this.colItems[idx]).to(.15, { color: new cc.Color(134, 134, 134, 255) }).start()
     },
     setBlockRed(idx) {
-        this.colItems[idx].runAction(cc.tintTo(.15, 255, 0, 0, 255));
+        cc.tween(this.colItems[idx]).to(.15, { color: new cc.Color(255, 0, 0, 255) }).start()
     },
     setNormal() {
         for (let i = 0; i < this.colItems.length; i++) {

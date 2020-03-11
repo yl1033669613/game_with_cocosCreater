@@ -21,7 +21,7 @@ cc.Class({
     },
     // 设置节点在x轴的初始位置
     initPositionX() {
-        const visibleSize = cc.find("Canvas"); // 场景可见区域大小
+        const visibleSize = cc.find('Canvas'); // 场景可见区域大小
         let sceneLeft = -visibleSize.width / 2;
         let sceneRight = visibleSize.width / 2;
         this.node.x = sceneRight + 300;
@@ -29,9 +29,9 @@ cc.Class({
     },
     // 设置上、下管道y轴位置以及之间的距离 
     initPositionY() {
-        const visibleSize = cc.find("Canvas");
+        const visibleSize = cc.find('Canvas');
         let topPipeMaxY = visibleSize.height / 2 - this.topPipeMinHeight;
-        let bottomPipeMinY = cc.find("Canvas/ground").y + cc.find("Canvas/ground").height / 2 + this.bottomPipeMinHeight; 
+        let bottomPipeMinY = cc.find('Canvas/ground').y + cc.find('Canvas/ground').height / 2 + this.bottomPipeMinHeight; 
         let spacing = this.spacingMinValue + Math.random() * (this.spacingMaxValue - this.spacingMinValue);
         this.topPipe.y = topPipeMaxY - Math.random() * (topPipeMaxY - bottomPipeMinY - spacing);
         this.bottomPipe.y = this.topPipe.y - spacing

@@ -28,7 +28,7 @@ cc.Class({
 
         if (theScore > bestScore) {
             bestScore = theScore;
-            Utils.GD.updateGameScore({snakeBestScore: bestScore}, () => {
+            Utils.GD.updateGameScore({ snakeBestScore: bestScore }, () => {
                 Utils.GD.setUserGameInfo('snakeBestScore', bestScore);
                 console.log('保存成功');
             })
@@ -37,16 +37,10 @@ cc.Class({
         this.bestScore.string = 'best:' + bestScore;
 
         this.btn1.on(cc.Node.EventType.TOUCH_START, (e) => {
-            this.node.runAction(
-                cc.sequence(
-                    cc.fadeOut(0.2),
-                    cc.callFunc(() => {
-                        // 加载列表
-                        this.node.active = false;
-                        cc.director.loadScene('snake');
-                    }, this)
-                )
-            )
+            cc.tween(this.node).to(.2, { opacity: 0 }).call(() => {
+                this.node.active = false;
+                cc.director.loadScene('snake');
+            }).start()
         }, this)
     },
     backToList() {

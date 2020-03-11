@@ -10,29 +10,19 @@ cc.Class({
         this.maskLayer.active = true;
         this.maskLayer.opacity = 1;
         this.maskLayer.color = cc.Color.BLACK;
-        this.maskLayer.runAction(
-            cc.sequence(
-                cc.fadeIn(0.2),
-                cc.callFunc(() => {
-                    // 重新加载场景
-                    cc.director.loadScene('bird_game');
-                }, this)
-            )
-        )
+        cc.tween(this.maskLayer).to(.2, { opacity: 255 }).call(() => {
+            // 重新加载场景
+            cc.director.loadScene('bird_game');
+        }).start()
     },
     // 返回游戏列表
     backGameList() {
         this.maskLayer.active = true;
         this.maskLayer.opacity = 1;
         this.maskLayer.color = cc.Color.BLACK;
-        this.maskLayer.runAction(
-            cc.sequence(
-                cc.fadeIn(0.2),
-                cc.callFunc(() => {
-                    // 加载列表
-                    cc.director.loadScene('startscene');
-                }, this)
-            )
-        )
+        cc.tween(this.maskLayer).to(.2, { opacity: 255 }).call(() => {
+            // 加载列表
+            cc.director.loadScene('startscene');
+        }).start()
     }
 })
