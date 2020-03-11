@@ -731,6 +731,9 @@
       "__id__": 8
     },
     "_enabled": true,
+    "mainCamera": {
+      "__id__": 3
+    },
     "rectPfb": {
       "__uuid__": "3f81d85a-d9f2-46e3-a4f5-b7e65da07627"
     },

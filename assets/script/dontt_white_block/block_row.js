@@ -7,7 +7,7 @@ cc.Class({
         }
     },
     onLoad() {
-        const visSize = cc.find("Canvas");
+        const visSize = cc.winSize;
         this.node.width = visSize.width;
         this.node.height = visSize.height / 4;
         let itemW = this.node.width / 4;
@@ -33,7 +33,6 @@ cc.Class({
         }
     },
     init(isFirst) {
-        console.log(isFirst)
         this.state = 1; //1 未触发状态 2正确点击态
         this.redIdx = -1; // 点击错误红色块index
         this.blackIdx = this.getBlack(); // 黑色块index

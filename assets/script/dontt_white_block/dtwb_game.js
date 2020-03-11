@@ -36,13 +36,13 @@ cc.Class({
         for (let i = 0; i < INITPOOLCOUNT; ++i) {
             let nodeO = cc.instantiate(this.rowPfb);
             this.rowPool.put(nodeO);
-        };
+        }
     },
     start() {
         this.updateUi();
         for (let i = 0; i < 6; i++) this.createMoveRow(i == 0)
     },
-    update(dt) {
+    update() {
         if (this.gameState == 1) {
             this.rowNodeList.forEach((a) => {
                 a.y = a.y - this.speed;

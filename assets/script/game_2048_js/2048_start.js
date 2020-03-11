@@ -29,7 +29,7 @@ cc.Class({
         }
     },
     onLoad() {
-        let windowSize = cc.find("Canvas");
+        let windowSize = cc.winSize;
         this.node.height = this.node.width = windowSize.width - 14;
         let rectBgNode = this.node.getChildByName('gameShadowRect');
         this.ctx = rectBgNode.getComponent(cc.Graphics);

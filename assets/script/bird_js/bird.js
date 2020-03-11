@@ -81,7 +81,7 @@ cc.Class({
             case State.Rise:
                 if (this.currentSpeed < 0) {
                     this.state = State.FreeFall;
-                    this.runFallAction(.7);
+                    this.runFallAction(.6);
                 }
                 break;
             case State.Drop:
