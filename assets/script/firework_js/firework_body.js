@@ -5,7 +5,7 @@ cc.Class({
         acceleration: 1.03, //加速度
         targetRadius: 1, //target 初始半径
 
-        friction: 0.95, //阻力系数
+        friction: 0.9, //阻力系数
         gravity: -1.3, //粒子重力系数
     },
     onLoad() {
@@ -98,7 +98,7 @@ cc.Class({
             this.particles.push({
                 x: x, //target x
                 y: y, //target y
-                decay: this.random(3, 15), //点的最小透明度
+                decay: this.random(2, 20), //点的最小透明度
                 coordinates: coordinates, //坐标数组
                 angle: this.random(0, Math.PI * 2), //随机角度
                 speed: this.random(1, 10), //随机速度

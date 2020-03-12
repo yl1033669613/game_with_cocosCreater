@@ -18,12 +18,14 @@ cc.Class({
         this.circleGroup.startCreateCircles();
     },
     showGameMask(bool) {
-        this.gameMask.active = bool;
         if (bool) {
+            this.gameMask.active = bool;
             this.gameMask.opacity = 1;
             cc.tween(this.gameMask).to(.3, { opacity: 255 }).start();
         } else {
-            cc.tween(this.gameMask).to(.3, { opacity: 1 }).start();
+            cc.tween(this.gameMask).to(.3, { opacity: 1 }).call(() => {
+                this.gameMask.active = bool;
+            }).start();
         }
     },
     tapCloseBtnToQuitThisGame() {

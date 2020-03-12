@@ -19,13 +19,13 @@ cc.Class({
         // particle color change range
         this.range = 40;
         // particle number
-        this.particleMinNum = 30;
-        this.particleMaxNum = 100;
+        this.particleMinNum = 80;
+        this.particleMaxNum = 300;
         // 生成间隔（帧数间隔，超过10帧才能生成一个）
-        this.clickLimiterTotal = 10;
+        this.clickLimiterTotal = 8;
         this.clickLimiterTick = 0;
         // 默认自动生成
-        this.timerTotal = 80;
+        this.timerTotal = 60;
         this.timerTick = 0;
 
         this.handlerEvents();
@@ -58,7 +58,7 @@ cc.Class({
             this.finger.y = y;
         }, this)
 
-        this.node.on(cc.Node.EventType.TOUCH_END, (e) => {
+        this.node.on(cc.Node.EventType.TOUCH_END, () => {
             this.finger.down = false
         }, this);
     },

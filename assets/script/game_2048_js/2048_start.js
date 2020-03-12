@@ -232,9 +232,10 @@ cc.Class({
         if (bool) {
             cpt.active = bool;
             cpt.opacity = 1;
-            cc.tween(cpt).to(.2, { opacity: 255 }).start()
+            cpt.scale = .95;
+            cc.tween(cpt).to(.2, {scale: 1, opacity: 255 }).start()
         } else {
-            cc.tween(cpt).to(.2, { opacity: 0 }).call(() => {
+            cc.tween(cpt).to(.2, {scale: .95, opacity: 0 }).call(() => {
                 cpt.active = bool;
             }).start()
         }

@@ -77,7 +77,7 @@ cc.Class({
             this.needlesNum = '';
         }
     },
-    createNeedles(cb) {
+    createNeedles() {
         let needleBody;
         if (this.needlesPool.size() > 0) {
             needleBody = this.needlesPool.get();
@@ -219,10 +219,13 @@ cc.Class({
     gameOverMaskVis() {
         this.gameInfoMask.active = true;
         this.gameInfoMask.opacity = 1;
-        cc.tween(this.gameInfoMask).to(0, { scale: .95, opacity: 1 }).to(.3, { scale: 1, opacity: 255 }).start()
+        this.gameInfoMask.scale = .95;
+        cc.tween(this.gameInfoMask).to(.3, { scale: 1, opacity: 255 }).start()
     },
     reLoadThisScene() {
-        cc.director.loadScene('game_needles');
+        cc.tween(this.gameInfoMask).to(.3, { scale: .95, opacity: 0 }).call(() => {
+            cc.director.loadScene('game_needles');
+        }).start()
     },
     start() {
         this.modeTypeTxt.getComponent(cc.Label).string = gbData.mode + ' mode';

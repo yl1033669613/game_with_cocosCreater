@@ -198,6 +198,8 @@ cc.Class({
     handleGameOver() {
         if (this.gameOver) return;
         this.gameOver = true;
+        this.unscheduleAllCallbacks();
+        cc.tween(this.gameBg).to(.2, { color: new cc.Color(255, 255, 255, 255) }).start();
         this.circlesCreateState = false;
         this.updateScore();
         this.updateCombo();

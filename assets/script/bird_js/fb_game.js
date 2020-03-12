@@ -66,8 +66,13 @@ cc.Class({
         // 显示游戏结束面板
         this.showGameOverMenu()
     },
-    backBegainPage(e) {
-        cc.director.loadScene('flappy_bird')
+    backBegainPage() {
+        this.maskLayer.color = cc.Color.BLACK;
+        this.maskLayer.opacity = 1;
+        cc.tween(this.maskLayer).to(.3, { opacity: 255 }).call(() => {
+            // 重新加载场景
+            cc.director.loadScene('flappy_bird')
+        }).start()
     },
     gainScore() {
         this.score++;

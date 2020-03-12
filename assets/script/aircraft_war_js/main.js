@@ -169,10 +169,12 @@ cc.Class({
         this.maskBestScore.string = 'Best Score: ' + this.bestScore;
     },
     playAgain() {
-        cc.director.loadScene('aircraft_war_game');
+        cc.tween(this.gameOverMask).to(.3, {opacity: 0}).call(() => {
+            cc.director.loadScene('aircraft_war_game')
+        }).start()
     },
     backStartScene() {
-        cc.director.loadScene('aircraft_war_start');
+        cc.director.loadScene('aircraft_war_start')
     },
     //保存最高分数
     requestDbAircraftWarScore() {
@@ -181,7 +183,7 @@ cc.Class({
             aircraftWarBestScore: self.bestScore
         }, () => {
             Utils.GD.setUserGameInfo('aircraftWarBestScore', self.bestScore);
-            console.log('保存成功');
+            console.log('保存成功')
         })
     }
 })

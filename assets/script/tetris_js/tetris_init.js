@@ -286,19 +286,21 @@ cc.Class({
         cc.tween(this.gameOverInfo).to(.3, { opacity: 255, scale: 1 }).start()
     },
     newGame() {
-        this.gameOverInfo.active = false;
-        this.fps = 0;
-        this.dropSpeed = DROPSPEED;
-        this.score = 0;
-        this.gameOver = false;
-        this.scoreLabel.string = 'score:' + this.score;
+        cc.tween(this.gameOverInfo).to(.3, { opacity: 0, scale: .95 }).call(() => {
+            this.gameOverInfo.active = false;
+            this.fps = 0;
+            this.dropSpeed = DROPSPEED;
+            this.score = 0;
+            this.gameOver = false;
+            this.scoreLabel.string = 'score:' + this.score;
 
-        for (let r = 0; r < ROW; r++) {
-            this.board[r] = [];
-            for (let c = 0; c < COL; c++) this.board[r][c] = DFCOLOR;
-        };
-        this.drawBoard();
-        this.randomOne();
+            for (let r = 0; r < ROW; r++) {
+                this.board[r] = [];
+                for (let c = 0; c < COL; c++) this.board[r][c] = DFCOLOR;
+            };
+            this.drawBoard();
+            this.randomOne();
+        }).start()
     },
     backList() {
         //游戏非game over时退出任然记录最高分

@@ -75,13 +75,13 @@ cc.Class({
         this.poolBlock = new cc.NodePool();
         for (let i = 0; i < POOLINITCOUNT; i++) {
             let blockPb = cc.instantiate(this.blockPb);
-            this.poolBlock.put(blockPb);
+            this.poolBlock.put(blockPb)
         }
     },
     start() {
         this.craneRotation.craneStrRotate();
         this.updateUi();
-        this.generateBlock();
+        this.generateBlock()
     },
     //重新装载
     generateBlock() {
@@ -95,7 +95,7 @@ cc.Class({
         } else {
             this.waitBlock = cc.instantiate(this.blockPb);
         };
-        this.blockJsComp = this.waitBlock.getComponent("skysc_block");
+        this.blockJsComp = this.waitBlock.getComponent('skysc_block');
         this.blockJsComp.init();
         this.waitBlock.angle = 0;
         this.waitBlock.setPosition(cc.v2(0, 0));
@@ -107,7 +107,7 @@ cc.Class({
         this.poolBlock.put(nodeInfo);
     },
     //放置
-    putNext(e) {
+    putNext() {
         if (this.state == 1 && this.isPut) {
             cc.tween(this.crane).stop();
             this.crane.opacity = 255;
@@ -149,13 +149,13 @@ cc.Class({
             this.waitBlock.getComponent(cc.PhysicsBoxCollider).tag = 102;
             this.prevBlock = this.waitBlock;
             this.score = this.score + (isPrefect ? 10 : 1);
-            this.move();
+            this.move()
         } else {
-            // console.log("放置失败！");
+            console.log("放置失败！")
         };
         this.updateUi();
         this.scheduleOnce(() => {
-            this.generateBlock();
+            this.generateBlock()
         }, 0.3)
     },
     updateUi() {
@@ -171,13 +171,18 @@ cc.Class({
             this.bestScore = this.score;
             this.updateBestScore();
         };
-        this.gameOverMask.active = true;
-        this.gameOverMask.opacity = 1;
-        cc.tween(this.gameOverMask).to(.3, { opacity: 255 }).start();
-        this.updateUi();
+        let speed = this.succeedPutCount <= 15 ? .1 * this.succeedPutCount : 1.5;
+        cc.tween(this.camera.node).to(speed, { position: cc.v2(0, 0) }).call(() => {
+            this.gameOverMask.active = true;
+            this.gameOverMask.opacity = 1;
+            cc.tween(this.gameOverMask).to(.3, { opacity: 255 }).start();
+            this.updateUi();
+        }).start()
     },
     restartTheGame() {
-        cc.director.loadScene('skyscraper_game');
+        cc.tween(this.gameOverMask).to(.3, { opacity: 0 }).call(() => {
+            cc.director.loadScene('skyscraper_game');
+        }).start();
     },
     backStartPage() {
         cc.director.loadScene('skyscraper_start');

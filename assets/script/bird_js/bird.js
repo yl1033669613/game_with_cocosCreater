@@ -130,6 +130,7 @@ cc.Class({
     runRiseAction() {
         if (this.tweenAction) {
             this.tweenAction.stop();
+            this.tweenAction = null;
         };
         this.tweenAction = cc.tween(this.node).to(.3, { angle: 30 }, { easing: 'cubicOut' }).start()
     },
@@ -137,6 +138,7 @@ cc.Class({
     runFallAction(duration) {
         if (this.tweenAction) {
             this.tweenAction.stop();
+            this.tweenAction = null;
         };
         this.tweenAction = cc.tween(this.node).to(duration, { angle: -90 }, { easing: 'cubicIn' }).start()
     },
