@@ -13,6 +13,8 @@ cc.Class({
         }
     },
     onLoad() {
+        cc.director.preloadScene('game_needles')
+
         gbData.freeBestScore = Utils.GD.userGameInfo.needleFreeModeScore || 0;
         gbData.gameLevel = Utils.GD.userGameInfo.needleLevelModeLevels || 1;
         gbData.gameLevelData = Utils.GD.needleLevelData;

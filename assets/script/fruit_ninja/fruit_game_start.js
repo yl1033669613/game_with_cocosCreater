@@ -23,6 +23,8 @@ cc.Class({
         }
     },
     onLoad() {
+        cc.director.preloadScene('fruit_ninja_game');
+
         this.knifeMotionS = this.knife.getComponent(cc.MotionStreak);
     },
     start() {

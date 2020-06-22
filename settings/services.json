@@ -1,14 +1,14 @@
 {
 	"services": [
 		{
-			"service_id": "235",
-			"service_name": "Cocos Analytics",
-			"service_icon": "https://account.cocos.com/client/3f8f31ccf66995e183044f167c092395.png",
-			"service_desc": "提供最核心最基本的数据、标准化界面功能简洁易用、数据准确性最好",
-			"service_title": "精准了解游戏的新增、活跃、留存、付费等数据",
-			"service_guide_url": "https://n-analytics.cocos.com/docs/",
-			"service_sample_url": "https://github.com/cocos-creator/tutorial-dark-slash/tree/analytics",
-			"service_dev_url": "http://analytics.cocos.com/realtime/jump_to/<app_id>",
+			"service_id": "272",
+			"service_name": "云开发",
+			"service_icon": "https://download.cocos.com/CocosUdc/client/af078f8ea7/42c0d7e44f41e6d94f65198922ea84e7.png",
+			"service_desc": "为开发者提供云数据库、云存储、云函数、日志和监控等开发运维能力，开发者无需再为此搭建及运维服务器，可以专注于业务逻辑实现，轻松开始游戏开发之旅，快速试错和落地。\n",
+			"service_title": "提供云函数、云存储、云数据库等一站式serverless服务。",
+			"service_guide_url": "https://docs.cocos.com/creator/manual/zh/cocos-service/tcb.html",
+			"service_sample_url": "https://github.com/CocosService/tcbDemo?ccservices_local_sample=service-tcb",
+			"service_dev_url": "https://account.cocos.com/serviceConsole/jump?client_id=272&app_id=<app_id>&language=zh",
 			"service_type": "3",
 			"service_type_zh": "公司和个人游戏",
 			"support_platform": [
@@ -16,47 +16,125 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "http://download.cocos.com/CocosServices/plugins/service-analytics/1.1.7_2.0.3.zip",
-			"package_version_desc": "1、 更新 H5 SDK 版本至 2.0.3。<br>2、 SDK 优化更新，删除 init 接口字段 'channel' ，改为 login 接口输入。<br>3、 如有相关问题咨询或者需求， 可以联系我们技术支持邮箱 <a href=' '>support-cocos@cocos.com</a>",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-tcb/0.6.2_1.6.1.zip",
+			"package_version_desc": "<p>更新日志:<br />\n新增 TCB 服务集成<br />\n",
+			"service_component_name": "service-tcb",
+			"package_versions": [
+				"0.6.2_1.6.1"
+			],
+			"build_platform": [],
+			"require_verify": 0,
+			"service_price": "该服务按使用量计费，为开发者提供一定的免费额度，超出免费额度将进行收费，详情请看 <a href='https://cloud.tencent.com/document/product/876/18864'><font color='#dddddd'>计费规则</font></a> 。",
+			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>",
+			"service_group": "腾讯云游戏云服务",
+			"not_service": false
+		},
+		{
+			"service_id": "269",
+			"service_name": "游戏联机对战引擎",
+			"service_icon": "https://download.cocos.com/CocosUdc/client/af078f8ea7/d9aeaa8fbf76d6ddda2fbd78db416cb5.png",
+			"service_desc": "游戏联机对战引擎(MGOBE)：为游戏提供房间管理、在线匹配、帧同步、状态同步等网络通信服务，帮助开发者快速搭建多人交互游戏。同时提供云函数、云存储、云数据库，支持大厅服和单机游戏。\n",
+			"service_title": "提供房间管理、匹配管理、帧同步、状态同步、云开发等服务。",
+			"service_guide_url": "https://docs.cocos.com/creator/manual/zh/cocos-service/gme.html",
+			"service_sample_url": "https://github.com/CocosService/mgobeDemo?ccservices_local_sample=service-mgobe",
+			"service_dev_url": "https://account.cocos.com/serviceConsole/jump?client_id=269&app_id=<app_id>&language=zh",
+			"service_type": "3",
+			"service_type_zh": "公司和个人游戏",
+			"support_platform": [
+				"Android",
+				"iOS"
+			],
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-mgobe/0.6.4_1.3.0.zip",
+			"package_version_desc": "<p>更新日志:<br />\n新增 MGOBE 服务集成<br />\n",
+			"service_component_name": "service-mgobe",
+			"package_versions": [
+				"0.6.4_1.3.0"
+			],
+			"build_platform": [],
+			"require_verify": 0,
+			"service_price": "小游戏联机对战引擎根据DAU及超额流量计费，500DAU以内免费使用。<a href='https://cloud.tencent.com/document/product/1038/33293'><font color='#dddddd'>查看计费详情</font></a>。",
+			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>",
+			"service_group": "腾讯云游戏云服务",
+			"not_service": false
+		},
+		{
+			"service_id": "270",
+			"service_name": "游戏多媒体引擎",
+			"service_icon": "https://download.cocos.com/CocosUdc/client/af078f8ea7/f4ba26b83ad742de39eca362985d7389.png",
+			"service_desc": "腾讯云游戏多媒体引擎（Gaming Multimedia Engine，GME）提供一站式游戏语音解决方案。针对不同游戏场景进行深度优化，覆盖休闲社交、MOBA、MMORPG、FPS 等多种游戏类型；支持多人实时语音、3D 位置语音、语音消息和语音转文本等功能。\n",
+			"service_title": "一站式游戏语音解决方案，助力游戏社交文化",
+			"service_guide_url": "https://docs.cocos.com/creator/manual/zh/cocos-service/gme.html",
+			"service_sample_url": "https://github.com/CocosService/gmeDemo?ccservices_local_sample=service-gme",
+			"service_dev_url": "https://account.cocos.com/serviceConsole/jump?client_id=270&app_id=<app_id>&language=zh",
+			"service_type": "3",
+			"service_type_zh": "公司和个人游戏",
+			"support_platform": [
+				"Android",
+				"iOS"
+			],
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-gme/0.6.1_2.5.2.zip",
+			"package_version_desc": "<p>更新日志:<br />\n新增 GME 服务集成<br />\n",
+			"service_component_name": "service-gme",
+			"package_versions": [
+				"0.6.1_2.5.2"
+			],
+			"build_platform": [],
+			"require_verify": 0,
+			"service_price": "该服务按使用量计费，<a href='https://cloud.tencent.com/document/product/607/17808'><font color='#dddddd'>计费规则</font></a>，所产生的费用将由第三方从您的 <a href='https://account.cocos.com/#/finance/finance_list'><font color='#dddddd'>Cocos 账户余额</font></a> 中扣除。",
+			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>",
+			"service_group": "",
+			"not_service": false
+		},
+		{
+			"service_id": "235",
+			"service_name": "Cocos Analytics",
+			"service_icon": "https://download.cocos.com/CocosUdc/client/872b94af2e/3f8f31ccf66995e183044f167c092395.png",
+			"service_desc": "一键集成，快速定位游戏玩家。统计更准确、数据更安全、接入更简单",
+			"service_title": "精准了解游戏的新增、活跃、留存、付费等数据",
+			"service_guide_url": "https://n-analytics.cocos.com/docs/",
+			"service_sample_url": "https://github.com/CocosService/cocosAnalyticsDemo",
+			"service_dev_url": "https://account.cocos.com/serviceConsole/jump?client_id=235&app_id=<app_id>&language=zh",
+			"service_type": "3",
+			"service_type_zh": "公司和个人游戏",
+			"support_platform": [
+				"Android",
+				"iOS",
+				"HTML5"
+			],
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-analytics/1.2.8_2.1.3.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/06/19<br />\n<strong>更新说明：</strong><br />\n1.修复重复点击重新加载预览插件导致 Creator 插件系统报错的问题。<br />\n2.修复网络重试导致的性能损耗问题。<br />\n3.更新 cocosanalytics.d.ts 语法提示文档。<br />\n4.更新 SDK 版本。<br />\n",
 			"service_component_name": "service-analytics",
 			"package_versions": [
-				"1.0.0_1.0.5",
-				"1.1.2_2.0.0",
-				"1.1.3_2.0.1",
-				"1.1.4_2.0.1",
-				"1.1.5_2.0.1",
+				"1.2.8_2.1.3",
+				"1.2.7_2.1.2",
+				"1.2.6_2.1.1",
+				"1.2.5_2.1.1",
+				"1.2.3_2.1.1",
+				"1.2.0_2.1.0",
+				"1.1.7_2.0.3",
 				"1.1.6_2.0.1_2.0.2",
-				"1.1.7_2.0.3"
+				"1.1.5_2.0.1",
+				"1.1.4_2.0.1",
+				"1.1.3_2.0.1",
+				"1.1.2_2.0.0",
+				"1.0.0_1.0.5"
 			],
-			"build_platform": [
-				"web-mobile",
-				"web-desktop",
-				"fb-instant-games",
-				"wechatgame",
-				"wechatgame-subcontext",
-				"qqplay",
-				"android",
-				"android-instant",
-				"ios",
-				"mac",
-				"quickgame",
-				"qgame",
-				"huawei"
-			],
+			"build_platform": [],
 			"require_verify": 0,
 			"service_price": "",
-			"packpage_version_desc": "",
-			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>"
+			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>",
+			"service_group": "",
+			"not_service": false
 		},
 		{
 			"service_id": "241",
 			"service_name": "Matchvs",
-			"service_icon": "https://account.cocos.com/client/14406719a07eb3d714d36e5edc6e06fa.png",
-			"service_desc": "通过SDK接入快速实现联网功能、帧同步、国内外多节点、服务器独立部署、gameServer自定义游戏服务端逻辑。\n技术支持群QQ群：822523258",
+			"service_icon": "https://download.cocos.com/CocosUdc/client/872b94af2e/14406719a07eb3d714d36e5edc6e06fa.png",
+			"service_desc": "通过SDK接入快速实现联网功能、帧同步、国内外多节点、服务器独立部署、gameServer自定义游戏服务端逻辑。",
 			"service_title": "专业成熟的移动游戏联网与服务端解决方案",
-			"service_guide_url": "http://doc.matchvs.com/QuickStart/QuickStart-CocosCreator",
+			"service_guide_url": "https://docs.cocos.com/creator/manual/zh/cocos-service/matchvs.html",
 			"service_sample_url": "http://www.matchvs.com/serviceCourse",
-			"service_dev_url": "http://www.matchvs.com/cocosLogin",
+			"service_dev_url": "https://account.cocos.com/serviceConsole/jump?client_id=241&app_id=<app_id>&language=zh",
 			"service_type": "3",
 			"service_type_zh": "公司和个人游戏",
 			"support_platform": [
@@ -64,44 +142,33 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "http://download.cocos.com/CocosServices/plugins/service-matchvs/1.0.7_3.7.9.6.zip",
-			"package_version_desc": "更新日期：2019-05-15<br>更新内容：<br>1、调整getRoomListEx接口，获取系统创建房间<br>2、增加appkey等的校验<br>3、新增以下平台支持:<li>VIVO 小游戏<li>OPPO 小游戏<li>HUAWEI 快游戏<li>百度小游戏（默认不支持，需修改代码强制开启WSS选项）",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-matchvs/1.0.10_3.7.9.10.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2019/9/12\n<strong>更新内容：</strong>\n1.多语言支持\n2.SDK日常更新</p>",
 			"service_component_name": "service-matchvs",
 			"package_versions": [
-				"1.0.3_3.7.6.4",
-				"1.0.5_3.7.7.3",
+				"1.0.9_3.7.9.9",
+				"1.0.7_3.7.9.6",
 				"1.0.6_3.7.9.2",
-				"1.0.7_3.7.9.6"
+				"1.0.5_3.7.7.3",
+				"1.0.3_3.7.6.4",
+				"1.0.10_3.7.9.10"
 			],
-			"build_platform": [
-				"web-mobile",
-				"web-desktop",
-				"fb-instant-games",
-				"wechatgame",
-				"wechatgame-subcontext",
-				"qqplay",
-				"android",
-				"android-instant",
-				"ios",
-				"mac",
-				"quickgame",
-				"qgame",
-				"huawei"
-			],
+			"build_platform": [],
 			"require_verify": 0,
 			"service_price": "该服务按使用量计费，<a href='https://www.matchvs.com/price'><font color='#dddddd'>计费规则</font></a>，所产生的费用将由第三方从您的 <a href='https://account.cocos.com/#/finance/finance_list'><font color='#dddddd'>Cocos 账户余额</font></a> 中扣除。",
-			"packpage_version_desc": "",
-			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>"
+			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>",
+			"service_group": "",
+			"not_service": false
 		},
 		{
 			"service_id": "242",
 			"service_name": "Agora Voice",
-			"service_icon": "https://account.cocos.com/uploads/client_icon/date(\"Y-m-d\")/50fe52b789c2fc1e1fff9eec161c1bb3.png",
-			"service_desc": "稳定、低耗、76ms超低延时、全球200+数据中心覆盖；变声器、超高音质、听声辩位等丰富玩法极速接入；全平台支持：Android、iOS、Web。\n技术支持群QQ群：799099183\n",
+			"service_icon": "https://download.cocos.com/CocosUdc/client/0ed3b350b5/273952d155b4cdb72d2b1bc61de91ade.png",
+			"service_desc": "稳定、低耗、76ms超低延时、全球200+数据中心覆盖；变声器、超高音质、听声辩位等丰富玩法极速接入；全平台支持：Android、iOS、Web。",
 			"service_title": "游戏内置实时语音",
-			"service_guide_url": "https://docs.agora.io/cn/Interactive Gaming/game_c",
-			"service_sample_url": "https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Basic-Voice-Call-for-Gaming/Hello-Cocos-Creator-Voice-Agora",
-			"service_dev_url": "https://sso.agora.io/api/oauth/cocos/login",
+			"service_guide_url": "https://docs.agora.io/cn/Interactive Gaming/game_c?platform=Cocos Creator",
+			"service_sample_url": "https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Basic-Voice-Call-for-Gaming/Hello-CocosCreator-Voice-Agora",
+			"service_dev_url": "https://account.cocos.com/serviceConsole/jump?client_id=242&app_id=<app_id>&language=zh",
 			"service_type": "3",
 			"service_type_zh": "公司和个人游戏",
 			"support_platform": [
@@ -109,22 +176,20 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "http://download.cocos.com/CocosServices/plugins/service-agora/1.0.1_2.2.3.20_2.5.2.zip",
-			"package_version_desc": "first release.",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agora/1.1.0_2.2.3.20_2.5.2.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/03/05<br />\n<strong>更新说明：</strong><br />\n1、适配 Cocos Creator 2.3.x<br />\n",
 			"service_component_name": "service-agora",
 			"package_versions": [
+				"1.1.0_2.2.3.20_2.5.2",
+				"1.0.2_2.2.3.20_2.5.2",
 				"1.0.1_2.2.3.20_2.5.2"
 			],
-			"build_platform": [
-				"web-mobile",
-				"web-desktop",
-				"android",
-				"ios"
-			],
+			"build_platform": [],
 			"require_verify": 1,
-			"service_price": "该服务按使用量计费，<a href='https://docs.agora.io/cn/Agora Platform/billing_faq?platform=All Platforms'><font color='#dddddd'>计费规则</font></a>，所产生的费用将由第三方从您的 <a href='https://account.cocos.com/#/finance/finance_list'><font color='#dddddd'>Cocos 账户余额</font></a> 中扣除。",
-			"packpage_version_desc": "",
-			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>"
+			"service_price": "该服务按使用量计费，<a href='https://www.agora.io/cn/price/'><font color='#dddddd'>计费规则</font></a>，所产生的费用将由第三方从您的 <a href='https://account.cocos.com/#/finance/finance_list'><font color='#dddddd'>Cocos 账户余额</font></a> 中扣除。",
+			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>",
+			"service_group": "",
+			"not_service": false
 		}
 	],
 	"game": {

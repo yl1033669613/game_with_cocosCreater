@@ -167,7 +167,7 @@
     "sk_ui",
     "sk_env"
   ],
-  "last-module-event-record-time": 1583840943754,
+  "last-module-event-record-time": 1592812855508,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,
@@ -175,5 +175,8 @@
   },
   "use-customize-simulator": true,
   "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "start-scene": "current",
+  "migrate-history": [
+    "cloud-function"
+  ]
 }

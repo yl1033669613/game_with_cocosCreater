@@ -1,6 +1,9 @@
 cc.Class({
     extends: cc.Component,
     properties: {},
+    onLoad() {
+        cc.director.preloadScene('skyscraper_game');
+    },
     backTheGameList() {
         cc.director.loadScene('startscene');
     },

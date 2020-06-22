@@ -1,7 +1,8 @@
 cc.Class({
     extends: cc.Component,
-    properties: {
-
+    properties: {},
+    onLoad() {
+        cc.director.preloadScene('dontt_white_block');
     },
     backTheGameList() {
         cc.director.loadScene('startscene');

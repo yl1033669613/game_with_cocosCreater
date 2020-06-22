@@ -53,9 +53,22 @@ cc.Class({
         bottBanner: {
             default: null,
             type: cc.Node
+        },
+        loadMask: {
+            default: null,
+            type: cc.Node
+        },
+        progress: {
+            default: null,
+            type: cc.ProgressBar
+        },
+        text: {
+            default: null,
+            type: cc.Label
         }
     },
     onLoad() {
+        this.isNav = false
         this.noticeOpen = false;
         this.noticeLoadFirst = true;
         let y = -65;
@@ -107,5 +120,30 @@ cc.Class({
             };
             cb && cb();
         })
+    },
+    // 预加载完成时切换场景
+    loadGames(url) {
+        const self = this
+        if (!self.isNav) {
+            self.isNav = true
+            self.text.string = '0' + '%';
+            self.progress.progress = 0;
+            self.loadMask.opacity = 0;
+            self.loadMask.active = true;
+            cc.tween(self.loadMask).by(.2, { opacity: 250 }).call(() => {
+                // 预加载，第一个是场景名，第二个callback中3个参数，第三个callback是完成回调
+                cc.director.preloadScene(url, (completedCount, totalCount, item) => {
+                    let p = completedCount / totalCount;
+                    self.progress.progress = p;
+                    self.text.string = parseInt(p * 100) + '%';
+                }, () => {
+                    cc.tween(self.loadMask).to(.3, { opacity: 50 }).call(() => {
+                        self.isNav = false
+                        self.loadMask.active = false;
+                        cc.director.loadScene(url);
+                    }).start()
+                })
+            }).start()
+        }
     }
 })

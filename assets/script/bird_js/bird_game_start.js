@@ -7,6 +7,8 @@ cc.Class({
         }
     },
     startGame() {
+        cc.director.preloadScene('bird_game');
+
         this.maskLayer.active = true;
         this.maskLayer.opacity = 1;
         this.maskLayer.color = cc.Color.BLACK;
